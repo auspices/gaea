@@ -1,28 +1,30 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { ApolloProvider } from 'react-apollo';
+import { BrowserRouter } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
-}
+import initClient from 'apollo/initClient';
 
-export default App;
+import theme from 'styles/theme'
+
+import Routes from './Routes';
+import Page from 'components/UI/Page';
+import Alerts from 'components/Alerts';
+import { AlertsProvider } from 'components/Alerts/Store';
+
+const client = initClient();
+
+export default () => (
+  <BrowserRouter>
+    <ApolloProvider client={client}>
+      <ThemeProvider theme={theme}>
+        <AlertsProvider>
+          <Page>
+            <Alerts />
+            <Routes />
+          </Page>
+        </AlertsProvider>
+      </ThemeProvider>
+    </ApolloProvider>
+  </BrowserRouter>
+);
