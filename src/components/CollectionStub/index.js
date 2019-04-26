@@ -4,6 +4,8 @@ import styled from 'styled-components'
 import Box from 'components/UI/Box'
 import Link from 'components/UI/Link'
 
+const Title = styled.span``
+
 const Container = styled(Link).attrs({
   px: 6,
   py: 5,
@@ -11,6 +13,7 @@ const Container = styled(Link).attrs({
   position: relative;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   border-bottom: 1px solid black;
   margin-top: -1px;
   border: 1px solid;
@@ -26,23 +29,26 @@ const Container = styled(Link).attrs({
   }
 
   &:hover {
-    border-color: blue;
-    z-index: 1;
-    color: blue;
     text-decoration: none;
+
+    ${Title} {
+      text-decoration: underline;
+    }
   }
 `
 
 export default ({ collection }) => (
   <Container to={`/collections/${collection.id}`}>
     <Box display="flex">
-      {collection.title}
+      <Title>{collection.title}</Title>
 
       <Box color="lightgray" ml={6}>
         {collection.counts.contents || 'empty'}
       </Box>
     </Box>
 
-    <Box color="lightgray">{collection.updatedAt}</Box>
+    <Box fontSize={0} color="lightgray">
+      {collection.updatedAt}
+    </Box>
   </Container>
 )
