@@ -1,11 +1,10 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
 
-import Box from 'components/UI/Box';
-import CollectionStub from 'components/CollectionStub';
+import Box from 'components/UI/Box'
+import CollectionStub from 'components/CollectionStub'
 
-const Container = styled(Box)`
-`;
+const Container = styled(Box)``
 
 export default ({ collections, ...rest }) => (
   <Container {...rest}>
@@ -16,4 +15,4 @@ export default ({ collections, ...rest }) => (
       />
     ))}
   </Container>
-);
+)

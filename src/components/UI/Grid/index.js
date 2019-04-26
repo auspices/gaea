@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
-import Box from '../Box';
+import Box from '../Box'
 
 const Container = styled(Box)`
   width: 100%;
@@ -8,6 +8,6 @@ const Container = styled(Box)`
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-`;
+`
 
-export default Container;
+export default Container

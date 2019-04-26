@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
-import styled from 'styled-components';
+import React, { useContext } from 'react'
+import styled from 'styled-components'
 
-import { Store } from './Store';
+import { Store } from './Store'
 
-import Box from 'components/UI/Box';
-import Alert from 'components/UI/Alert';
+import Box from 'components/UI/Box'
+import Alert from 'components/UI/Alert'
 
 const Container = styled(Box).attrs({
   p: 3,
@@ -14,11 +14,11 @@ const Container = styled(Box).attrs({
   right: 0;
   width: 20em;
   z-index: 1;
-`;
+`
 
-export const WithAlerts = (WrappedComponent) => {
-  const WithAlerts = (props) => {
-    const { dispatch } = useContext(Store);
+export const WithAlerts = WrappedComponent => {
+  const WithAlerts = props => {
+    const { dispatch } = useContext(Store)
 
     const dispatchError = error =>
       dispatch({
@@ -27,7 +27,7 @@ export const WithAlerts = (WrappedComponent) => {
           type: 'ERROR',
           ...error,
         },
-      });
+      })
 
     const dispatchAlert = message =>
       dispatch({
@@ -36,7 +36,7 @@ export const WithAlerts = (WrappedComponent) => {
           type: 'ALERT',
           message,
         },
-      });
+      })
 
     return (
       <WrappedComponent
@@ -44,21 +44,24 @@ export const WithAlerts = (WrappedComponent) => {
         dispatchError={dispatchError}
         {...props}
       />
-    );
-  };
+    )
+  }
 
-  return WithAlerts;
-};
+  return WithAlerts
+}
 
 export default () => {
-  const { state: { alerts }, dispatch } = useContext(Store);
+  const {
+    state: { alerts },
+    dispatch,
+  } = useContext(Store)
 
-  const handleRemove = (alertId) => {
+  const handleRemove = alertId => {
     dispatch({
       type: 'REMOVE_ALERT',
       payload: alertId,
-    });
-  };
+    })
+  }
 
   return (
     <Container>
@@ -68,5 +71,5 @@ export default () => {
         </Alert>
       ))}
     </Container>
-  );
-};
+  )
+}

@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
 export default gql`
   query Content($id: ID!, $type: ContentTypes!) {
@@ -18,4 +18,4 @@ export default gql`
       }
     }
   }
-`;
+`

@@ -1,10 +1,10 @@
-import React, { PureComponent } from 'react';
-import { graphql } from 'react-apollo';
+import React, { PureComponent } from 'react'
+import { graphql } from 'react-apollo'
 
-import { TextInput } from 'components/UI/Inputs';
-import { WithAlerts } from 'components/Alerts';
+import { TextInput } from 'components/UI/Inputs'
+import { WithAlerts } from 'components/Alerts'
 
-import addToCollectionMutation from './mutations/addToCollection';
+import addToCollectionMutation from './mutations/addToCollection'
 
 class AddToCollection extends PureComponent {
   state = {
@@ -13,20 +13,20 @@ class AddToCollection extends PureComponent {
     key: new Date().getTime(),
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault();
+  handleSubmit = e => {
+    e.preventDefault()
 
-    const { value } = this.state;
-    const { per } = this.props;
+    const { value } = this.state
+    const { per } = this.props
 
     const {
       addToCollection,
       collection,
       dispatchAlert,
       dispatchError,
-    } = this.props;
+    } = this.props
 
-    this.setState({ mode: 'adding' });
+    this.setState({ mode: 'adding' })
 
     addToCollection({
       variables: {
@@ -37,25 +37,24 @@ class AddToCollection extends PureComponent {
       },
     })
       .then(() => {
-        dispatchAlert('Added successfully');
+        dispatchAlert('Added successfully')
 
         this.setState({
           mode: 'resting',
           key: new Date().getTime(),
-        });
+        })
       })
-      .catch((err) => {
-        dispatchError(err);
+      .catch(err => {
+        dispatchError(err)
 
-        this.setState({ mode: 'error' });
+        this.setState({ mode: 'error' })
       })
   }
 
-  handleChange = ({ target: { value }}) =>
-    this.setState({ value });
+  handleChange = ({ target: { value } }) => this.setState({ value })
 
   render() {
-    const { mode, key } = this.state;
+    const { mode, key } = this.state
 
     return (
       <form onSubmit={this.handleSubmit}>
@@ -68,10 +67,10 @@ class AddToCollection extends PureComponent {
           autoFocus
         />
       </form>
-    );
+    )
   }
 }
 
 export default graphql(addToCollectionMutation, {
   name: 'addToCollection',
-})(WithAlerts(AddToCollection));
+})(WithAlerts(AddToCollection))

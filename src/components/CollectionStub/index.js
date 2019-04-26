@@ -1,8 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
 
-import Box from 'components/UI/Box';
-import Link from 'components/UI/Link';
+import Box from 'components/UI/Box'
+import Link from 'components/UI/Link'
 
 const Container = styled(Link).attrs({
   px: 6,
@@ -31,7 +31,7 @@ const Container = styled(Link).attrs({
     color: blue;
     text-decoration: none;
   }
-`;
+`
 
 export default ({ collection }) => (
   <Container to={`/collections/${collection.id}`}>
@@ -43,8 +43,6 @@ export default ({ collection }) => (
       </Box>
     </Box>
 
-    <Box color="lightgray">
-      {collection.updatedAt}
-    </Box>
+    <Box color="lightgray">{collection.updatedAt}</Box>
   </Container>
-);
+)

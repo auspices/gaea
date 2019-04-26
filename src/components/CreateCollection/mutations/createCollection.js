@@ -1,6 +1,6 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
-import collectionStubFragment from 'components/CollectionStub/fragments/collectionStub';
+import collectionStubFragment from 'components/CollectionStub/fragments/collectionStub'
 
 export default gql`
   mutation createCollection($title: String!) {
@@ -11,4 +11,4 @@ export default gql`
     }
   }
   ${collectionStubFragment}
-`;
+`

@@ -1,10 +1,10 @@
-import React from 'react';
-import styled from 'styled-components';
-import { graphql } from 'react-apollo';
+import React from 'react'
+import styled from 'styled-components'
+import { graphql } from 'react-apollo'
 
-import removeFromCollectionMutation from './mutations/removeFromCollection';
+import removeFromCollectionMutation from './mutations/removeFromCollection'
 
-import { Button } from 'components/UI/Buttons';
+import { Button } from 'components/UI/Buttons'
 
 const Container = styled(Button).attrs({
   fontSize: 5,
@@ -20,7 +20,7 @@ const Container = styled(Button).attrs({
   &:hover {
     background-color: gray;
   }
-`;
+`
 
 const RemoveFromCollection = ({
   contentId,
@@ -31,8 +31,8 @@ const RemoveFromCollection = ({
   per,
   ...rest
 }) => {
-  const handleClick = (e) => {
-    e.preventDefault();
+  const handleClick = e => {
+    e.preventDefault()
 
     removeFromCollection({
       variables: {
@@ -46,17 +46,12 @@ const RemoveFromCollection = ({
       },
     })
       .then(console.log.bind(console))
-      .catch(console.error.bind(console));
-  };
+      .catch(console.error.bind(console))
+  }
 
-  return (
-    <Container
-      onClick={handleClick}
-      {...rest}
-    />
-  )
-};
+  return <Container onClick={handleClick} {...rest} />
+}
 
 export default graphql(removeFromCollectionMutation, {
   name: 'removeFromCollection',
-})(RemoveFromCollection);
+})(RemoveFromCollection)

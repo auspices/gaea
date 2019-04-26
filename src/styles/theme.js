@@ -31,9 +31,5 @@ export default {
     '8em',
     '16em',
   ],
-  breakpoints: [
-    '480px',
-    '800px',
-    '1024px',
-  ],
-};
+  breakpoints: ['480px', '800px', '1024px'],
+}

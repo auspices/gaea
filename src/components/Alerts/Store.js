@@ -1,13 +1,15 @@
-import React from 'react';
+import React from 'react'
 
 const initialState = {
-  alerts: []
-};
+  alerts: [],
+}
 
-export const Store = React.createContext();
+export const Store = React.createContext()
 
 const generateId = () =>
-  Math.random().toString(26).slice(2);
+  Math.random()
+    .toString(26)
+    .slice(2)
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -15,28 +17,26 @@ const reducer = (state, action) => {
       return {
         ...state,
         alerts: [
-          ...state.alerts, {
+          ...state.alerts,
+          {
             id: generateId(),
-            ...action.payload
-          }],
-      };
+            ...action.payload,
+          },
+        ],
+      }
     case 'REMOVE_ALERT':
-      const filtered = state.alerts.filter(alert => alert.id !== action.payload);
+      const filtered = state.alerts.filter(alert => alert.id !== action.payload)
       return {
         ...state,
         alerts: filtered,
-      };
+      }
     default:
-      return state;
+      return state
   }
-};
+}
 
 export const AlertsProvider = ({ children }) => {
-  const [state, dispatch] = React.useReducer(reducer, initialState);
+  const [state, dispatch] = React.useReducer(reducer, initialState)
 
-  return (
-    <Store.Provider value={{ state, dispatch }}>
-      {children}
-    </Store.Provider>
-  );
-};
+  return <Store.Provider value={{ state, dispatch }}>{children}</Store.Provider>
+}

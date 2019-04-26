@@ -1,12 +1,14 @@
-import styled from 'styled-components';
-import { Link as _Link } from 'react-router-dom';
+import styled from 'styled-components'
+import { Link as _Link } from 'react-router-dom'
 
-import { mixin as boxMixin } from '../Box';
+import { mixin as boxMixin } from '../Box'
 
 const Link = styled(_Link)`
   ${boxMixin}
 
-  ${props => props.disabled && `
+  ${props =>
+    props.disabled &&
+    `
     cursor: default;
     pointer-events: none;
   `}
@@ -14,6 +16,6 @@ const Link = styled(_Link)`
   &:hover {
     text-decoration: underline;
   }
-`;
+`
 
-export default Link;
+export default Link

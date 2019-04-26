@@ -1,9 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
 
 const Image = styled.img`
   background-color: lightgray;
-`;
+`
 
 export default ({ image, ...rest }) => (
   <Image
@@ -14,4 +14,4 @@ export default ({ image, ...rest }) => (
     height={image.resized.height}
     {...rest}
   />
-);
+)

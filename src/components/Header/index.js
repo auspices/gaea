@@ -1,7 +1,7 @@
-import React, { Children } from 'react';
-import styled from 'styled-components';
+import React, { Children } from 'react'
+import styled from 'styled-components'
 
-import Box from '../UI/Box';
+import Box from '../UI/Box'
 
 const Container = styled(Box).attrs({
   borderRadius: 4,
@@ -10,7 +10,7 @@ const Container = styled(Box).attrs({
   align-items: stretch;
   border: 1px solid black;
   overflow: hidden;
-`;
+`
 
 const Crumb = styled(Box)`
   border-left: 1px solid black;
@@ -26,7 +26,9 @@ const Crumb = styled(Box)`
     padding: ${({ theme: { space } }) => `${space[5]} ${space[6]}`};
   }
 
-  ${props => props.children.key === 'input' && `
+  ${props =>
+    props.children.key === 'input' &&
+    `
     flex: 1;
     padding: 0;
 
@@ -40,28 +42,22 @@ const Crumb = styled(Box)`
       border: 0;
     }
   `}
-`;
+`
 
 const Header = ({ children, isLoading, ...rest }) => (
   <Container {...rest}>
     {isLoading ? (
       <Crumb>
-        <span>
-          &nbsp;
-        </span>
+        <span>&nbsp;</span>
       </Crumb>
     ) : (
-      Children.map(children, child =>
-        <Crumb>
-          {child}
-        </Crumb>
-      )
+      Children.map(children, child => <Crumb>{child}</Crumb>)
     )}
   </Container>
-);
+)
 
 Header.defaultProps = {
   isLoading: false,
-};
+}
 
-export default Header;
+export default Header

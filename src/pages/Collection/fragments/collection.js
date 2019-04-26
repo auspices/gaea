@@ -1,6 +1,6 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
-import thumbnailFragment from '../../../components/Thumbnail/fragments/thumbnail';
+import thumbnailFragment from '../../../components/Thumbnail/fragments/thumbnail'
 
 export default gql`
   fragment Collection on Collection {
@@ -19,4 +19,4 @@ export default gql`
     }
   }
   ${thumbnailFragment}
-`;
+`

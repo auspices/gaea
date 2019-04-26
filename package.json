@@ -10,7 +10,10 @@
     "apollo-link-http": "^1.5.14",
     "graphql": "^14.2.0",
     "graphql-tag": "^2.10.1",
+    "husky": "^2.1.0",
     "jwt-decode": "^2.2.0",
+    "lint-staged": "^8.1.5",
+    "prettier": "^1.17.0",
     "qs": "^6.7.0",
     "react": "^16.8.6",
     "react-apollo": "^2.5.3",
@@ -35,5 +38,23 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "prettier": {
+    "bracketSpacing": true,
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "printWidth": 80
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --single-quote --write",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
 }

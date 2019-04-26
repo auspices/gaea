@@ -1,26 +1,33 @@
-import React from 'react';
-import { Query } from 'react-apollo';
+import React from 'react'
+import { Query } from 'react-apollo'
 
-import collectionQuery from './queries/collection';
+import collectionQuery from './queries/collection'
 
-import Grid from 'components/UI/Grid';
-import Link from 'components/UI/Link';
-import Pagination from 'components/UI/Pagination';
-import Header from 'components/Header';
-import AddToCollection from 'components/AddToCollection';
-import CollectionContent from 'components/CollectionContent';
-import { WithAlerts } from 'components/Alerts';
+import Grid from 'components/UI/Grid'
+import Link from 'components/UI/Link'
+import Pagination from 'components/UI/Pagination'
+import Header from 'components/Header'
+import AddToCollection from 'components/AddToCollection'
+import CollectionContent from 'components/CollectionContent'
+import { WithAlerts } from 'components/Alerts'
 
 const Collection = ({ id, page, per, dispatchError }) => (
-  <Query query={collectionQuery} variables={{ id, page, per }} onError={dispatchError} fetchPolicy="network-only">
+  <Query
+    query={collectionQuery}
+    variables={{ id, page, per }}
+    onError={dispatchError}
+    fetchPolicy="network-only"
+  >
     {({ data, loading, error }) => {
-      if (error) return null;
+      if (error) return null
 
       if (loading) {
-        return <Header isLoading />;
+        return <Header isLoading />
       }
 
-      const { me: { username, collection } } = data;
+      const {
+        me: { username, collection },
+      } = data
 
       return (
         <>
@@ -33,11 +40,7 @@ const Collection = ({ id, page, per, dispatchError }) => (
               {collection.title}
             </Link>
 
-            <AddToCollection
-              key="input"
-              collection={collection}
-              per={per}
-            />
+            <AddToCollection key="input" collection={collection} per={per} />
           </Header>
 
           <Pagination
@@ -49,7 +52,7 @@ const Collection = ({ id, page, per, dispatchError }) => (
           />
 
           <Grid my={6}>
-            {collection.contents.map((content) =>
+            {collection.contents.map(content => (
               <CollectionContent
                 key={`CollectionContent:${content.id}`}
                 collection={collection}
@@ -57,12 +60,12 @@ const Collection = ({ id, page, per, dispatchError }) => (
                 page={page}
                 per={per}
               />
-            )}
+            ))}
           </Grid>
         </>
-      );
+      )
     }}
   </Query>
-);
+)
 
-export default WithAlerts(Collection);
+export default WithAlerts(Collection)

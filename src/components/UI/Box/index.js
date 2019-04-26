@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from 'styled-components'
 import {
   display,
   position,
@@ -25,7 +25,7 @@ import {
   bottom,
   left,
   zIndex,
-} from 'styled-system';
+} from 'styled-system'
 
 export const mixin = css`
   ${display}
@@ -53,10 +53,10 @@ export const mixin = css`
   ${bottom}
   ${left}
   ${zIndex}
-`;
+`
 
 const Box = styled.div`
   ${mixin}
-`;
+`
 
-export default Box;
+export default Box

@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
-import { mixin as boxMixin } from '../Box';
+import { mixin as boxMixin } from '../Box'
 
 export const Button = styled.button`
   appearance: none;
@@ -12,7 +12,9 @@ export const Button = styled.button`
 
   ${boxMixin}
 
-  ${props => props.disabled && `
+  ${props =>
+    props.disabled &&
+    `
     cursor: default;
     pointer-events: none;
   `}
@@ -20,4 +22,4 @@ export const Button = styled.button`
   &:hover {
     text-decoration: underline;
   }
-`;
+`

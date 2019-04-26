@@ -1,13 +1,13 @@
-import React, { PureComponent } from 'react';
-import { graphql } from 'react-apollo';
-import { Redirect } from 'react-router';
-import styled from 'styled-components';
+import React, { PureComponent } from 'react'
+import { graphql } from 'react-apollo'
+import { Redirect } from 'react-router'
+import styled from 'styled-components'
 
-import loginMutation from './mutations/login';
+import loginMutation from './mutations/login'
 
-import { Button } from 'components/UI/Buttons';
-import { TextInput } from 'components/UI/Inputs';
-import { WithAlerts } from 'components/Alerts';
+import { Button } from 'components/UI/Buttons'
+import { TextInput } from 'components/UI/Inputs'
+import { WithAlerts } from 'components/Alerts'
 
 const Form = styled.form`
   display: flex;
@@ -31,7 +31,7 @@ const Form = styled.form`
       border-bottom-right-radius: 4px;
     }
   }
-`;
+`
 
 class Login extends PureComponent {
   state = {
@@ -46,37 +46,37 @@ class Login extends PureComponent {
       mode: 'active',
       errorMessage: null,
       [name]: value,
-    });
+    })
 
   handleUsername = this.handleInput('username')
   handlePassword = this.handleInput('password')
 
-  handleLogin = (e) => {
-    e.preventDefault();
+  handleLogin = e => {
+    e.preventDefault()
 
-    const { login, dispatchAlert, dispatchError } = this.props;
-    const { username, password } = this.state;
+    const { login, dispatchAlert, dispatchError } = this.props
+    const { username, password } = this.state
 
     login({ variables: { username, password } })
       .then(({ data: { login: { jwt } } }) => {
-        localStorage.setItem('jwt', jwt);
+        localStorage.setItem('jwt', jwt)
 
-        dispatchAlert('Logged in');
+        dispatchAlert('Logged in')
 
-        this.setState({ mode: 'success' });
+        this.setState({ mode: 'success' })
       })
-      .catch((err) => {
-        dispatchError(err);
+      .catch(err => {
+        dispatchError(err)
 
-        console.error(err);
-      });
+        console.error(err)
+      })
   }
 
   render() {
-    const { mode } = this.state;
+    const { mode } = this.state
 
     if (mode === 'success') {
-      return <Redirect to="/collections" />;
+      return <Redirect to="/collections" />
     }
 
     return (
@@ -95,14 +95,12 @@ class Login extends PureComponent {
           required
         />
 
-        <Button onClick={this.handleLogin}>
-          Login
-        </Button>
+        <Button onClick={this.handleLogin}>Login</Button>
       </Form>
-    );
+    )
   }
 }
 
 export default graphql(loginMutation, {
   name: 'login',
-})(WithAlerts(Login));
+})(WithAlerts(Login))

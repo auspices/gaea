@@ -1,6 +1,6 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
-import collectionFragment from '../fragments/collection';
+import collectionFragment from '../fragments/collection'
 
 export default gql`
   query Collection($id: ID!, $page: Int, $per: Int) {
@@ -14,4 +14,4 @@ export default gql`
     }
   }
   ${collectionFragment}
-`;
+`
