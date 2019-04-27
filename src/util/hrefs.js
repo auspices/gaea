@@ -2,7 +2,7 @@ import { curry } from 'lodash'
 
 export const login = '/login'
 
-export const home = curry(user => `/${user.slug}`)
+export const home = curry(user => `/${user.slug}/xs`)
 
 export const collections = curry(user => `/${user.slug}/xs`)
 

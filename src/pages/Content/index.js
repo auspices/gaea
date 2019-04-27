@@ -1,39 +1,71 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import { Query } from 'react-apollo'
 
 import contentQuery from './queries/content'
 
-export default class Content extends PureComponent {
-  render() {
-    const { id, type } = this.props
+import { generate as generateHrefs } from 'util/hrefs'
 
-    return (
-      <Query query={contentQuery} variables={{ id, type }}>
-        {({ data, loading, error }) => {
-          if (loading) return '...'
-          if (error) return error.message
+import Box from 'components/UI/Box'
+import Link from 'components/UI/Link'
+import Header from 'components/Header'
+import { ContentDisplay } from 'components/ContentDisplay'
+import { WithAlerts } from 'components/Alerts'
 
-          const { content } = data
+export default WithAlerts(({ id, type, dispatchError }) => {
+  return (
+    <Query
+      query={contentQuery}
+      variables={{ id, type }}
+      onError={dispatchError}
+    >
+      {({ data, loading, error }) => {
+        if (error) return null
 
-          switch (content.__typename) {
-            case 'Image':
-              return (
-                <img
-                  src={content.resized.urls._1x}
-                  srcSet={`${content.resized.urls._1x} 1x, ${
-                    content.resized.urls._2x
-                  } 2x`}
-                  alt={content.title}
-                  title={content.title}
-                  width={content.resized.width}
-                  height={content.resized.height}
-                />
-              )
-            default:
-              return content.__typename
-          }
-        }}
-      </Query>
-    )
-  }
-}
+        if (loading) {
+          return <Header isLoading />
+        }
+
+        const {
+          me,
+          me: { username },
+          content,
+        } = data
+
+        const hrefs = generateHrefs(me)
+
+        return (
+          <>
+            <Header>
+              <Link to={hrefs.collections}>{username}</Link>
+
+              <Link href={content.url}>
+                {content.width}×{content.height}
+              </Link>
+
+              <Link
+                href={`https://www.google.com/searchbyimage?&image_url=${
+                  content.url
+                }`}
+              >
+                Reverse Image Search
+              </Link>
+            </Header>
+
+            <Box
+              flex={1}
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              border="1px solid"
+              mt={6}
+              p={6}
+              borderRadius={4}
+            >
+              <ContentDisplay content={content} />
+            </Box>
+          </>
+        )
+      }}
+    </Query>
+  )
+})

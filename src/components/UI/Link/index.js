@@ -1,21 +1,40 @@
-import styled from 'styled-components'
-import { Link as _Link } from 'react-router-dom'
+import React from 'react'
+import styled, { css } from 'styled-components'
+import { Link } from 'react-router-dom'
 
 import { mixin as boxMixin } from '../Box'
 
-const Link = styled(_Link)`
+export const mixin = css`
   ${boxMixin}
 
   ${props =>
     props.disabled &&
     `
-    cursor: default;
-    pointer-events: none;
-  `}
+  cursor: default;
+  pointer-events: none;
+`}
 
-  &:hover {
+&:hover {
     text-decoration: underline;
   }
 `
 
-export default Link
+export const InternalLink = styled(Link)`
+  ${mixin}
+`
+
+export const ExternalLink = styled(Link).attrs({
+  target: '_blank',
+  rel: 'noopener noreferrer',
+})`
+  ${mixin}
+`
+
+export default ({ to, children, ...rest }) =>
+  to ? (
+    <InternalLink to={to} {...rest}>
+      {children}
+    </InternalLink>
+  ) : (
+    <ExternalLink {...rest}>{children}</ExternalLink>
+  )

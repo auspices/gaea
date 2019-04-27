@@ -41,7 +41,7 @@ export default WithAlerts(({ dispatchError }) => (
             <CreateCollection key="input" hrefs={hrefs} />
           </Header>
 
-          <CollectionsList mt="-1px" collections={collections} hrefs={hrefs} />
+          <CollectionsList collections={collections} hrefs={hrefs} />
         </>
       )
     }}
