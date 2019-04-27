@@ -23,18 +23,19 @@ export const InternalLink = styled(Link)`
   ${mixin}
 `
 
-export const ExternalLink = styled(Link).attrs({
+export const ExternalLink = styled.a.attrs({
   target: '_blank',
   rel: 'noopener noreferrer',
 })`
   ${mixin}
 `
 
-export default ({ to, children, ...rest }) =>
-  to ? (
+export default ({ to, children, ...rest }) => {
+  return to ? (
     <InternalLink to={to} {...rest}>
       {children}
     </InternalLink>
   ) : (
     <ExternalLink {...rest}>{children}</ExternalLink>
   )
+}

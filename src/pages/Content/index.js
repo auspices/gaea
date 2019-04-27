@@ -56,7 +56,6 @@ export default WithAlerts(({ id, type, dispatchError }) => {
               display="flex"
               alignItems="center"
               justifyContent="center"
-              border="1px solid"
               mt={6}
               p={6}
               borderRadius={4}
