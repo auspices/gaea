@@ -5,6 +5,8 @@ import styled from 'styled-components'
 
 import loginMutation from './mutations/login'
 
+import * as hrefs from 'util/hrefs'
+
 import { Button } from 'components/UI/Buttons'
 import { TextInput } from 'components/UI/Inputs'
 import { WithAlerts } from 'components/Alerts'
@@ -39,6 +41,7 @@ class Login extends PureComponent {
     username: null,
     password: null,
     errorMessage: null,
+    userSlug: null,
   }
 
   handleInput = name => ({ target: { value } }) =>
@@ -58,12 +61,12 @@ class Login extends PureComponent {
     const { username, password } = this.state
 
     login({ variables: { username, password } })
-      .then(({ data: { login: { jwt } } }) => {
+      .then(({ data: { login: { jwt, user } } }) => {
         localStorage.setItem('jwt', jwt)
 
         dispatchAlert('Logged in')
 
-        this.setState({ mode: 'success' })
+        this.setState({ mode: 'success', userSlug: user.slug })
       })
       .catch(err => {
         dispatchError(err)
@@ -72,11 +75,12 @@ class Login extends PureComponent {
       })
   }
 
+  // TODO: This should check & query for logged in status and handle the redirect
   render() {
-    const { mode } = this.state
+    const { mode, userSlug } = this.state
 
     if (mode === 'success') {
-      return <Redirect to="/collections" />
+      return <Redirect to={hrefs.collections({ slug: userSlug })} />
     }
 
     return (

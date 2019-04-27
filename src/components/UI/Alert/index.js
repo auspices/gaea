@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 
-import errorMessage from 'util/errorMessage'
+import { errorMessage } from 'util/errors'
 
 import Box from 'components/UI/Box'
 

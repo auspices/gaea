@@ -5,7 +5,8 @@ import thumbnailFragment from '../../../components/Thumbnail/fragments/thumbnail
 export default gql`
   fragment Collection on Collection {
     __typename
-    id: slug
+    id
+    slug
     title
     counts {
       __typename

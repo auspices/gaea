@@ -11,7 +11,7 @@ const Container = styled(Box).attrs({
   px: 6,
 })``
 
-export default ({ content, collection, page, per, ...rest }) => {
+export default ({ content, collection, hrefs, page, per, ...rest }) => {
   const [mode, setMode] = useState('resting')
 
   return (
@@ -20,11 +20,7 @@ export default ({ content, collection, page, per, ...rest }) => {
       onMouseLeave={() => setMode('resting')}
       {...rest}
     >
-      <Link
-        display="block"
-        position="relative"
-        to={`/content/${content.__typename.toLowerCase()}/${content.id}`}
-      >
+      <Link display="block" position="relative" to={hrefs.content(content)}>
         <CollectionContentInner content={content} />
 
         {mode === 'hover' && (

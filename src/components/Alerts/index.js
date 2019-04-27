@@ -3,6 +3,9 @@ import styled from 'styled-components'
 
 import { Store } from './Store'
 
+import { login as loginHref } from 'util/hrefs'
+import { errorCode } from 'util/errors'
+
 import Box from 'components/UI/Box'
 import Alert from 'components/UI/Alert'
 
@@ -20,7 +23,14 @@ export const WithAlerts = WrappedComponent => {
   const WithAlerts = props => {
     const { dispatch } = useContext(Store)
 
-    const dispatchError = error =>
+    const dispatchError = error => {
+      if (
+        errorCode(error) === 'UNAUTHORIZED' &&
+        !(window.location.pathname === loginHref)
+      ) {
+        window.location.href = '/'
+      }
+
       dispatch({
         type: 'CREATE_ALERT',
         payload: {
@@ -28,6 +38,7 @@ export const WithAlerts = WrappedComponent => {
           ...error,
         },
       })
+    }
 
     const dispatchAlert = message =>
       dispatch({

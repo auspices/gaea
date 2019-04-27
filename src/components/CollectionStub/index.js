@@ -37,8 +37,8 @@ const Container = styled(Link).attrs({
   }
 `
 
-export default ({ collection }) => (
-  <Container to={`/collections/${collection.id}`}>
+export default ({ collection, hrefs }) => (
+  <Container to={hrefs.collection(collection)}>
     <Box display="flex">
       <Title>{collection.title}</Title>
 

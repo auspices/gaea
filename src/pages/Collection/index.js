@@ -3,6 +3,8 @@ import { Query } from 'react-apollo'
 
 import collectionQuery from './queries/collection'
 
+import { generate as generateHrefs } from 'util/hrefs'
+
 import Grid from 'components/UI/Grid'
 import Link from 'components/UI/Link'
 import Pagination from 'components/UI/Pagination'
@@ -26,17 +28,20 @@ const Collection = ({ id, page, per, dispatchError }) => (
       }
 
       const {
+        me,
         me: { username, collection },
       } = data
+
+      const hrefs = generateHrefs(me)
 
       return (
         <>
           <Header>
-            <Link to="/collections" key="username">
+            <Link to={hrefs.collections} key="username">
               {username}
             </Link>
 
-            <Link to={`/collections/${id}`} key="title">
+            <Link to={hrefs.collection(collection)} key="title">
               {collection.title}
             </Link>
 
@@ -44,7 +49,7 @@ const Collection = ({ id, page, per, dispatchError }) => (
           </Header>
 
           <Pagination
-            href={`/collections/${id}`}
+            href={hrefs.collection(collection)}
             page={page}
             per={per}
             total={collection.counts.contents}
@@ -57,6 +62,7 @@ const Collection = ({ id, page, per, dispatchError }) => (
                 key={`CollectionContent:${content.id}`}
                 collection={collection}
                 content={content}
+                hrefs={hrefs}
                 page={page}
                 per={per}
               />

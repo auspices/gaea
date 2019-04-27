@@ -6,12 +6,13 @@ import CollectionStub from 'components/CollectionStub'
 
 const Container = styled(Box)``
 
-export default ({ collections, ...rest }) => (
+export default ({ collections, hrefs, ...rest }) => (
   <Container {...rest}>
     {collections.map(collection => (
       <CollectionStub
         key={`CollectionStub:${collection.id}`}
         collection={collection}
+        hrefs={hrefs}
       />
     ))}
   </Container>

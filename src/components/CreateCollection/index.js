@@ -4,9 +4,9 @@ import { Redirect } from 'react-router-dom'
 
 import createCollectionMutation from './mutations/createCollection'
 
-import { TextInput } from '../UI/Inputs'
+import { TextInput } from 'components/UI/Inputs'
 
-const CreateCollection = ({ createCollection }) => {
+const CreateCollection = ({ createCollection, hrefs }) => {
   const [mode, setMode] = useState('resting')
   const [title, setTitle] = useState('')
   const [collection, setCollection] = useState(null)
@@ -28,7 +28,7 @@ const CreateCollection = ({ createCollection }) => {
 
   return (
     <>
-      {mode === 'created' && <Redirect to={`/collections/${collection.id}`} />}
+      {mode === 'created' && <Redirect to={hrefs.collection(collection)} />}
 
       <form onSubmit={handleSubmit}>
         <TextInput

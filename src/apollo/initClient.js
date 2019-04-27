@@ -4,9 +4,13 @@ import { setContext } from 'apollo-link-context'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import jwtDecode from 'jwt-decode'
 
+const ENDPOINTS = {
+  production: 'https://atlas.auspic.es/graphql',
+  development: 'http://localhost:5000/graphql',
+}
+
 const httpLink = createHttpLink({
-  uri: 'https://atlas.auspic.es/graphql',
-  // uri: 'http://localhost:5000/graphql',
+  uri: ENDPOINTS['production'],
 })
 
 const authLink = setContext((_, { headers }) => {

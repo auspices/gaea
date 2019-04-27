@@ -3,6 +3,8 @@ import { Query } from 'react-apollo'
 
 import collectionsQuery from './queries/collections'
 
+import { generate as generateHrefs } from 'util/hrefs'
+
 import Link from 'components/UI/Link'
 import Header from 'components/Header'
 import CreateCollection from 'components/CreateCollection'
@@ -23,20 +25,23 @@ export default WithAlerts(({ dispatchError }) => (
       }
 
       const {
+        me,
         me: { username, collections },
       } = data
+
+      const hrefs = generateHrefs(me)
 
       return (
         <>
           <Header>
-            <Link key="name" to="/collections">
+            <Link key="name" to={hrefs.home}>
               {username}
             </Link>
 
-            <CreateCollection key="input" />
+            <CreateCollection key="input" hrefs={hrefs} />
           </Header>
 
-          <CollectionsList mt="-1px" collections={collections} />
+          <CollectionsList mt="-1px" collections={collections} hrefs={hrefs} />
         </>
       )
     }}
