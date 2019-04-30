@@ -28,7 +28,7 @@ export const WithAlerts = WrappedComponent => {
         errorCode(error) === 'UNAUTHORIZED' &&
         !(window.location.pathname === loginHref)
       ) {
-        window.location.href = '/'
+        window.location.href = loginHref
       }
 
       dispatch({
