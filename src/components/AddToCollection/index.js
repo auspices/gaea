@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { useState, useCallback } from 'react'
 import { graphql } from 'react-apollo'
 
 import { TextInput } from 'components/UI/Inputs'
@@ -6,69 +6,63 @@ import { WithAlerts } from 'components/Alerts'
 
 import addToCollectionMutation from './mutations/addToCollection'
 
-class AddToCollection extends PureComponent {
-  state = {
-    mode: 'resting',
-    value: '',
-    key: new Date().getTime(),
-  }
+export const AddToCollection = ({
+  per,
+  addToCollection,
+  collection,
+  dispatchAlert,
+  dispatchError,
+}) => {
+  const [mode, setMode] = useState('resting')
+  const [value, setValue] = useState('')
+  const [inputKey, setInputKey] = useState(new Date().getTime())
 
-  handleSubmit = e => {
-    e.preventDefault()
+  const handleSubmit = useCallback(
+    e => {
+      e.preventDefault()
 
-    const { value } = this.state
-    const { per } = this.props
+      setMode('adding')
 
-    const {
-      addToCollection,
-      collection,
-      dispatchAlert,
-      dispatchError,
-    } = this.props
-
-    this.setState({ mode: 'adding' })
-
-    addToCollection({
-      variables: {
-        id: collection.id,
-        sourceUrl: value,
-        page: 1,
-        per,
-      },
-    })
-      .then(() => {
-        dispatchAlert('Added successfully')
-
-        this.setState({
-          mode: 'resting',
-          key: new Date().getTime(),
+      addToCollection({
+        variables: {
+          id: collection.id,
+          url: value,
+          page: 1,
+          per,
+        },
+      })
+        .then(() => {
+          dispatchAlert('Added successfully')
+          setMode('resting')
+          setInputKey(new Date().getTime())
         })
-      })
-      .catch(err => {
-        dispatchError(err)
+        .catch(err => {
+          dispatchError(err)
+          setMode('error')
+        })
+    },
+    [addToCollection, collection.id, dispatchAlert, dispatchError, per, value]
+  )
 
-        this.setState({ mode: 'error' })
-      })
-  }
+  const handleChange = useCallback(
+    ({ target: { value } }) => setValue(value),
+    []
+  )
 
-  handleChange = ({ target: { value } }) => this.setState({ value })
-
-  render() {
-    const { mode, key } = this.state
-
-    return (
-      <form onSubmit={this.handleSubmit}>
+  return (
+    <>
+      <form onSubmit={handleSubmit}>
         <TextInput
-          key={key}
+          key={inputKey}
           placeholder="add to this collection"
-          onChange={this.handleChange}
+          onChange={handleChange}
           disabled={mode === 'adding'}
           required
           autoFocus
         />
       </form>
-    )
-  }
+    </>
+  )
 }
 
 export default graphql(addToCollectionMutation, {

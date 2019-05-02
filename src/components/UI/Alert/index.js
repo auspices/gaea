@@ -28,13 +28,13 @@ const Container = styled(Box).attrs({
 `
 
 const Alert = ({ alert, autoClose, onRemove, children }) => {
-  if (autoClose) {
-    useEffect(() => {
-      const timer = setTimeout(() => onRemove(alert.id), autoClose * 1000)
-
-      return () => clearTimeout(timer)
-    }, [])
-  }
+  useEffect(() => {
+    let timer
+    if (autoClose) {
+      timer = setTimeout(() => onRemove(alert.id), autoClose * 1000)
+    }
+    return () => clearTimeout(timer)
+  }, [alert.id, autoClose, onRemove])
 
   const handleClick = e => {
     e.preventDefault()
@@ -55,7 +55,7 @@ const Alert = ({ alert, autoClose, onRemove, children }) => {
 }
 
 Alert.defaultProps = {
-  autoClose: 10, // seconds
+  autoClose: 5, // seconds
 }
 
 export default Alert
