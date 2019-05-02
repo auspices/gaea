@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useCallback } from 'react'
 import styled from 'styled-components'
 
 import { Store } from './Store'
@@ -23,31 +23,37 @@ export const WithAlerts = WrappedComponent => {
   const WithAlerts = props => {
     const { dispatch } = useContext(Store)
 
-    const dispatchError = error => {
-      if (
-        errorCode(error) === 'UNAUTHORIZED' &&
-        !(window.location.pathname === loginHref)
-      ) {
-        window.location.href = loginHref
-      }
+    const dispatchError = useCallback(
+      error => {
+        if (
+          errorCode(error) === 'UNAUTHORIZED' &&
+          !(window.location.pathname === loginHref)
+        ) {
+          window.location.href = loginHref
+        }
 
-      dispatch({
-        type: 'CREATE_ALERT',
-        payload: {
-          type: 'ERROR',
-          ...error,
-        },
-      })
-    }
+        dispatch({
+          type: 'CREATE_ALERT',
+          payload: {
+            type: 'ERROR',
+            ...error,
+          },
+        })
+      },
+      [dispatch]
+    )
 
-    const dispatchAlert = message =>
-      dispatch({
-        type: 'CREATE_ALERT',
-        payload: {
-          type: 'ALERT',
-          message,
-        },
-      })
+    const dispatchAlert = useCallback(
+      message =>
+        dispatch({
+          type: 'CREATE_ALERT',
+          payload: {
+            type: 'ALERT',
+            message,
+          },
+        }),
+      [dispatch]
+    )
 
     return (
       <WrappedComponent
