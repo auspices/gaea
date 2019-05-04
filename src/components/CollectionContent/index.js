@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 import Box from 'components/UI/Box'
 import Link from 'components/UI/Link'
+import { CollectionContentContextMenu } from 'components/CollectionContentContextMenu'
 import RemoveFromCollection from 'components/RemoveFromCollection'
 import CollectionContentInner from './components/CollectionContentInner'
 
@@ -24,16 +25,18 @@ export default ({ content, collection, hrefs, page, per, ...rest }) => {
         <CollectionContentInner content={content} />
 
         {mode === 'hover' && (
-          <RemoveFromCollection
-            position="absolute"
-            top={0}
-            right={0}
-            collectionId={collection.id}
-            contentId={content.id}
-            contentType={content.__typename.toUpperCase()}
-            page={page}
-            per={per}
-          />
+          <CollectionContentContextMenu position="absolute" top={0} right={0}>
+            <RemoveFromCollection
+              fontSize={0}
+              collectionId={collection.id}
+              contentId={content.id}
+              contentType={content.__typename.toUpperCase()}
+              page={page}
+              per={per}
+            >
+              delete this {content.__typename.toLowerCase()}
+            </RemoveFromCollection>
+          </CollectionContentContextMenu>
         )}
       </Link>
     </Container>
