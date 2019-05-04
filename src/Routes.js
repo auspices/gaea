@@ -29,7 +29,13 @@ export default () => (
 
     <Route exact path="/login" component={Login} />
 
-    <Route exact path="/:username/xs" component={Collections} />
+    <Route
+      exact
+      path="/:username/xs"
+      component={parseRoute(({ query: { page, per } }) => (
+        <Collections page={page} per={per} />
+      ))}
+    />
 
     <Route
       exact

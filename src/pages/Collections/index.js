@@ -7,13 +7,15 @@ import { generate as generateHrefs } from 'util/hrefs'
 
 import Link from 'components/UI/Link'
 import Header from 'components/Header'
+import Pagination from 'components/UI/Pagination'
 import CreateCollection from 'components/CreateCollection'
 import CollectionsList from 'components/CollectionsList'
 import { WithAlerts } from 'components/Alerts'
 
-export default WithAlerts(({ dispatchError }) => (
+export default WithAlerts(({ dispatchError, page, per }) => (
   <Query
     query={collectionsQuery}
+    variables={{ page, per }}
     onError={dispatchError}
     fetchPolicy="network-only"
   >
@@ -40,6 +42,14 @@ export default WithAlerts(({ dispatchError }) => (
 
             <CreateCollection key="input" hrefs={hrefs} />
           </Header>
+
+          <Pagination
+            href={hrefs.collections}
+            page={page}
+            per={per}
+            total={me.counts.collections}
+            mt="-1px"
+          />
 
           <CollectionsList collections={collections} hrefs={hrefs} />
         </>
