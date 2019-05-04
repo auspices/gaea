@@ -1,11 +1,5 @@
 import axios from 'axios'
 
-export const parseLocationFromS3Response = data => {
-  const parser = new DOMParser()
-  const parsed = parser.parseFromString(data, 'text/xml')
-  return parsed.getElementsByTagName('Location')[0].childNodes[0].nodeValue
-}
-
 export const uploadFile = ({
   file,
   presignedUploadUrl,
