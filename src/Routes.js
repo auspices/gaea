@@ -35,11 +35,7 @@ export default () => (
       exact
       path="/:username/xs/:id"
       component={parseRoute(({ params: { id }, query: { page, per } }) => (
-        <Collection
-          id={id}
-          page={page ? parseInt(page, 10) : 1}
-          per={per ? parseInt(per, 10) : 24}
-        />
+        <Collection id={id} page={page} per={per} />
       ))}
     />
 

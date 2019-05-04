@@ -8,7 +8,7 @@ import initClient from 'apollo/initClient'
 import theme from 'styles/theme'
 
 import Routes from './Routes'
-import Page from 'components/UI/Page'
+import { Page } from 'components/UI/Page'
 import Alerts from 'components/Alerts'
 import { AlertsProvider } from 'components/Alerts/Store'
 
