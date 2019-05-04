@@ -6,7 +6,7 @@ export default gql`
     id
     slug
     title
-    updatedAt
+    updatedAt(relative: true)
     counts {
       __typename
       contents
