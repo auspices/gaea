@@ -1,28 +1,12 @@
-import React from 'react'
-import styled from 'styled-components'
+import React, { useState, useCallback } from 'react'
 import { graphql } from 'react-apollo'
 
 import removeFromCollectionMutation from './mutations/removeFromCollection'
 
 import { Button } from 'components/UI/Buttons'
 
-const Container = styled(Button).attrs({
-  fontSize: 5,
-  color: 'white',
-})`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 1.5rem;
-  height: 1.5rem;
-  background-color: red;
-
-  &:hover {
-    background-color: gray;
-  }
-`
-
 const RemoveFromCollection = ({
+  children,
   contentId,
   contentType,
   collectionId,
@@ -31,25 +15,37 @@ const RemoveFromCollection = ({
   per,
   ...rest
 }) => {
-  const handleClick = e => {
-    e.preventDefault()
+  const [mode, setMode] = useState('resting')
 
-    removeFromCollection({
-      variables: {
-        connection: {
-          contentId,
-          contentType,
-          collectionId,
-          page,
-          per,
+  const handleClick = useCallback(
+    e => {
+      e.preventDefault()
+
+      setMode('deleting')
+
+      removeFromCollection({
+        variables: {
+          connection: {
+            contentId,
+            contentType,
+            collectionId,
+            page,
+            per,
+          },
         },
-      },
-    })
-      .then(console.log.bind(console))
-      .catch(console.error.bind(console))
-  }
+      }).catch(err => {
+        console.error(err)
+        setMode('error')
+      })
+    },
+    [collectionId, contentId, contentType, page, per, removeFromCollection]
+  )
 
-  return <Container onClick={handleClick} {...rest} />
+  return (
+    <Button onClick={handleClick} disabled={mode !== 'resting'} {...rest}>
+      {children}
+    </Button>
+  )
 }
 
 export default graphql(removeFromCollectionMutation, {
