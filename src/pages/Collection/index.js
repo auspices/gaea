@@ -5,14 +5,13 @@ import collectionQuery from './queries/collection'
 
 import { generate as generateHrefs } from 'util/hrefs'
 
-import Grid from 'components/UI/Grid'
 import Link from 'components/UI/Link'
 import Pagination from 'components/UI/Pagination'
 import Header from 'components/Header'
 import AddToCollection from 'components/AddToCollection'
-import CollectionContent from 'components/CollectionContent'
 import { WithAlerts } from 'components/Alerts'
 import { CollectionFileDropzone } from 'components/CollectionFileDropzone'
+import { CollectionContents } from 'components/CollectionContents'
 
 const Collection = ({ id, page, per, dispatchError }) => {
   return (
@@ -60,18 +59,12 @@ const Collection = ({ id, page, per, dispatchError }) => {
               mt="-1px"
             />
 
-            <Grid my={6}>
-              {collection.contents.map(content => (
-                <CollectionContent
-                  key={`CollectionContent:${content.id}`}
-                  collection={collection}
-                  content={content}
-                  hrefs={hrefs}
-                  page={page}
-                  per={per}
-                />
-              ))}
-            </Grid>
+            <CollectionContents
+              collection={collection}
+              hrefs={hrefs}
+              page={page}
+              per={per}
+            />
           </>
         )
       }}

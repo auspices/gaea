@@ -100,10 +100,14 @@ export class Overlay extends PureComponent {
     document.body.appendChild(this.el)
 
     this.positionOverlay = () => {
-      this.alignToEl(targetEl())
+      const el = targetEl()
+
+      if (!el) return
+
+      this.alignToEl(el)
 
       if (disableTarget) {
-        this.overlayTarget()
+        this.overlayTarget(el)
       }
     }
 
@@ -131,9 +135,8 @@ export class Overlay extends PureComponent {
     this.observer.disconnect()
   }
 
-  overlayTarget = () => {
-    const { targetEl } = this.props
-    const { top, left, width, height } = targetEl().getBoundingClientRect()
+  overlayTarget = el => {
+    const { top, left, width, height } = el.getBoundingClientRect()
 
     this.setState({
       targetOverlay: { top, left, width, height },
@@ -141,8 +144,6 @@ export class Overlay extends PureComponent {
   }
 
   alignToEl = el => {
-    if (!el) return
-
     const {
       anchorY,
       anchorX,
