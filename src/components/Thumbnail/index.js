@@ -3,6 +3,9 @@ import styled from 'styled-components'
 
 const Image = styled.img`
   background-color: lightgray;
+  vertical-align: bottom;
+  overflow: hidden;
+  border-radius: 4px;
 `
 
 export default ({ image, ...rest }) => (

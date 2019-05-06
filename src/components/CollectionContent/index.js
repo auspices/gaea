@@ -7,10 +7,13 @@ import { CollectionContentContextMenu } from 'components/CollectionContentContex
 import RemoveFromCollection from 'components/RemoveFromCollection'
 import CollectionContentInner from './components/CollectionContentInner'
 
-const Container = styled(Box).attrs({
-  pb: 6,
-  px: 6,
-})``
+const Container = styled(Box)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 200px;
+`
 
 export default ({ content, collection, hrefs, page, per, ...rest }) => {
   const [mode, setMode] = useState('resting')
