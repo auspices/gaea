@@ -29,6 +29,11 @@ export const CollectionContents = WithAlerts(
 
       const [contents, setContents] = useState(collection.contents)
 
+      if (collection.contents.length !== contents.length) {
+        // Collection has been updated since last render
+        setContents(collection.contents)
+      }
+
       const handleSortEnd = useCallback(
         ({ oldIndex, newIndex }) => {
           const sortedContents = reorder({
