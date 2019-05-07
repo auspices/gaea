@@ -10,7 +10,10 @@ import { WithAlerts } from 'components/Alerts'
 import Grid from 'components/UI/Grid'
 import CollectionContent from 'components/CollectionContent'
 
-const SortableGrid = sortableContainer(Grid)
+const SortableGrid = sortableContainer(({ onSortEnd: _onSortEnd, ...rest }) => (
+  <Grid {...rest} />
+))
+
 const SortableContent = sortableElement(CollectionContent)
 
 export const CollectionContents = WithAlerts(
@@ -29,8 +32,9 @@ export const CollectionContents = WithAlerts(
 
       const [contents, setContents] = useState(collection.contents)
 
-      if (collection.contents.length !== contents.length) {
-        // Collection has been updated since last render
+      // Calculates set-difference to see if collection has been updated
+      // (additions/removals) since last render
+      if (collection.contents.filter(x => !contents.includes(x)).length) {
         setContents(collection.contents)
       }
 
@@ -78,19 +82,17 @@ export const CollectionContents = WithAlerts(
           onSortEnd={handleSortEnd}
         >
           {contents.map((content, index) => (
-            <>
-              <SortableContent
-                key={`${content.id}:${content.__typename}`}
-                index={index + offset}
-                collection={collection}
-                content={content}
-                hrefs={hrefs}
-                page={page}
-                per={per}
-                mr={6}
-                my={6}
-              />
-            </>
+            <SortableContent
+              key={`${content.id}:${content.__typename}`}
+              index={index + offset}
+              collectionId={collection.id}
+              content={content}
+              hrefs={hrefs}
+              page={page}
+              per={per}
+              mr={6}
+              my={6}
+            />
           ))}
         </SortableGrid>
       )

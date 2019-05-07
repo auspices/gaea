@@ -15,7 +15,7 @@ const Container = styled(Box)`
   height: 200px;
 `
 
-export default ({ content, collection, hrefs, page, per, ...rest }) => {
+export default ({ content, collectionId, hrefs, page, per, ...rest }) => {
   const [mode, setMode] = useState('resting')
 
   return (
@@ -31,7 +31,7 @@ export default ({ content, collection, hrefs, page, per, ...rest }) => {
           <CollectionContentContextMenu position="absolute" top={0} right={0}>
             <RemoveFromCollection
               fontSize={0}
-              collectionId={collection.id}
+              collectionId={collectionId}
               contentId={content.id}
               contentType={content.__typename.toUpperCase()}
               page={page}
