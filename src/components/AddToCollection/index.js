@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react'
 import { graphql } from 'react-apollo'
+import { Redirect } from 'react-router-dom'
 
 import { TextInput } from 'components/UI/Inputs'
 import { WithAlerts } from 'components/Alerts'
@@ -7,9 +8,11 @@ import { WithAlerts } from 'components/Alerts'
 import addToCollectionMutation from './mutations/addToCollection'
 
 export const AddToCollection = ({
+  page,
   per,
   addToCollection,
   collection,
+  hrefs,
   dispatchAlert,
   dispatchError,
 }) => {
@@ -33,7 +36,7 @@ export const AddToCollection = ({
       })
         .then(() => {
           dispatchAlert('Added successfully')
-          setMode('resting')
+          setMode('added')
           setInputKey(new Date().getTime())
         })
         .catch(err => {
@@ -51,6 +54,10 @@ export const AddToCollection = ({
 
   return (
     <>
+      {mode === 'added' && page !== 1 && (
+        <Redirect to={hrefs.collection(collection)} />
+      )}
+
       <form onSubmit={handleSubmit}>
         <TextInput
           key={inputKey}

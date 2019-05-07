@@ -48,7 +48,13 @@ const Collection = ({ id, page, per, dispatchError }) => {
                 {collection.title}
               </Link>
 
-              <AddToCollection key="input" collection={collection} per={per} />
+              <AddToCollection
+                key="input"
+                collection={collection}
+                page={page}
+                per={per}
+                hrefs={hrefs}
+              />
             </Header>
 
             <Pagination
