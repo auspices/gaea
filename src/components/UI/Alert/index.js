@@ -27,7 +27,7 @@ const Container = styled(Box).attrs({
     }[props.type])}
 `
 
-const Alert = ({ alert, autoClose, onRemove, children }) => {
+export const Alert = ({ alert, autoClose = 5, onRemove, children }) => {
   useEffect(() => {
     let timer
     if (autoClose) {
@@ -52,10 +52,6 @@ const Alert = ({ alert, autoClose, onRemove, children }) => {
       }
     </Container>
   )
-}
-
-Alert.defaultProps = {
-  autoClose: 5, // seconds
 }
 
 export default Alert

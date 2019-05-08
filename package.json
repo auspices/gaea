@@ -35,7 +35,9 @@
     "start-prod": "REACT_APP_GRAPHQL_ENDPOINT=https://atlas.auspic.es/graphql react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "storybook": "start-storybook -p 9009 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -63,5 +65,13 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
+  },
+  "devDependencies": {
+    "@storybook/react": "^5.1.0-alpha.39",
+    "@storybook/addon-actions": "^5.1.0-alpha.39",
+    "@storybook/addon-links": "^5.1.0-alpha.39",
+    "@storybook/addons": "^5.1.0-alpha.39",
+    "@babel/core": "^7.4.4",
+    "babel-loader": "^8.0.5"
   }
 }
