@@ -9,16 +9,41 @@ import Box from 'components/UI/Box'
 import { WithAlerts } from 'components/Alerts'
 import { FileUpload } from 'components/FileUpload'
 
-const Container = styled(Box).attrs({
-  p: 6,
-})`
+export const FilesUploaderContainer = styled(Box)`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin: auto;
   width: 100%;
   height: 100%;
 `
+
+export const FilesUploaderList = styled(Box).attrs({
+  p: 6,
+})`
+  width: 100%;
+  max-height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+`
+
+export const FilesUploadList = ({ uploads, onUpload }) => {
+  return (
+    <FilesUploaderContainer>
+      <FilesUploaderList>
+        {uploads.map(([presignedUploadUrl, file]) => (
+          <FileUpload
+            key={file.path}
+            file={file}
+            presignedUploadUrl={presignedUploadUrl}
+            onUpload={onUpload}
+          />
+        ))}
+      </FilesUploaderList>
+    </FilesUploaderContainer>
+  )
+}
 
 export const FilesUploader = WithAlerts(
   ({ files, acceptedFileTypes, onUpload, dispatchError }) => {
@@ -40,19 +65,7 @@ export const FilesUploader = WithAlerts(
 
           const uploads = zip(presignedUploadUrls, files)
 
-          return (
-            <Container>
-              {uploads.map(([presignedUploadUrl, file]) => (
-                <FileUpload
-                  key={file.path}
-                  file={file}
-                  presignedUploadUrl={presignedUploadUrl}
-                  onUpload={onUpload}
-                  mb={4}
-                />
-              ))}
-            </Container>
-          )
+          return <FilesUploadList uploads={uploads} onUpload={onUpload} />
         }}
       </Query>
     )

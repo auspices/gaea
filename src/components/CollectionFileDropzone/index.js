@@ -8,7 +8,7 @@ import addToCollectionMutation from 'components/AddToCollection/mutations/addToC
 import { FilesUploader } from 'components/FilesUploader'
 import { WithAlerts } from 'components/Alerts'
 
-const Container = styled.div`
+export const Container = styled.div`
   ${props => `display: ${{ resting: 'none', active: 'block' }[props.mode]};`}
   position: fixed;
   top: 0;

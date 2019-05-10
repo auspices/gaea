@@ -6,31 +6,55 @@ import { uploadFile } from 'util/uploadFile'
 import Box from 'components/UI/Box'
 
 const Container = styled(Box).attrs({
-  py: 6,
-  px: 7,
+  px: 5,
+  py: 3,
+  mb: 1,
 })`
   position: relative;
   width: 100%;
+  overflow: hidden;
+  ${props =>
+    props.progress >= 100 &&
+    `
+    opacity: 0.5;
+  `}
 `
 
-const ProgressBar = styled(Box)`
+const ProgressBar = styled(Box).attrs({})`
   position: absolute;
   top: 0;
   left: 0;
-  bottom: 0;
-  width: ${props => props.progress}%;
-  z-index: 0;
-  background-color: ${props => `
-    ${props.progress === 100 ? 'rgba(255, 255, 255, 0.5)' : 'white'}
-  `};
+  height: 100%;
+  border-left: 1px solid white;
+  background-color: white;
+  width: 100%;
+  transform: translateX(-${props => 100 - props.progress}%);
+  transition: transform 0.125s;
 `
 
 const Label = styled(Box).attrs({
-  fontSize: 2,
+  fontSize: 1,
 })`
   position: relative;
   z-index: 1;
+  color: black;
 `
+
+export const FileUploadRepresentation = ({
+  label,
+  uploadProgress,
+  ...rest
+}) => {
+  return (
+    <Container progress={uploadProgress} {...rest}>
+      <Label>
+        {label}: {Math.ceil(uploadProgress)}%
+      </Label>
+
+      <ProgressBar progress={uploadProgress} />
+    </Container>
+  )
+}
 
 export const FileUpload = ({ presignedUploadUrl, file, onUpload, ...rest }) => {
   const [uploadProgress, setUploadProgress] = useState(0)
@@ -52,12 +76,10 @@ export const FileUpload = ({ presignedUploadUrl, file, onUpload, ...rest }) => {
   }, [file, handleUploadDone, onUpload, presignedUploadUrl])
 
   return (
-    <Container {...rest}>
-      <Label>
-        {file.path}: {uploadProgress}%
-      </Label>
-
-      <ProgressBar progress={uploadProgress} />
-    </Container>
+    <FileUploadRepresentation
+      label={file.path}
+      uploadProgress={uploadProgress}
+      {...rest}
+    />
   )
 }
