@@ -7,6 +7,7 @@ import { generate as generateHrefs } from 'util/hrefs'
 
 import Link from 'components/UI/Link'
 import Pagination from 'components/UI/Pagination'
+import { Icons } from 'components/UI/Icons'
 import Header from 'components/Header'
 import AddToCollection from 'components/AddToCollection'
 import { WithAlerts } from 'components/Alerts'
@@ -40,12 +41,15 @@ const Collection = ({ id, page, per, dispatchError }) => {
             <CollectionFileDropzone collectionId={collection.id} per={per} />
 
             <Header>
-              <Link to={hrefs.collections} key="username">
-                {username}
-              </Link>
+              <Link to={hrefs.collections}>{username}</Link>
 
-              <Link to={hrefs.collection(collection)} key="title">
-                {collection.title}
+              <Link to={hrefs.collection(collection)}>{collection.title}</Link>
+
+              <Link
+                to={hrefs.collectionSettings(collection)}
+                hoverStyle="OPACITY"
+              >
+                <Icons name="Ellipsis" color="black" size="1.25em" />
               </Link>
 
               <AddToCollection
