@@ -10,9 +10,10 @@ const Container = styled(Box).attrs({
   px: 5,
   mb: 3,
   fontSize: 0,
+  borderRadius: 4,
 })`
   width: 100%;
-  border-radius: 4px;
+  user-select: none;
 
   ${props =>
     ({
@@ -27,18 +28,18 @@ const Container = styled(Box).attrs({
     }[props.type])}
 `
 
-export const Alert = ({ alert, autoClose = 5, onRemove, children }) => {
+export const Alert = ({ alert, onRemove, children }) => {
   useEffect(() => {
-    let timer
-    if (autoClose) {
-      timer = setTimeout(() => onRemove(alert.id), autoClose * 1000)
-    }
+    const timeout = { ALERT: 1000, ERROR: 6000 }[alert.type]
+    const timer = setTimeout(() => {
+      onRemove(alert.id)
+    }, timeout)
+
     return () => clearTimeout(timer)
-  }, [alert.id, autoClose, onRemove])
+  }, [alert.id, alert.type, onRemove])
 
   const handleClick = e => {
     e.preventDefault()
-
     onRemove(alert.id)
   }
 
