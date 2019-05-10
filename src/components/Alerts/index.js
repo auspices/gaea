@@ -15,8 +15,11 @@ const Container = styled(Box).attrs({
   position: fixed;
   top: 0;
   right: 0;
+  bottom: 0;
   width: 20em;
   z-index: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 `
 
 export const WithAlerts = WrappedComponent => {
