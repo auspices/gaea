@@ -55,7 +55,7 @@ export const mixin = css`
   ${zIndex}
 `
 
-const Box = styled.div`
+export const Box = styled.div`
   ${mixin}
 `
 
