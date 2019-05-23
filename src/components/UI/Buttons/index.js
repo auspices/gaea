@@ -7,6 +7,7 @@ export const Button = styled.button`
   border: 0;
   padding: 0;
   font-size: 1rem;
+  line-height: 1;
   cursor: pointer;
   background-color: transparent;
 
@@ -23,3 +24,14 @@ export const Button = styled.button`
     text-decoration: underline;
   }
 `
+
+export const BorderedButton = styled(Button)``
+
+BorderedButton.defaultProps = {
+  ...Button.defaultProps,
+  py: 5,
+  px: 6,
+  border: '1px solid',
+  borderColor: 'black',
+  borderRadius: 4,
+}
