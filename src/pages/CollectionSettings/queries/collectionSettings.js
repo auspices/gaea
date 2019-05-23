@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 
 import headerFragment from 'components/Header/fragments/header'
+import { collectionSettingsFragment } from 'components/CollectionSettings/fragments/collectionSettings'
 
 export const collectionSettingsQuery = gql`
   query CollectionSettings($id: ID!) {
@@ -12,10 +13,11 @@ export const collectionSettingsQuery = gql`
       collection(id: $id) {
         __typename
         id
-        title
         slug
+        ...CollectionSettings
       }
     }
   }
   ${headerFragment}
+  ${collectionSettingsFragment}
 `
