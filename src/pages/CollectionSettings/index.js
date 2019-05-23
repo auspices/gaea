@@ -8,6 +8,7 @@ import { generate as generateHrefs } from 'util/hrefs'
 import Link from 'components/UI/Link'
 import Header from 'components/Header'
 import { WithAlerts } from 'components/Alerts'
+import { CollectionSettings as Settings } from 'components/CollectionSettings'
 
 export const CollectionSettings = WithAlerts(
   ({ id, page, per, dispatchError }) => {
@@ -43,6 +44,8 @@ export const CollectionSettings = WithAlerts(
                   {collection.title}
                 </Link>
               </Header>
+
+              <Settings collection={collection} />
             </>
           )
         }}
