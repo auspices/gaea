@@ -5,7 +5,7 @@ import Box from 'components/UI/Box'
 import Link from 'components/UI/Link'
 import { CollectionContentContextMenu } from 'components/CollectionContentContextMenu'
 import RemoveFromCollection from 'components/RemoveFromCollection'
-import CollectionContentInner from './components/CollectionContentInner'
+import CollectionContentEntity from 'components/CollectionContentEntity'
 
 const Container = styled(Box)`
   display: flex;
@@ -25,7 +25,7 @@ export default ({ content, collectionId, hrefs, page, per, ...rest }) => {
       {...rest}
     >
       <Link display="block" position="relative" to={hrefs.content(content)}>
-        <CollectionContentInner content={content} />
+        <CollectionContentEntity entity={content.entity} />
 
         {mode === 'hover' && (
           <CollectionContentContextMenu position="absolute" top={0} right={0}>
@@ -33,7 +33,6 @@ export default ({ content, collectionId, hrefs, page, per, ...rest }) => {
               fontSize={0}
               collectionId={collectionId}
               contentId={content.id}
-              contentType={content.__typename.toUpperCase()}
               page={page}
               per={per}
             >

@@ -12,9 +12,7 @@ export const collectionSettings = curry(
   (user, xs) => `/${user.slug}/xs/${xs.slug}/settings`
 )
 
-export const content = curry(
-  (user, x) => `/${user.slug}/x/${x.__typename.toLowerCase()}/${x.id}`
-)
+export const content = curry((user, x) => `/${user.slug}/x/${x.id}`)
 
 export const generate = (...args) => ({
   login,

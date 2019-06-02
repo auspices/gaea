@@ -49,7 +49,7 @@ const Collection = ({ id, page, per, dispatchError }) => {
                 to={hrefs.collectionSettings(collection)}
                 hoverStyle="OPACITY"
               >
-                <Icons name="Ellipsis" color="black" size="1.25em" />
+                <Icons name="Ellipsis" color="black" size="1em" />
               </Link>
 
               <AddToCollection

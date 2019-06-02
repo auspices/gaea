@@ -34,7 +34,7 @@ export const CollectionContents = WithAlerts(
 
       // Calculates set-difference to see if collection has been updated
       // (additions/removals) since last render
-      if (collection.contents.filter(x => !contents.includes(x)).length) {
+      if (contents.filter(x => !collection.contents.includes(x)).length) {
         setContents(collection.contents)
       }
 
@@ -53,23 +53,13 @@ export const CollectionContents = WithAlerts(
 
           repositionCollectionContent({
             variables: {
-              connection: {
-                collectionId: collection.id,
-                contentId: content.id,
-                contentType: content.__typename.toUpperCase(),
-              },
+              contentId: content.id,
               action: 'INSERT_AT',
               insertAt: newIndex,
             },
           }).catch(dispatchError)
         },
-        [
-          collection.id,
-          contents,
-          offset,
-          repositionCollectionContent,
-          dispatchError,
-        ]
+        [contents, offset, repositionCollectionContent, dispatchError]
       )
 
       return (
@@ -83,7 +73,7 @@ export const CollectionContents = WithAlerts(
         >
           {contents.map((content, index) => (
             <SortableContent
-              key={`${content.id}:${content.__typename}`}
+              key={content.id}
               index={index + offset}
               collectionId={collection.id}
               content={content}
