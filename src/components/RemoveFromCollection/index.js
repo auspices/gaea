@@ -8,7 +8,6 @@ import { Button } from 'components/UI/Buttons'
 const RemoveFromCollection = ({
   children,
   contentId,
-  contentType,
   collectionId,
   removeFromCollection,
   page,
@@ -25,20 +24,16 @@ const RemoveFromCollection = ({
 
       removeFromCollection({
         variables: {
-          connection: {
-            contentId,
-            contentType,
-            collectionId,
-            page,
-            per,
-          },
+          contentId,
+          page,
+          per,
         },
       }).catch(err => {
         console.error(err)
         setMode('error')
       })
     },
-    [collectionId, contentId, contentType, page, per, removeFromCollection]
+    [contentId, page, per, removeFromCollection]
   )
 
   return (

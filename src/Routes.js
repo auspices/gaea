@@ -56,9 +56,9 @@ export default () => (
 
     <Route
       exact
-      path="/:username/x/:type/:id"
+      path="/:username/x/:id"
       component={parseRoute(({ params }) => (
-        <Content type={params.type.toUpperCase()} id={params.id} />
+        <Content id={params.id} />
       ))}
     />
   </Switch>

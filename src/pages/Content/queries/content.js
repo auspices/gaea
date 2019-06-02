@@ -3,24 +3,33 @@ import gql from 'graphql-tag'
 import headerFragment from 'components/Header/fragments/header'
 
 export default gql`
-  query Content($id: ID!, $type: ContentTypes!) {
+  query Content($id: ID!) {
     me {
       ...Header
     }
-    content(id: $id, type: $type) {
+    content(id: $id) {
       __typename
-      ... on Image {
+      id
+      collection {
+        __typename
         id
+        slug
         title
-        url
-        width
-        height
-        resized(width: 750, height: 750) {
+      }
+      entity {
+        ... on Image {
+          id
+          title
+          url
           width
           height
-          urls {
-            _1x
-            _2x
+          resized(width: 750, height: 750) {
+            width
+            height
+            urls {
+              _1x
+              _2x
+            }
           }
         }
       }

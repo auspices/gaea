@@ -14,8 +14,11 @@ export default gql`
     }
     contents(page: $page, per: $per) {
       __typename
-      ... on Image {
-        ...Thumbnail
+      id
+      entity {
+        ... on Image {
+          ...Thumbnail
+        }
       }
     }
   }

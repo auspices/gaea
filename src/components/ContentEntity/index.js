@@ -13,28 +13,28 @@ export const Img = styled.img`
     }[props.mode])};
 `
 
-export const ContentDisplay = ({ content }) => {
+export const ContentEntity = ({ entity }) => {
   const [mode, setMode] = useState(
-    content.__typename === 'Image' ? 'loading' : 'resting'
+    entity.__typename === 'Image' ? 'loading' : 'resting'
   )
 
-  switch (content.__typename) {
+  switch (entity.__typename) {
     case 'Image':
       return (
         <Img
           mode={mode}
-          src={content.resized.urls._1x}
-          srcSet={`${content.resized.urls._1x} 1x, ${
-            content.resized.urls._2x
+          src={entity.resized.urls._1x}
+          srcSet={`${entity.resized.urls._1x} 1x, ${
+            entity.resized.urls._2x
           } 2x`}
-          alt={content.title}
-          width={content.resized.width}
-          height={content.resized.height}
+          alt={entity.title}
+          width={entity.resized.width}
+          height={entity.resized.height}
           onLoad={() => setMode('resting')}
           onError={() => setMode('error')}
         />
       )
     default:
-      return content.__typename
+      return entity.__typename
   }
 }
