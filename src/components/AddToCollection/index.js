@@ -29,7 +29,7 @@ export const AddToCollection = ({
       addToCollection({
         variables: {
           id: collection.id,
-          url: value,
+          value,
           page: 1,
           per,
         },

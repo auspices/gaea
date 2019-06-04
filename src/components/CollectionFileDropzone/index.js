@@ -60,7 +60,7 @@ export const CollectionFileDropzone = graphql(addToCollectionMutation, {
           addToCollection({
             variables: {
               id: collectionId,
-              url,
+              value: url,
               page: 1,
               per,
             },

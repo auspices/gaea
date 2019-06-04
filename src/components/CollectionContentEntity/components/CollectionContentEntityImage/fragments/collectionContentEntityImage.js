@@ -1,8 +1,7 @@
 import gql from 'graphql-tag'
 
-export default gql`
-  fragment Thumbnail on Image {
-    __typename
+export const collectionContentEntityImageFragment = gql`
+  fragment CollectionContentEntityImage on Image {
     id
     title
     resized(width: 200, height: 200) {

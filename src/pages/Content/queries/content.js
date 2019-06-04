@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 
 import headerFragment from 'components/Header/fragments/header'
+import { contentEntityFragment } from 'components/ContentEntity/fragments/contentEntity'
 
 export default gql`
   query Content($id: ID!) {
@@ -17,23 +18,10 @@ export default gql`
         title
       }
       entity {
-        ... on Image {
-          id
-          title
-          url
-          width
-          height
-          resized(width: 750, height: 750) {
-            width
-            height
-            urls {
-              _1x
-              _2x
-            }
-          }
-        }
+        ...ContentEntity
       }
     }
   }
   ${headerFragment}
+  ${contentEntityFragment}
 `
