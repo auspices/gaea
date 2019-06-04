@@ -1,7 +1,7 @@
 import React, { Children } from 'react'
 import styled from 'styled-components'
 
-import Box from '../UI/Box'
+import { Box } from 'components/UI/Box'
 
 const Container = styled(Box).attrs({
   borderRadius: 4,
@@ -12,18 +12,23 @@ const Container = styled(Box).attrs({
   overflow: hidden;
 `
 
-const Crumb = styled(Box)`
-  border-left: 1px solid black;
-
-  &:first-child {
-    border-left: 0;
-  }
+export const Crumb = styled(Box)`
+  display: flex;
 
   > a,
   > span,
   > div {
     display: block;
     padding: ${({ theme: { space } }) => `${space[5]} ${space[6]}`};
+    border-left: 1px solid black;
+  }
+
+  &:first-child {
+    > a,
+    > span,
+    > div {
+      border-left: 0;
+    }
   }
 
   ${props =>
@@ -31,6 +36,7 @@ const Crumb = styled(Box)`
     `
     flex: 1;
     padding: 0;
+    border-left: 1px solid black;
 
     form,
     input {
@@ -44,7 +50,7 @@ const Crumb = styled(Box)`
   `}
 `
 
-const Header = ({ children, isLoading, ...rest }) => (
+export const Header = ({ children, isLoading = false, ...rest }) => (
   <Container {...rest}>
     {isLoading ? (
       <Crumb>
@@ -55,9 +61,5 @@ const Header = ({ children, isLoading, ...rest }) => (
     )}
   </Container>
 )
-
-Header.defaultProps = {
-  isLoading: false,
-}
 
 export default Header
