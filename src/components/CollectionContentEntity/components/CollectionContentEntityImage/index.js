@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react'
 import styled from 'styled-components'
 
-import Box from 'components/UI/Box'
+import { Box } from 'components/UI/Box'
 
 const Container = styled(Box)`
   background-color: lightgray;
@@ -30,7 +30,7 @@ const Image = styled.img`
   `}
 `
 
-export default ({ image, ...rest }) => {
+export const CollectionContentEntityImage = ({ image, ...rest }) => {
   const [mode, setMode] = useState('loading')
 
   const handleLoad = useCallback(() => setMode('ready'), [])

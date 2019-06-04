@@ -36,6 +36,7 @@ export default WithAlerts(({ id, dispatchError }) => {
 
               <Link to={hrefs.collection(collection)}>{collection.title}</Link>
 
+              {/* TODO: Needs to be a component for each type */}
               <Link href={entity.url}>
                 {entity.width}×{entity.height}
               </Link>

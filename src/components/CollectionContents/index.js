@@ -34,7 +34,10 @@ export const CollectionContents = WithAlerts(
 
       // Calculates set-difference to see if collection has been updated
       // (additions/removals) since last render
-      if (contents.filter(x => !collection.contents.includes(x)).length) {
+      if (
+        contents.length !== collection.contents.length ||
+        contents.filter(x => !collection.contents.includes(x)).length
+      ) {
         setContents(collection.contents)
       }
 

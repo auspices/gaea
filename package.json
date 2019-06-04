@@ -67,11 +67,12 @@
     }
   },
   "devDependencies": {
-    "@storybook/react": "^5.1.0-alpha.39",
+    "@babel/core": "^7.4.4",
     "@storybook/addon-actions": "^5.1.0-alpha.39",
     "@storybook/addon-links": "^5.1.0-alpha.39",
     "@storybook/addons": "^5.1.0-alpha.39",
-    "@babel/core": "^7.4.4",
+    "@storybook/react": "^5.1.0-alpha.39",
+    "apollo": "^2.12.5",
     "babel-loader": "^8.0.5"
   }
 }
