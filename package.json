@@ -8,7 +8,7 @@
     "apollo-link-context": "^1.0.17",
     "apollo-link-error": "^1.1.10",
     "apollo-link-http": "^1.5.14",
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "graphql": "^14.2.0",
     "graphql-tag": "^2.10.1",
     "husky": "^2.1.0",
