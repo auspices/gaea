@@ -1,5 +1,6 @@
 import React from 'react'
 import { Query } from 'react-apollo'
+import styled from 'styled-components'
 
 import contentQuery from './queries/content'
 
@@ -11,6 +12,20 @@ import { Header } from 'components/Header'
 import { ContentEntity } from 'components/ContentEntity'
 import { ContentEntityHeader } from 'components/ContentEntityHeader'
 import { WithAlerts } from 'components/Alerts'
+import { ContentSettings } from 'components/ContentSettings'
+
+const Content = styled(Box).attrs({
+  mt: 6,
+  p: 6,
+  borderRadius: 4,
+})`
+  flex: 1;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+`
 
 export default WithAlerts(({ id, dispatchError }) => {
   return (
@@ -25,6 +40,7 @@ export default WithAlerts(({ id, dispatchError }) => {
         const {
           me,
           me: { username },
+          content,
           content: { collection, entity },
         } = data
 
@@ -39,17 +55,11 @@ export default WithAlerts(({ id, dispatchError }) => {
               <ContentEntityHeader entity={entity} />
             </Header>
 
-            <Box
-              flex={1}
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-              mt={6}
-              p={6}
-              borderRadius={4}
-            >
+            <Content>
               <ContentEntity entity={entity} />
-            </Box>
+
+              <ContentSettings mt={8} width="100%" content={content} />
+            </Content>
           </>
         )
       }}

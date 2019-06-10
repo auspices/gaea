@@ -1,5 +1,7 @@
 import React from 'react'
 
-export const ContentEntityText = ({ text }) => {
-  return <div>{text.body}</div>
+import { Box } from 'components/UI/Box'
+
+export const ContentEntityText = ({ text, ...rest }) => {
+  return <Box {...rest}>{text.body}</Box>
 }
