@@ -13,7 +13,7 @@ export const Img = styled.img`
     }[mode])};
 `
 
-export const ContentEntityImage = ({ image }) => {
+export const ContentEntityImage = ({ image, ...rest }) => {
   const [mode, setMode] = useState('loading')
 
   const handleLoad = useCallback(() => setMode('resting'), [])
@@ -29,6 +29,7 @@ export const ContentEntityImage = ({ image }) => {
       height={image.resized.height}
       onLoad={handleLoad}
       onError={handleError}
+      {...rest}
     />
   )
 }

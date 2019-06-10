@@ -124,9 +124,6 @@ export const KeyValueEditor = ({
           disabled: true,
         }}
       />
-
-      {/* DEBUG: */}
-      {/* <pre>{JSON.stringify(state, null, 2)}</pre> */}
     </>
   )
 }
