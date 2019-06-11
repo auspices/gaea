@@ -1,5 +1,6 @@
 import React, { useReducer, useCallback, useEffect } from 'react'
 import { omit } from 'lodash'
+import useDebounce from 'react-use/lib/useDebounce'
 
 import { KeyValueInput } from 'components/UI/KeyValueInput'
 
@@ -8,6 +9,7 @@ const reducer = (state, action) => {
     case 'ADD_FIELD':
       return {
         ...state,
+        edited: true,
         schema: [
           ...state.schema,
           {
@@ -19,6 +21,7 @@ const reducer = (state, action) => {
     case 'UPDATE_NAME':
       return {
         ...state,
+        edited: true,
         schema: state.schema.map((field, index) => {
           if (index !== action.index) return field
 
@@ -36,6 +39,7 @@ const reducer = (state, action) => {
     case 'UPDATE_VALUE':
       return {
         ...state,
+        edited: true,
         data: {
           ...state.data,
           [action.key]: action.value,
@@ -50,6 +54,8 @@ export const KeyValueEditor = ({
   schema: initialSchema,
   data: initialData,
   onChange = () => {},
+  onSave = () => {},
+  autoSaveWait = 500,
 }) => {
   const [state, dispatch] = useReducer(reducer, {
     schema: initialSchema.map(field => ({ key: field.name, ...field })),
@@ -92,6 +98,14 @@ export const KeyValueEditor = ({
     onChange(state.data)
   }, [onChange, state.data])
 
+  useDebounce(
+    () => {
+      state.edited && onSave(state.data)
+    },
+    autoSaveWait,
+    [state.data]
+  )
+
   return (
     <>
       {state.schema.map((field, index) => (
@@ -119,9 +133,6 @@ export const KeyValueEditor = ({
           onBlur: handleAddField,
           placeholder: 'add field',
           autoComplete: 'off',
-        }}
-        v={{
-          disabled: true,
         }}
       />
     </>

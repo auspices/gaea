@@ -73,5 +73,7 @@ storiesOf('Inputs', module)
         bar: 'baz',
         qux: 'foo',
       }}
+      onChange={state => console.info('onChange', state)}
+      onSave={state => console.info('onSave', state)}
     />
   ))
