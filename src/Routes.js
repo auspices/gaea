@@ -9,7 +9,6 @@ import Login from 'pages/Login'
 import Collections from 'pages/Collections'
 import Collection from 'pages/Collection'
 import Content from 'pages/Content'
-import { CollectionSettings } from 'pages/CollectionSettings'
 
 export default () => (
   <Switch>
@@ -43,14 +42,6 @@ export default () => (
       path="/:username/xs/:id"
       component={parseRoute(({ params: { id }, query: { page, per } }) => (
         <Collection id={id} page={page} per={per} />
-      ))}
-    />
-
-    <Route
-      exact
-      path="/:username/xs/:id/settings"
-      component={parseRoute(({ params: { id } }) => (
-        <CollectionSettings id={id} />
       ))}
     />
 
