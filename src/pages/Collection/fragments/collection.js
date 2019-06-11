@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 
 import { collectionContentEntityImageFragment } from 'components/CollectionContentEntity/components/CollectionContentEntityImage/fragments/collectionContentEntityImage'
 import { collectionContentEntityTextFragment } from 'components/CollectionContentEntity/components/CollectionContentEntityText/fragments/collectionContentEntityText'
+import { collectionSettingsFragment } from 'components/CollectionSettings/fragments/collectionSettings'
 
 export default gql`
   fragment Collection on Collection {
@@ -22,7 +23,9 @@ export default gql`
         }
       }
     }
+    ...CollectionSettings
   }
   ${collectionContentEntityImageFragment}
   ${collectionContentEntityTextFragment}
+  ${collectionSettingsFragment}
 `

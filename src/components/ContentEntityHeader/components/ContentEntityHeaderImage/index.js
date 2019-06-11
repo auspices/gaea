@@ -6,7 +6,7 @@ export const ContentEntityHeaderImage = ({ image }) => {
   return (
     <>
       <Link href={image.url}>
-        view original @ {image.width}×{image.height}
+        @{image.width}×{image.height}
       </Link>
 
       <Link

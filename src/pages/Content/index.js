@@ -55,10 +55,10 @@ export default WithAlerts(({ id, dispatchError }) => {
               <ContentEntityHeader entity={entity} />
             </Header>
 
+            <ContentSettings mt="-1px" width="100%" content={content} />
+
             <Content>
               <ContentEntity entity={entity} />
-
-              <ContentSettings mt={8} width="100%" content={content} />
             </Content>
           </>
         )

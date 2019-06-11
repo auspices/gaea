@@ -13,6 +13,7 @@ import AddToCollection from 'components/AddToCollection'
 import { WithAlerts } from 'components/Alerts'
 import { CollectionFileDropzone } from 'components/CollectionFileDropzone'
 import { CollectionContents } from 'components/CollectionContents'
+import { CollectionSettings } from 'components/CollectionSettings'
 
 const Collection = ({ id, page, per, dispatchError }) => {
   return (
@@ -45,13 +46,6 @@ const Collection = ({ id, page, per, dispatchError }) => {
 
               <Link to={hrefs.collection(collection)}>{collection.title}</Link>
 
-              <Link
-                to={hrefs.collectionSettings(collection)}
-                hoverStyle="OPACITY"
-              >
-                <Icons name="Ellipsis" color="black" size="1em" />
-              </Link>
-
               <AddToCollection
                 key="input"
                 collection={collection}
@@ -60,6 +54,8 @@ const Collection = ({ id, page, per, dispatchError }) => {
                 hrefs={hrefs}
               />
             </Header>
+
+            <CollectionSettings collection={collection} mt="-1px" />
 
             <Pagination
               href={hrefs.collection(collection)}
@@ -74,6 +70,13 @@ const Collection = ({ id, page, per, dispatchError }) => {
               hrefs={hrefs}
               page={page}
               per={per}
+            />
+
+            <Pagination
+              href={hrefs.collection(collection)}
+              page={page}
+              per={per}
+              total={collection.counts.contents}
             />
           </>
         )
