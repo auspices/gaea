@@ -7,7 +7,6 @@ import { generate as generateHrefs } from 'util/hrefs'
 
 import Link from 'components/UI/Link'
 import Pagination from 'components/UI/Pagination'
-import { Icons } from 'components/UI/Icons'
 import Header from 'components/Header'
 import AddToCollection from 'components/AddToCollection'
 import { WithAlerts } from 'components/Alerts'
