@@ -4,7 +4,11 @@
       {
         "kind": "UNION",
         "name": "Entity",
-        "possibleTypes": [{ "name": "Image" }, { "name": "Text" }]
+        "possibleTypes": [
+          { "name": "Image" },
+          { "name": "Text" },
+          { "name": "Link" }
+        ]
       }
     ]
   }

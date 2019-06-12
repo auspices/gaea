@@ -75,7 +75,6 @@ class Login extends PureComponent {
       })
   }
 
-  // TODO: This should check & query for logged in status and handle the redirect
   render() {
     const { mode, userSlug } = this.state
 
@@ -99,7 +98,7 @@ class Login extends PureComponent {
           required
         />
 
-        <Button onClick={this.handleLogin}>Login</Button>
+        <Button onClick={this.handleLogin}>login</Button>
       </Form>
     )
   }
