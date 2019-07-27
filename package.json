@@ -68,12 +68,12 @@
     }
   },
   "devDependencies": {
-    "@babel/core": "^7.4.4",
-    "@storybook/addon-actions": "^5.1.0-alpha.39",
-    "@storybook/addon-links": "^5.1.0-alpha.39",
-    "@storybook/addons": "^5.1.0-alpha.39",
-    "@storybook/react": "^5.1.0-alpha.39",
-    "apollo": "^2.12.5",
-    "babel-loader": "^8.0.5"
+    "@babel/core": "^7.5.5",
+    "@storybook/addon-actions": "^5.1.9",
+    "@storybook/addon-links": "^5.1.9",
+    "@storybook/addons": "^5.1.9",
+    "@storybook/react": "^5.1.9",
+    "apollo": "^2.16.2",
+    "babel-loader": "^8.0.6"
   }
 }
