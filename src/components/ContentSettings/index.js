@@ -14,7 +14,6 @@ export const ContentSettings = graphql(updateContentMutation, {
     ({ content, updateContent, dispatchAlert, dispatchError, ...rest }) => {
       const handleSubmit = useCallback(
         async metadata => {
-          console.log(metadata)
           try {
             await updateContent({
               variables: {
