@@ -14,10 +14,7 @@ export default {
     '4rem', // 7 = 64px
     '4.5rem', // 8 = 72px
   ],
-  lineHeights: {
-    body: 1.75,
-    heading: 1.25,
-  },
+  lineHeights: [1, 1.25, 1.33, 1.75],
   space: [
     0,
     '0.125em',
