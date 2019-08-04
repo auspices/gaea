@@ -46,7 +46,7 @@ const reducer = (state, action) => {
         },
       }
     default:
-      throw new Error()
+      throw new Error('Invalid `action.type`', action)
   }
 }
 
@@ -58,6 +58,7 @@ export const KeyValueEditor = ({
   autoSaveWait = 500,
 }) => {
   const [state, dispatch] = useReducer(reducer, {
+    edited: false,
     schema: initialSchema.map(field => ({ key: field.name, ...field })),
     data: initialData,
   })

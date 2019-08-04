@@ -1,59 +1,64 @@
 import styled, { css } from 'styled-components'
 import {
-  display,
-  position,
-  space,
-  color,
-  width,
-  height,
-  minHeight,
-  maxHeight,
-  minWidth,
-  maxWidth,
-  fontSize,
-  border,
-  borderRadius,
-  borderColor,
-  flex,
-  flexDirection,
-  justifyContent,
   alignItems,
   alignSelf,
+  border,
+  borderColor,
+  borderRadius,
+  bottom,
+  color,
+  compose,
+  display,
+  flex,
+  flexDirection,
+  fontSize,
+  height,
+  justifyContent,
+  left,
+  lineHeight,
+  maxHeight,
+  maxWidth,
+  minHeight,
+  minWidth,
+  position,
+  right,
+  space,
   textAlign,
   top,
-  right,
-  bottom,
-  left,
+  width,
   zIndex,
 } from 'styled-system'
 
-export const mixin = css`
-  ${display}
-  ${position}
-  ${space}
-  ${color}
-  ${width}
-  ${height}
-  ${minHeight}
-  ${maxHeight}
-  ${minWidth}
-  ${maxWidth}
-  ${fontSize}
-  ${border}
-  ${borderRadius}
-  ${borderColor}
-  ${flex}
-  ${flexDirection}
-  ${justifyContent}
-  ${alignItems}
-  ${alignSelf}
-  ${textAlign}
-  ${top}
-  ${right}
-  ${bottom}
-  ${left}
-  ${zIndex}
-`
+export const mixin = css(
+  compose(
+    alignItems,
+    alignSelf,
+    border,
+    borderColor,
+    borderRadius,
+    bottom,
+    color,
+    display,
+    flex,
+    flexDirection,
+    fontSize,
+    height,
+    justifyContent,
+    left,
+    lineHeight,
+    maxHeight,
+    maxWidth,
+    minHeight,
+    minWidth,
+    position,
+    right,
+    space,
+    textAlign,
+    top,
+    width,
+    zIndex
+  )
+)
 
 export const Box = styled.div`
   ${mixin}
