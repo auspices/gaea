@@ -2,6 +2,8 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/986f3e08-bfc3-4598-865a-bf34ad459d6c/deploy-status)](https://app.netlify.com/sites/auspices-gaea-production/deploys)
 
+Frontend to the Auspic.es GraphQL endpoint: [Atlas](https://github.com/auspices/atlas).
+
 ## Meta
 
 - **State**: production
