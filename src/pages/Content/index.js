@@ -8,6 +8,7 @@ import { generate as generateHrefs } from 'util/hrefs'
 
 import { Box } from 'components/UI/Box'
 import { Link } from 'components/UI/Link'
+import { Icons } from 'components/UI/Icons'
 import { Header } from 'components/Header'
 import { ContentEntity } from 'components/ContentEntity'
 import { ContentEntityHeader } from 'components/ContentEntityHeader'
@@ -52,7 +53,11 @@ export default WithAlerts(({ id, dispatchError }) => {
               <Link to={hrefs.collections}>{username}</Link>
               <Link to={hrefs.collection(collection)}>{collection.title}</Link>
 
-              <ContentEntityHeader entity={entity} />
+              <ContentEntityHeader key="primary" entity={entity} />
+
+              <Link to={hrefs.sampleCollectionContent(collection)}>
+                <Icons name="Shuffle" />
+              </Link>
             </Header>
 
             <ContentSettings mt="-1px" width="100%" content={content} />

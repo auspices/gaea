@@ -9,6 +9,7 @@ import Link from 'components/UI/Link'
 import Pagination from 'components/UI/Pagination'
 import Header from 'components/Header'
 import AddToCollection from 'components/AddToCollection'
+import { Icons } from 'components/UI/Icons'
 import { WithAlerts } from 'components/Alerts'
 import { CollectionFileDropzone } from 'components/CollectionFileDropzone'
 import { CollectionContents } from 'components/CollectionContents'
@@ -52,6 +53,10 @@ const Collection = ({ id, page, per, dispatchError }) => {
                 per={per}
                 hrefs={hrefs}
               />
+
+              <Link to={hrefs.sampleCollectionContent(collection)}>
+                <Icons name="Shuffle" />
+              </Link>
             </Header>
 
             <CollectionSettings collection={collection} mt="-1px" />

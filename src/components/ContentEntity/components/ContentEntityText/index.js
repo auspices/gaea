@@ -25,6 +25,7 @@ const Container = styled(Box).attrs({
     font-size: 1rem;
     border: 0;
     resize: none;
+    line-height: ${props => props.theme.lineHeights[2]};
 
     &:focus {
       outline: 0;
@@ -73,7 +74,7 @@ export const ContentEntityText = graphql(updateEntityMutation, {
       updateEntity,
       dispatchAlert,
       dispatchError,
-      autoSaveWait = 1500,
+      autoSaveWait = 500,
       ...rest
     }) => {
       const [state, dispatch] = useReducer(reducer, {
