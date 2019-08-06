@@ -52,6 +52,14 @@ export default WithAlerts(({ dispatchError, page, per }) => (
           />
 
           <CollectionsList collections={collections} hrefs={hrefs} />
+
+          <Pagination
+            href={hrefs.collections}
+            page={page}
+            per={per}
+            total={me.counts.collections}
+            mt="-1px"
+          />
         </>
       )
     }}
