@@ -32,7 +32,7 @@ export const SampleCollectionContent = WithAlerts(({ id, dispatchError }) => {
 
         const hrefs = generateHrefs(me)
 
-        return <Redirect to={hrefs.content(contents[0])} />
+        return <Redirect push to={hrefs.content(contents[0])} />
       }}
     </Query>
   )
