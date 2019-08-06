@@ -74,7 +74,7 @@ export const ContentEntityText = graphql(updateEntityMutation, {
       updateEntity,
       dispatchAlert,
       dispatchError,
-      autoSaveWait = 1500,
+      autoSaveWait = 500,
       ...rest
     }) => {
       const [state, dispatch] = useReducer(reducer, {
