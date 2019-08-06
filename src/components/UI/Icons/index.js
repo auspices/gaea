@@ -4,11 +4,13 @@ import styled from 'styled-components'
 import Box from 'components/UI/Box'
 
 import { ReactComponent as Ellipsis } from './Ellipsis.svg'
+import { ReactComponent as Shuffle } from './Shuffle.svg'
 
 const DEFAULT_ICON_SIZE = 6 // 1em
 
 export const ICONS = {
   Ellipsis: <Ellipsis />,
+  Shuffle: <Shuffle />,
 }
 
 const size = key => props =>

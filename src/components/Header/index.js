@@ -32,6 +32,12 @@ export const Crumb = styled(Box)`
   }
 
   ${props =>
+    props.children.key === 'primary' &&
+    `
+    flex: 1;
+  `}
+
+  ${props =>
     props.children.key === 'input' &&
     `
     flex: 1;
