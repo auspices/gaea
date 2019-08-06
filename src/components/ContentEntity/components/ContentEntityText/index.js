@@ -69,14 +69,7 @@ export const ContentEntityText = graphql(updateEntityMutation, {
   name: 'updateEntity',
 })(
   WithAlerts(
-    ({
-      text,
-      updateEntity,
-      dispatchAlert,
-      dispatchError,
-      autoSaveWait = 500,
-      ...rest
-    }) => {
+    ({ text, updateEntity, dispatchError, autoSaveWait = 500, ...rest }) => {
       const [state, dispatch] = useReducer(reducer, {
         edited: false,
         value: text.body,
@@ -96,7 +89,6 @@ export const ContentEntityText = graphql(updateEntityMutation, {
             updateEntity({
               variables: { id: text.id, value: state.value, type: 'TEXT' },
             })
-              .then(() => dispatchAlert('Saved'))
               .catch(dispatchError)
               .then(() => dispatch({ type: 'COMPLETE_SAVE' }))
         },
