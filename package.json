@@ -27,7 +27,7 @@
     "react-sortable-hoc": "1.9.1",
     "react-use": "10.5.0",
     "styled-components": "4.3.2",
-    "styled-system": "5.0.18"
+    "styled-system": "5.0.20"
   },
   "scripts": {
     "start": "react-scripts start",
