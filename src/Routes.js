@@ -9,7 +9,6 @@ import Login from 'pages/Login'
 import Collections from 'pages/Collections'
 import Collection from 'pages/Collection'
 import Content from 'pages/Content'
-import { SampleCollectionContent } from 'components/SampleCollectionContent'
 
 export default () => (
   <Switch>
@@ -51,14 +50,6 @@ export default () => (
       path="/:username/x/:id"
       component={parseRoute(({ params }) => (
         <Content id={params.id} />
-      ))}
-    />
-
-    <Route
-      exact
-      path="/:username/xs/:id/sample"
-      component={parseRoute(({ params }) => (
-        <SampleCollectionContent id={params.id} />
       ))}
     />
   </Switch>

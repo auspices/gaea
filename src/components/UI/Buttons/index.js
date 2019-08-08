@@ -18,6 +18,7 @@ export const Button = styled.button`
     `
     cursor: default;
     pointer-events: none;
+    opacity: 0.75;
   `}
 
   &:hover {

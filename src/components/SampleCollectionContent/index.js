@@ -1,39 +1,50 @@
-import React from 'react'
+import React, { useState, useCallback } from 'react'
 import { Query } from 'react-apollo'
 import { Redirect } from 'react-router-dom'
 
-import Header from 'components/Header'
-import { WithAlerts } from 'components/Alerts'
 import { generate as generateHrefs } from 'util/hrefs'
+
+import { WithAlerts } from 'components/Alerts'
 
 import { sampleCollectionContentQuery } from './queries/sampleCollectionContent'
 
-export const SampleCollectionContent = WithAlerts(({ id, dispatchError }) => {
-  return (
-    <Query
-      query={sampleCollectionContentQuery}
-      variables={{ id }}
-      onError={dispatchError}
-      fetchPolicy="network-only"
-    >
-      {({ data, loading, error }) => {
-        if (error) return null
+import { Button } from 'components/UI/Buttons'
 
-        if (loading) {
-          return <Header isLoading />
-        }
+export const SampleCollectionContent = WithAlerts(
+  ({ id, dispatchError, children }) => {
+    const [mode, setMode] = useState('resting')
+    const handleClick = useCallback(() => setMode('redirecting'), [])
 
-        const {
-          me,
-          me: {
-            collection: { contents },
-          },
-        } = data
+    return (
+      <>
+        <Button onClick={handleClick} disabled={mode === 'redirecting'}>
+          {children}
+        </Button>
 
-        const hrefs = generateHrefs(me)
+        <Query
+          query={sampleCollectionContentQuery}
+          variables={{ id }}
+          onError={dispatchError}
+          fetchPolicy="network-only"
+          skip={mode !== 'redirecting'}
+        >
+          {({ data, loading, error }) => {
+            if (mode !== 'redirecting') return null
+            if (error || loading) return null
 
-        return <Redirect push to={hrefs.content(contents[0])} />
-      }}
-    </Query>
-  )
-})
+            const {
+              me,
+              me: {
+                collection: { contents },
+              },
+            } = data
+
+            const hrefs = generateHrefs(me)
+
+            return <Redirect push to={hrefs.content(contents[0])} />
+          }}
+        </Query>
+      </>
+    )
+  }
+)

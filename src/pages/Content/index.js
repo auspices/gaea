@@ -14,6 +14,7 @@ import { ContentEntity } from 'components/ContentEntity'
 import { ContentEntityHeader } from 'components/ContentEntityHeader'
 import { WithAlerts } from 'components/Alerts'
 import { ContentSettings } from 'components/ContentSettings'
+import { SampleCollectionContent } from 'components/SampleCollectionContent'
 
 const Content = styled(Box).attrs({
   mt: 6,
@@ -30,7 +31,12 @@ const Content = styled(Box).attrs({
 
 export default WithAlerts(({ id, dispatchError }) => {
   return (
-    <Query query={contentQuery} variables={{ id }} onError={dispatchError}>
+    <Query
+      query={contentQuery}
+      variables={{ id }}
+      onError={dispatchError}
+      fetchPolicy="network-only"
+    >
       {({ data, loading, error }) => {
         if (error) return null
 
@@ -55,9 +61,9 @@ export default WithAlerts(({ id, dispatchError }) => {
 
               <ContentEntityHeader key="primary" entity={entity} />
 
-              <Link to={hrefs.sampleCollectionContent(collection)}>
+              <SampleCollectionContent id={collection.id}>
                 <Icons name="Shuffle" />
-              </Link>
+              </SampleCollectionContent>
             </Header>
 
             <ContentSettings mt="-1px" width="100%" content={content} />
