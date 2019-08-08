@@ -14,6 +14,7 @@ import { WithAlerts } from 'components/Alerts'
 import { CollectionFileDropzone } from 'components/CollectionFileDropzone'
 import { CollectionContents } from 'components/CollectionContents'
 import { CollectionSettings } from 'components/CollectionSettings'
+import { SampleCollectionContent } from 'components/SampleCollectionContent'
 
 const Collection = ({ id, page, per, dispatchError }) => {
   return (
@@ -54,9 +55,9 @@ const Collection = ({ id, page, per, dispatchError }) => {
                 hrefs={hrefs}
               />
 
-              <Link to={hrefs.sampleCollectionContent(collection)}>
+              <SampleCollectionContent id={collection.id}>
                 <Icons name="Shuffle" />
-              </Link>
+              </SampleCollectionContent>
             </Header>
 
             <CollectionSettings collection={collection} mt="-1px" />

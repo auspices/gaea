@@ -17,6 +17,7 @@ export const Crumb = styled(Box)`
 
   > a,
   > span,
+  > button,
   > div {
     display: block;
     padding: ${({ theme: { space } }) => `${space[5]} ${space[6]}`};
