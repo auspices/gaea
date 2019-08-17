@@ -15,7 +15,7 @@
     "lodash": "4.17.15",
     "prettier": "1.18.2",
     "prop-types": "15.7.2",
-    "qs": "6.7.0",
+    "qs": "6.8.0",
     "react": "16.9.0",
     "react-apollo": "3.0.1",
     "react-dom": "16.9.0",
