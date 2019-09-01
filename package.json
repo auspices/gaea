@@ -72,7 +72,7 @@
     "@storybook/addons": "5.1.11",
     "@storybook/react": "5.1.11",
     "apollo": "2.18.0",
-    "husky": "3.0.4",
+    "husky": "3.0.5",
     "lint-staged": "9.2.5"
   }
 }
