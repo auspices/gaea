@@ -12399,10 +12399,10 @@ react-textarea-autosize@^7.1.0:
     "@babel/runtime" "^7.1.2"
     prop-types "^15.6.0"
 
-react-use@13.8.1:
-  version "13.8.1"
-  resolved "https://registry.yarnpkg.com/react-use/-/react-use-13.8.1.tgz#6173a5c93365b8534223ac2f9e0977ece1d7f541"
-  integrity sha512-XsrKcfXP6kPaqsZYEuaV5F/DMV1IT8FXHtcAOJAOFASHo6YoBL3/N5pYqnh+NczAVgH6BWF+gXi6Zke2R4/wpg==
+react-use@13.8.2:
+  version "13.8.2"
+  resolved "https://registry.yarnpkg.com/react-use/-/react-use-13.8.2.tgz#1665adb037c7c44214aa6ee210d7abd2322c1ef1"
+  integrity sha512-I0xjVQrdiP592107vqfrGD4OGtTqTpo/TuQluWtFweeJm95kg3JmPQ79Ltv4hr9rKmU5MaSBj33vwMaL6x8KkQ==
   dependencies:
     copy-to-clipboard "^3.2.0"
     nano-css "^5.2.1"
