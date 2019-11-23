@@ -15,6 +15,7 @@ export const TextInput = styled.input`
   background-color: transparent;
   border: 0;
   padding: 0;
+  margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 

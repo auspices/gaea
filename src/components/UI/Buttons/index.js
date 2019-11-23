@@ -5,6 +5,7 @@ import { mixin as boxMixin } from '../Box'
 export const Button = styled.button`
   appearance: none;
   border: 0;
+  margin: 0;
   padding: 0;
   font-size: 1rem;
   line-height: 1;
