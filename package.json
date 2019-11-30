@@ -67,10 +67,10 @@
   },
   "devDependencies": {
     "@babel/core": "7.7.4",
-    "@storybook/addon-actions": "5.2.6",
-    "@storybook/addon-links": "5.2.6",
-    "@storybook/addons": "5.2.6",
-    "@storybook/react": "5.2.6",
+    "@storybook/addon-actions": "5.2.7",
+    "@storybook/addon-links": "5.2.7",
+    "@storybook/addons": "5.2.7",
+    "@storybook/react": "5.2.7",
     "apollo": "2.21.1",
     "husky": "3.1.0",
     "lint-staged": "9.5.0"
