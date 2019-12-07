@@ -30,6 +30,10 @@ export const TextInput = styled.input`
   &:focus {
     outline: 0;
   }
+
+  &:autofill {
+    font-size: 1rem;
+  }
 `
 
 TextInput.defaultProps = {

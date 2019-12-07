@@ -33,6 +33,32 @@ const Form = styled.form`
       border-bottom-right-radius: 4px;
     }
   }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints[0]}) {
+    flex-wrap: wrap;
+    > * {
+      flex-basis: 100%;
+      margin-top: -1px;
+
+      &,
+      &:first-child,
+      &:last-child {
+        margin-left: 0;
+        border-radius: 0;
+      }
+
+      &:first-child {
+        margin-top: 0;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+      }
+
+      &:last-child {
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 4px;
+      }
+    }
+  }
 `
 
 class Login extends PureComponent {
@@ -61,13 +87,19 @@ class Login extends PureComponent {
     const { username, password } = this.state
 
     login({ variables: { username, password } })
-      .then(({ data: { login: { jwt, user } } }) => {
-        localStorage.setItem('jwt', jwt)
+      .then(
+        ({
+          data: {
+            login: { jwt, user },
+          },
+        }) => {
+          localStorage.setItem('jwt', jwt)
 
-        dispatchAlert('Logged in')
+          dispatchAlert('Logged in')
 
-        this.setState({ mode: 'success', userSlug: user.slug })
-      })
+          this.setState({ mode: 'success', userSlug: user.slug })
+        }
+      )
       .catch(err => {
         dispatchError(err)
 
