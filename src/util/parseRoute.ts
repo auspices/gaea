@@ -1,6 +1,17 @@
 import { parse } from 'qs'
 
-export default renderFn => props => {
+type Render = (renderable: {
+  params: any
+  query: { page: number; per: number }
+  originalProps: any
+}) => JSX.Element
+
+type Props = {
+  location: { search: string }
+  match: { params: any }
+}
+
+export default (render: Render) => (props: Props) => {
   const _query = parse(props.location.search.slice(1))
   const query = {
     ..._query,
@@ -9,7 +20,7 @@ export default renderFn => props => {
     per: _query.per ? parseInt(_query.per, 10) : 24,
   }
 
-  return renderFn({
+  return render({
     params: props.match.params,
     query,
     originalProps: props,
