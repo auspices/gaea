@@ -13171,10 +13171,10 @@ react-textarea-autosize@^7.1.0:
     "@babel/runtime" "^7.1.2"
     prop-types "^15.6.0"
 
-react-use@13.14.2:
-  version "13.14.2"
-  resolved "https://registry.yarnpkg.com/react-use/-/react-use-13.14.2.tgz#399d98abd2a75c210439d9008264638f468e560e"
-  integrity sha512-/n+DzMwoPkzR+jjB/sNlSDY2wCV2yklX7xhWNQa3kNAHj2pXSAhDQyHOUNk8JR+w5R10aZZf12tv91w8Krg3Kw==
+react-use@13.14.3:
+  version "13.14.3"
+  resolved "https://registry.yarnpkg.com/react-use/-/react-use-13.14.3.tgz#8d39c5c09ba1131e652fc460f2a363f7591d0f89"
+  integrity sha512-HTeicdoc6Jre2boKpZh3ie26RcYagirC1T1OsoQ2xcmxd3jEgtfGj8trexWT7wTThkBn0Zw7dcmflMGgARkXSw==
   dependencies:
     "@xobotyi/scrollbar-width" "1.5.0"
     copy-to-clipboard "^3.2.0"
