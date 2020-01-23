@@ -70,7 +70,7 @@
     "@storybook/addon-links": "5.3.8",
     "@storybook/addons": "5.3.8",
     "@storybook/react": "5.3.8",
-    "@types/jest": "24.9.0",
+    "@types/jest": "24.9.1",
     "@types/lodash": "4.14.149",
     "@types/node": "12.12.25",
     "@types/qs": "6.9.0",
