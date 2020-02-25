@@ -66,10 +66,10 @@
     }
   },
   "devDependencies": {
-    "@storybook/addon-actions": "5.3.9",
-    "@storybook/addon-links": "5.3.9",
-    "@storybook/addons": "5.3.9",
-    "@storybook/react": "5.3.9",
+    "@storybook/addon-actions": "5.3.14",
+    "@storybook/addon-links": "5.3.14",
+    "@storybook/addons": "5.3.14",
+    "@storybook/react": "5.3.14",
     "@types/jest": "24.9.1",
     "@types/lodash": "4.14.149",
     "@types/node": "12.12.25",
