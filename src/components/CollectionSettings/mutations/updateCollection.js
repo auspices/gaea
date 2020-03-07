@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { collectionSettingsFragment } from 'components/CollectionSettings/fragments/collectionSettings'
+import { collectionSettingsFragment } from '../../../components/CollectionSettings/fragments/collectionSettings'
 
 export const updateCollectionMutation = gql`
   mutation updateCollection($id: ID!, $title: String, $metadata: JSON) {

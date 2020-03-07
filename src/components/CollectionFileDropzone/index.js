@@ -1,12 +1,12 @@
-import React, { useState, useCallback, useEffect } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import styled from 'styled-components'
 import { graphql } from 'react-apollo'
 
-import addToCollectionMutation from 'components/AddToCollection/mutations/addToCollection'
+import addToCollectionMutation from '../../components/AddToCollection/mutations/addToCollection'
 
-import { FilesUploader } from 'components/FilesUploader'
-import { WithAlerts } from 'components/Alerts'
+import { FilesUploader } from '../../components/FilesUploader'
+import { WithAlerts } from '../../components/Alerts'
 
 export const Container = styled.div`
   ${props => `display: ${{ resting: 'none', active: 'block' }[props.mode]};`}

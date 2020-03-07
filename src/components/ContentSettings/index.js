@@ -3,9 +3,9 @@ import { graphql } from 'react-apollo'
 
 import { updateContentMutation } from './mutations/updateContent'
 
-import { WithAlerts } from 'components/Alerts'
-import { Box } from 'components/UI/Box'
-import { KeyValueEditor } from 'components/UI/KeyValueEditor'
+import { WithAlerts } from '../../components/Alerts'
+import { Box } from '../../components/UI/Box'
+import { KeyValueEditor } from '../../components/UI/KeyValueEditor'
 
 export const ContentSettings = graphql(updateContentMutation, {
   name: 'updateContent',

@@ -1,14 +1,14 @@
-import React, { useState, useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 import { sortableContainer, sortableElement } from 'react-sortable-hoc'
 import { graphql } from 'react-apollo'
 
-import { reorder } from 'util/reorder'
+import { reorder } from '../../util/reorder'
 
 import { repositionCollectionContentMutation } from './mutations/repositionCollectionContent'
 
-import { WithAlerts } from 'components/Alerts'
-import Grid from 'components/UI/Grid'
-import CollectionContent from 'components/CollectionContent'
+import { WithAlerts } from '../../components/Alerts'
+import Grid from '../../components/UI/Grid'
+import CollectionContent from '../../components/CollectionContent'
 
 const SortableGrid = sortableContainer(({ onSortEnd: _onSortEnd, ...rest }) => (
   <Grid {...rest} />

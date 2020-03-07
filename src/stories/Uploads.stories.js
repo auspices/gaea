@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { storiesOf } from '@storybook/react'
 
-import { Container } from 'components/CollectionFileDropzone'
+import { Container } from '../components/CollectionFileDropzone'
 import {
   FilesUploaderContainer,
   FilesUploaderList,
-} from 'components/FilesUploader'
-import { FileUploadRepresentation } from 'components/FileUpload'
+} from '../components/FilesUploader'
+import { FileUploadRepresentation } from '../components/FileUpload'
 
 const Foo = () => {
   const [randomProgress, setRandomProgress] = useState(0)

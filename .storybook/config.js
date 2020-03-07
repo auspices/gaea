@@ -4,9 +4,9 @@ import { ThemeProvider } from 'styled-components'
 
 import 'index.css'
 
-import theme from 'styles/theme'
+import { THEME } from 'styles/theme'
 
-addDecorator(story => <ThemeProvider theme={theme}>{story()}</ThemeProvider>)
+addDecorator(story => <ThemeProvider theme={THEME}>{story()}</ThemeProvider>)
 
 addParameters({
   options: {

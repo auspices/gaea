@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import collectionFragment from 'pages/Collection/fragments/collection'
+import collectionFragment from '../../../pages/Collection/fragments/collection'
 
 export default gql`
   mutation addToCollection($id: ID!, $value: String!, $page: Int, $per: Int) {

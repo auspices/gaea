@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom'
 
 import createCollectionMutation from './mutations/createCollection'
 
-import { TextInput } from 'components/UI/Inputs'
+import { TextInput } from '../../components/UI/Inputs'
 
 const CreateCollection = ({ createCollection, hrefs }) => {
   const [mode, setMode] = useState('resting')

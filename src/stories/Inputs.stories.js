@@ -1,10 +1,9 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-
-import { TextInput, BorderedTextInput } from 'components/UI/Inputs'
-import { Field } from 'components/UI/Field'
-import { KeyValueInput } from 'components/UI/KeyValueInput'
-import { KeyValueEditor } from 'components/UI/KeyValueEditor'
+import { BorderedTextInput, TextInput } from '../components/UI/Inputs'
+import { Field } from '../components/UI/Field'
+import { KeyValueInput } from '../components/UI/KeyValueInput'
+import { KeyValueEditor } from '../components/UI/KeyValueEditor'
 
 storiesOf('Inputs', module)
   .add('TextInput', () => <TextInput placeholder="example input" />)

@@ -1,14 +1,14 @@
-import React, { useState, useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 import { Query } from 'react-apollo'
 import { Redirect } from 'react-router-dom'
 
-import { generate as generateHrefs } from 'util/hrefs'
+import { generate as generateHrefs } from '../../util/hrefs'
 
-import { WithAlerts } from 'components/Alerts'
+import { WithAlerts } from '../../components/Alerts'
 
 import { sampleCollectionContentQuery } from './queries/sampleCollectionContent'
 
-import { Button } from 'components/UI/Buttons'
+import { Button } from '../../components/UI/Buttons'
 
 export const SampleCollectionContent = WithAlerts(
   ({ id, dispatchError, children }) => {

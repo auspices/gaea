@@ -1,13 +1,13 @@
-import React, { useContext, useCallback } from 'react'
+import React, { useCallback, useContext } from 'react'
 import styled from 'styled-components'
 
 import { Store } from './Store'
 
-import { login as loginHref } from 'util/hrefs'
-import { errorCode } from 'util/errors'
+import { login as loginHref } from '../../util/hrefs'
+import { errorCode } from '../../util/errors'
 
-import Box from 'components/UI/Box'
-import Alert from 'components/UI/Alert'
+import { Box } from '../../components/UI/Box'
+import { Alert } from '../../components/UI/Alert'
 
 const Container = styled(Box).attrs({
   p: 3,

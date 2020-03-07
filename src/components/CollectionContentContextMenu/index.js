@@ -1,10 +1,10 @@
-import React, { useState, useCallback, useRef, Children } from 'react'
+import React, { Children, useCallback, useRef, useState } from 'react'
 
 import styled from 'styled-components'
 
-import Box from 'components/UI/Box'
-import { Overlay } from 'components/UI/Overlay'
-import { Icons } from 'components/UI/Icons'
+import { Box } from '../../components/UI/Box'
+import { Overlay } from '../../components/UI/Overlay'
+import { Icons } from '../../components/UI/Icons'
 
 const Toggle = styled.div.attrs({
   role: 'button',

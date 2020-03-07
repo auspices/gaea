@@ -3,18 +3,18 @@ import { Query } from 'react-apollo'
 
 import collectionQuery from './queries/collection'
 
-import { generate as generateHrefs } from 'util/hrefs'
+import { generate as generateHrefs } from '../../util/hrefs'
 
-import Link from 'components/UI/Link'
-import Pagination from 'components/UI/Pagination'
-import Header from 'components/Header'
-import AddToCollection from 'components/AddToCollection'
-import { Icons } from 'components/UI/Icons'
-import { WithAlerts } from 'components/Alerts'
-import { CollectionFileDropzone } from 'components/CollectionFileDropzone'
-import { CollectionContents } from 'components/CollectionContents'
-import { CollectionSettings } from 'components/CollectionSettings'
-import { SampleCollectionContent } from 'components/SampleCollectionContent'
+import { Link } from '../../components/UI/Link'
+import Pagination from '../../components/UI/Pagination'
+import { Header } from '../../components/Header'
+import { AddToCollection } from '../../components/AddToCollection'
+import { Icons } from '../../components/UI/Icons'
+import { WithAlerts } from '../../components/Alerts'
+import { CollectionFileDropzone } from '../../components/CollectionFileDropzone'
+import { CollectionContents } from '../../components/CollectionContents'
+import { CollectionSettings } from '../../components/CollectionSettings'
+import { SampleCollectionContent } from '../../components/SampleCollectionContent'
 
 const Collection = ({ id, page, per, dispatchError }) => {
   return (

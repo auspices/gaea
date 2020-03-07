@@ -1,14 +1,14 @@
 import React from 'react'
-import { Switch, Route, Redirect } from 'react-router-dom'
+import { Redirect, Route, Switch } from 'react-router-dom'
 
-import parseRoute from 'util/parseRoute'
+import parseRoute from './util/parseRoute'
 
-import { RedirectHome } from 'components/RedirectHome'
+import { RedirectHome } from './components/RedirectHome'
 
-import Login from 'pages/Login'
-import Collections from 'pages/Collections'
-import Collection from 'pages/Collection'
-import Content from 'pages/Content'
+import Login from './pages/Login'
+import Collections from './pages/Collections'
+import Collection from './pages/Collection'
+import Content from './pages/Content'
 
 export default () => (
   <Switch>

@@ -5,9 +5,9 @@ import styled from 'styled-components'
 
 import { filesUploaderQuery } from './queries/filesUploader'
 
-import Box from 'components/UI/Box'
-import { WithAlerts } from 'components/Alerts'
-import { FileUpload } from 'components/FileUpload'
+import { Box } from '../../components/UI/Box'
+import { WithAlerts } from '../../components/Alerts'
+import { FileUpload } from '../../components/FileUpload'
 
 export const FilesUploaderContainer = styled(Box)`
   display: flex;
