@@ -4,17 +4,17 @@ import styled from 'styled-components'
 
 import contentQuery from './queries/content'
 
-import { generate as generateHrefs } from 'util/hrefs'
+import { generate as generateHrefs } from '../../util/hrefs'
 
-import { Box } from 'components/UI/Box'
-import { Link } from 'components/UI/Link'
-import { Icons } from 'components/UI/Icons'
-import { Header } from 'components/Header'
-import { ContentEntity } from 'components/ContentEntity'
-import { ContentEntityHeader } from 'components/ContentEntityHeader'
-import { WithAlerts } from 'components/Alerts'
-import { ContentSettings } from 'components/ContentSettings'
-import { SampleCollectionContent } from 'components/SampleCollectionContent'
+import { Box } from '../../components/UI/Box'
+import { Link } from '../../components/UI/Link'
+import { Icons } from '../../components/UI/Icons'
+import { Header } from '../../components/Header'
+import { ContentEntity } from '../../components/ContentEntity'
+import { ContentEntityHeader } from '../../components/ContentEntityHeader'
+import { WithAlerts } from '../../components/Alerts'
+import { ContentSettings } from '../../components/ContentSettings'
+import { SampleCollectionContent } from '../../components/SampleCollectionContent'
 
 const Content = styled(Box).attrs({
   mt: 6,

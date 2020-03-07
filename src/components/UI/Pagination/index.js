@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import Link from 'components/UI/Link'
-import Box from 'components/UI/Box'
+import { Box } from 'components/UI/Box'
 
 const Container = styled(Box)`
   display: flex;

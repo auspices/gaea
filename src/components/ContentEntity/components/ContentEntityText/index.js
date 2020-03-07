@@ -1,10 +1,10 @@
-import React, { useCallback, useReducer, useEffect } from 'react'
+import React, { useCallback, useEffect, useReducer } from 'react'
 import styled from 'styled-components'
 import { graphql } from 'react-apollo'
 import useDebounce from 'react-use/lib/useDebounce'
 
-import { WithAlerts } from 'components/Alerts'
-import { Box } from 'components/UI/Box'
+import { WithAlerts } from '../../../../components/Alerts'
+import { Box } from '../../../../components/UI/Box'
 
 import { updateEntityMutation } from '../../mutations/updateEntity'
 

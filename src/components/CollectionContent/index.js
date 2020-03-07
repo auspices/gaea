@@ -1,10 +1,10 @@
-import React, { useState, useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 import styled from 'styled-components'
 
-import Link from 'components/UI/Link'
-import { CollectionContentContextMenu } from 'components/CollectionContentContextMenu'
-import RemoveFromCollection from 'components/RemoveFromCollection'
-import CollectionContentEntity from 'components/CollectionContentEntity'
+import { Link } from '../../components/UI/Link'
+import { CollectionContentContextMenu } from '../../components/CollectionContentContextMenu'
+import RemoveFromCollection from '../../components/RemoveFromCollection'
+import CollectionContentEntity from '../../components/CollectionContentEntity'
 
 const Container = styled(Link)`
   display: flex;

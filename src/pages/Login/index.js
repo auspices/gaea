@@ -5,11 +5,11 @@ import styled from 'styled-components'
 
 import loginMutation from './mutations/login'
 
-import * as hrefs from 'util/hrefs'
+import * as hrefs from '../../util/hrefs'
 
-import { Button } from 'components/UI/Buttons'
-import { TextInput } from 'components/UI/Inputs'
-import { WithAlerts } from 'components/Alerts'
+import { Button } from '../../components/UI/Buttons'
+import { TextInput } from '../../components/UI/Inputs'
+import { WithAlerts } from '../../components/Alerts'
 
 const Form = styled.form`
   display: flex;

@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 
-import { errorMessage } from 'util/errors'
+import { errorMessage } from '../../../util/errors'
 
-import Box from 'components/UI/Box'
+import { Box } from '../Box'
 
 const Container = styled(Box).attrs({
   py: 4,

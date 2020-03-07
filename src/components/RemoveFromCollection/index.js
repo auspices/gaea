@@ -1,9 +1,9 @@
-import React, { useState, useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 import { graphql } from 'react-apollo'
 
 import removeFromCollectionMutation from './mutations/removeFromCollection'
 
-import { Button } from 'components/UI/Buttons'
+import { Button } from '../../components/UI/Buttons'
 
 const RemoveFromCollection = ({
   children,

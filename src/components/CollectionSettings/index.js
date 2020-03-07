@@ -3,9 +3,9 @@ import { graphql } from 'react-apollo'
 
 import { updateCollectionMutation } from './mutations/updateCollection'
 
-import { Box } from 'components/UI/Box'
-import { WithAlerts } from 'components/Alerts'
-import { KeyValueEditor } from 'components/UI/KeyValueEditor'
+import { Box } from '../../components/UI/Box'
+import { WithAlerts } from '../../components/Alerts'
+import { KeyValueEditor } from '../../components/UI/KeyValueEditor'
 
 export const CollectionSettings = graphql(updateCollectionMutation, {
   name: 'updateCollection',

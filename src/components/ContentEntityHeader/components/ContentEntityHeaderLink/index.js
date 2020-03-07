@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Link } from 'components/UI/Link'
+import { Link } from '../../../../components/UI/Link'
 
 export const ContentEntityHeaderLink = ({ link }) => {
   return (

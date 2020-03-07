@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { Box } from 'components/UI/Box'
+import { Box } from '../../../../components/UI/Box'
 
 const Container = styled(Box)`
   color: blue;

@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
-import { collectionSettingsFragment } from 'components/CollectionSettings/fragments/collectionSettings'
-import { collectionContentEntityFragment } from 'components/CollectionContentEntity/fragments/collectionContentEntity'
+import { collectionSettingsFragment } from '../../../components/CollectionSettings/fragments/collectionSettings'
+import { collectionContentEntityFragment } from '../../../components/CollectionContentEntity/fragments/collectionContentEntity'
 
 export default gql`
   fragment Collection on Collection {

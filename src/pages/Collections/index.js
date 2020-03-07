@@ -3,14 +3,14 @@ import { Query } from 'react-apollo'
 
 import collectionsQuery from './queries/collections'
 
-import { generate as generateHrefs } from 'util/hrefs'
+import { generate as generateHrefs } from '../../util/hrefs'
 
-import Link from 'components/UI/Link'
-import Header from 'components/Header'
-import Pagination from 'components/UI/Pagination'
-import CreateCollection from 'components/CreateCollection'
-import CollectionsList from 'components/CollectionsList'
-import { WithAlerts } from 'components/Alerts'
+import { Link } from '../../components/UI/Link'
+import { Header } from '../../components/Header'
+import Pagination from '../../components/UI/Pagination'
+import CreateCollection from '../../components/CreateCollection'
+import CollectionsList from '../../components/CollectionsList'
+import { WithAlerts } from '../../components/Alerts'
 
 export default WithAlerts(({ dispatchError, page, per }) => (
   <Query

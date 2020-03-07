@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import headerFragment from 'components/Header/fragments/header'
+import headerFragment from '../../../components/Header/fragments/header'
 import collectionFragment from '../fragments/collection'
 
 export default gql`

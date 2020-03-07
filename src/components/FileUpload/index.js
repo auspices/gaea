@@ -1,9 +1,9 @@
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import styled from 'styled-components'
 
-import { uploadFile } from 'util/uploadFile'
+import { uploadFile } from '../../util/uploadFile'
 
-import Box from 'components/UI/Box'
+import { Box } from '../../components/UI/Box'
 
 const Container = styled(Box).attrs({
   px: 5,

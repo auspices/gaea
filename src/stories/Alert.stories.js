@@ -1,7 +1,7 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 
-import { Alert } from 'components/UI/Alert'
+import { Alert } from '../components/UI/Alert'
 
 storiesOf('Alert', module).add('types', () => (
   <>
