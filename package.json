@@ -95,7 +95,7 @@
     "@types/react-router": "5.1.4",
     "@types/react-router-dom": "5.1.3",
     "@types/styled-components": "5.0.1",
-    "@types/styled-system": "5.1.8",
+    "@types/styled-system": "5.1.9",
     "apollo": "2.25.0",
     "eslint-plugin-import": "2.20.1",
     "husky": "4.2.3",
