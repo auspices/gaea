@@ -1,0 +1,42 @@
+import React from 'react'
+import gql from 'graphql-tag'
+import { Grid } from '@auspices/eos'
+import {
+  COLLECTION_CONTENT_FRAGMENT,
+  CollectionContent,
+} from '../../components/CollectionContent'
+import { CollectionContentsFragment } from '../../generated/types/CollectionContentsFragment'
+
+export const COLLECTION_CONTENTS_FRAGMENT = gql`
+  fragment CollectionContentsFragment on Collection {
+    id
+    contents(page: $page, per: $per) {
+      id
+      ...CollectionContentFragment
+    }
+  }
+  ${COLLECTION_CONTENT_FRAGMENT}
+`
+
+export type CollectionContentsProps = {
+  collection: CollectionContentsFragment
+  hrefs: any
+}
+
+export const CollectionContents: React.FC<CollectionContentsProps> = ({
+  collection,
+  hrefs,
+}) => {
+  return (
+    <Grid my={6}>
+      {collection.contents.map((content) => (
+        <CollectionContent
+          key={content.id}
+          collectionId={collection.id}
+          content={content}
+          hrefs={hrefs}
+        />
+      ))}
+    </Grid>
+  )
+}

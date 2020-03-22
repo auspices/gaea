@@ -1,16 +1,14 @@
 import React from 'react'
 import { Redirect, Route, Switch } from 'react-router-dom'
-
-import parseRoute from './util/parseRoute'
-
+import { parseRoute } from './util/parseRoute'
 import { RedirectHome } from './components/RedirectHome'
+import { LoginPage } from './pages/LoginPage'
+import { CollectionsPage } from './pages/CollectionsPage'
+import { CollectionPage } from './pages/CollectionPage'
+import { ContentPage } from './pages/ContentPage'
+import { ErrorBoundary } from './components/ErrorBoundary'
 
-import Login from './pages/Login'
-import Collections from './pages/Collections'
-import Collection from './pages/Collection'
-import Content from './pages/Content'
-
-export default () => (
+export const Routes = () => (
   <Switch>
     <Route
       exact
@@ -23,25 +21,41 @@ export default () => (
           return <Redirect to="/login" />
         }
 
-        return <RedirectHome />
+        return (
+          <ErrorBoundary>
+            <RedirectHome />
+          </ErrorBoundary>
+        )
       }}
     />
 
-    <Route exact path="/login" component={Login} />
+    <Route
+      exact
+      path="/login"
+      component={() => (
+        <ErrorBoundary>
+          <LoginPage />
+        </ErrorBoundary>
+      )}
+    />
 
     <Route
       exact
       path="/:username/xs"
-      component={parseRoute(({ query: { page, per } }) => (
-        <Collections page={page} per={per} />
+      component={parseRoute(() => (
+        <ErrorBoundary>
+          <CollectionsPage />
+        </ErrorBoundary>
       ))}
     />
 
     <Route
       exact
       path="/:username/xs/:id"
-      component={parseRoute(({ params: { id }, query: { page, per } }) => (
-        <Collection id={id} page={page} per={per} />
+      component={parseRoute(({ params: { id } }) => (
+        <ErrorBoundary>
+          <CollectionPage id={id} />
+        </ErrorBoundary>
       ))}
     />
 
@@ -49,7 +63,9 @@ export default () => (
       exact
       path="/:username/x/:id"
       component={parseRoute(({ params }) => (
-        <Content id={params.id} />
+        <ErrorBoundary>
+          <ContentPage id={params.id} />
+        </ErrorBoundary>
       ))}
     />
   </Switch>
