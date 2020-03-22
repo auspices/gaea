@@ -16,6 +16,7 @@ export type ContentEntityHeaderTextProps = {
 
 export const ContentEntityHeaderText: React.FC<ContentEntityHeaderTextProps> = ({
   text,
+  ...rest
 }) => {
   return (
     <Button
@@ -23,6 +24,7 @@ export const ContentEntityHeaderText: React.FC<ContentEntityHeaderTextProps> = (
       href={`https://www.google.com/search?q=${text.body}`}
       target="_blank"
       flex="1"
+      {...rest}
     >
       search
     </Button>

@@ -37,13 +37,14 @@ type ContentEntityHeader = {
 
 export const ContentEntityHeader: React.FC<ContentEntityHeader> = ({
   entity,
+  ...rest
 }) => {
   switch (entity.__typename) {
     case 'Image':
-      return <ContentEntityHeaderImage image={entity} />
+      return <ContentEntityHeaderImage image={entity} {...rest} />
     case 'Text':
-      return <ContentEntityHeaderText text={entity} />
+      return <ContentEntityHeaderText text={entity} {...rest} />
     case 'Link':
-      return <ContentEntityHeaderLink link={entity} />
+      return <ContentEntityHeaderLink link={entity} {...rest} />
   }
 }

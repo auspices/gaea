@@ -18,10 +18,11 @@ type ContentEntityHeaderImageProps = {
 
 export const ContentEntityHeaderImage: React.FC<ContentEntityHeaderImageProps> = ({
   image,
+  ...rest
 }) => {
   return (
     <>
-      <Button as="a" href={image.url} flex="1">
+      <Button as="a" href={image.url} flex="1" {...rest}>
         @{image.width}×{image.height}
       </Button>
 
@@ -29,6 +30,7 @@ export const ContentEntityHeaderImage: React.FC<ContentEntityHeaderImageProps> =
         as="a"
         href={`https://www.google.com/searchbyimage?&image_url=${image.url}`}
         target="_blank"
+        {...rest}
       >
         reverse image search
       </Button>

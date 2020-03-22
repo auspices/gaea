@@ -2,7 +2,7 @@ import React, { useCallback } from 'react'
 import { useMutation } from '@apollo/react-hooks'
 import { useDebouncedCallback } from 'use-debounce'
 import gql from 'graphql-tag'
-import { KeyValueEditor, toSchema, useAlerts } from '@auspices/eos'
+import { KeyValueEditor, StackProps, toSchema, useAlerts } from '@auspices/eos'
 import { errorMessage } from '../../util/errors'
 import {
   CollectionSettingsMutation,
@@ -35,12 +35,13 @@ export const COLLECTION_SETTINGS_MUTATION = gql`
   ${COLLECTION_SETTINGS_FRAGMENT}
 `
 
-export type CollectionSettingsProps = {
+export type CollectionSettingsProps = StackProps & {
   collection: CollectionSettingsFragment
 }
 
 export const CollectionSettings: React.FC<CollectionSettingsProps> = ({
   collection,
+  ...rest
 }) => {
   const { sendNotification, sendError } = useAlerts()
   const [updateCollection] = useMutation<
@@ -72,6 +73,7 @@ export const CollectionSettings: React.FC<CollectionSettingsProps> = ({
       schema={toSchema(collection.metadata)}
       data={collection.metadata}
       onChange={debouncedHandleChange}
+      {...rest}
     />
   )
 }

@@ -7,6 +7,7 @@ import {
   PaginationProps,
 } from '@auspices/eos'
 
+// TODO: Is there a way to just curry component props?
 const Page: React.FC<PageProps> = (props) => <PAGE as={Link} {...props} />
 
 export const Pagination: React.FC<PaginationProps> = (props) => (

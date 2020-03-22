@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/react-hooks'
 import { Button, Input, useAlerts } from '@auspices/eos'
 import { usePagination, useRefetch } from '../../hooks'
 import { errorMessage } from '../../util/errors'
-import { Form } from '../Form'
+import { Form, FormProps } from '../Form'
 import { FileDropzone } from '../FileDropzone'
 import { useHistory } from 'react-router'
 
@@ -24,11 +24,14 @@ enum Mode {
   Error,
 }
 
-type AddToCollectionProps = {
+type AddToCollectionProps = FormProps & {
   id: number
 }
 
-export const AddToCollection: React.FC<AddToCollectionProps> = ({ id }) => {
+export const AddToCollection: React.FC<AddToCollectionProps> = ({
+  id,
+  ...rest
+}) => {
   const history = useHistory()
   const { refetch } = useRefetch()
   const { page, per, encode } = usePagination()
@@ -122,7 +125,7 @@ export const AddToCollection: React.FC<AddToCollectionProps> = ({ id }) => {
         onComplete={handleComplete}
       />
 
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} {...rest}>
         <Input
           key={inputKey}
           borderWidth={0}

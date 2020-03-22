@@ -17,9 +17,10 @@ export type ContentEntityHeaderLinkProps = {
 
 export const ContentEntityHeaderLink: React.FC<ContentEntityHeaderLinkProps> = ({
   link,
+  ...rest
 }) => {
   return (
-    <Button as="a" href={link.url} target="_blank" flex="1">
+    <Button as="a" href={link.url} target="_blank" flex="1" {...rest}>
       {link.name}
     </Button>
   )
