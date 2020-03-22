@@ -13,7 +13,6 @@ import {
   CONTENT_ENTITY_HEADER_FRAGMENT,
   ContentEntityHeader,
 } from '../../components/ContentEntityHeader'
-import { errorMessage } from '../../util/errors'
 import {
   CONTENT_SETTINGS_FRAGMENT,
   ContentSettings,
