@@ -11,7 +11,7 @@ type Props = {
   match: { params: any }
 }
 
-export default (render: Render) => (props: Props) => {
+export const parseRoute = (render: Render) => (props: Props) => {
   const _query = parse(props.location.search.slice(1))
   const query = {
     ..._query,
