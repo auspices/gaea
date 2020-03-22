@@ -74,7 +74,7 @@ export const ContentPage: React.FC<ContentPageProps> = ({ id }) => {
 
   return (
     <Stack flex="1">
-      <Stack direction="horizontal">
+      <Stack direction={['vertical', 'vertical', 'horizontal']}>
         <Button as={Link} to={hrefs.collections}>
           {username}
         </Button>

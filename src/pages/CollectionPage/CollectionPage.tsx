@@ -73,7 +73,7 @@ export const CollectionPage: React.FC<CollectionPageProps> = ({ id }) => {
   return (
     <RefetchProvider refetch={refetch}>
       <Stack flex="1">
-        <Stack direction={['vertical', 'horizontal']}>
+        <Stack direction={['vertical', 'vertical', 'horizontal']}>
           <Button as={Link} to={hrefs.collections}>
             {username}
           </Button>
