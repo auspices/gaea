@@ -56,12 +56,10 @@ export const ContentPage: React.FC<ContentPageProps> = ({ id }) => {
     variables: { id },
   })
 
-  // TODO
   if (error) {
-    return <>{errorMessage(error)}</>
+    throw error
   }
 
-  // TODO
   if (loading || !data) {
     return <Loading />
   }
