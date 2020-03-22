@@ -72,7 +72,7 @@ export const LoginPage: React.FC = () => {
 
   return (
     <Box as="form" width="100%" onSubmit={handleSubmit}>
-      <Stack direction="horizontal">
+      <Stack direction={['vertical', 'vertical', 'horizontal']}>
         <Input
           flex="1"
           name="username"
