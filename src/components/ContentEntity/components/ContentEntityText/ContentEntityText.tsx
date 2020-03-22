@@ -144,9 +144,11 @@ export const ContentEntityText: React.FC<ContentEntityTextProps> = ({
         ref={textareaRef}
         as="textarea"
         flex={1}
-        py={6}
+        py={7}
+        px={6}
         defaultValue={text.body}
         onChange={handleChange}
+        borderWidth={0}
         autoFocus
       />
     </Box>

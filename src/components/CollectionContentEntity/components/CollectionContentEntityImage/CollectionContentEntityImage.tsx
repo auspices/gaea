@@ -1,14 +1,13 @@
 import React from 'react'
 import gql from 'graphql-tag'
-import { Box, BoxProps } from '@auspices/eos'
-import { Image } from '../../../Image'
+import { ResponsiveImage } from '@auspices/eos'
 import { CollectionContentEntityImageFragment } from '../../../../generated/types/CollectionContentEntityImageFragment'
 
 export const COLLECTION_CONTENT_ENTITY_IMAGE_FRAGMENT = gql`
   fragment CollectionContentEntityImageFragment on Image {
     id
     title
-    resized(width: 200, height: 200) {
+    resized(width: 250, height: 250) {
       width
       height
       urls {
@@ -19,7 +18,7 @@ export const COLLECTION_CONTENT_ENTITY_IMAGE_FRAGMENT = gql`
   }
 `
 
-type CollectionContentEntityImageProps = BoxProps & {
+type CollectionContentEntityImageProps = {
   image: CollectionContentEntityImageFragment
 }
 
@@ -28,21 +27,16 @@ export const CollectionContentEntityImage: React.FC<CollectionContentEntityImage
   ...rest
 }) => {
   return (
-    <Box
-      width={image.resized.width}
-      height={image.resized.height}
+    <ResponsiveImage
+      srcs={[image.resized.urls._1x, image.resized.urls._2x]}
+      srcSet={`${image.resized.urls._1x} 1x, ${image.resized.urls._2x} 2x`}
+      alt={image.title}
+      aspectWidth={image.resized.width}
+      aspectHeight={image.resized.height}
+      maxWidth={image.resized.width}
+      maxHeight={image.resized.height}
       backgroundColor="lightgray"
-      overflow="hidden"
-      borderRadius={4}
       {...rest}
-    >
-      <Image
-        srcs={[image.resized.urls._1x, image.resized.urls._2x]}
-        srcSet={`${image.resized.urls._1x} 1x, ${image.resized.urls._2x} 2x`}
-        alt={image.title}
-        width={image.resized.width}
-        height={image.resized.height}
-      />
-    </Box>
+    />
   )
 }

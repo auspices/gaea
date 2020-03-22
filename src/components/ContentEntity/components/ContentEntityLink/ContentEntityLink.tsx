@@ -20,7 +20,13 @@ export const ContentEntityLink: React.FC<ContentEntityLinkProps> = ({
 }) => {
   return (
     <Box {...rest}>
-      <Button as="a" href={link.url} target="_blank">
+      <Button
+        as="a"
+        href={link.url}
+        color="blue"
+        borderColor="blue"
+        target="_blank"
+      >
         &lt;{link.url}&gt;
       </Button>
     </Box>
