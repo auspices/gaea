@@ -75,7 +75,7 @@ export const CollectionContent: React.FC<CollectionContentProps> = ({
           <RepositionCollectionContent
             contentId={content.id}
             action={ReorderAction.MOVE_TO_TOP}
-            borderTop="1px solid lightgray"
+            borderTop="1px solid whitesmoke"
           />
 
           <RepositionCollectionContent
@@ -86,7 +86,7 @@ export const CollectionContent: React.FC<CollectionContentProps> = ({
           <RepositionCollectionContent
             contentId={content.id}
             action={ReorderAction.MOVE_DOWN}
-            borderTop="1px solid lightgray"
+            borderTop="1px solid whitesmoke"
           />
 
           <RepositionCollectionContent

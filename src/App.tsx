@@ -13,7 +13,12 @@ export default () => (
     <ApolloProvider client={client}>
       <ThemeProvider theme={THEME}>
         <AlertsProvider>
-          <Box display="flex" flexDirection="column" p={4} minHeight="100vh">
+          <Box
+            display="flex"
+            flexDirection="column"
+            p={[0, 0, 2, 4]}
+            minHeight="100vh"
+          >
             <GlobalStyles />
 
             <Alerts
