@@ -19,11 +19,11 @@ enum Mode {
   Open,
 }
 
-type CollectionContentContextMenuProps = BoxProps & {
+type ContextMenuProps = BoxProps & {
   children: React.ReactElement<any> | React.ReactElement<any>[]
 }
 
-export const CollectionContentContextMenu: React.FC<CollectionContentContextMenuProps> = ({
+export const ContextMenu: React.FC<ContextMenuProps> = ({
   children,
   ...rest
 }) => {

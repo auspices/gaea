@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react'
 import gql from 'graphql-tag'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { CollectionContentContextMenu } from '../CollectionContentContextMenu'
+import { ContextMenu } from '../ContextMenu'
 import { RemoveFromCollection } from '../RemoveFromCollection'
 import {
   ReorderAction,
@@ -64,7 +64,7 @@ export const CollectionContent: React.FC<CollectionContentProps> = ({
       {...rest}
     >
       {mode === Mode.Active && (
-        <CollectionContentContextMenu position="absolute" top={0} right={0}>
+        <ContextMenu position="absolute" top={0} right={0}>
           <RemoveFromCollection
             collectionId={collectionId}
             contentId={content.id}
@@ -95,7 +95,7 @@ export const CollectionContent: React.FC<CollectionContentProps> = ({
             contentId={content.id}
             action={ReorderAction.MOVE_UP}
           />
-        </CollectionContentContextMenu>
+        </ContextMenu>
       )}
 
       <CollectionContentEntity entity={content.entity} />
