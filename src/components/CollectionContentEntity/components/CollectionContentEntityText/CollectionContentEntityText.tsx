@@ -1,6 +1,6 @@
 import React from 'react'
 import gql from 'graphql-tag'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Box, BoxProps } from '@auspices/eos'
 import { themeGet } from '@styled-system/theme-get'
 import { CollectionContentEntityTextFragment } from '../../../../generated/types/CollectionContentEntityTextFragment'
@@ -17,7 +17,7 @@ const Container = styled(Box).attrs({
   p: 3,
   m: 5,
   borderRadius: 4,
-})<{ length: number }>`
+})<{ truncate: boolean }>`
   position: relative;
   display: flex;
   align-items: flex-start;
@@ -27,22 +27,26 @@ const Container = styled(Box).attrs({
   max-height: 15rem;
   overflow: hidden;
 
-  ${({ length }) =>
-    length > 150 &&
-    `
-      &:after {
-        content: '';
-        display: block;
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        height: 4rem;
-        background: linear-gradient(rgba(255, 255, 255, 0.001) 0%, ${themeGet(
-          'background'
-        )} 100%);
-      }
-  `}
+  ${({ truncate, ...rest }) => {
+    return (
+      truncate &&
+      css`
+        &:after {
+          content: '';
+          display: block;
+          position: absolute;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          height: 4rem;
+          background: linear-gradient(
+            rgba(255, 255, 255, 0.001) 0%,
+            ${themeGet('colors.background')} 100%
+          );
+        }
+      `
+    )
+  }}
 `
 
 type CollectionContentEntityTextProps = BoxProps & {
@@ -51,4 +55,4 @@ type CollectionContentEntityTextProps = BoxProps & {
 
 export const CollectionContentEntityText: React.FC<CollectionContentEntityTextProps> = ({
   text,
-}) => <Container length={text.body.length}>{text.body}</Container>
+}) => <Container truncate={text.body.length > 150}>{text.body}</Container>
