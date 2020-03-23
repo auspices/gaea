@@ -4,6 +4,7 @@ import { Box, Pill, PillProps } from '@auspices/eos'
 import { Link } from 'react-router-dom'
 import gql from 'graphql-tag'
 import { themeGet } from '@styled-system/theme-get'
+import { CollectionStubFragment } from '../../generated/types/CollectionStubFragment'
 
 export const COLLECTION_STUB_FRAGMENT = gql`
   fragment CollectionStubFragment on Collection {
@@ -35,14 +36,13 @@ const Container = styled(Pill)<PillProps>`
 
     > ${Delta} {
       color: ${themeGet('colors.secondary')};
-      text-decoration: underline;
     }
   }
 `
 
 export type CollectionStubProps = {
-  collection: any
-  hrefs: any
+  collection: CollectionStubFragment
+  hrefs: any // TODO
 }
 
 export const CollectionStub: React.FC<CollectionStubProps> = ({
