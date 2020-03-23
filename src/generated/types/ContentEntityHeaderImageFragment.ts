@@ -8,9 +8,9 @@
 // ====================================================
 
 export interface ContentEntityHeaderImageFragment {
-  __typename: 'Image'
-  id: number
-  url: string
-  width: number
-  height: number
+  __typename: "Image";
+  id: number;
+  url: string;
+  width: number;
+  height: number;
 }

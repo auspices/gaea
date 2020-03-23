@@ -8,73 +8,70 @@
 // ====================================================
 
 export interface ContentPageQuery_me {
-  __typename: 'User'
-  id: number
-  slug: string
-  username: string
+  __typename: "User";
+  id: number;
+  slug: string;
+  username: string;
 }
 
 export interface ContentPageQuery_content_collection {
-  __typename: 'Collection'
-  id: number
-  slug: string
-  title: string
+  __typename: "Collection";
+  id: number;
+  slug: string;
+  title: string;
 }
 
 export interface ContentPageQuery_content_entity_Image_resized_urls {
-  __typename: 'RetinaImage'
-  _1x: string
-  _2x: string
+  __typename: "RetinaImage";
+  _1x: string;
+  _2x: string;
 }
 
 export interface ContentPageQuery_content_entity_Image_resized {
-  __typename: 'ResizedImage'
-  width: number
-  height: number
-  urls: ContentPageQuery_content_entity_Image_resized_urls
+  __typename: "ResizedImage";
+  width: number;
+  height: number;
+  urls: ContentPageQuery_content_entity_Image_resized_urls;
 }
 
 export interface ContentPageQuery_content_entity_Image {
-  __typename: 'Image'
-  id: number
-  url: string
-  width: number
-  height: number
-  title: string
-  resized: ContentPageQuery_content_entity_Image_resized
+  __typename: "Image";
+  id: number;
+  url: string;
+  width: number;
+  height: number;
+  title: string;
+  resized: ContentPageQuery_content_entity_Image_resized;
 }
 
 export interface ContentPageQuery_content_entity_Text {
-  __typename: 'Text'
-  id: number
-  body: string
+  __typename: "Text";
+  id: number;
+  body: string;
 }
 
 export interface ContentPageQuery_content_entity_Link {
-  __typename: 'Link'
-  id: number
-  name: string
-  url: string
+  __typename: "Link";
+  id: number;
+  name: string;
+  url: string;
 }
 
-export type ContentPageQuery_content_entity =
-  | ContentPageQuery_content_entity_Image
-  | ContentPageQuery_content_entity_Text
-  | ContentPageQuery_content_entity_Link
+export type ContentPageQuery_content_entity = ContentPageQuery_content_entity_Image | ContentPageQuery_content_entity_Text | ContentPageQuery_content_entity_Link;
 
 export interface ContentPageQuery_content {
-  __typename: 'Content'
-  id: number
-  collection: ContentPageQuery_content_collection
-  entity: ContentPageQuery_content_entity
-  metadata: any
+  __typename: "Content";
+  id: number;
+  collection: ContentPageQuery_content_collection;
+  entity: ContentPageQuery_content_entity;
+  metadata: any;
 }
 
 export interface ContentPageQuery {
-  me: ContentPageQuery_me
-  content: ContentPageQuery_content
+  me: ContentPageQuery_me;
+  content: ContentPageQuery_content;
 }
 
 export interface ContentPageQueryVariables {
-  id: string
+  id: string;
 }

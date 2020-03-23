@@ -8,15 +8,15 @@
 // ====================================================
 
 export interface CollectionStubFragment_counts {
-  __typename: 'CollectionCounts'
-  contents: number
+  __typename: "CollectionCounts";
+  contents: number;
 }
 
 export interface CollectionStubFragment {
-  __typename: 'Collection'
-  id: number
-  slug: string
-  title: string
-  updatedAt: string
-  counts: CollectionStubFragment_counts
+  __typename: "Collection";
+  id: number;
+  slug: string;
+  title: string;
+  updatedAt: string;
+  counts: CollectionStubFragment_counts;
 }

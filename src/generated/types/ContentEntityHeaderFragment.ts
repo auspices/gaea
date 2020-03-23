@@ -8,27 +8,24 @@
 // ====================================================
 
 export interface ContentEntityHeaderFragment_Image {
-  __typename: 'Image'
-  id: number
-  url: string
-  width: number
-  height: number
+  __typename: "Image";
+  id: number;
+  url: string;
+  width: number;
+  height: number;
 }
 
 export interface ContentEntityHeaderFragment_Text {
-  __typename: 'Text'
-  id: number
-  body: string
+  __typename: "Text";
+  id: number;
+  body: string;
 }
 
 export interface ContentEntityHeaderFragment_Link {
-  __typename: 'Link'
-  id: number
-  name: string
-  url: string
+  __typename: "Link";
+  id: number;
+  name: string;
+  url: string;
 }
 
-export type ContentEntityHeaderFragment =
-  | ContentEntityHeaderFragment_Image
-  | ContentEntityHeaderFragment_Text
-  | ContentEntityHeaderFragment_Link
+export type ContentEntityHeaderFragment = ContentEntityHeaderFragment_Image | ContentEntityHeaderFragment_Text | ContentEntityHeaderFragment_Link;

@@ -8,24 +8,24 @@
 // ====================================================
 
 export interface ContentEntityImageFragment_resized_urls {
-  __typename: 'RetinaImage'
-  _1x: string
-  _2x: string
+  __typename: "RetinaImage";
+  _1x: string;
+  _2x: string;
 }
 
 export interface ContentEntityImageFragment_resized {
-  __typename: 'ResizedImage'
-  width: number
-  height: number
-  urls: ContentEntityImageFragment_resized_urls
+  __typename: "ResizedImage";
+  width: number;
+  height: number;
+  urls: ContentEntityImageFragment_resized_urls;
 }
 
 export interface ContentEntityImageFragment {
-  __typename: 'Image'
-  id: number
-  title: string
-  url: string
-  width: number
-  height: number
-  resized: ContentEntityImageFragment_resized
+  __typename: "Image";
+  id: number;
+  title: string;
+  url: string;
+  width: number;
+  height: number;
+  resized: ContentEntityImageFragment_resized;
 }

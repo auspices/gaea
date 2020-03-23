@@ -8,8 +8,8 @@
 // ====================================================
 
 export interface CollectionContentEntityLinkFragment {
-  __typename: 'Link'
-  id: number
-  url: string
-  name: string
+  __typename: "Link";
+  id: number;
+  url: string;
+  name: string;
 }

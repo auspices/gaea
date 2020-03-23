@@ -8,21 +8,21 @@
 // ====================================================
 
 export interface LoginPageMutation_login_user {
-  __typename: 'User'
-  slug: string
+  __typename: "User";
+  slug: string;
 }
 
 export interface LoginPageMutation_login {
-  __typename: 'LoginPayload'
-  jwt: string
-  user: LoginPageMutation_login_user
+  __typename: "LoginPayload";
+  jwt: string;
+  user: LoginPageMutation_login_user;
 }
 
 export interface LoginPageMutation {
-  login: LoginPageMutation_login | null
+  login: LoginPageMutation_login | null;
 }
 
 export interface LoginPageMutationVariables {
-  username: string
-  password: string
+  username: string;
+  password: string;
 }

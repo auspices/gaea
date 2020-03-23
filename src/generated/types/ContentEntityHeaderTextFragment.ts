@@ -8,7 +8,7 @@
 // ====================================================
 
 export interface ContentEntityHeaderTextFragment {
-  __typename: 'Text'
-  id: number
-  body: string
+  __typename: "Text";
+  id: number;
+  body: string;
 }

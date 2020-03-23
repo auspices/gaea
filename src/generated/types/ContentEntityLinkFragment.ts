@@ -8,7 +8,7 @@
 // ====================================================
 
 export interface ContentEntityLinkFragment {
-  __typename: 'Link'
-  id: number
-  url: string
+  __typename: "Link";
+  id: number;
+  url: string;
 }

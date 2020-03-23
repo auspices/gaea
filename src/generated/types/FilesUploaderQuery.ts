@@ -3,22 +3,22 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { SupportedUpload } from './globalTypes'
+import { SupportedUpload } from "./globalTypes";
 
 // ====================================================
 // GraphQL query operation: FilesUploaderQuery
 // ====================================================
 
 export interface FilesUploaderQuery_me {
-  __typename: 'User'
-  id: number
-  presignedUploadUrls: string[]
+  __typename: "User";
+  id: number;
+  presignedUploadUrls: string[];
 }
 
 export interface FilesUploaderQuery {
-  me: FilesUploaderQuery_me
+  me: FilesUploaderQuery_me;
 }
 
 export interface FilesUploaderQueryVariables {
-  fileTypes: SupportedUpload[]
+  fileTypes: SupportedUpload[];
 }

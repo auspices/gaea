@@ -8,8 +8,8 @@
 // ====================================================
 
 export interface CollectionSettingsFragment {
-  __typename: 'Collection'
-  id: number
-  title: string
-  metadata: any
+  __typename: "Collection";
+  id: number;
+  title: string;
+  metadata: any;
 }

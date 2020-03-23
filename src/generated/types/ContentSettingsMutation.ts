@@ -8,21 +8,21 @@
 // ====================================================
 
 export interface ContentSettingsMutation_updateContent_content {
-  __typename: 'Content'
-  id: number
-  metadata: any
+  __typename: "Content";
+  id: number;
+  metadata: any;
 }
 
 export interface ContentSettingsMutation_updateContent {
-  __typename: 'UpdateContentPayload'
-  content: ContentSettingsMutation_updateContent_content
+  __typename: "UpdateContentPayload";
+  content: ContentSettingsMutation_updateContent_content;
 }
 
 export interface ContentSettingsMutation {
-  updateContent: ContentSettingsMutation_updateContent | null
+  updateContent: ContentSettingsMutation_updateContent | null;
 }
 
 export interface ContentSettingsMutationVariables {
-  id: string
-  metadata?: any | null
+  id: string;
+  metadata?: any | null;
 }

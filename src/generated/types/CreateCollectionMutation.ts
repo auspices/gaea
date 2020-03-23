@@ -8,28 +8,28 @@
 // ====================================================
 
 export interface CreateCollectionMutation_createCollection_collection_counts {
-  __typename: 'CollectionCounts'
-  contents: number
+  __typename: "CollectionCounts";
+  contents: number;
 }
 
 export interface CreateCollectionMutation_createCollection_collection {
-  __typename: 'Collection'
-  title: string
-  slug: string
-  id: number
-  updatedAt: string
-  counts: CreateCollectionMutation_createCollection_collection_counts
+  __typename: "Collection";
+  title: string;
+  slug: string;
+  id: number;
+  updatedAt: string;
+  counts: CreateCollectionMutation_createCollection_collection_counts;
 }
 
 export interface CreateCollectionMutation_createCollection {
-  __typename: 'CreateCollectionPayload'
-  collection: CreateCollectionMutation_createCollection_collection
+  __typename: "CreateCollectionPayload";
+  collection: CreateCollectionMutation_createCollection_collection;
 }
 
 export interface CreateCollectionMutation {
-  createCollection: CreateCollectionMutation_createCollection | null
+  createCollection: CreateCollectionMutation_createCollection | null;
 }
 
 export interface CreateCollectionMutationVariables {
-  title: string
+  title: string;
 }

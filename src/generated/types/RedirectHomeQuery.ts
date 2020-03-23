@@ -8,11 +8,11 @@
 // ====================================================
 
 export interface RedirectHomeQuery_me {
-  __typename: 'User'
-  id: number
-  slug: string
+  __typename: "User";
+  id: number;
+  slug: string;
 }
 
 export interface RedirectHomeQuery {
-  me: RedirectHomeQuery_me
+  me: RedirectHomeQuery_me;
 }

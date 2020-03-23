@@ -8,7 +8,7 @@
 // ====================================================
 
 export interface ContentSettingsFragment {
-  __typename: 'Content'
-  id: number
-  metadata: any
+  __typename: "Content";
+  id: number;
+  metadata: any;
 }
