@@ -37,15 +37,5 @@ export const FileUpload: React.FC<FileUploadProps> = ({
     throw error
   }
 
-  return (
-    <Upload
-      foregroundColor="primary"
-      progressBarColor="background"
-      backgroundColor="transparent"
-      borderColor="background"
-      label={file.name}
-      progress={uploadProgress}
-      {...rest}
-    />
-  )
+  return <Upload label={file.name} progress={uploadProgress} {...rest} />
 }

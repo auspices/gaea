@@ -27,7 +27,7 @@ export const Overlay = styled(Box)<{ mode: Mode }>`
   bottom: 0;
   left: 0;
   z-index: 1;
-  background-color: rgba(127, 127, 127, 0.9);
+  background-color: rgba(255, 255, 255, 0.9);
   user-select: none;
 `
 
