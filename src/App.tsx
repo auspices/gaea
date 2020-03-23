@@ -17,6 +17,7 @@ const client = initClient()
 
 const App = () => {
   const { theme } = useThemer()
+
   return (
     <ThemeProvider theme={theme}>
       <AlertsProvider>
@@ -47,7 +48,7 @@ export default () => {
   return (
     <BrowserRouter>
       <ApolloProvider client={client}>
-        <ThemerProvider initialScheme="light">
+        <ThemerProvider>
           <App />
         </ThemerProvider>
       </ApolloProvider>

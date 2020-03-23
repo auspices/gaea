@@ -6,6 +6,7 @@ import { LoginPage } from './pages/LoginPage'
 import { CollectionsPage } from './pages/CollectionsPage'
 import { CollectionPage } from './pages/CollectionPage'
 import { ContentPage } from './pages/ContentPage'
+import { AccountPage } from './pages/AccountPage'
 import { ErrorBoundary } from './components/ErrorBoundary'
 
 export const Routes = () => (
@@ -27,6 +28,16 @@ export const Routes = () => (
           </ErrorBoundary>
         )
       }}
+    />
+
+    <Route
+      exact
+      path="/account"
+      component={() => (
+        <ErrorBoundary>
+          <AccountPage />
+        </ErrorBoundary>
+      )}
     />
 
     <Route
