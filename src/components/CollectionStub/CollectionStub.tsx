@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { Box, Pill, PillProps } from '@auspices/eos'
 import { Link } from 'react-router-dom'
 import gql from 'graphql-tag'
+import { themeGet } from '@styled-system/theme-get'
 
 export const COLLECTION_STUB_FRAGMENT = gql`
   fragment CollectionStubFragment on Collection {
@@ -29,11 +30,11 @@ const Container = styled(Pill)<PillProps>`
     }
 
     > ${Count} {
-      color: gray;
+      color: ${themeGet('colors.secondary')};
     }
 
     > ${Delta} {
-      color: gray;
+      color: ${themeGet('colors.secondary')};
       text-decoration: underline;
     }
   }
@@ -53,11 +54,11 @@ export const CollectionStub: React.FC<CollectionStubProps> = ({
     <Container as={Link} to={hrefs.collection(collection)} {...rest}>
       <Title>{collection.title}</Title>
 
-      <Count mx={4} color="lightgray">
+      <Count mx={4} color="tertiary">
         {collection.counts.contents || '∅'}
       </Count>
 
-      <Delta flex="1" textAlign="right" color="lightgray" fontSize={0}>
+      <Delta flex="1" textAlign="right" color="tertiary" fontSize={0}>
         {collection.updatedAt}
       </Delta>
     </Container>

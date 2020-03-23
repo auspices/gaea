@@ -46,7 +46,7 @@ export const CollectionContentContextMenu: React.FC<CollectionContentContextMenu
         open={mode === Mode.Open}
         onClose={handleClose}
         anchor={
-          <Toggle onClick={handleClick} backgroundColor="white">
+          <Toggle onClick={handleClick} backgroundColor="background">
             <Icons name="Ellipsis" />
           </Toggle>
         }

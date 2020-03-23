@@ -6,6 +6,7 @@ import { useDebounce } from 'use-debounce'
 import { Box, Input, useAlerts } from '@auspices/eos'
 import { errorMessage } from '../../../../util/errors'
 import { ContentEntityTextFragment } from '../../../../generated/types/ContentEntityTextFragment'
+import { themeGet } from '@styled-system/theme-get'
 
 export const UPDATE_CONTENT_ENTITY_TEXT_MUTATION = gql`
   mutation UpdateContentEntityTextMutation(
@@ -32,7 +33,7 @@ const Status = styled(Box).attrs({ m: 6 })`
   position: absolute;
   top: 0;
   right: 0;
-  background-color: black;
+  background-color: ${themeGet('colors.primary')};
   border-radius: 50%;
   width: 0.5em;
   height: 0.5em;

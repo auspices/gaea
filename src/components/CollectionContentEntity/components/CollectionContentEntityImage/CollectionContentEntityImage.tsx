@@ -35,7 +35,7 @@ export const CollectionContentEntityImage: React.FC<CollectionContentEntityImage
       aspectHeight={image.resized.height}
       maxWidth={image.resized.width}
       maxHeight={image.resized.height}
-      backgroundColor="lightgray"
+      backgroundColor="tertiary"
       {...rest}
     />
   )

@@ -33,13 +33,13 @@ export const ErrorFallback: React.FC<ErrorFallbackProps> = ({
   return (
     <Stack>
       {error && (
-        <Pill as="h1" color="red" borderColor="red">
+        <Pill as="h1" color="danger" borderColor="danger">
           {errorMessage(error)}
 
           {requireLogin && (
             <>
               &nbsp;
-              <Box as="a" color="red" href="/login">
+              <Box as="a" color="danger" href="/login">
                 login
               </Box>
             </>
@@ -47,12 +47,12 @@ export const ErrorFallback: React.FC<ErrorFallbackProps> = ({
         </Pill>
       )}
 
-      <Pill as="h2" color="red" borderColor="red">
+      <Pill as="h2" color="danger" borderColor="danger">
         <span>
           could a version perhaps be false somewhat in the way a jigsaw puzzle
           can be wrongly put together, or a motor fail to run, a poster to
           attract attention, or a camouflage to conceal?{' '}
-          <Box as="a" color="red" href="/">
+          <Box as="a" color="danger" href="/">
             go home
           </Box>
         </span>
@@ -64,8 +64,8 @@ export const ErrorFallback: React.FC<ErrorFallbackProps> = ({
           fontFamily="mono"
           fontSize={0}
           color="white"
-          backgroundColor="red"
-          borderColor="red"
+          backgroundColor="danger"
+          borderColor="danger"
         >
           {stackTrace}
         </Pill>
