@@ -32,25 +32,35 @@ enum Mode {
 
 export type CreateCollectionProps = {
   hrefs: any // TODO
+  onChange?(event: React.ChangeEvent<HTMLInputElement>): void
 }
 
 export const CreateCollection: React.FC<CreateCollectionProps> = ({
   hrefs,
+  onChange,
   ...rest
 }) => {
   const [createCollection] = useMutation<
     CreateCollectionMutation,
     CreateCollectionMutationVariables
   >(CREATE_COLLECTION_MUTATION)
+
   const history = useHistory()
+
   const { sendNotification, sendError } = useAlerts()
+
   const [mode, setMode] = useState(Mode.Resting)
   const [value, setValue] = useState('')
 
   const handleChange = useCallback(
-    ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) =>
-      setValue(value),
-    []
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const {
+        target: { value },
+      } = event
+      setValue(value)
+      onChange && onChange(event)
+    },
+    [onChange]
   )
 
   const handleSubmit = useCallback(
