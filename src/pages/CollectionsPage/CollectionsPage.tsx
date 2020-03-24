@@ -8,9 +8,9 @@ import { Loading } from '../../components/Loading'
 import { Pagination } from '../../components/Pagination'
 import { CreateCollection } from '../../components/CreateCollection'
 import {
-  COLLECTION_STUB_FRAGMENT,
-  CollectionStub,
-} from '../../components/CollectionStub'
+  COLLECTION_STUB_LIST_FRAGMENT,
+  CollectionStubList,
+} from '../../components/CollectionStubList'
 import {
   CollectionsPageQuery,
   CollectionsPageQueryVariables,
@@ -26,11 +26,11 @@ export const COLLECTIONS_PAGE_QUERY = gql`
         collections
       }
       collections(page: $page, per: $per) {
-        ...CollectionStubFragment
+        ...CollectionStubListFragment
       }
     }
   }
-  ${COLLECTION_STUB_FRAGMENT}
+  ${COLLECTION_STUB_LIST_FRAGMENT}
 `
 
 export type CollectionsPageProps = {}
@@ -91,11 +91,7 @@ export const CollectionsPage: React.FC<CollectionsPageProps> = () => {
         total={me.counts.collections}
       />
 
-      <Stack>
-        {collections.map((collection) => (
-          <CollectionStub key={collection.id} collection={collection} />
-        ))}
-      </Stack>
+      <CollectionStubList collections={collections} />
 
       <Pagination
         href={hrefs.collections()}

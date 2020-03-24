@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Box, Pill, PillProps } from '@auspices/eos'
 import { Link } from 'react-router-dom'
 import gql from 'graphql-tag'
@@ -26,36 +26,49 @@ const Delta = styled(Box)`
   transition: opacity 125ms;
 `
 
-const Container = styled(Pill)<PillProps>`
+const selectedMixin = css`
+  > ${Title} {
+    text-decoration: underline;
+  }
+
+  > ${Count} {
+    color: ${themeGet('colors.secondary')};
+  }
+
+  > ${Delta} {
+    opacity: 1;
+  }
+`
+
+const Container = styled(Pill)<PillProps & { selected?: boolean }>`
   text-decoration: none;
 
+  ${({ selected }) => selected && selectedMixin}
+
   &:hover {
-    > ${Title} {
-      text-decoration: underline;
-    }
-
-    > ${Count} {
-      color: ${themeGet('colors.secondary')};
-    }
-
-    > ${Delta} {
-      opacity: 1;
-    }
+    ${selectedMixin}
   }
 `
 
 export type CollectionStubProps = {
   collection: CollectionStubFragment
+  selected?: boolean
 }
 
 export const CollectionStub: React.FC<CollectionStubProps> = ({
   collection,
+  selected,
   ...rest
 }) => {
   const hrefs = useHrefs()
 
   return (
-    <Container as={Link} to={hrefs.collection(collection.slug)} {...rest}>
+    <Container
+      as={Link}
+      to={hrefs.collection(collection.slug)}
+      selected={selected}
+      {...rest}
+    >
       <Title>{collection.title}</Title>
 
       <Count mx={4} color="tertiary">
