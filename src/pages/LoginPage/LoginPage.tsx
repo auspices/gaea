@@ -3,7 +3,7 @@ import { useHistory } from 'react-router'
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
 import { Box, Button, Input, Stack, useAlerts } from '@auspices/eos'
-import * as hrefs from '../../util/hrefs'
+import { useHrefs } from '../../hooks'
 import { errorMessage } from '../../util/errors'
 import {
   LoginPageMutation,
@@ -28,6 +28,8 @@ enum Mode {
 
 export const LoginPage: React.FC = () => {
   const history = useHistory()
+
+  const hrefs = useHrefs()
 
   const [mode, setMode] = useState(Mode.Resting)
 
@@ -61,13 +63,13 @@ export const LoginPage: React.FC = () => {
         } = data!.login!
         localStorage.setItem('jwt', jwt)
         sendNotification({ body: 'successfully logged in' })
-        history.push(hrefs.collections({ slug }))
+        history.push(hrefs.collections(slug))
       } catch (err) {
         sendError({ body: errorMessage(err) })
       }
       setMode(Mode.Resting)
     },
-    [history, login, sendError, sendNotification, state]
+    [history, hrefs, login, sendError, sendNotification, state]
   )
 
   return (

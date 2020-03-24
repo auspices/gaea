@@ -12,6 +12,7 @@ import {
   COLLECTION_CONTENT_ENTITY_FRAGMENT,
   CollectionContentEntity,
 } from '../CollectionContentEntity'
+import { useHrefs } from '../../hooks'
 import { CollectionContentFragment } from '../../generated/types/CollectionContentFragment'
 
 export const COLLECTION_CONTENT_FRAGMENT = gql`
@@ -42,15 +43,14 @@ enum Mode {
 type CollectionContentProps = {
   content: CollectionContentFragment
   collectionId: number
-  hrefs: any // TODO
 }
 
 export const CollectionContent: React.FC<CollectionContentProps> = ({
   content,
   collectionId,
-  hrefs,
   ...rest
 }) => {
+  const hrefs = useHrefs()
   const [mode, setMode] = useState(Mode.Resting)
 
   const handleMouseEnter = useCallback(() => setMode(Mode.Active), [])
@@ -60,7 +60,7 @@ export const CollectionContent: React.FC<CollectionContentProps> = ({
     <Container
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      to={hrefs.content(content)}
+      to={hrefs.content(content.id)}
       {...rest}
     >
       {mode === Mode.Active && (

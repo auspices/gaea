@@ -8,7 +8,7 @@ import {
   SampleCollectionContentQueryVariables,
 } from '../../generated/types/SampleCollectionContentQuery'
 import { errorMessage } from '../../util/errors'
-import { generate as generateHrefs } from '../../util/hrefs'
+import { useHrefs } from '../../hooks'
 
 export const SAMPLE_COLLECTION_CONTENT_QUERY = gql`
   query SampleCollectionContentQuery($id: ID!) {
@@ -39,7 +39,11 @@ export const SampleCollectionContent: React.FC<SampleCollectionContentProps> = (
   children,
 }) => {
   const { sendError } = useAlerts()
+
+  const hrefs = useHrefs()
+
   const history = useHistory()
+
   const [mode, setMode] = useState(Mode.Resting)
   const handleClick = useCallback(() => setMode(Mode.Redirecting), [])
 
@@ -61,14 +65,15 @@ export const SampleCollectionContent: React.FC<SampleCollectionContentProps> = (
     if (loading || !data) return
 
     const {
-      me,
       me: {
         collection: { contents },
       },
     } = data
-    const hrefs = generateHrefs(me)
-    history.push(hrefs.content(contents[0]))
-  }, [data, error, history, loading, sendError])
+
+    const [{ id }] = contents
+
+    history.push(hrefs.content(id))
+  }, [data, error, history, hrefs, loading, sendError])
 
   return (
     <Button onClick={handleClick} disabled={mode === Mode.Redirecting}>
