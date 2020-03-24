@@ -2,7 +2,7 @@ import React from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { Redirect } from 'react-router-dom'
-import { collections as collectionsHref } from '../../util/hrefs'
+import { useHrefs } from '../../hooks'
 import { Loading } from '../Loading'
 
 const REDIRECT_HOME_QUERY = gql`
@@ -16,7 +16,9 @@ const REDIRECT_HOME_QUERY = gql`
 
 export const RedirectHome = () => {
   const { data, loading, error } = useQuery(REDIRECT_HOME_QUERY)
-  // if (error || loading) return null
+
+  const hrefs = useHrefs()
+
   if (error) {
     throw error
   }
@@ -25,5 +27,5 @@ export const RedirectHome = () => {
     return <Loading />
   }
 
-  return <Redirect to={collectionsHref(data.me)} />
+  return <Redirect to={hrefs.collections(data.me.slug)} />
 }

@@ -3,8 +3,7 @@ import gql from 'graphql-tag'
 import { Link } from 'react-router-dom'
 import { Box, Button, Pane, PaneOption, Popper, Stack } from '@auspices/eos'
 import { useQuery } from '@apollo/react-hooks'
-import { useActive, usePagination } from '../../hooks'
-import { generate as generateHrefs } from '../../util/hrefs'
+import { useActive, useHrefs, usePagination } from '../../hooks'
 import { Loading } from '../../components/Loading'
 import { Pagination } from '../../components/Pagination'
 import { CreateCollection } from '../../components/CreateCollection'
@@ -39,6 +38,8 @@ export type CollectionsPageProps = {}
 export const CollectionsPage: React.FC<CollectionsPageProps> = () => {
   const { page, per } = usePagination()
 
+  const hrefs = useHrefs()
+
   const { mode, setResting, setActive, Mode } = useActive()
 
   const { data, loading, error } = useQuery<
@@ -62,8 +63,6 @@ export const CollectionsPage: React.FC<CollectionsPageProps> = () => {
     me: { username, collections },
   } = data
 
-  const hrefs = generateHrefs(me)
-
   return (
     <Stack>
       <Stack direction="horizontal">
@@ -75,18 +74,18 @@ export const CollectionsPage: React.FC<CollectionsPageProps> = () => {
             placement="bottom"
           >
             <Pane>
-              <PaneOption as={Link} to="/account">
+              <PaneOption as={Link} to={hrefs.account()}>
                 account settings
               </PaneOption>
             </Pane>
           </Popper>
         </Box>
 
-        <CreateCollection hrefs={hrefs} />
+        <CreateCollection />
       </Stack>
 
       <Pagination
-        href={hrefs.collections}
+        href={hrefs.collections()}
         page={page}
         per={per}
         total={me.counts.collections}
@@ -94,16 +93,12 @@ export const CollectionsPage: React.FC<CollectionsPageProps> = () => {
 
       <Stack>
         {collections.map((collection) => (
-          <CollectionStub
-            key={collection.id}
-            collection={collection}
-            hrefs={hrefs}
-          />
+          <CollectionStub key={collection.id} collection={collection} />
         ))}
       </Stack>
 
       <Pagination
-        href={hrefs.collections}
+        href={hrefs.collections()}
         page={page}
         per={per}
         total={me.counts.collections}

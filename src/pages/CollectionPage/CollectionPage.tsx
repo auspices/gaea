@@ -1,10 +1,9 @@
 import React from 'react'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
-import { RefetchProvider, usePagination } from '../../hooks'
 import { Link } from 'react-router-dom'
 import { Box, Button, Stack } from '@auspices/eos'
-import { generate as generateHrefs } from '../../util/hrefs'
+import { RefetchProvider, useHrefs, usePagination } from '../../hooks'
 import { AddToCollection } from '../../components/AddToCollection'
 import { Loading } from '../../components/Loading'
 import { Pagination } from '../../components/Pagination'
@@ -17,6 +16,10 @@ import {
   CollectionSettings,
 } from '../../components/CollectionSettings'
 import { SampleCollectionContent } from '../../components/SampleCollectionContent'
+import {
+  CollectionPageQuery,
+  CollectionPageQueryVariables,
+} from '../../generated/types/CollectionPageQuery'
 
 export const COLLECTION_PAGE_QUERY = gql`
   query CollectionPageQuery($id: ID!, $page: Int, $per: Int) {
@@ -46,7 +49,13 @@ type CollectionPageProps = {
 
 export const CollectionPage: React.FC<CollectionPageProps> = ({ id }) => {
   const { page, per } = usePagination()
-  const { data, loading, error, refetch } = useQuery(COLLECTION_PAGE_QUERY, {
+
+  const hrefs = useHrefs()
+
+  const { data, loading, error, refetch } = useQuery<
+    CollectionPageQuery,
+    CollectionPageQueryVariables
+  >(COLLECTION_PAGE_QUERY, {
     fetchPolicy: 'network-only',
     variables: {
       id,
@@ -64,27 +73,24 @@ export const CollectionPage: React.FC<CollectionPageProps> = ({ id }) => {
   }
 
   const {
-    me,
     me: { username, collection },
   } = data
-
-  const hrefs = generateHrefs(me)
 
   return (
     <RefetchProvider refetch={refetch}>
       <Stack flex="1">
         <Stack direction={['vertical', 'vertical', 'horizontal']}>
-          <Button as={Link} to={hrefs.collections}>
+          <Button as={Link} to={hrefs.collections()}>
             {username}
           </Button>
 
-          <Button as={Link} to={`${hrefs.collection(collection)}`}>
+          <Button as={Link} to={hrefs.collection(collection.slug)}>
             {collection.title}
           </Button>
 
           <AddToCollection id={collection.id} />
 
-          <SampleCollectionContent id={collection.id}>
+          <SampleCollectionContent id={collection.slug}>
             random
           </SampleCollectionContent>
         </Stack>
@@ -92,18 +98,18 @@ export const CollectionPage: React.FC<CollectionPageProps> = ({ id }) => {
         <CollectionSettings collection={collection} />
 
         <Pagination
-          href={`${hrefs.collection(collection)}`}
+          href={hrefs.collection(collection.slug)}
           page={page}
           per={per}
           total={collection.counts.contents}
         />
 
         <Box flex="1">
-          <CollectionContents collection={collection} hrefs={hrefs} />
+          <CollectionContents collection={collection} />
         </Box>
 
         <Pagination
-          href={`${hrefs.collection(collection)}`}
+          href={hrefs.collection(collection.slug)}
           page={page}
           per={per}
           total={collection.counts.contents}

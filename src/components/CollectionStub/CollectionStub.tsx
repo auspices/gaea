@@ -4,6 +4,7 @@ import { Box, Pill, PillProps } from '@auspices/eos'
 import { Link } from 'react-router-dom'
 import gql from 'graphql-tag'
 import { themeGet } from '@styled-system/theme-get'
+import { useHrefs } from '../../hooks'
 import { CollectionStubFragment } from '../../generated/types/CollectionStubFragment'
 
 export const COLLECTION_STUB_FRAGMENT = gql`
@@ -42,16 +43,16 @@ const Container = styled(Pill)<PillProps>`
 
 export type CollectionStubProps = {
   collection: CollectionStubFragment
-  hrefs: any // TODO
 }
 
 export const CollectionStub: React.FC<CollectionStubProps> = ({
   collection,
-  hrefs,
   ...rest
 }) => {
+  const hrefs = useHrefs()
+
   return (
-    <Container as={Link} to={hrefs.collection(collection)} {...rest}>
+    <Container as={Link} to={hrefs.collection(collection.slug)} {...rest}>
       <Title>{collection.title}</Title>
 
       <Count mx={4} color="tertiary">

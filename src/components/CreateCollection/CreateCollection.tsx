@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
 import { useHistory } from 'react-router-dom'
 import { Button, Input, useAlerts } from '@auspices/eos'
+import { useHrefs } from '../../hooks'
 import { errorMessage } from '../../util/errors'
 import { Form } from '../Form'
 import { COLLECTION_STUB_FRAGMENT } from '../../components/CollectionStub'
@@ -31,26 +32,35 @@ enum Mode {
 }
 
 export type CreateCollectionProps = {
-  hrefs: any // TODO
+  onChange?(event: React.ChangeEvent<HTMLInputElement>): void
 }
 
 export const CreateCollection: React.FC<CreateCollectionProps> = ({
-  hrefs,
+  onChange,
   ...rest
 }) => {
   const [createCollection] = useMutation<
     CreateCollectionMutation,
     CreateCollectionMutationVariables
   >(CREATE_COLLECTION_MUTATION)
+
   const history = useHistory()
+  const hrefs = useHrefs()
+
   const { sendNotification, sendError } = useAlerts()
+
   const [mode, setMode] = useState(Mode.Resting)
   const [value, setValue] = useState('')
 
   const handleChange = useCallback(
-    ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) =>
-      setValue(value),
-    []
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const {
+        target: { value },
+      } = event
+      setValue(value)
+      onChange && onChange(event)
+    },
+    [onChange]
   )
 
   const handleSubmit = useCallback(
@@ -62,7 +72,7 @@ export const CreateCollection: React.FC<CreateCollectionProps> = ({
         const { data } = await createCollection({ variables: { title: value } })
         const { collection } = data!.createCollection!
         sendNotification({ body: `successfully created ${collection.title}` })
-        history.push(hrefs.collection(collection))
+        history.push(hrefs.collection(collection.slug))
       } catch (err) {
         setMode(Mode.Error)
         sendError({ body: errorMessage(err) })

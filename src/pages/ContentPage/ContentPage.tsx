@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
 import { Link } from 'react-router-dom'
 import { Box, Button, Stack } from '@auspices/eos'
-import { generate as generateHrefs } from '../../util/hrefs'
+import { useHrefs } from '../../hooks/useHrefs'
 import { Loading } from '../../components/Loading'
 import {
   CONTENT_ENTITY_FRAGMENT,
@@ -18,6 +18,10 @@ import {
   ContentSettings,
 } from '../../components/ContentSettings'
 import { SampleCollectionContent } from '../../components/SampleCollectionContent'
+import {
+  ContentPageQuery,
+  ContentPageQueryVariables,
+} from '../../generated/types/ContentPageQuery'
 
 export const CONTENT_PAGE_QUERY = gql`
   query ContentPageQuery($id: ID!) {
@@ -50,7 +54,12 @@ type ContentPageProps = {
 }
 
 export const ContentPage: React.FC<ContentPageProps> = ({ id }) => {
-  const { data, loading, error } = useQuery(CONTENT_PAGE_QUERY, {
+  const hrefs = useHrefs()
+
+  const { data, loading, error } = useQuery<
+    ContentPageQuery,
+    ContentPageQueryVariables
+  >(CONTENT_PAGE_QUERY, {
     fetchPolicy: 'network-only',
     variables: { id },
   })
@@ -64,28 +73,25 @@ export const ContentPage: React.FC<ContentPageProps> = ({ id }) => {
   }
 
   const {
-    me,
     me: { username },
     content,
     content: { collection, entity },
   } = data
 
-  const hrefs = generateHrefs(me)
-
   return (
     <Stack flex="1">
       <Stack direction={['vertical', 'vertical', 'horizontal']}>
-        <Button as={Link} to={hrefs.collections}>
+        <Button as={Link} to={hrefs.collections()}>
           {username}
         </Button>
 
-        <Button as={Link} to={`${hrefs.collection(collection)}`}>
+        <Button as={Link} to={hrefs.collection(collection.slug)}>
           {collection.title}
         </Button>
 
         <ContentEntityHeader entity={entity} />
 
-        <SampleCollectionContent id={collection.id}>
+        <SampleCollectionContent id={collection.slug}>
           random
         </SampleCollectionContent>
       </Stack>

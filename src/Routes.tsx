@@ -1,5 +1,6 @@
 import React from 'react'
 import { Redirect, Route, Switch } from 'react-router-dom'
+import { useHrefs } from './hooks'
 import { parseRoute } from './util/parseRoute'
 import { RedirectHome } from './components/RedirectHome'
 import { LoginPage } from './pages/LoginPage'
@@ -9,75 +10,79 @@ import { ContentPage } from './pages/ContentPage'
 import { AccountPage } from './pages/AccountPage'
 import { ErrorBoundary } from './components/ErrorBoundary'
 
-export const Routes = () => (
-  <Switch>
-    <Route
-      exact
-      path="/"
-      component={() => {
-        const jwt = localStorage.getItem('jwt')
-        const isLoggedIn = !!jwt
+export const Routes = () => {
+  const hrefs = useHrefs()
 
-        if (!isLoggedIn) {
-          return <Redirect to="/login" />
-        }
+  return (
+    <Switch>
+      <Route
+        exact
+        path="/"
+        component={() => {
+          const jwt = localStorage.getItem('jwt')
+          const isLoggedIn = !!jwt
 
-        return (
+          if (!isLoggedIn) {
+            return <Redirect to={hrefs.login()} />
+          }
+
+          return (
+            <ErrorBoundary>
+              <RedirectHome />
+            </ErrorBoundary>
+          )
+        }}
+      />
+
+      <Route
+        exact
+        path="/account"
+        component={() => (
           <ErrorBoundary>
-            <RedirectHome />
+            <AccountPage />
           </ErrorBoundary>
-        )
-      }}
-    />
+        )}
+      />
 
-    <Route
-      exact
-      path="/account"
-      component={() => (
-        <ErrorBoundary>
-          <AccountPage />
-        </ErrorBoundary>
-      )}
-    />
+      <Route
+        exact
+        path="/login"
+        component={() => (
+          <ErrorBoundary>
+            <LoginPage />
+          </ErrorBoundary>
+        )}
+      />
 
-    <Route
-      exact
-      path="/login"
-      component={() => (
-        <ErrorBoundary>
-          <LoginPage />
-        </ErrorBoundary>
-      )}
-    />
+      <Route
+        exact
+        path="/:username/xs"
+        component={parseRoute(() => (
+          <ErrorBoundary>
+            <CollectionsPage />
+          </ErrorBoundary>
+        ))}
+      />
 
-    <Route
-      exact
-      path="/:username/xs"
-      component={parseRoute(() => (
-        <ErrorBoundary>
-          <CollectionsPage />
-        </ErrorBoundary>
-      ))}
-    />
+      <Route
+        exact
+        path="/:username/xs/:id"
+        component={parseRoute(({ params: { id } }) => (
+          <ErrorBoundary>
+            <CollectionPage id={id} />
+          </ErrorBoundary>
+        ))}
+      />
 
-    <Route
-      exact
-      path="/:username/xs/:id"
-      component={parseRoute(({ params: { id } }) => (
-        <ErrorBoundary>
-          <CollectionPage id={id} />
-        </ErrorBoundary>
-      ))}
-    />
-
-    <Route
-      exact
-      path="/:username/x/:id"
-      component={parseRoute(({ params }) => (
-        <ErrorBoundary>
-          <ContentPage id={params.id} />
-        </ErrorBoundary>
-      ))}
-    />
-  </Switch>
-)
+      <Route
+        exact
+        path="/:username/x/:id"
+        component={parseRoute(({ params }) => (
+          <ErrorBoundary>
+            <ContentPage id={params.id} />
+          </ErrorBoundary>
+        ))}
+      />
+    </Switch>
+  )
+}

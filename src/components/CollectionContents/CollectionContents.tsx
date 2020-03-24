@@ -20,12 +20,10 @@ export const COLLECTION_CONTENTS_FRAGMENT = gql`
 
 export type CollectionContentsProps = {
   collection: CollectionContentsFragment
-  hrefs: any
 }
 
 export const CollectionContents: React.FC<CollectionContentsProps> = ({
   collection,
-  hrefs,
 }) => {
   return (
     <Grid my={6}>
@@ -34,7 +32,6 @@ export const CollectionContents: React.FC<CollectionContentsProps> = ({
           key={content.id}
           collectionId={collection.id}
           content={content}
-          hrefs={hrefs}
         />
       ))}
     </Grid>
