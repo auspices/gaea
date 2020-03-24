@@ -21,7 +21,10 @@ export const COLLECTION_STUB_FRAGMENT = gql`
 
 const Title = styled(Box)``
 const Count = styled(Box)``
-const Delta = styled(Box)``
+const Delta = styled(Box)`
+  opacity: 0;
+  transition: opacity 125ms;
+`
 
 const Container = styled(Pill)<PillProps>`
   text-decoration: none;
@@ -36,7 +39,7 @@ const Container = styled(Pill)<PillProps>`
     }
 
     > ${Delta} {
-      color: ${themeGet('colors.secondary')};
+      opacity: 1;
     }
   }
 `
@@ -59,7 +62,7 @@ export const CollectionStub: React.FC<CollectionStubProps> = ({
         {collection.counts.contents || '∅'}
       </Count>
 
-      <Delta flex="1" textAlign="right" color="tertiary" fontSize={0}>
+      <Delta color="tertiary" fontSize={0}>
         {collection.updatedAt}
       </Delta>
     </Container>
