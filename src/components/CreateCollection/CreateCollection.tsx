@@ -90,7 +90,9 @@ export const CreateCollection: React.FC<CreateCollectionProps> = ({
         disabled={mode === Mode.Creating}
         required
         autoFocus
+        autoComplete="off"
         borderWidth={0}
+        title=""
         flex={1}
       />
 

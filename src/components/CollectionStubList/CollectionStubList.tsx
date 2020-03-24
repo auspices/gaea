@@ -38,6 +38,7 @@ export const CollectionStubList: React.FC<CollectionStubListProps> = ({
   const { index } = useKeyboardListNavigation({
     list: collections,
     onEnter: handleEnter,
+    waitForInteractive: true,
   })
 
   return (
