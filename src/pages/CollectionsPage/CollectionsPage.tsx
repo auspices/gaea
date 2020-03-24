@@ -1,9 +1,9 @@
 import React from 'react'
 import gql from 'graphql-tag'
-import { Button, Stack } from '@auspices/eos'
 import { Link } from 'react-router-dom'
+import { Box, Button, Pane, PaneOption, Popper, Stack } from '@auspices/eos'
 import { useQuery } from '@apollo/react-hooks'
-import { usePagination } from '../../hooks'
+import { useActive, usePagination } from '../../hooks'
 import { generate as generateHrefs } from '../../util/hrefs'
 import { Loading } from '../../components/Loading'
 import { Pagination } from '../../components/Pagination'
@@ -38,6 +38,9 @@ export type CollectionsPageProps = {}
 
 export const CollectionsPage: React.FC<CollectionsPageProps> = () => {
   const { page, per } = usePagination()
+
+  const { mode, setResting, setActive, Mode } = useActive()
+
   const { data, loading, error } = useQuery<
     CollectionsPageQuery,
     CollectionsPageQueryVariables
@@ -64,9 +67,20 @@ export const CollectionsPage: React.FC<CollectionsPageProps> = () => {
   return (
     <Stack>
       <Stack direction="horizontal">
-        <Button as={Link} to={hrefs.home}>
-          {username}
-        </Button>
+        <Box zIndex={1}>
+          <Popper
+            open={mode === Mode.Active}
+            onClose={setResting}
+            anchor={<Button onClick={setActive}>{username}</Button>}
+            placement="bottom"
+          >
+            <Pane>
+              <PaneOption as={Link} to="/account">
+                account settings
+              </PaneOption>
+            </Pane>
+          </Popper>
+        </Box>
 
         <CreateCollection hrefs={hrefs} />
       </Stack>
