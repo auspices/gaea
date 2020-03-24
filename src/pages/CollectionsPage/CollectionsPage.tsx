@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback, useState } from 'react'
 import gql from 'graphql-tag'
 import { Link } from 'react-router-dom'
 import { Box, Button, Pane, PaneOption, Popper, Stack } from '@auspices/eos'
@@ -11,10 +11,12 @@ import {
   COLLECTION_STUB_LIST_FRAGMENT,
   CollectionStubList,
 } from '../../components/CollectionStubList'
+import { FilteredCollectionStubList } from '../../components/FilteredCollectionStubList'
 import {
   CollectionsPageQuery,
   CollectionsPageQueryVariables,
 } from '../../generated/types/CollectionsPageQuery'
+import { useDebounce } from 'use-debounce/lib'
 
 export const COLLECTIONS_PAGE_QUERY = gql`
   query CollectionsPageQuery($page: Int, $per: Int) {
@@ -50,6 +52,19 @@ export const CollectionsPage: React.FC<CollectionsPageProps> = () => {
     variables: { page, per },
   })
 
+  const [query, setQuery] = useState('')
+  const [debouncedQuery] = useDebounce(query, 500)
+
+  const handleChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const {
+        currentTarget: { value },
+      } = event
+      setQuery(value)
+    },
+    []
+  )
+
   if (error) {
     throw error
   }
@@ -81,7 +96,7 @@ export const CollectionsPage: React.FC<CollectionsPageProps> = () => {
           </Popper>
         </Box>
 
-        <CreateCollection />
+        <CreateCollection onChange={handleChange} />
       </Stack>
 
       <Pagination
@@ -91,7 +106,11 @@ export const CollectionsPage: React.FC<CollectionsPageProps> = () => {
         total={me.counts.collections}
       />
 
-      <CollectionStubList collections={collections} />
+      {debouncedQuery ? (
+        <FilteredCollectionStubList query={debouncedQuery} />
+      ) : (
+        <CollectionStubList collections={collections} />
+      )}
 
       <Pagination
         href={hrefs.collections()}
