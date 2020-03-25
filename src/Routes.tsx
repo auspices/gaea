@@ -6,6 +6,7 @@ import { RedirectHome } from './components/RedirectHome'
 import { LoginPage } from './pages/LoginPage'
 import { CollectionsPage } from './pages/CollectionsPage'
 import { CollectionPage } from './pages/CollectionPage'
+import { CollectionSettingsPage } from './pages/CollectionSettingsPage'
 import { ContentPage } from './pages/ContentPage'
 import { AccountPage } from './pages/AccountPage'
 import { ErrorBoundary } from './components/ErrorBoundary'
@@ -70,6 +71,16 @@ export const Routes = () => {
         component={parseRoute(({ params: { id } }) => (
           <ErrorBoundary>
             <CollectionPage id={id} />
+          </ErrorBoundary>
+        ))}
+      />
+
+      <Route
+        exact
+        path="/:username/xs/:id/settings"
+        component={parseRoute(({ params: { id } }) => (
+          <ErrorBoundary>
+            <CollectionSettingsPage id={id} />
           </ErrorBoundary>
         ))}
       />
