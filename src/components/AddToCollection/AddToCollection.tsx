@@ -135,6 +135,8 @@ export const AddToCollection: React.FC<AddToCollectionProps> = ({
           disabled={mode === Mode.Adding}
           required
           autoFocus
+          title=""
+          autoComplete="off"
         />
 
         {value !== '' && (
