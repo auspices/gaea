@@ -1,7 +1,6 @@
 import React from 'react'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
-import { zip } from 'lodash'
 import styled from 'styled-components'
 import { Box, Stack } from '@auspices/eos'
 import { FileUpload } from '../../components/FileUpload'
@@ -76,9 +75,10 @@ export const FilesUploader: React.FC<FilesUploaderProps> = ({
 
   if (loading || !data) return null
 
-  // TODO: Typesafe zip
-  // @ts-ignore
-  const uploads: [string, File][] = zip(data.me.presignedUploadUrls, files)
+  const uploads: [
+    string,
+    File
+  ][] = data.me.presignedUploadUrls.map((url, i) => [url, files[i]])
 
   return (
     <Container>
