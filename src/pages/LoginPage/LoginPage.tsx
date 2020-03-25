@@ -82,6 +82,8 @@ export const LoginPage: React.FC = () => {
           onChange={handleChange}
           required
           autoFocus
+          autoCorrect="off"
+          autoCapitalize="none"
         />
 
         <Input

@@ -19,9 +19,20 @@ export const COLLECTION_STUB_FRAGMENT = gql`
   }
 `
 
-const Title = styled(Box)``
+const Title = styled(Box)`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 70%;
+`
+
 const Count = styled(Box)``
+
 const Delta = styled(Box)`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 20%;
   opacity: 0;
   transition: opacity 125ms;
 `

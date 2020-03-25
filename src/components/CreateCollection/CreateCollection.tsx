@@ -91,8 +91,9 @@ export const CreateCollection: React.FC<CreateCollectionProps> = ({
         required
         autoFocus
         autoComplete="off"
-        borderWidth={0}
         title=""
+        borderWidth={0}
+        width={0}
         flex={1}
       />
 
