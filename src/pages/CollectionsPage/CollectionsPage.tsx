@@ -1,9 +1,10 @@
-import React, { useCallback, useState } from 'react'
+import React, { useState } from 'react'
 import gql from 'graphql-tag'
 import { Link } from 'react-router-dom'
-import { Box, Button, Pane, PaneOption, Popper, Stack } from '@auspices/eos'
+import { Dropdown, PaneOption, Stack } from '@auspices/eos'
 import { useQuery } from '@apollo/react-hooks'
-import { useActive, useHrefs, usePagination } from '../../hooks'
+import { useDebounce } from 'use-debounce'
+import { useHrefs, usePagination } from '../../hooks'
 import { Loading } from '../../components/Loading'
 import { Pagination } from '../../components/Pagination'
 import { CreateCollection } from '../../components/CreateCollection'
@@ -16,7 +17,6 @@ import {
   CollectionsPageQuery,
   CollectionsPageQueryVariables,
 } from '../../generated/types/CollectionsPageQuery'
-import { useDebounce } from 'use-debounce/lib'
 
 export const COLLECTIONS_PAGE_QUERY = gql`
   query CollectionsPageQuery($page: Int, $per: Int) {
@@ -42,8 +42,6 @@ export const CollectionsPage: React.FC<CollectionsPageProps> = () => {
 
   const hrefs = useHrefs()
 
-  const { mode, setResting, setActive, Mode } = useActive()
-
   const { data, loading, error } = useQuery<
     CollectionsPageQuery,
     CollectionsPageQueryVariables
@@ -53,17 +51,7 @@ export const CollectionsPage: React.FC<CollectionsPageProps> = () => {
   })
 
   const [query, setQuery] = useState('')
-  const [debouncedQuery] = useDebounce(query, 500)
-
-  const handleChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      const {
-        currentTarget: { value },
-      } = event
-      setQuery(value)
-    },
-    []
-  )
+  const [debouncedQuery] = useDebounce(query, 150)
 
   if (error) {
     throw error
@@ -81,43 +69,42 @@ export const CollectionsPage: React.FC<CollectionsPageProps> = () => {
   return (
     <Stack>
       <Stack direction="horizontal">
-        <Box zIndex={1}>
-          <Popper
-            open={mode === Mode.Active}
-            onClose={setResting}
-            anchor={<Button onClick={setActive}>{username}</Button>}
-            placement="bottom"
-          >
-            <Pane>
-              <PaneOption as={Link} to={hrefs.account()}>
-                account settings
-              </PaneOption>
-            </Pane>
-          </Popper>
-        </Box>
+        <Dropdown label={username} zIndex={1}>
+          <PaneOption as={Link} to={hrefs.collections()}>
+            refresh
+          </PaneOption>
 
-        <CreateCollection onChange={handleChange} />
+          <PaneOption as={Link} to={hrefs.account()}>
+            account settings
+          </PaneOption>
+        </Dropdown>
+
+        <CreateCollection onChange={setQuery} />
       </Stack>
-
-      <Pagination
-        href={hrefs.collections()}
-        page={page}
-        per={per}
-        total={me.counts.collections}
-      />
 
       {debouncedQuery ? (
         <FilteredCollectionStubList query={debouncedQuery} />
       ) : (
-        <CollectionStubList collections={collections} />
-      )}
+        [
+          <Pagination
+            key="a"
+            href={hrefs.collections()}
+            page={page}
+            per={per}
+            total={me.counts.collections}
+          />,
 
-      <Pagination
-        href={hrefs.collections()}
-        page={page}
-        per={per}
-        total={me.counts.collections}
-      />
+          <CollectionStubList key="b" collections={collections} />,
+
+          <Pagination
+            key="c"
+            href={hrefs.collections()}
+            page={page}
+            per={per}
+            total={me.counts.collections}
+          />,
+        ]
+      )}
     </Stack>
   )
 }

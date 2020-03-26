@@ -2,7 +2,7 @@ import React from 'react'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
 import { Link } from 'react-router-dom'
-import { Box, Button, Stack } from '@auspices/eos'
+import { Box, Button, Dropdown, PaneOption, Stack } from '@auspices/eos'
 import { RefetchProvider, useHrefs, usePagination } from '../../hooks'
 import { AddToCollection } from '../../components/AddToCollection'
 import { Loading } from '../../components/Loading'
@@ -84,9 +84,18 @@ export const CollectionPage: React.FC<CollectionPageProps> = ({ id }) => {
             {username}
           </Button>
 
-          <Button as={Link} to={hrefs.collection(collection.slug)}>
-            {collection.title}
-          </Button>
+          <Dropdown zIndex={1} label={collection.title}>
+            <PaneOption as={Link} to={hrefs.collection(collection.slug)}>
+              refresh
+            </PaneOption>
+
+            <PaneOption
+              as={Link}
+              to={hrefs.collectionSettings(collection.slug)}
+            >
+              collection settings
+            </PaneOption>
+          </Dropdown>
 
           <AddToCollection id={collection.id} />
 

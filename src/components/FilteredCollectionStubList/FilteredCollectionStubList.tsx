@@ -26,10 +26,12 @@ export const FILTERED_COLLECTION_STUB_LIST_QUERY = gql`
 
 export type FilteredCollectionStubListProps = {
   query?: string
+  onCompleted?(): void
 }
 
 export const FilteredCollectionStubList: React.FC<FilteredCollectionStubListProps> = ({
   query,
+  onCompleted,
   ...rest
 }) => {
   const { data, loading, error } = useQuery<
@@ -38,6 +40,7 @@ export const FilteredCollectionStubList: React.FC<FilteredCollectionStubListProp
   >(FILTERED_COLLECTION_STUB_LIST_QUERY, {
     skip: !query,
     variables: { query: query || '' },
+    onCompleted,
   })
 
   if (error) {

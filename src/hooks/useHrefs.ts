@@ -13,6 +13,9 @@ export const useHrefs = () => {
     collection: (id: string, username?: string) =>
       `/${__username__ || username}/xs/${id}`,
 
+    collectionSettings: (id: string, username?: string) =>
+      `/${__username__ || username}/xs/${id}/settings`,
+
     content: (id: number, username?: string) =>
       `/${__username__ || username}/x/${id}`,
   }
