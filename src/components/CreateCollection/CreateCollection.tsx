@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react'
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
 import { useHistory } from 'react-router-dom'
-import { Button, Input, useAlerts } from '@auspices/eos'
+import { Button, ClearableInput, useAlerts } from '@auspices/eos'
 import { useHrefs } from '../../hooks'
 import { errorMessage } from '../../util/errors'
 import { Form } from '../Form'
@@ -32,7 +32,7 @@ enum Mode {
 }
 
 export type CreateCollectionProps = {
-  onChange?(event: React.ChangeEvent<HTMLInputElement>): void
+  onChange?(value: string): void
 }
 
 export const CreateCollection: React.FC<CreateCollectionProps> = ({
@@ -53,12 +53,9 @@ export const CreateCollection: React.FC<CreateCollectionProps> = ({
   const [value, setValue] = useState('')
 
   const handleChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      const {
-        target: { value },
-      } = event
+    (value: string) => {
       setValue(value)
-      onChange && onChange(event)
+      onChange && onChange(value)
     },
     [onChange]
   )
@@ -83,9 +80,9 @@ export const CreateCollection: React.FC<CreateCollectionProps> = ({
 
   return (
     <Form onSubmit={handleSubmit} {...rest}>
-      <Input
+      <ClearableInput
         name="title"
-        placeholder="new collection"
+        placeholder="find or create collection"
         onChange={handleChange}
         disabled={mode === Mode.Creating}
         required

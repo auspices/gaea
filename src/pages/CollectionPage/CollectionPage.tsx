@@ -2,13 +2,8 @@ import React from 'react'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
 import { Link } from 'react-router-dom'
-import { Box, Button, Pane, PaneOption, Popper, Stack } from '@auspices/eos'
-import {
-  RefetchProvider,
-  useActive,
-  useHrefs,
-  usePagination,
-} from '../../hooks'
+import { Box, Button, Dropdown, PaneOption, Stack } from '@auspices/eos'
+import { RefetchProvider, useHrefs, usePagination } from '../../hooks'
 import { AddToCollection } from '../../components/AddToCollection'
 import { Loading } from '../../components/Loading'
 import { Pagination } from '../../components/Pagination'
@@ -57,8 +52,6 @@ export const CollectionPage: React.FC<CollectionPageProps> = ({ id }) => {
 
   const hrefs = useHrefs()
 
-  const { mode, setResting, setActive, Mode } = useActive()
-
   const { data, loading, error, refetch } = useQuery<
     CollectionPageQuery,
     CollectionPageQueryVariables
@@ -91,23 +84,18 @@ export const CollectionPage: React.FC<CollectionPageProps> = ({ id }) => {
             {username}
           </Button>
 
-          <Box zIndex={1}>
-            <Popper
-              open={mode === Mode.Active}
-              onClose={setResting}
-              anchor={<Button onClick={setActive}>{collection.title}</Button>}
-              placement="bottom"
+          <Dropdown zIndex={1} label={collection.title}>
+            <PaneOption as={Link} to={hrefs.collection(collection.slug)}>
+              refresh
+            </PaneOption>
+
+            <PaneOption
+              as={Link}
+              to={hrefs.collectionSettings(collection.slug)}
             >
-              <Pane>
-                <PaneOption
-                  as={Link}
-                  to={hrefs.collectionSettings(collection.slug)}
-                >
-                  collection settings
-                </PaneOption>
-              </Pane>
-            </Popper>
-          </Box>
+              collection settings
+            </PaneOption>
+          </Dropdown>
 
           <AddToCollection id={collection.id} />
 
