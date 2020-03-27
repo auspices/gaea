@@ -65,10 +65,10 @@
   dependencies:
     "@apollographql/graphql-language-service-types" "^2.0.0"
 
-"@auspices/eos@1.8.1":
-  version "1.8.1"
-  resolved "https://registry.yarnpkg.com/@auspices/eos/-/eos-1.8.1.tgz#bd248f98c868cd49a78048b2f6515fbbcd33578c"
-  integrity sha512-WOlRMwUkoNJcj2r7uCaxRbswbsucVkFZVzG7YHef0qzfleNvUE/37GDl1M52t1Z3N3ZuHl1k3yLH33/nq9Mb8A==
+"@auspices/eos@1.8.2":
+  version "1.8.2"
+  resolved "https://registry.yarnpkg.com/@auspices/eos/-/eos-1.8.2.tgz#40696ec27b85f9ac03d54f99476f73ac02d8ef52"
+  integrity sha512-kRGUg8L8uyBbIUBADoXmJ7XgbMeXCP4eCAWZM5nqaV7Mn/UgGgzVjjA5vu4T8GYIcfyt5rSp7pZ3VYBkDrGttg==
   dependencies:
     "@popperjs/core" "^2.1.1"
     "@seznam/compose-react-refs" "^1.0.4"
@@ -77,7 +77,7 @@
     proportional-scale "^2.1.1"
     styled-reset "^4.1.2"
     styled-system "^5.1.5"
-    use-keyboard-list-navigation "^1.3.0"
+    use-keyboard-list-navigation "^1.5.0"
 
 "@babel/code-frame@7.8.3", "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.8.3":
   version "7.8.3"
@@ -11914,17 +11914,10 @@ use-debounce@3.4.0:
   resolved "https://registry.yarnpkg.com/use-debounce/-/use-debounce-3.4.0.tgz#e61653fd4daad9beaa6e4695bc1d3fbd35f7e5b3"
   integrity sha512-FSUfs/x7eJUusqvbk/UboMlWKQFBEGTegqK2tvm8+59bcbs77f0DeAy4MuychfxN7E+6rxXDpbv41Kq+aSJPow==
 
-use-keyboard-list-navigation@1.5.0:
+use-keyboard-list-navigation@1.5.0, use-keyboard-list-navigation@^1.5.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/use-keyboard-list-navigation/-/use-keyboard-list-navigation-1.5.0.tgz#51af270ebdeeea2efc19bb7ac7492e8c3b1feaab"
   integrity sha512-5HU8X9phyhY6nwxqeex9ptzNNHrA86mgkJ6Ln3tZV1hLdZ3ysLyPfNDmwg2TNi7+Au2LNWRXw/nuQ1rzZlRshw==
-  dependencies:
-    map-cursor-to-max "^1.0.0"
-
-use-keyboard-list-navigation@^1.3.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/use-keyboard-list-navigation/-/use-keyboard-list-navigation-1.4.0.tgz#3c479e3c54e64d56d12d27eb16e5bf85acb9cb38"
-  integrity sha512-CxBTtJzhQWlj0bYpmU9KUhhXIOf8OilJinwKSfAhrJcZLsfIVx+leKs8e0nbiDkUVH5us5/9A4TTRciMe7HJFg==
   dependencies:
     map-cursor-to-max "^1.0.0"
 

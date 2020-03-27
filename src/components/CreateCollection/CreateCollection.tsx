@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
 import { useHistory } from 'react-router-dom'
 import { Button, ClearableInput, useAlerts } from '@auspices/eos'
-import { useHrefs } from '../../hooks'
+import { useContextualRef, useHrefs } from '../../hooks'
 import { errorMessage } from '../../util/errors'
 import { Form } from '../Form'
 import { COLLECTION_STUB_FRAGMENT } from '../../components/CollectionStub'
@@ -47,6 +47,8 @@ export const CreateCollection: React.FC<CreateCollectionProps> = ({
   const history = useHistory()
   const hrefs = useHrefs()
 
+  const { setContextualRef } = useContextualRef()
+
   const { sendNotification, sendError } = useAlerts()
 
   const [mode, setMode] = useState(Mode.Resting)
@@ -81,6 +83,7 @@ export const CreateCollection: React.FC<CreateCollectionProps> = ({
   return (
     <Form onSubmit={handleSubmit} {...rest}>
       <ClearableInput
+        ref={setContextualRef('primaryInput')}
         name="title"
         placeholder="find or create collection"
         onChange={handleChange}

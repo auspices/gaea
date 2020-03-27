@@ -10,6 +10,7 @@ import {
   ThemerProvider,
   useThemer,
 } from '@auspices/eos'
+import { ContextualRefsProvider } from './hooks'
 import { initClient } from './apollo/initClient'
 import { Routes } from './Routes'
 
@@ -48,9 +49,11 @@ export default () => {
   return (
     <BrowserRouter>
       <ApolloProvider client={client}>
-        <ThemerProvider>
-          <App />
-        </ThemerProvider>
+        <ContextualRefsProvider>
+          <ThemerProvider>
+            <App />
+          </ThemerProvider>
+        </ContextualRefsProvider>
       </ApolloProvider>
     </BrowserRouter>
   )
