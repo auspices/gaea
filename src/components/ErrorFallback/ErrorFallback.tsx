@@ -5,7 +5,7 @@ import { errorMessage, GraphQLError } from '../../util/errors'
 const isDevelopment = process.env.NODE_ENV === 'development'
 
 export type ErrorFallbackProps = {
-  error: Error & { graphQLErrors: GraphQLError[] }
+  error: Error & { graphQLErrors?: GraphQLError[] }
   componentStack: string
 }
 
@@ -26,7 +26,7 @@ export const ErrorFallback: React.FC<ErrorFallbackProps> = ({
     .filter(Boolean)
     .join('\n\n')
 
-  const requireLogin = error.graphQLErrors.some(
+  const requireLogin = error.graphQLErrors?.some(
     (err) => err.extensions.code === 'UNAUTHORIZED'
   )
 
