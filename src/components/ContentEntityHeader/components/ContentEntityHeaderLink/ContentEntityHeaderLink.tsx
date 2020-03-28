@@ -20,7 +20,7 @@ export const ContentEntityHeaderLink: React.FC<ContentEntityHeaderLinkProps> = (
   ...rest
 }) => {
   return (
-    <Dropdown label={link.name} flex="1" {...rest}>
+    <Dropdown label={link.name} flex="1" zIndex={1} {...rest}>
       <PaneOption as="a" href={link.url} target="_blank">
         open in new tab
       </PaneOption>

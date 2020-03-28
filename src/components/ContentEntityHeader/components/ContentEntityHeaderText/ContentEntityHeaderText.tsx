@@ -20,7 +20,7 @@ export const ContentEntityHeaderText: React.FC<ContentEntityHeaderTextProps> = (
   ...rest
 }) => {
   return (
-    <Dropdown label={text.name} flex="1" {...rest}>
+    <Dropdown label={text.name} flex="1" zIndex={1} {...rest}>
       <PaneOption
         as="a"
         href={`https://www.google.com/search?q=${text.body}`}
