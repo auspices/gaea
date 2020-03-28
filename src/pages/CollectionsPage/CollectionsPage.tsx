@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import gql from 'graphql-tag'
 import { Link } from 'react-router-dom'
 import { Dropdown, PaneOption, Stack } from '@auspices/eos'
-import { useQuery } from '@apollo/react-hooks'
+import { useApolloClient, useQuery } from '@apollo/react-hooks'
 import { useDebounce } from 'use-debounce'
 import { useHrefs, usePagination } from '../../hooks'
 import { Loading } from '../../components/Loading'
@@ -53,6 +53,13 @@ export const CollectionsPage: React.FC<CollectionsPageProps> = () => {
   const [query, setQuery] = useState('')
   const [debouncedQuery] = useDebounce(query, 150)
 
+  const client = useApolloClient()
+
+  const handleLogout = useCallback(() => {
+    client.resetStore()
+    localStorage.removeItem('jwt')
+  }, [client])
+
   if (error) {
     throw error
   }
@@ -76,6 +83,14 @@ export const CollectionsPage: React.FC<CollectionsPageProps> = () => {
 
           <PaneOption as={Link} to={hrefs.account()}>
             account settings
+          </PaneOption>
+
+          <PaneOption
+            borderTop="1px solid"
+            borderColor="hint"
+            onClick={handleLogout}
+          >
+            logout
           </PaneOption>
         </Dropdown>
 
