@@ -12,10 +12,7 @@ export const COLLECTION_CONTENT_ENTITY_LINK_FRAGMENT = gql`
   }
 `
 
-const Container = styled(Box)`
-  color: blue;
-  text-align: center;
-`
+const Container = styled(Box)``
 
 type CollectionContentEntityLinkProps = BoxProps & {
   link: CollectionContentEntityLinkFragment
@@ -24,4 +21,17 @@ type CollectionContentEntityLinkProps = BoxProps & {
 export const CollectionContentEntityLink: React.FC<CollectionContentEntityLinkProps> = ({
   link,
   ...rest
-}) => <Container {...rest}>{link.name}</Container>
+}) => (
+  <Container
+    px={4}
+    py={3}
+    border="1px solid"
+    borderColor="blue"
+    borderRadius={4}
+    color="blue"
+    fontSize={0}
+    {...rest}
+  >
+    {link.name}
+  </Container>
+)

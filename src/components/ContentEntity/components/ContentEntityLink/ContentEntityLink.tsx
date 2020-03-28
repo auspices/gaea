@@ -1,6 +1,6 @@
 import React from 'react'
 import gql from 'graphql-tag'
-import { Box, BoxProps, Button } from '@auspices/eos'
+import { Box, BoxProps } from '@auspices/eos'
 import { ContentEntityLinkFragment } from '../../../../generated/types/ContentEntityLinkFragment'
 
 export const CONTENT_ENTITY_LINK_FRAGMENT = gql`
@@ -20,15 +20,21 @@ export const ContentEntityLink: React.FC<ContentEntityLinkProps> = ({
 }) => {
   return (
     <Box {...rest}>
-      <Button
+      <Box
         as="a"
         href={link.url}
-        color="blue"
+        display="block"
+        textAlign="center"
+        px={4}
+        py={3}
+        border="1px solid"
         borderColor="blue"
+        borderRadius={4}
+        color="blue"
         target="_blank"
       >
-        &lt;{link.url}&gt;
-      </Button>
+        open &lt;{link.url}&gt;
+      </Box>
     </Box>
   )
 }
