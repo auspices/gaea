@@ -40,6 +40,7 @@ export interface ContentPageQuery_content_entity_Image {
   url: string;
   width: number;
   height: number;
+  name: string;
   title: string;
   resized: ContentPageQuery_content_entity_Image_resized;
 }
@@ -48,13 +49,14 @@ export interface ContentPageQuery_content_entity_Text {
   __typename: "Text";
   id: number;
   body: string;
+  name: string;
 }
 
 export interface ContentPageQuery_content_entity_Link {
   __typename: "Link";
   id: number;
-  name: string;
   url: string;
+  name: string;
 }
 
 export type ContentPageQuery_content_entity = ContentPageQuery_content_entity_Image | ContentPageQuery_content_entity_Text | ContentPageQuery_content_entity_Link;

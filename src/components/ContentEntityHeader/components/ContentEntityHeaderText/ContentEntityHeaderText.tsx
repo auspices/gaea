@@ -1,12 +1,13 @@
 import React from 'react'
 import gql from 'graphql-tag'
-import { Button } from '@auspices/eos'
+import { Dropdown, PaneOption } from '@auspices/eos'
 import { ContentEntityHeaderTextFragment } from '../../../../generated/types/ContentEntityHeaderTextFragment'
 
 export const CONTENT_ENTITY_HEADER_TEXT_FRAGMENT = gql`
   fragment ContentEntityHeaderTextFragment on Text {
     id
     body
+    name: toString(length: 35, from: TAIL)
   }
 `
 
@@ -19,14 +20,14 @@ export const ContentEntityHeaderText: React.FC<ContentEntityHeaderTextProps> = (
   ...rest
 }) => {
   return (
-    <Button
-      as="a"
-      href={`https://www.google.com/search?q=${text.body}`}
-      target="_blank"
-      flex="1"
-      {...rest}
-    >
-      search
-    </Button>
+    <Dropdown label={text.name} flex="1" {...rest}>
+      <PaneOption
+        as="a"
+        href={`https://www.google.com/search?q=${text.body}`}
+        target="_blank"
+      >
+        search for "{text.name}"
+      </PaneOption>
+    </Dropdown>
   )
 }

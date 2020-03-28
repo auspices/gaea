@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react'
 import { useMutation } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { PaneOption, useAlerts } from '@auspices/eos'
+import { PaneOption, PaneOptionProps, useAlerts } from '@auspices/eos'
 import { errorMessage } from '../../util/errors'
 import { useRefetch } from '../../hooks'
 import {
@@ -25,7 +25,7 @@ enum Mode {
   Error,
 }
 
-type RemoveFromCollectionProps = {
+type RemoveFromCollectionProps = PaneOptionProps & {
   children: React.ReactNode
   contentId: number
   collectionId: number

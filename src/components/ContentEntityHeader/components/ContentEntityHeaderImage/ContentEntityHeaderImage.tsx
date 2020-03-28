@@ -1,6 +1,6 @@
 import React from 'react'
 import gql from 'graphql-tag'
-import { Button } from '@auspices/eos'
+import { Dropdown, PaneOption } from '@auspices/eos'
 import { ContentEntityHeaderImageFragment } from '../../../../generated/types/ContentEntityHeaderImageFragment'
 
 export const CONTENT_ENTITY_HEADER_IMAGE_FRAGMENT = gql`
@@ -9,6 +9,7 @@ export const CONTENT_ENTITY_HEADER_IMAGE_FRAGMENT = gql`
     url
     width
     height
+    name: toString(length: 35, from: CENTER)
   }
 `
 
@@ -21,19 +22,18 @@ export const ContentEntityHeaderImage: React.FC<ContentEntityHeaderImageProps> =
   ...rest
 }) => {
   return (
-    <>
-      <Button as="a" href={image.url} flex="1" {...rest}>
-        @{image.width}×{image.height}
-      </Button>
+    <Dropdown label={image.name} zIndex={1} flex="1" {...rest}>
+      <PaneOption as="a" href={image.url} target="_blank">
+        original (@{image.width}×{image.height})
+      </PaneOption>
 
-      <Button
+      <PaneOption
         as="a"
         href={`https://www.google.com/searchbyimage?&image_url=${image.url}`}
         target="_blank"
-        {...rest}
       >
         reverse image search
-      </Button>
-    </>
+      </PaneOption>
+    </Dropdown>
   )
 }

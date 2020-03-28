@@ -10,6 +10,6 @@
 export interface ContentEntityHeaderLinkFragment {
   __typename: "Link";
   id: number;
-  name: string;
   url: string;
+  name: string;
 }

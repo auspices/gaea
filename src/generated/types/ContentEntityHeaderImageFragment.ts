@@ -13,4 +13,5 @@ export interface ContentEntityHeaderImageFragment {
   url: string;
   width: number;
   height: number;
+  name: string;
 }

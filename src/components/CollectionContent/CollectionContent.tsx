@@ -65,18 +65,9 @@ export const CollectionContent: React.FC<CollectionContentProps> = ({
     >
       {mode === Mode.Active && (
         <ContextMenu position="absolute" top={0} right={0}>
-          <RemoveFromCollection
-            collectionId={collectionId}
-            contentId={content.id}
-          >
-            delete this {content.entity.__typename.toLowerCase()}
-          </RemoveFromCollection>
-
           <RepositionCollectionContent
             contentId={content.id}
             action={ReorderAction.MOVE_TO_TOP}
-            borderTop="1px solid"
-            borderColor="hint"
           />
 
           <RepositionCollectionContent
@@ -95,6 +86,15 @@ export const CollectionContent: React.FC<CollectionContentProps> = ({
             contentId={content.id}
             action={ReorderAction.MOVE_UP}
           />
+
+          <RemoveFromCollection
+            collectionId={collectionId}
+            contentId={content.id}
+            borderTop="1px solid"
+            borderColor="hint"
+          >
+            delete this {content.entity.__typename.toLowerCase()}
+          </RemoveFromCollection>
         </ContextMenu>
       )}
 

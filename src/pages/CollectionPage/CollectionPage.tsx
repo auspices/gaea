@@ -84,7 +84,7 @@ export const CollectionPage: React.FC<CollectionPageProps> = ({ id }) => {
             {username}
           </Button>
 
-          <Dropdown zIndex={1} label={collection.title}>
+          <Dropdown label={collection.title} zIndex={1}>
             <PaneOption as={Link} to={hrefs.collection(collection.slug)}>
               refresh
             </PaneOption>

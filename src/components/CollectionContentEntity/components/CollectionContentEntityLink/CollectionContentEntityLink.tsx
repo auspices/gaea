@@ -8,12 +8,13 @@ export const COLLECTION_CONTENT_ENTITY_LINK_FRAGMENT = gql`
   fragment CollectionContentEntityLinkFragment on Link {
     id
     url
-    name
+    name: toString(length: 30, from: CENTER)
   }
 `
 
 const Container = styled(Box)`
   color: blue;
+  text-align: center;
 `
 
 type CollectionContentEntityLinkProps = BoxProps & {
