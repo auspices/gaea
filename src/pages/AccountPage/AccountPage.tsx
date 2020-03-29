@@ -2,7 +2,7 @@ import React from 'react'
 import gql from 'graphql-tag'
 import { Link } from 'react-router-dom'
 import { useQuery } from '@apollo/react-hooks'
-import { Button, Field, Pill, Stack, useThemer } from '@auspices/eos'
+import { Button, Caret, Field, Pill, Stack, useThemer } from '@auspices/eos'
 import { useHrefs } from '../../hooks'
 import { AccountPageQuery } from '../../generated/types/AccountPageQuery'
 import { Loading } from '../../components/Loading'
@@ -40,9 +40,14 @@ export const AccountPage: React.FC = () => {
 
   return (
     <Stack flex="1">
-      <Button as={Link} to={hrefs.collections(me.slug)}>
-        {me.username}
-      </Button>
+      <Stack direction="horizontal">
+        <Button as={Link} to={hrefs.collections(me.slug)}>
+          <Caret direction="left" mr={3} />
+          {me.username}
+        </Button>
+
+        <Pill flex="1">settings</Pill>
+      </Stack>
 
       <Field label="username" input={{ value: me.username, readOnly: true }} />
 
