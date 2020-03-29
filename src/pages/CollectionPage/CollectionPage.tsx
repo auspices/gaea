@@ -80,22 +80,24 @@ export const CollectionPage: React.FC<CollectionPageProps> = ({ id }) => {
     <RefetchProvider refetch={refetch}>
       <Stack flex="1">
         <Stack direction={['vertical', 'vertical', 'horizontal']}>
-          <Button as={Link} to={hrefs.collections()}>
-            {username}
-          </Button>
+          <Stack direction="horizontal">
+            <Button as={Link} to={hrefs.collections()}>
+              {username}
+            </Button>
 
-          <Dropdown label={collection.title} zIndex={1}>
-            <PaneOption as={Link} to={hrefs.collection(collection.slug)}>
-              refresh
-            </PaneOption>
+            <Dropdown flex="1" label={collection.title} zIndex={1}>
+              <PaneOption as={Link} to={hrefs.collection(collection.slug)}>
+                refresh
+              </PaneOption>
 
-            <PaneOption
-              as={Link}
-              to={hrefs.collectionSettings(collection.slug)}
-            >
-              collection settings
-            </PaneOption>
-          </Dropdown>
+              <PaneOption
+                as={Link}
+                to={hrefs.collectionSettings(collection.slug)}
+              >
+                collection settings
+              </PaneOption>
+            </Dropdown>
+          </Stack>
 
           <AddToCollection id={collection.id} />
 

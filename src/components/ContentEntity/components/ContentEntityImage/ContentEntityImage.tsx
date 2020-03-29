@@ -1,6 +1,6 @@
 import React from 'react'
 import gql from 'graphql-tag'
-import { ResponsiveImage } from '@auspices/eos'
+import { Box, ResponsiveImage } from '@auspices/eos'
 import { ContentEntityImageFragment } from '../../../../generated/types/ContentEntityImageFragment'
 
 export const CONTENT_ENTITY_IMAGE_FRAGMENT = gql`
@@ -30,14 +30,23 @@ export const ContentEntityImage: React.FC<ContentEntityImageProps> = ({
   ...rest
 }) => {
   return (
-    <ResponsiveImage
-      srcs={[image.resized.urls._1x, image.resized.urls._2x]}
-      alt={image.title}
-      aspectWidth={image.resized.width}
-      aspectHeight={image.resized.height}
-      maxWidth={image.resized.width}
-      maxHeight={image.resized.height}
+    <Box
+      mt="1px"
+      flex="1"
+      display="flex"
+      width="100%"
+      alignItems={['flex-start', 'flex-start', 'center']}
+      justifyContent="center"
       {...rest}
-    />
+    >
+      <ResponsiveImage
+        srcs={[image.resized.urls._1x, image.resized.urls._2x]}
+        alt={image.title}
+        aspectWidth={image.resized.width}
+        aspectHeight={image.resized.height}
+        maxWidth={image.resized.width}
+        maxHeight={image.resized.height}
+      />
+    </Box>
   )
 }

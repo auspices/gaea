@@ -125,31 +125,35 @@ export const ContentPage: React.FC<ContentPageProps> = ({ id }) => {
   return (
     <Stack flex="1">
       <Stack direction={['vertical', 'vertical', 'horizontal']}>
-        <Button as={Link} to={hrefs.collections()}>
-          {username}
-        </Button>
+        <Stack direction="horizontal">
+          <Button as={Link} to={hrefs.collections()}>
+            {username}
+          </Button>
 
-        <Button as={Link} to={hrefs.collection(collection.slug)}>
-          {collection.title}
-        </Button>
+          <Button flex="1" as={Link} to={hrefs.collection(collection.slug)}>
+            {collection.title}
+          </Button>
+        </Stack>
 
         <ContentEntityHeader entity={entity} />
 
-        {content.previous && (
-          <Button as={Link} to={hrefs.content(content.previous.id)}>
-            past
-          </Button>
-        )}
+        <Stack direction="horizontal">
+          {content.previous && (
+            <Button flex="1" as={Link} to={hrefs.content(content.previous.id)}>
+              past
+            </Button>
+          )}
 
-        {content.next && (
-          <Button as={Link} to={hrefs.content(content.next.id)}>
-            next
-          </Button>
-        )}
+          {content.next && (
+            <Button flex="1" as={Link} to={hrefs.content(content.next.id)}>
+              next
+            </Button>
+          )}
 
-        <SampleCollectionContent id={collection.slug}>
-          rand
-        </SampleCollectionContent>
+          <SampleCollectionContent flex="1" id={collection.slug}>
+            rand
+          </SampleCollectionContent>
+        </Stack>
       </Stack>
 
       <ContentSettings content={content} />

@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import { useHistory } from 'react-router-dom'
 import gql from 'graphql-tag'
-import { Button, useAlerts } from '@auspices/eos'
+import { Button, ButtonProps, useAlerts } from '@auspices/eos'
 import {
   SampleCollectionContentQuery,
   SampleCollectionContentQueryVariables,
@@ -25,7 +25,7 @@ export const SAMPLE_COLLECTION_CONTENT_QUERY = gql`
   }
 `
 
-type SampleCollectionContentProps = {
+type SampleCollectionContentProps = ButtonProps & {
   id: string
 }
 
@@ -37,6 +37,7 @@ enum Mode {
 export const SampleCollectionContent: React.FC<SampleCollectionContentProps> = ({
   id,
   children,
+  ...rest
 }) => {
   const { sendError } = useAlerts()
 
@@ -76,7 +77,11 @@ export const SampleCollectionContent: React.FC<SampleCollectionContentProps> = (
   }, [data, error, history, hrefs, loading, sendError])
 
   return (
-    <Button onClick={handleClick} disabled={mode === Mode.Redirecting}>
+    <Button
+      onClick={handleClick}
+      disabled={mode === Mode.Redirecting}
+      {...rest}
+    >
       {children}
     </Button>
   )
