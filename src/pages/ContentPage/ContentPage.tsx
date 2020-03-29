@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useCallback, useEffect } from 'react'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { Box, Button, Stack } from '@auspices/eos'
 import { useHrefs } from '../../hooks/useHrefs'
 import { Loading } from '../../components/Loading'
@@ -60,6 +60,8 @@ type ContentPageProps = {
 }
 
 export const ContentPage: React.FC<ContentPageProps> = ({ id }) => {
+  const history = useHistory()
+
   const hrefs = useHrefs()
 
   const { data, loading, error } = useQuery<
@@ -69,6 +71,40 @@ export const ContentPage: React.FC<ContentPageProps> = ({ id }) => {
     fetchPolicy: 'network-only',
     variables: { id },
   })
+
+  const handleKeydown = useCallback(
+    ({ key }: KeyboardEvent) => {
+      if (loading || !data) return
+
+      // Only bind navigation arrows if nothing else has focus
+      if (document.activeElement?.tagName !== 'BODY') return
+
+      const {
+        me: {
+          content,
+          content: { collection },
+        },
+      } = data
+
+      switch (key) {
+        case 'ArrowUp':
+          history.push(hrefs.collection(collection.slug))
+          break
+        case 'ArrowRight':
+          content.next && history.push(hrefs.content(content.next.id))
+          break
+        case 'ArrowLeft':
+          content.previous && history.push(hrefs.content(content.previous.id))
+          break
+      }
+    },
+    [data, history, hrefs, loading]
+  )
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeydown)
+    return () => window.removeEventListener('keydown', handleKeydown)
+  }, [handleKeydown])
 
   if (error) {
     throw error

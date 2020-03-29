@@ -123,13 +123,6 @@ export const ContentEntityText: React.FC<ContentEntityTextProps> = ({
     return () => window.removeEventListener('beforeunload', handleBeforeUnload)
   }, [handleBeforeUnload, state.edited])
 
-  useEffect(() => {
-    const el = textareaRef.current
-    if (!el) return
-    el.focus()
-    el.setSelectionRange(el.value.length, el.value.length)
-  }, [])
-
   return (
     <Box
       position="relative"
@@ -150,7 +143,6 @@ export const ContentEntityText: React.FC<ContentEntityTextProps> = ({
         defaultValue={text.body}
         onChange={handleChange}
         borderWidth={0}
-        autoFocus
       />
     </Box>
   )
