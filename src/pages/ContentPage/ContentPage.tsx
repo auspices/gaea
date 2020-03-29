@@ -2,7 +2,7 @@ import React, { useCallback, useEffect } from 'react'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
 import { Link, useHistory } from 'react-router-dom'
-import { Box, Button, Stack } from '@auspices/eos'
+import { Box, Button, Caret, Stack } from '@auspices/eos'
 import { useHrefs } from '../../hooks/useHrefs'
 import { Loading } from '../../components/Loading'
 import {
@@ -127,10 +127,12 @@ export const ContentPage: React.FC<ContentPageProps> = ({ id }) => {
       <Stack direction={['vertical', 'vertical', 'horizontal']}>
         <Stack direction="horizontal">
           <Button as={Link} to={hrefs.collections()}>
+            <Caret direction="left" mr={3} />
             {username}
           </Button>
 
           <Button flex="1" as={Link} to={hrefs.collection(collection.slug)}>
+            <Caret direction="left" mr={3} />
             {collection.title}
           </Button>
         </Stack>

@@ -2,7 +2,7 @@ import React from 'react'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
 import { Link } from 'react-router-dom'
-import { Box, Button, Dropdown, PaneOption, Stack } from '@auspices/eos'
+import { Box, Button, Caret, Dropdown, PaneOption, Stack } from '@auspices/eos'
 import { RefetchProvider, useHrefs, usePagination } from '../../hooks'
 import { AddToCollection } from '../../components/AddToCollection'
 import { Loading } from '../../components/Loading'
@@ -82,6 +82,7 @@ export const CollectionPage: React.FC<CollectionPageProps> = ({ id }) => {
         <Stack direction={['vertical', 'vertical', 'horizontal']}>
           <Stack direction="horizontal">
             <Button as={Link} to={hrefs.collections()}>
+              <Caret direction="left" mr={3} />
               {username}
             </Button>
 
