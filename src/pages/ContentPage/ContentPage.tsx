@@ -144,15 +144,15 @@ export const ContentPage: React.FC<ContentPageProps> = ({ id }) => {
             </Button>
           )}
 
+          <SampleCollectionContent flex="1" id={collection.slug}>
+            rand
+          </SampleCollectionContent>
+
           {content.next && (
             <Button flex="1" as={Link} to={hrefs.content(content.next.id)}>
               next
             </Button>
           )}
-
-          <SampleCollectionContent flex="1" id={collection.slug}>
-            rand
-          </SampleCollectionContent>
         </Stack>
       </Stack>
 
