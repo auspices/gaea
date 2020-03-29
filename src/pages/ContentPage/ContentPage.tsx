@@ -29,19 +29,25 @@ export const CONTENT_PAGE_QUERY = gql`
       id
       slug
       username
-    }
-    content(id: $id) {
-      id
-      collection {
+      content(id: $id) {
         id
-        slug
-        title
+        collection {
+          id
+          slug
+          title
+        }
+        entity {
+          ...ContentEntityHeaderFragment
+          ...ContentEntityFragment
+        }
+        next {
+          id
+        }
+        previous {
+          id
+        }
+        ...ContentSettingsFragment
       }
-      entity {
-        ...ContentEntityHeaderFragment
-        ...ContentEntityFragment
-      }
-      ...ContentSettingsFragment
     }
   }
   ${CONTENT_ENTITY_FRAGMENT}
@@ -73,9 +79,11 @@ export const ContentPage: React.FC<ContentPageProps> = ({ id }) => {
   }
 
   const {
-    me: { username },
-    content,
-    content: { collection, entity },
+    me: {
+      username,
+      content,
+      content: { collection, entity },
+    },
   } = data
 
   return (
@@ -91,8 +99,20 @@ export const ContentPage: React.FC<ContentPageProps> = ({ id }) => {
 
         <ContentEntityHeader entity={entity} />
 
+        {content.previous && (
+          <Button as={Link} to={hrefs.content(content.previous.id)}>
+            past
+          </Button>
+        )}
+
+        {content.next && (
+          <Button as={Link} to={hrefs.content(content.next.id)}>
+            next
+          </Button>
+        )}
+
         <SampleCollectionContent id={collection.slug}>
-          random
+          rand
         </SampleCollectionContent>
       </Stack>
 

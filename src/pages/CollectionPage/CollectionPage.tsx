@@ -100,7 +100,7 @@ export const CollectionPage: React.FC<CollectionPageProps> = ({ id }) => {
           <AddToCollection id={collection.id} />
 
           <SampleCollectionContent id={collection.slug}>
-            random
+            rand
           </SampleCollectionContent>
         </Stack>
 
