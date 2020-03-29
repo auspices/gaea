@@ -28,9 +28,9 @@ export const ContentEntityLink: React.FC<ContentEntityLinkProps> = ({
         px={4}
         py={3}
         border="1px solid"
-        borderColor="blue"
+        borderColor="external"
         borderRadius={4}
-        color="blue"
+        color="external"
         target="_blank"
       >
         open &lt;{link.url}&gt;

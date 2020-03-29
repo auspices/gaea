@@ -34,6 +34,7 @@ export type ContentSettingsProps = {
 
 export const ContentSettings: React.FC<ContentSettingsProps> = ({
   content,
+  ...rest
 }) => {
   const { sendNotification, sendError } = useAlerts()
   const [updateContent] = useMutation<
@@ -65,6 +66,7 @@ export const ContentSettings: React.FC<ContentSettingsProps> = ({
       schema={toSchema(content.metadata)}
       data={content.metadata}
       onChange={debouncedHandleChange}
+      {...rest}
     />
   )
 }

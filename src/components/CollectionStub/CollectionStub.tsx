@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { Box, Pill, PillProps } from '@auspices/eos'
+import { Box, Pill, pillFocusMixin, PillProps } from '@auspices/eos'
 import { Link } from 'react-router-dom'
 import gql from 'graphql-tag'
 import { themeGet } from '@styled-system/theme-get'
@@ -54,7 +54,12 @@ const selectedMixin = css`
 const Container = styled(Pill)<PillProps & { selected?: boolean }>`
   text-decoration: none;
 
-  ${({ selected }) => selected && selectedMixin}
+  ${({ selected }) =>
+    selected &&
+    css`
+      ${selectedMixin}
+      ${pillFocusMixin}
+    `}
 
   &:hover {
     ${selectedMixin}

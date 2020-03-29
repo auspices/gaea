@@ -26,9 +26,9 @@ export const CollectionContentEntityLink: React.FC<CollectionContentEntityLinkPr
     px={4}
     py={3}
     border="1px solid"
-    borderColor="blue"
+    borderColor="external"
     borderRadius={4}
-    color="blue"
+    color="external"
     fontSize={0}
     {...rest}
   >
