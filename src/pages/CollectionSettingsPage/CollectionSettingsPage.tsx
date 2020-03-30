@@ -1,14 +1,18 @@
 import React, { useCallback, useState } from 'react'
 import gql from 'graphql-tag'
-import { Link, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useMutation, useQuery } from '@apollo/react-hooks'
 import { Button, Caret, Pill, Stack, useAlerts } from '@auspices/eos'
 import { useHrefs } from '../../hooks'
 import { Loading } from '../../components/Loading'
+import { DeleteCollection } from '../../components/DeleteCollection'
 import { Fieldset, FieldsetData } from '../../components/Fieldset'
 import { errorMessage } from '../../util/errors'
 import { UpadateCollectionSettingsMutation } from '../../generated/types/UpadateCollectionSettingsMutation'
-import { DeleteCollectionMutation } from '../../generated/types/DeleteCollectionMutation'
+import {
+  CollectionSettingsPageQuery,
+  CollectionSettingsPageQueryVariables,
+} from '../../generated/types/CollectionSettingsPageQuery'
 
 export const UPDATE_COLLECTION_SETTINGS_MUTATION = gql`
   mutation UpadateCollectionSettingsMutation($id: ID!, $title: String) {
@@ -17,14 +21,6 @@ export const UPDATE_COLLECTION_SETTINGS_MUTATION = gql`
         id
         name
       }
-    }
-  }
-`
-
-export const DELETE_COLLECTION_MUTATION = gql`
-  mutation DeleteCollectionMutation($id: ID!) {
-    deleteCollection(input: { id: $id }) {
-      __typename
     }
   }
 `
@@ -57,22 +53,17 @@ type CollectionSettingsPageProps = {
 export const CollectionSettingsPage: React.FC<CollectionSettingsPageProps> = ({
   id,
 }) => {
-  const { data, loading, error, refetch } = useQuery(
-    COLLECTION_SETTINGS_PAGE_QUERY,
-    {
-      variables: { id },
-    }
-  )
+  const { data, loading, error, refetch } = useQuery<
+    CollectionSettingsPageQuery,
+    CollectionSettingsPageQueryVariables
+  >(COLLECTION_SETTINGS_PAGE_QUERY, {
+    variables: { id },
+  })
 
   const [updateCollectionSettings] = useMutation<
     UpadateCollectionSettingsMutation
   >(UPDATE_COLLECTION_SETTINGS_MUTATION)
 
-  const [deleteCollection] = useMutation<DeleteCollectionMutation>(
-    DELETE_COLLECTION_MUTATION
-  )
-
-  const history = useHistory()
   const hrefs = useHrefs()
 
   const { sendError, sendNotification } = useAlerts()
@@ -117,16 +108,6 @@ export const CollectionSettingsPage: React.FC<CollectionSettingsPageProps> = ({
     setState(data)
   }, [])
 
-  const handleDelete = useCallback(async () => {
-    try {
-      await deleteCollection({ variables: { id } })
-      sendNotification({ body: 'deleted successfully' })
-      history.push(hrefs.collections())
-    } catch (err) {
-      sendError({ body: errorMessage(err) })
-    }
-  }, [deleteCollection, history, hrefs, id, sendError, sendNotification])
-
   if (error) {
     throw error
   }
@@ -161,7 +142,10 @@ export const CollectionSettingsPage: React.FC<CollectionSettingsPageProps> = ({
         as="form"
         onSubmit={handleSubmit}
       >
+        <Pill as="h2">attributes</Pill>
+
         <Fieldset data={{ title: collection.title }} onChange={handleChange} />
+
         <Button type="submit" disabled={mode !== Mode.Dirty}>
           {
             {
@@ -173,15 +157,11 @@ export const CollectionSettingsPage: React.FC<CollectionSettingsPageProps> = ({
         </Button>
       </Stack>
 
-      {/* TODO: Extract into own component, add confirmation dialog, etc. */}
-      <Button
-        color="danger"
-        borderColor="danger"
-        zIndex={1}
-        onClick={handleDelete}
-      >
-        delete collection
-      </Button>
+      <Pill as="h2" color="danger" borderColor="danger" zIndex={1}>
+        danger
+      </Pill>
+
+      <DeleteCollection id={id} confirmation={collection.title} />
     </Stack>
   )
 }
