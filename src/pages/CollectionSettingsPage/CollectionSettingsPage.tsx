@@ -123,18 +123,22 @@ export const CollectionSettingsPage: React.FC<CollectionSettingsPageProps> = ({
 
   return (
     <Stack flex="1">
-      <Stack direction="horizontal">
-        <Button as={Link} to={hrefs.collections()}>
-          <Caret direction="left" mr={3} />
-          {me.username}
-        </Button>
+      <Stack direction={['vertical', 'vertical', 'horizontal']}>
+        <Stack direction="horizontal">
+          <Button as={Link} to={hrefs.collections()}>
+            <Caret direction="left" mr={3} />
+            {me.username}
+          </Button>
 
-        <Button as={Link} to={hrefs.collection(collection.slug)}>
-          <Caret direction="left" mr={3} />
-          {collection.title}
-        </Button>
+          <Button as={Link} to={hrefs.collection(collection.slug)} flex="1">
+            <Caret direction="left" mr={3} />
+            {collection.title}
+          </Button>
+        </Stack>
 
-        <Pill flex="1">settings</Pill>
+        <Pill as="h1" flex="1">
+          settings
+        </Pill>
       </Stack>
 
       <Stack
@@ -142,8 +146,6 @@ export const CollectionSettingsPage: React.FC<CollectionSettingsPageProps> = ({
         as="form"
         onSubmit={handleSubmit}
       >
-        <Pill as="h2">attributes</Pill>
-
         <Fieldset data={{ title: collection.title }} onChange={handleChange} />
 
         <Button type="submit" disabled={mode !== Mode.Dirty}>

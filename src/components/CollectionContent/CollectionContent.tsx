@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import gql from 'graphql-tag'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
@@ -50,11 +50,26 @@ export const CollectionContent: React.FC<CollectionContentProps> = ({
   collectionId,
   ...rest
 }) => {
-  const hrefs = useHrefs()
   const [mode, setMode] = useState(Mode.Resting)
 
-  const handleMouseEnter = useCallback(() => setMode(Mode.Active), [])
-  const handleMouseLeave = useCallback(() => setMode(Mode.Resting), [])
+  const hrefs = useHrefs()
+
+  const timer = useRef<number | null>()
+
+  const handleMouseEnter = useCallback(() => {
+    timer.current && clearTimeout(timer.current)
+    setMode(Mode.Active)
+  }, [])
+
+  const handleMouseLeave = useCallback(() => {
+    timer.current = setTimeout(() => setMode(Mode.Resting), 100)
+  }, [])
+
+  useEffect(() => {
+    return () => {
+      timer.current && clearTimeout(timer.current)
+    }
+  }, [])
 
   return (
     <Container
