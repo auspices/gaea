@@ -1,6 +1,6 @@
 import React from 'react'
 import gql from 'graphql-tag'
-import { Pill } from '@auspices/eos'
+import { Loading } from '@auspices/eos'
 import {
   COLLECTION_STUB_LIST_FRAGMENT,
   CollectionStubList,
@@ -48,7 +48,7 @@ export const FilteredCollectionStubList: React.FC<FilteredCollectionStubListProp
   }
 
   if (loading || !data) {
-    return <Pill {...rest}>sifting</Pill>
+    return <Loading />
   }
 
   const {
