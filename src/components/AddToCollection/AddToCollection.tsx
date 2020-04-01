@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react'
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
-import { Button, Input, useAlerts } from '@auspices/eos'
+import { Button, Input, Loading, useAlerts } from '@auspices/eos'
 import { usePagination, useRefetch } from '../../hooks'
 import { errorMessage } from '../../util/errors'
 import { Form, FormProps } from '../Form'
@@ -126,18 +126,26 @@ export const AddToCollection: React.FC<AddToCollectionProps> = ({
       />
 
       <Form onSubmit={handleSubmit} {...rest}>
-        <Input
-          key={inputKey}
+        <Loading
+          px={0}
+          py={0}
           borderWidth={0}
           flex={1}
-          placeholder="add to this collection"
-          onChange={handleChange}
-          disabled={mode === Mode.Adding}
-          required
-          autoFocus
-          title=""
-          autoComplete="off"
-        />
+          loading={mode === Mode.Adding}
+        >
+          <Input
+            key={inputKey}
+            borderWidth={0}
+            flex={1}
+            placeholder="add to this collection"
+            onChange={handleChange}
+            disabled={mode === Mode.Adding}
+            required
+            autoFocus
+            title=""
+            autoComplete="off"
+          />
+        </Loading>
 
         {value !== '' && (
           <Button
