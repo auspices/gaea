@@ -65,15 +65,15 @@
   dependencies:
     "@apollographql/graphql-language-service-types" "^2.0.0"
 
-"@auspices/eos@1.12.0":
-  version "1.12.0"
-  resolved "https://registry.yarnpkg.com/@auspices/eos/-/eos-1.12.0.tgz#d5ba71731b3788ee60dfb123a1ac3d608ddf0b49"
-  integrity sha512-5zGr6QeP4p9Hrrn0LPcZN3usq5qtYwhcNfvzaTxbKkJzMMLr50AVC5Y0b1oTmnx72/r6cTpg4kqVd2JkjoNV+g==
+"@auspices/eos@1.14.1":
+  version "1.14.1"
+  resolved "https://registry.yarnpkg.com/@auspices/eos/-/eos-1.14.1.tgz#f083a3e13c6b4253bf9bb9f494a0538d521ba3c2"
+  integrity sha512-lnivspYp3mkwoDhoJ6qbRmIEUoVDR+F3LSoEfU/XV0RrPkxYAEwvYGuTWtuuOWK4IdGOKnDxeNlByt98wNm5Wg==
   dependencies:
     "@popperjs/core" "^2.1.1"
     "@seznam/compose-react-refs" "^1.0.4"
     "@styled-system/theme-get" "^5.1.2"
-    csstype "^2.6.9"
+    csstype "^2.6.10"
     proportional-scale "^2.1.1"
     react-focus-on "^3.3.0"
     styled-reset "^4.1.2"
@@ -4229,6 +4229,11 @@ csstype@^2.2.0, csstype@^2.6.9:
   version "2.6.9"
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.9.tgz#05141d0cd557a56b8891394c1911c40c8a98d098"
   integrity sha512-xz39Sb4+OaTsULgUERcCk+TJj8ylkL4aSVDQiX/ksxbELSqwkgt4d4RD7fovIdgJGSuNYqwZEiVjYY5l0ask+Q==
+
+csstype@^2.6.10:
+  version "2.6.10"
+  resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.10.tgz#e63af50e66d7c266edb6b32909cfd0aabe03928b"
+  integrity sha512-D34BqZU4cIlMCY93rZHbrq9pjTAQJ3U8S8rfBqjwHxkGPThWFjzZDQpgMJY0QViLxth6ZKYiwFBo14RdN44U/w==
 
 cyclist@^1.0.1:
   version "1.0.1"
