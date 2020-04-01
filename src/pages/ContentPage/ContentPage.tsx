@@ -2,9 +2,8 @@ import React, { useCallback, useEffect } from 'react'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
 import { Link, useHistory } from 'react-router-dom'
-import { Box, Button, Caret, Stack } from '@auspices/eos'
+import { Box, Button, Caret, Loading, Stack } from '@auspices/eos'
 import { useHrefs } from '../../hooks/useHrefs'
-import { Loading } from '../../components/Loading'
 import {
   CONTENT_ENTITY_FRAGMENT,
   ContentEntity,

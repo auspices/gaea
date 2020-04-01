@@ -3,15 +3,15 @@ import styled from 'styled-components'
 import {
   Box,
   BoxProps,
+  Ellipsis,
   Pane,
   PaneOption,
   paneShadowMixin,
   Popper,
 } from '@auspices/eos'
 import { useActive } from '../../hooks'
-import { Icons } from '../Icons'
 
-const Toggle = styled(PaneOption).attrs({ borderRadius: 4, px: 3, py: 1 })`
+const Toggle = styled(PaneOption).attrs({ borderRadius: 4, px: 3, py: 3 })`
   ${paneShadowMixin}
 `
 
@@ -46,7 +46,7 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({
         onClose={handleClose}
         anchor={
           <Toggle onClick={handleClick} backgroundColor="background">
-            <Icons name="Ellipsis" />
+            <Ellipsis />
           </Toggle>
         }
       >

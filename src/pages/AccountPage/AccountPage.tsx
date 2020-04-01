@@ -2,10 +2,17 @@ import React from 'react'
 import gql from 'graphql-tag'
 import { Link } from 'react-router-dom'
 import { useQuery } from '@apollo/react-hooks'
-import { Button, Caret, Field, Pill, Stack, useThemer } from '@auspices/eos'
+import {
+  Button,
+  Caret,
+  Field,
+  Loading,
+  Pill,
+  Stack,
+  useThemer,
+} from '@auspices/eos'
 import { useHrefs } from '../../hooks'
 import { AccountPageQuery } from '../../generated/types/AccountPageQuery'
-import { Loading } from '../../components/Loading'
 
 export const ACCOUNT_PAGE_QUERY = gql`
   query AccountPageQuery {

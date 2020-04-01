@@ -1,11 +1,10 @@
 import React, { useCallback, useState } from 'react'
 import gql from 'graphql-tag'
 import { Link } from 'react-router-dom'
-import { Dropdown, PaneOption, Stack, useThemer } from '@auspices/eos'
+import { Dropdown, Loading, PaneOption, Stack, useThemer } from '@auspices/eos'
 import { useApolloClient, useQuery } from '@apollo/react-hooks'
 import { useDebounce } from 'use-debounce'
 import { useHrefs, usePagination } from '../../hooks'
-import { Loading } from '../../components/Loading'
 import { Pagination } from '../../components/Pagination'
 import { CreateCollection } from '../../components/CreateCollection'
 import {

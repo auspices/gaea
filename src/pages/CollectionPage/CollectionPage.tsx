@@ -2,10 +2,17 @@ import React from 'react'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
 import { Link } from 'react-router-dom'
-import { Box, Button, Caret, Dropdown, PaneOption, Stack } from '@auspices/eos'
+import {
+  Box,
+  Button,
+  Caret,
+  Dropdown,
+  Loading,
+  PaneOption,
+  Stack,
+} from '@auspices/eos'
 import { RefetchProvider, useHrefs, usePagination } from '../../hooks'
 import { AddToCollection } from '../../components/AddToCollection'
-import { Loading } from '../../components/Loading'
 import { Pagination } from '../../components/Pagination'
 import {
   COLLECTION_CONTENTS_FRAGMENT,
