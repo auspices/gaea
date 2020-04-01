@@ -56,12 +56,12 @@ export const CollectionContent: React.FC<CollectionContentProps> = ({
 
   const timer = useRef<number | null>()
 
-  const handleMouseEnter = useCallback(() => {
+  const handleMouseOver = useCallback(() => {
     timer.current && clearTimeout(timer.current)
     setMode(Mode.Active)
   }, [])
 
-  const handleMouseLeave = useCallback(() => {
+  const handleMouseOut = useCallback(() => {
     timer.current = setTimeout(() => setMode(Mode.Resting), 100)
   }, [])
 
@@ -73,8 +73,8 @@ export const CollectionContent: React.FC<CollectionContentProps> = ({
 
   return (
     <Container
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onMouseOver={handleMouseOver}
+      onMouseOut={handleMouseOut}
       to={hrefs.content(content.id)}
       {...rest}
     >
