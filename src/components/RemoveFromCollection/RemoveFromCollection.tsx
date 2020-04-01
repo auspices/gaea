@@ -39,7 +39,7 @@ export const RemoveFromCollection = React.forwardRef(
     const [mode, setMode] = useState(Mode.Resting)
 
     const { refetch } = useRefetch()
-    const { sendError } = useAlerts()
+    const { sendError, sendNotification } = useAlerts()
 
     const [removeFromCollection] = useMutation<
       RemoveFromCollectionMutation,
@@ -56,6 +56,7 @@ export const RemoveFromCollection = React.forwardRef(
           await removeFromCollection({
             variables: { contentId: `${contentId}` },
           })
+          sendNotification({ body: 'successfully removed' })
         } catch (err) {
           setMode(Mode.Error)
           sendError({ body: errorMessage(err) })
@@ -63,7 +64,7 @@ export const RemoveFromCollection = React.forwardRef(
 
         refetch()
       },
-      [contentId, refetch, removeFromCollection, sendError]
+      [contentId, refetch, removeFromCollection, sendError, sendNotification]
     )
 
     return (
