@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import { Link } from 'react-router-dom'
 import { useMutation, useQuery } from '@apollo/react-hooks'
 import { Button, Caret, Loading, Pill, Stack, useAlerts } from '@auspices/eos'
+import { Helmet } from 'react-helmet'
 import { useHrefs } from '../../hooks'
 import { DeleteCollection } from '../../components/DeleteCollection'
 import { Fieldset, FieldsetData } from '../../components/Fieldset'
@@ -121,48 +122,57 @@ export const CollectionSettingsPage: React.FC<CollectionSettingsPageProps> = ({
   } = data
 
   return (
-    <Stack flex="1">
-      <Stack direction={['vertical', 'vertical', 'horizontal']}>
-        <Stack direction="horizontal">
-          <Button as={Link} to={hrefs.collections()}>
-            <Caret direction="left" mr={3} />
-            {me.username}
-          </Button>
+    <>
+      <Helmet>
+        <title>{['settings', collection.title].join(' / ')}</title>
+      </Helmet>
 
-          <Button as={Link} to={hrefs.collection(collection.slug)} flex="1">
-            <Caret direction="left" mr={3} />
-            {collection.title}
+      <Stack flex="1">
+        <Stack direction={['vertical', 'vertical', 'horizontal']}>
+          <Stack direction="horizontal">
+            <Button as={Link} to={hrefs.collections()}>
+              <Caret direction="left" mr={3} />
+              {me.username}
+            </Button>
+
+            <Button as={Link} to={hrefs.collection(collection.slug)} flex="1">
+              <Caret direction="left" mr={3} />
+              {collection.title}
+            </Button>
+          </Stack>
+
+          <Pill as="h1" flex="1">
+            settings
+          </Pill>
+        </Stack>
+
+        <Stack
+          // @ts-ignore
+          as="form"
+          onSubmit={handleSubmit}
+        >
+          <Fieldset
+            data={{ title: collection.title }}
+            onChange={handleChange}
+          />
+
+          <Button type="submit" disabled={mode !== Mode.Dirty}>
+            {
+              {
+                [Mode.Resting]: 'save',
+                [Mode.Dirty]: 'save',
+                [Mode.Saving]: 'saving',
+              }[mode]
+            }
           </Button>
         </Stack>
 
-        <Pill as="h1" flex="1">
-          settings
+        <Pill as="h2" color="danger" borderColor="danger" zIndex={1}>
+          danger
         </Pill>
+
+        <DeleteCollection id={id} confirmation={collection.title} />
       </Stack>
-
-      <Stack
-        // @ts-ignore
-        as="form"
-        onSubmit={handleSubmit}
-      >
-        <Fieldset data={{ title: collection.title }} onChange={handleChange} />
-
-        <Button type="submit" disabled={mode !== Mode.Dirty}>
-          {
-            {
-              [Mode.Resting]: 'save',
-              [Mode.Dirty]: 'save',
-              [Mode.Saving]: 'saving',
-            }[mode]
-          }
-        </Button>
-      </Stack>
-
-      <Pill as="h2" color="danger" borderColor="danger" zIndex={1}>
-        danger
-      </Pill>
-
-      <DeleteCollection id={id} confirmation={collection.title} />
-    </Stack>
+    </>
   )
 }

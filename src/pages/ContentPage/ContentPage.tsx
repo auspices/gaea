@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
 import { Link, useHistory } from 'react-router-dom'
 import { Box, Button, Caret, Loading, Stack } from '@auspices/eos'
+import { Helmet } from 'react-helmet'
 import { useHrefs } from '../../hooks/useHrefs'
 import {
   CONTENT_ENTITY_FRAGMENT,
@@ -122,53 +123,63 @@ export const ContentPage: React.FC<ContentPageProps> = ({ id }) => {
   } = data
 
   return (
-    <Stack flex="1">
-      <Stack direction={['vertical', 'vertical', 'horizontal']}>
-        <Stack direction="horizontal">
-          <Button as={Link} to={hrefs.collections()}>
-            <Caret direction="left" mr={3} />
-            {username}
-          </Button>
+    <>
+      <Helmet>
+        <title>{[entity.name, collection.title, username].join(' / ')}</title>
+      </Helmet>
 
-          <Button flex="1" as={Link} to={hrefs.collection(collection.slug)}>
-            <Caret direction="left" mr={3} />
-            {collection.title}
-          </Button>
+      <Stack flex="1">
+        <Stack direction={['vertical', 'vertical', 'horizontal']}>
+          <Stack direction="horizontal">
+            <Button as={Link} to={hrefs.collections()}>
+              <Caret direction="left" mr={3} />
+              {username}
+            </Button>
+
+            <Button flex="1" as={Link} to={hrefs.collection(collection.slug)}>
+              <Caret direction="left" mr={3} />
+              {collection.title}
+            </Button>
+          </Stack>
+
+          <ContentEntityHeader entity={entity} />
+
+          <Stack direction="horizontal">
+            {content.previous && (
+              <Button
+                flex="1"
+                as={Link}
+                to={hrefs.content(content.previous.id)}
+              >
+                past
+              </Button>
+            )}
+
+            <SampleCollectionContent flex="1" id={collection.slug}>
+              rand
+            </SampleCollectionContent>
+
+            {content.next && (
+              <Button flex="1" as={Link} to={hrefs.content(content.next.id)}>
+                next
+              </Button>
+            )}
+          </Stack>
         </Stack>
 
-        <ContentEntityHeader entity={entity} />
+        <ContentSettings content={content} />
 
-        <Stack direction="horizontal">
-          {content.previous && (
-            <Button flex="1" as={Link} to={hrefs.content(content.previous.id)}>
-              past
-            </Button>
-          )}
-
-          <SampleCollectionContent flex="1" id={collection.slug}>
-            rand
-          </SampleCollectionContent>
-
-          {content.next && (
-            <Button flex="1" as={Link} to={hrefs.content(content.next.id)}>
-              next
-            </Button>
-          )}
-        </Stack>
+        <Box
+          display="flex"
+          width="100%"
+          alignItems="center"
+          justifyContent="center"
+          flexDirection="column"
+          flex={1}
+        >
+          <ContentEntity entity={entity} />
+        </Box>
       </Stack>
-
-      <ContentSettings content={content} />
-
-      <Box
-        display="flex"
-        width="100%"
-        alignItems="center"
-        justifyContent="center"
-        flexDirection="column"
-        flex={1}
-      >
-        <ContentEntity entity={entity} />
-      </Box>
-    </Stack>
+    </>
   )
 }

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { Dropdown, Loading, PaneOption, Stack, useThemer } from '@auspices/eos'
 import { useApolloClient, useQuery } from '@apollo/react-hooks'
 import { useDebounce } from 'use-debounce'
+import { Helmet } from 'react-helmet'
 import { useHrefs, usePagination } from '../../hooks'
 import { Pagination } from '../../components/Pagination'
 import { CreateCollection } from '../../components/CreateCollection'
@@ -75,56 +76,62 @@ export const CollectionsPage: React.FC<CollectionsPageProps> = () => {
   } = data
 
   return (
-    <Stack>
-      <Stack direction="horizontal">
-        <Dropdown label={username} zIndex={1}>
-          <PaneOption as={Link} to={hrefs.collections()}>
-            refresh
-          </PaneOption>
+    <>
+      <Helmet>
+        <title>{username}</title>
+      </Helmet>
 
-          <PaneOption as={Link} to={hrefs.account()}>
-            account settings
-          </PaneOption>
+      <Stack>
+        <Stack direction="horizontal">
+          <Dropdown label={username} zIndex={1}>
+            <PaneOption as={Link} to={hrefs.collections()}>
+              refresh
+            </PaneOption>
 
-          <PaneOption onClick={toggleScheme}>
-            toggle {{ dark: 'light', light: 'dark' }[scheme]} mode
-          </PaneOption>
+            <PaneOption as={Link} to={hrefs.account()}>
+              account settings
+            </PaneOption>
 
-          <PaneOption
-            borderTop="1px solid"
-            borderColor="hint"
-            onClick={handleLogout}
-          >
-            logout
-          </PaneOption>
-        </Dropdown>
+            <PaneOption onClick={toggleScheme}>
+              toggle {{ dark: 'light', light: 'dark' }[scheme]} mode
+            </PaneOption>
 
-        <CreateCollection onChange={setQuery} />
+            <PaneOption
+              borderTop="1px solid"
+              borderColor="hint"
+              onClick={handleLogout}
+            >
+              logout
+            </PaneOption>
+          </Dropdown>
+
+          <CreateCollection onChange={setQuery} />
+        </Stack>
+
+        {debouncedQuery ? (
+          <FilteredCollectionStubList query={debouncedQuery} />
+        ) : (
+          [
+            <Pagination
+              key="a"
+              href={hrefs.collections()}
+              page={page}
+              per={per}
+              total={me.counts.collections}
+            />,
+
+            <CollectionStubList key="b" collections={collections} />,
+
+            <Pagination
+              key="c"
+              href={hrefs.collections()}
+              page={page}
+              per={per}
+              total={me.counts.collections}
+            />,
+          ]
+        )}
       </Stack>
-
-      {debouncedQuery ? (
-        <FilteredCollectionStubList query={debouncedQuery} />
-      ) : (
-        [
-          <Pagination
-            key="a"
-            href={hrefs.collections()}
-            page={page}
-            per={per}
-            total={me.counts.collections}
-          />,
-
-          <CollectionStubList key="b" collections={collections} />,
-
-          <Pagination
-            key="c"
-            href={hrefs.collections()}
-            page={page}
-            per={per}
-            total={me.counts.collections}
-          />,
-        ]
-      )}
-    </Stack>
+    </>
   )
 }

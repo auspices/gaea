@@ -2,6 +2,7 @@ import React from 'react'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
 import { Link } from 'react-router-dom'
+import { Helmet } from 'react-helmet'
 import {
   Box,
   Button,
@@ -84,56 +85,62 @@ export const CollectionPage: React.FC<CollectionPageProps> = ({ id }) => {
   } = data
 
   return (
-    <RefetchProvider refetch={refetch}>
-      <Stack flex="1">
-        <Stack direction={['vertical', 'vertical', 'horizontal']}>
-          <Stack direction="horizontal">
-            <Button as={Link} to={hrefs.collections()}>
-              <Caret direction="left" mr={3} />
-              {username}
-            </Button>
+    <>
+      <Helmet>
+        <title>{[collection.title, username].join(' / ')}</title>
+      </Helmet>
 
-            <Dropdown flex="1" label={collection.title} zIndex={1}>
-              <PaneOption as={Link} to={hrefs.collection(collection.slug)}>
-                refresh
-              </PaneOption>
+      <RefetchProvider refetch={refetch}>
+        <Stack flex="1">
+          <Stack direction={['vertical', 'vertical', 'horizontal']}>
+            <Stack direction="horizontal">
+              <Button as={Link} to={hrefs.collections()}>
+                <Caret direction="left" mr={3} />
+                {username}
+              </Button>
 
-              <PaneOption
-                as={Link}
-                to={hrefs.collectionSettings(collection.slug)}
-              >
-                collection settings
-              </PaneOption>
-            </Dropdown>
+              <Dropdown flex="1" label={collection.title} zIndex={1}>
+                <PaneOption as={Link} to={hrefs.collection(collection.slug)}>
+                  refresh
+                </PaneOption>
+
+                <PaneOption
+                  as={Link}
+                  to={hrefs.collectionSettings(collection.slug)}
+                >
+                  collection settings
+                </PaneOption>
+              </Dropdown>
+            </Stack>
+
+            <AddToCollection id={collection.id} />
+
+            <SampleCollectionContent id={collection.slug}>
+              rand
+            </SampleCollectionContent>
           </Stack>
 
-          <AddToCollection id={collection.id} />
+          <CollectionSettings collection={collection} />
 
-          <SampleCollectionContent id={collection.slug}>
-            rand
-          </SampleCollectionContent>
+          <Pagination
+            href={hrefs.collection(collection.slug)}
+            page={page}
+            per={per}
+            total={collection.counts.contents}
+          />
+
+          <Box flex="1">
+            <CollectionContents collection={collection} />
+          </Box>
+
+          <Pagination
+            href={hrefs.collection(collection.slug)}
+            page={page}
+            per={per}
+            total={collection.counts.contents}
+          />
         </Stack>
-
-        <CollectionSettings collection={collection} />
-
-        <Pagination
-          href={hrefs.collection(collection.slug)}
-          page={page}
-          per={per}
-          total={collection.counts.contents}
-        />
-
-        <Box flex="1">
-          <CollectionContents collection={collection} />
-        </Box>
-
-        <Pagination
-          href={hrefs.collection(collection.slug)}
-          page={page}
-          per={per}
-          total={collection.counts.contents}
-        />
-      </Stack>
-    </RefetchProvider>
+      </RefetchProvider>
+    </>
   )
 }

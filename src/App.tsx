@@ -1,4 +1,5 @@
 import React from 'react'
+import { Helmet } from 'react-helmet'
 import { ApolloProvider } from '@apollo/react-hooks'
 import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
@@ -51,6 +52,11 @@ export default () => {
       <ApolloProvider client={client}>
         <ContextualRefsProvider>
           <ThemerProvider>
+            <Helmet
+              defaultTitle="loading / auspices"
+              titleTemplate="%s / auspices"
+            />
+
             <App />
           </ThemerProvider>
         </ContextualRefsProvider>
