@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react'
 import { useHistory } from 'react-router'
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
+import { Helmet } from 'react-helmet'
 import { Box, Button, Input, Stack, useAlerts } from '@auspices/eos'
 import { useHrefs } from '../../hooks'
 import { errorMessage } from '../../util/errors'
@@ -73,32 +74,38 @@ export const LoginPage: React.FC = () => {
   )
 
   return (
-    <Box as="form" width="100%" onSubmit={handleSubmit}>
-      <Stack direction={['vertical', 'vertical', 'horizontal']}>
-        <Input
-          flex="1"
-          name="username"
-          placeholder="username"
-          onChange={handleChange}
-          required
-          autoFocus
-          autoCorrect="off"
-          autoCapitalize="none"
-        />
+    <>
+      <Helmet>
+        <title>login</title>
+      </Helmet>
 
-        <Input
-          flex="1"
-          name="password"
-          placeholder="password"
-          type="password"
-          onChange={handleChange}
-          required
-        />
+      <Box as="form" width="100%" onSubmit={handleSubmit}>
+        <Stack direction={['vertical', 'vertical', 'horizontal']}>
+          <Input
+            flex="1"
+            name="username"
+            placeholder="username"
+            onChange={handleChange}
+            required
+            autoFocus
+            autoCorrect="off"
+            autoCapitalize="none"
+          />
 
-        <Button type="submit" flex="1" disabled={mode === Mode.Loading}>
-          login
-        </Button>
-      </Stack>
-    </Box>
+          <Input
+            flex="1"
+            name="password"
+            placeholder="password"
+            type="password"
+            onChange={handleChange}
+            required
+          />
+
+          <Button type="submit" flex="1" disabled={mode === Mode.Loading}>
+            login
+          </Button>
+        </Stack>
+      </Box>
+    </>
   )
 }

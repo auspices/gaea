@@ -1,4 +1,5 @@
 import React from 'react'
+import { Helmet } from 'react-helmet'
 import { Box, Pill, Stack } from '@auspices/eos'
 import { errorMessage, GraphQLError } from '../../util/errors'
 
@@ -31,45 +32,51 @@ export const ErrorFallback: React.FC<ErrorFallbackProps> = ({
   )
 
   return (
-    <Stack>
-      {error && (
-        <Pill as="h1" color="danger" borderColor="danger">
-          {errorMessage(error)}
+    <>
+      <Helmet>
+        <title>error</title>
+      </Helmet>
 
-          {requireLogin && (
-            <>
-              &nbsp;
-              <Box as="a" color="danger" href="/login">
-                login
-              </Box>
-            </>
-          )}
+      <Stack>
+        {error && (
+          <Pill as="h1" color="danger" borderColor="danger">
+            {errorMessage(error)}
+
+            {requireLogin && (
+              <>
+                &nbsp;
+                <Box as="a" color="danger" href="/login">
+                  login
+                </Box>
+              </>
+            )}
+          </Pill>
+        )}
+
+        <Pill as="h2" color="danger" borderColor="danger">
+          <span>
+            could a version perhaps be false somewhat in the way a jigsaw puzzle
+            can be wrongly put together, or a motor fail to run, a poster to
+            attract attention, or a camouflage to conceal?{' '}
+            <Box as="a" color="danger" href="/">
+              go home
+            </Box>
+          </span>
         </Pill>
-      )}
 
-      <Pill as="h2" color="danger" borderColor="danger">
-        <span>
-          could a version perhaps be false somewhat in the way a jigsaw puzzle
-          can be wrongly put together, or a motor fail to run, a poster to
-          attract attention, or a camouflage to conceal?{' '}
-          <Box as="a" color="danger" href="/">
-            go home
-          </Box>
-        </span>
-      </Pill>
-
-      {isDevelopment && (
-        <Pill
-          as="pre"
-          fontFamily="mono"
-          fontSize={0}
-          color="white"
-          backgroundColor="danger"
-          borderColor="danger"
-        >
-          {stackTrace}
-        </Pill>
-      )}
-    </Stack>
+        {isDevelopment && (
+          <Pill
+            as="pre"
+            fontFamily="mono"
+            fontSize={0}
+            color="white"
+            backgroundColor="danger"
+            borderColor="danger"
+          >
+            {stackTrace}
+          </Pill>
+        )}
+      </Stack>
+    </>
   )
 }
