@@ -84,7 +84,7 @@
     }
   },
   "devDependencies": {
-    "@types/jest": "25.1.4",
+    "@types/jest": "25.1.5",
     "@types/jwt-decode": "2.2.1",
     "@types/node": "13.11.0",
     "@types/qs": "6.9.1",
