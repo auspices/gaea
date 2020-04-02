@@ -8,7 +8,7 @@ import { CollectionContentEntityTextFragment } from '../../../../generated/types
 export const COLLECTION_CONTENT_ENTITY_TEXT_FRAGMENT = gql`
   fragment CollectionContentEntityTextFragment on Text {
     id
-    body
+    body: toString(length: 500)
   }
 `
 
@@ -16,7 +16,6 @@ const Container = styled(Box).attrs({
   fontSize: 0,
   p: 3,
   m: 5,
-  borderRadius: 4,
 })<{ truncate: boolean }>`
   position: relative;
   display: flex;
@@ -26,6 +25,8 @@ const Container = styled(Box).attrs({
   background-color: ${themeGet('colors.background')};
   max-height: 15rem;
   overflow: hidden;
+  width: 100%;
+  height: 100%;
 
   ${({ truncate, ...rest }) => {
     return (

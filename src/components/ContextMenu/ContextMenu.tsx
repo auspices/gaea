@@ -12,6 +12,7 @@ import {
 import { useActive } from '../../hooks'
 
 const Toggle = styled(PaneOption).attrs({ borderRadius: 4, px: 3, py: 3 })`
+  display: block;
   ${paneShadowMixin}
 `
 
@@ -40,7 +41,7 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({
   ])
 
   return (
-    <Box zIndex={1} {...rest}>
+    <Box zIndex={2} {...rest}>
       <Popper
         open={mode === Mode.Active}
         onClose={handleClose}

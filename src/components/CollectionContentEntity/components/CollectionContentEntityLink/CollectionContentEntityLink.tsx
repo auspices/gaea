@@ -23,15 +23,20 @@ export const CollectionContentEntityLink: React.FC<CollectionContentEntityLinkPr
   ...rest
 }) => (
   <Container
-    px={4}
-    py={3}
     border="1px solid"
     borderColor="external"
     borderRadius={4}
     color="external"
     fontSize={0}
+    height="100%"
+    width="100%"
+    display="flex"
+    flexDirection="column"
+    justifyContent="flex-end"
     {...rest}
   >
-    {link.name}
+    <Box px={4} py={3} borderTop="1px solid" borderColor="external">
+      {link.name}
+    </Box>
   </Container>
 )

@@ -79,7 +79,7 @@ export const CollectionContent: React.FC<CollectionContentProps> = ({
       {...rest}
     >
       {mode === Mode.Active && (
-        <ContextMenu position="absolute" top={0} right={0}>
+        <ContextMenu position="absolute" top="0.5rem" right="0.5rem">
           <RepositionCollectionContent
             contentId={content.id}
             action={ReorderAction.MOVE_TO_TOP}
