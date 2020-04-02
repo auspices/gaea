@@ -7,6 +7,16 @@
 // GraphQL fragment: ContentEntityFragment
 // ====================================================
 
+export interface ContentEntityFragment_Image_placeholder_urls {
+  __typename: "RetinaImage";
+  src: string;
+}
+
+export interface ContentEntityFragment_Image_placeholder {
+  __typename: "ResizedImage";
+  urls: ContentEntityFragment_Image_placeholder_urls;
+}
+
 export interface ContentEntityFragment_Image_resized_urls {
   __typename: "RetinaImage";
   _1x: string;
@@ -27,6 +37,7 @@ export interface ContentEntityFragment_Image {
   url: string;
   width: number;
   height: number;
+  placeholder: ContentEntityFragment_Image_placeholder;
   resized: ContentEntityFragment_Image_resized;
 }
 

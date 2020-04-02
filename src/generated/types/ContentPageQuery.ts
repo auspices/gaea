@@ -14,6 +14,16 @@ export interface ContentPageQuery_me_content_collection {
   title: string;
 }
 
+export interface ContentPageQuery_me_content_entity_Image_placeholder_urls {
+  __typename: "RetinaImage";
+  src: string;
+}
+
+export interface ContentPageQuery_me_content_entity_Image_placeholder {
+  __typename: "ResizedImage";
+  urls: ContentPageQuery_me_content_entity_Image_placeholder_urls;
+}
+
 export interface ContentPageQuery_me_content_entity_Image_resized_urls {
   __typename: "RetinaImage";
   _1x: string;
@@ -35,6 +45,7 @@ export interface ContentPageQuery_me_content_entity_Image {
   height: number;
   name: string;
   title: string;
+  placeholder: ContentPageQuery_me_content_entity_Image_placeholder;
   resized: ContentPageQuery_me_content_entity_Image_resized;
 }
 

@@ -10,6 +10,11 @@ export const CONTENT_ENTITY_IMAGE_FRAGMENT = gql`
     url
     width
     height
+    placeholder: resized(width: 25, height: 25) {
+      urls {
+        src: _1x
+      }
+    }
     resized(width: 900, height: 900) {
       width
       height
@@ -40,6 +45,8 @@ export const ContentEntityImage: React.FC<ContentEntityImageProps> = ({
       {...rest}
     >
       <ResponsiveImage
+        indicator
+        placeholder={image.placeholder.urls.src}
         srcs={[image.resized.urls._1x, image.resized.urls._2x]}
         alt={image.title}
         aspectWidth={image.resized.width}
