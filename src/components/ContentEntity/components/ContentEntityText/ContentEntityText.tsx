@@ -33,10 +33,20 @@ const Status = styled(Box).attrs({ m: 6 })`
   position: absolute;
   top: 0;
   right: 0;
+  width: ${themeGet('space.3')};
+  height: ${themeGet('space.3')};
   background-color: ${themeGet('colors.primary')};
   border-radius: 50%;
-  width: 0.5em;
-  height: 0.5em;
+`
+
+const Editor = styled(Input).attrs({
+  flex: 1,
+  p: 6,
+  borderWidth: 0,
+})`
+  &:focus {
+    box-shadow: none;
+  }
 `
 
 type State = {
@@ -134,15 +144,11 @@ export const ContentEntityText: React.FC<ContentEntityTextProps> = ({
     >
       {state.edited && <Status />}
 
-      <Input
-        ref={textareaRef}
+      <Editor
         as="textarea"
-        flex={1}
-        py={5}
-        px={6}
+        ref={textareaRef}
         defaultValue={text.body}
         onChange={handleChange}
-        borderWidth={0}
       />
     </Box>
   )

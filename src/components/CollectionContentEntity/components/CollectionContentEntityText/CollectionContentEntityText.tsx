@@ -8,22 +8,22 @@ import { CollectionContentEntityTextFragment } from '../../../../generated/types
 export const COLLECTION_CONTENT_ENTITY_TEXT_FRAGMENT = gql`
   fragment CollectionContentEntityTextFragment on Text {
     id
-    body: toString(length: 500)
+    body: toString(length: 800)
   }
 `
 
 const Container = styled(Box).attrs({
   fontSize: 0,
-  p: 3,
-  m: 5,
+  borderTop: '1px solid',
+  borderColor: 'hint',
+  color: 'primary',
+  py: 3,
+  px: [3, 0],
 })<{ truncate: boolean }>`
   position: relative;
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
-  color: ${themeGet('colors.primary')};
-  background-color: ${themeGet('colors.background')};
-  max-height: 15rem;
   overflow: hidden;
   width: 100%;
   height: 100%;
@@ -41,8 +41,8 @@ const Container = styled(Box).attrs({
           left: 0;
           height: 4rem;
           background: linear-gradient(
-            rgba(255, 255, 255, 0.001) 0%,
-            ${themeGet('colors.background')} 100%
+            rgba(255, 255, 0, 0.001) 0%,
+            ${themeGet('colors.background')(rest)} 100%
           );
         }
       `
@@ -56,4 +56,4 @@ type CollectionContentEntityTextProps = BoxProps & {
 
 export const CollectionContentEntityText: React.FC<CollectionContentEntityTextProps> = ({
   text,
-}) => <Container truncate={text.body.length > 150}>{text.body}</Container>
+}) => <Container truncate={text.body.length > 500}>{text.body}</Container>
