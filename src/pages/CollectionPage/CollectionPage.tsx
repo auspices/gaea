@@ -15,6 +15,7 @@ import {
 import { RefetchProvider, useHrefs, usePagination } from '../../hooks'
 import { AddToCollection } from '../../components/AddToCollection'
 import { Pagination } from '../../components/Pagination'
+import { BottomNav } from '../../components/BottomNav'
 import {
   COLLECTION_CONTENTS_FRAGMENT,
   CollectionContents,
@@ -28,6 +29,7 @@ import {
   CollectionPageQuery,
   CollectionPageQueryVariables,
 } from '../../generated/types/CollectionPageQuery'
+import { Z } from '../../util/zIndexes'
 
 export const COLLECTION_PAGE_QUERY = gql`
   query CollectionPageQuery($id: ID!, $page: Int, $per: Int) {
@@ -99,7 +101,7 @@ export const CollectionPage: React.FC<CollectionPageProps> = ({ id }) => {
                 {username}
               </Button>
 
-              <Dropdown flex="1" label={collection.title} zIndex={1}>
+              <Dropdown flex="1" label={collection.title} zIndex={Z.DROPDOWN}>
                 <PaneOption as={Link} to={hrefs.collection(collection.slug)}>
                   refresh
                 </PaneOption>
@@ -114,31 +116,36 @@ export const CollectionPage: React.FC<CollectionPageProps> = ({ id }) => {
             </Stack>
 
             <AddToCollection id={collection.id} />
-
-            <SampleCollectionContent id={collection.slug}>
-              rand
-            </SampleCollectionContent>
           </Stack>
 
           <CollectionSettings collection={collection} />
-
-          <Pagination
-            href={hrefs.collection(collection.slug)}
-            page={page}
-            per={per}
-            total={collection.counts.contents}
-          />
 
           <Box flex="1">
             <CollectionContents collection={collection} />
           </Box>
 
-          <Pagination
-            href={hrefs.collection(collection.slug)}
-            page={page}
-            per={per}
-            total={collection.counts.contents}
-          />
+          {collection.counts.contents > 0 && (
+            <BottomNav>
+              <Stack direction="horizontal">
+                <Pagination
+                  href={hrefs.collection(collection.slug)}
+                  page={page}
+                  per={per}
+                  total={collection.counts.contents}
+                  flex="1"
+                />
+
+                {collection.counts.contents > 1 && (
+                  <SampleCollectionContent
+                    id={collection.slug}
+                    flex={collection.counts.contents <= per ? 1 : null}
+                  >
+                    rand
+                  </SampleCollectionContent>
+                )}
+              </Stack>
+            </BottomNav>
+          )}
         </Stack>
       </RefetchProvider>
     </>

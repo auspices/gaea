@@ -7,6 +7,7 @@ import { useDebounce } from 'use-debounce'
 import { Helmet } from 'react-helmet'
 import { useHrefs, usePagination } from '../../hooks'
 import { Pagination } from '../../components/Pagination'
+import { BottomNav } from '../../components/BottomNav'
 import { CreateCollection } from '../../components/CreateCollection'
 import {
   COLLECTION_STUB_LIST_FRAGMENT,
@@ -17,6 +18,7 @@ import {
   CollectionsPageQuery,
   CollectionsPageQueryVariables,
 } from '../../generated/types/CollectionsPageQuery'
+import { Z } from '../../util/zIndexes'
 
 export const COLLECTIONS_PAGE_QUERY = gql`
   query CollectionsPageQuery($page: Int, $per: Int) {
@@ -83,7 +85,7 @@ export const CollectionsPage: React.FC<CollectionsPageProps> = () => {
 
       <Stack>
         <Stack direction="horizontal">
-          <Dropdown label={username} zIndex={1}>
+          <Dropdown label={username} zIndex={Z.DROPDOWN}>
             <PaneOption as={Link} to={hrefs.collections()}>
               refresh
             </PaneOption>
@@ -112,23 +114,16 @@ export const CollectionsPage: React.FC<CollectionsPageProps> = () => {
           <FilteredCollectionStubList query={debouncedQuery} />
         ) : (
           [
-            <Pagination
-              key="a"
-              href={hrefs.collections()}
-              page={page}
-              per={per}
-              total={me.counts.collections}
-            />,
+            <CollectionStubList key="a" collections={collections} />,
 
-            <CollectionStubList key="b" collections={collections} />,
-
-            <Pagination
-              key="c"
-              href={hrefs.collections()}
-              page={page}
-              per={per}
-              total={me.counts.collections}
-            />,
+            <BottomNav key="b">
+              <Pagination
+                href={hrefs.collections()}
+                page={page}
+                per={per}
+                total={me.counts.collections}
+              />
+            </BottomNav>,
           ]
         )}
       </Stack>

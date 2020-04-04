@@ -10,6 +10,7 @@ import {
   Popper,
 } from '@auspices/eos'
 import { useActive } from '../../hooks'
+import { Z } from '../../util/zIndexes'
 
 const Toggle = styled(PaneOption).attrs({ borderRadius: 4, px: 3, py: 3 })`
   display: block;
@@ -41,7 +42,7 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({
   ])
 
   return (
-    <Box zIndex={2} {...rest}>
+    <Box zIndex={Z.DROPDOWN} {...rest}>
       <Popper
         open={mode === Mode.Active}
         onClose={handleClose}

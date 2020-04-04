@@ -14,6 +14,7 @@ import {
 import { ContextualRefsProvider } from './hooks'
 import { initClient } from './apollo/initClient'
 import { Routes } from './Routes'
+import { Z } from './util/zIndexes'
 
 const client = initClient()
 
@@ -36,7 +37,7 @@ const App = () => {
             bottom={4}
             left={4}
             width="20rem"
-            zIndex={1}
+            zIndex={Z.ALERTS}
           />
 
           <Routes />

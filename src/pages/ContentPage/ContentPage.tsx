@@ -5,6 +5,7 @@ import { Link, useHistory } from 'react-router-dom'
 import { Box, Button, Caret, Loading, Stack } from '@auspices/eos'
 import { Helmet } from 'react-helmet'
 import { useHrefs } from '../../hooks/useHrefs'
+import { BottomNav } from '../../components/BottomNav'
 import {
   CONTENT_ENTITY_FRAGMENT,
   ContentEntity,
@@ -143,28 +144,6 @@ export const ContentPage: React.FC<ContentPageProps> = ({ id }) => {
           </Stack>
 
           <ContentEntityHeader entity={entity} />
-
-          <Stack direction="horizontal">
-            {content.previous && (
-              <Button
-                flex="1"
-                as={Link}
-                to={hrefs.content(content.previous.id)}
-              >
-                past
-              </Button>
-            )}
-
-            <SampleCollectionContent flex="1" id={collection.slug}>
-              rand
-            </SampleCollectionContent>
-
-            {content.next && (
-              <Button flex="1" as={Link} to={hrefs.content(content.next.id)}>
-                next
-              </Button>
-            )}
-          </Stack>
         </Stack>
 
         <ContentSettings content={content} />
@@ -179,6 +158,32 @@ export const ContentPage: React.FC<ContentPageProps> = ({ id }) => {
         >
           <ContentEntity entity={entity} />
         </Box>
+
+        {(content.previous || content.next) && (
+          <BottomNav>
+            <Stack direction="horizontal">
+              {content.previous && (
+                <Button
+                  flex="1"
+                  as={Link}
+                  to={hrefs.content(content.previous.id)}
+                >
+                  past
+                </Button>
+              )}
+
+              {content.next && (
+                <Button flex="1" as={Link} to={hrefs.content(content.next.id)}>
+                  next
+                </Button>
+              )}
+
+              <SampleCollectionContent id={collection.slug}>
+                rand
+              </SampleCollectionContent>
+            </Stack>
+          </BottomNav>
+        )}
       </Stack>
     </>
   )

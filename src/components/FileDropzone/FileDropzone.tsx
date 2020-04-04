@@ -4,6 +4,9 @@ import { useDropzone } from 'react-dropzone'
 import { Box, useAlerts } from '@auspices/eos'
 import { ACCEPT, FilesUploader } from '../FilesUploader'
 import { errorMessage } from '../../util/errors'
+import { hexAlpha } from '../../util/hexAlpha'
+import { themeGet } from '@styled-system/theme-get'
+import { Z } from '../../util/zIndexes'
 
 enum Mode {
   Resting,
@@ -26,8 +29,9 @@ export const Overlay = styled(Box)<{ mode: Mode }>`
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 1;
-  background-color: rgba(255, 255, 255, 0.9);
+  z-index: ${Z.FILE_DROPZONE};
+  background-color: ${(props) =>
+    hexAlpha(themeGet('colors.background')(props), 0.9)};
   user-select: none;
 `
 

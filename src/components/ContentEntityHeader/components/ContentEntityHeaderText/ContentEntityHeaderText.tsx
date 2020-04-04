@@ -2,6 +2,7 @@ import React from 'react'
 import gql from 'graphql-tag'
 import { Dropdown, PaneOption } from '@auspices/eos'
 import { ContentEntityHeaderTextFragment } from '../../../../generated/types/ContentEntityHeaderTextFragment'
+import { Z } from '../../../../util/zIndexes'
 
 export const CONTENT_ENTITY_HEADER_TEXT_FRAGMENT = gql`
   fragment ContentEntityHeaderTextFragment on Text {
@@ -20,7 +21,7 @@ export const ContentEntityHeaderText: React.FC<ContentEntityHeaderTextProps> = (
   ...rest
 }) => {
   return (
-    <Dropdown label={text.name} flex="1" zIndex={1} {...rest}>
+    <Dropdown label={text.name} flex="1" zIndex={Z.DROPDOWN} {...rest}>
       <PaneOption
         as="a"
         href={`https://www.google.com/search?q=${text.body}`}
