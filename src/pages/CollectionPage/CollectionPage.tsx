@@ -40,6 +40,7 @@ export const COLLECTION_PAGE_QUERY = gql`
       collection(id: $id) {
         id
         slug
+        key
         title
         counts {
           contents
@@ -112,6 +113,18 @@ export const CollectionPage: React.FC<CollectionPageProps> = ({ id }) => {
                 >
                   collection settings
                 </PaneOption>
+
+                {collection.key ? (
+                  <PaneOption
+                    as="a"
+                    href={hrefs.data(collection.key)}
+                    target="_blank"
+                  >
+                    data
+                  </PaneOption>
+                ) : (
+                  <PaneOption>publish</PaneOption>
+                )}
               </Dropdown>
             </Stack>
 

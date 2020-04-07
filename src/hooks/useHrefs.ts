@@ -18,5 +18,7 @@ export const useHrefs = () => {
 
     content: (id: number, username?: string) =>
       `/${__username__ || username}/x/${id}`,
+
+    data: (key: string) => `https://glyph.labs.auspic.es/graph/${key}`,
   }
 }
