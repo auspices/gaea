@@ -57,7 +57,7 @@ export interface CollectionPageQuery_me_collection {
   __typename: "Collection";
   id: number;
   slug: string;
-  key: string;
+  key: string | null;
   title: string;
   counts: CollectionPageQuery_me_collection_counts;
   contents: CollectionPageQuery_me_collection_contents[];

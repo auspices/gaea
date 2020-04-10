@@ -16,6 +16,8 @@ import { RefetchProvider, useHrefs, usePagination } from '../../hooks'
 import { AddToCollection } from '../../components/AddToCollection'
 import { Pagination } from '../../components/Pagination'
 import { BottomNav } from '../../components/BottomNav'
+import { PublishCollection } from '../../components/PublishCollection'
+import { UnpublishCollection } from '../../components/UnpublishCollection'
 import {
   COLLECTION_CONTENTS_FRAGMENT,
   CollectionContents,
@@ -111,19 +113,26 @@ export const CollectionPage: React.FC<CollectionPageProps> = ({ id }) => {
                   as={Link}
                   to={hrefs.collectionSettings(collection.slug)}
                 >
-                  collection settings
+                  settings
                 </PaneOption>
 
                 {collection.key ? (
-                  <PaneOption
-                    as="a"
-                    href={hrefs.data(collection.key)}
-                    target="_blank"
-                  >
-                    data
-                  </PaneOption>
+                  <>
+                    <PaneOption
+                      key="data"
+                      as="a"
+                      href={hrefs.data(collection.key)}
+                      target="_blank"
+                    >
+                      data
+                    </PaneOption>
+
+                    <UnpublishCollection id={collection.id} />
+
+                    <PublishCollection id={collection.id} regenerate />
+                  </>
                 ) : (
-                  <PaneOption>publish</PaneOption>
+                  <PublishCollection id={collection.id} />
                 )}
               </Dropdown>
             </Stack>

@@ -91,7 +91,7 @@ export const CollectionsPage: React.FC<CollectionsPageProps> = () => {
             </PaneOption>
 
             <PaneOption as={Link} to={hrefs.account()}>
-              account settings
+              settings
             </PaneOption>
 
             <PaneOption onClick={toggleScheme}>
