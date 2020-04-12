@@ -95,7 +95,7 @@ export const CollectionsPage: React.FC<CollectionsPageProps> = () => {
             </PaneOption>
 
             <PaneOption onClick={toggleScheme}>
-              toggle {{ dark: 'light', light: 'dark' }[scheme]} mode
+              {{ dark: 'light', light: 'dark' }[scheme]}
             </PaneOption>
 
             <PaneOption
