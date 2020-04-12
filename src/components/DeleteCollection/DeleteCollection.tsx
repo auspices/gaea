@@ -94,7 +94,12 @@ export const DeleteCollection: React.FC<DeleteCollectionProps> = ({
       {mode === Mode.Confirm && (
         <form onSubmit={handleDelete}>
           <Stack>
-            <Pill color="danger" borderColor="danger" alignItems="center">
+            <Pill
+              color="danger"
+              borderColor="danger"
+              alignItems="center"
+              zIndex={1}
+            >
               are you sure?
             </Pill>
 

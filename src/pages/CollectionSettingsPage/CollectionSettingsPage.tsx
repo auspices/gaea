@@ -167,10 +167,6 @@ export const CollectionSettingsPage: React.FC<CollectionSettingsPageProps> = ({
           </Button>
         </Stack>
 
-        <Pill as="h2" color="danger" borderColor="danger" zIndex={1}>
-          danger
-        </Pill>
-
         <DeleteCollection id={id} confirmation={collection.title} />
       </Stack>
     </>
