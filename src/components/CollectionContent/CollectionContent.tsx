@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 import gql from 'graphql-tag'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import { pillFocusMixin } from '@auspices/eos'
 import { ContextMenu } from '../ContextMenu'
 import { RemoveFromCollection } from '../RemoveFromCollection'
 import {
@@ -13,6 +14,7 @@ import {
   CollectionContentEntity,
 } from '../CollectionContentEntity'
 import { useHrefs } from '../../hooks'
+
 import { CollectionContentFragment } from '../../generated/types/CollectionContentFragment'
 
 export const COLLECTION_CONTENT_FRAGMENT = gql`
@@ -33,6 +35,12 @@ const Container = styled(Link)`
   height: 100%;
   text-decoration: none;
   position: relative;
+  transition: box-shadow 250ms ease;
+  border-radius: 4px;
+
+  &:focus {
+    ${pillFocusMixin}
+  }
 `
 
 enum Mode {
