@@ -123,6 +123,8 @@ export const CollectionPage: React.FC<CollectionPageProps> = ({ id }) => {
                       as="a"
                       href={hrefs.data(collection.key)}
                       target="_blank"
+                      borderTop="1px solid"
+                      borderColor="hint"
                     >
                       data
                     </PaneOption>
@@ -132,7 +134,11 @@ export const CollectionPage: React.FC<CollectionPageProps> = ({ id }) => {
                     <PublishCollection id={collection.id} regenerate />
                   </>
                 ) : (
-                  <PublishCollection id={collection.id} />
+                  <PublishCollection
+                    borderTop="1px solid"
+                    borderColor="hint"
+                    id={collection.id}
+                  />
                 )}
               </Dropdown>
             </Stack>
