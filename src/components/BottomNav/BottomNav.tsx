@@ -6,6 +6,8 @@ import { hexAlpha } from '../../util/hexAlpha'
 import { Z } from '../../util/zIndexes'
 
 const Container = styled(Box)`
+  margin-bottom: env(safe-area-inset-bottom);
+
   > * {
     backdrop-filter: blur(${themeGet('space.3')});
   }
