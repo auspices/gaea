@@ -21,6 +21,7 @@ export const REMOVE_FROM_COLLECTION_MUTATION = gql`
 
 enum Mode {
   Resting,
+  Confirm,
   Deleting,
   Error,
 }
@@ -50,6 +51,11 @@ export const RemoveFromCollection = React.forwardRef(
       async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault()
 
+        if (mode === Mode.Resting) {
+          setMode(Mode.Confirm)
+          return
+        }
+
         setMode(Mode.Deleting)
 
         try {
@@ -64,17 +70,31 @@ export const RemoveFromCollection = React.forwardRef(
 
         refetch()
       },
-      [contentId, refetch, removeFromCollection, sendError, sendNotification]
+      [
+        contentId,
+        mode,
+        refetch,
+        removeFromCollection,
+        sendError,
+        sendNotification,
+      ]
     )
 
     return (
       <PaneOption
         ref={forwardedRef}
         onClick={handleClick}
-        disabled={mode !== Mode.Resting}
+        disabled={mode === Mode.Deleting}
         {...rest}
       >
-        {children}
+        {
+          {
+            [Mode.Resting]: children,
+            [Mode.Confirm]: 'confirm',
+            [Mode.Deleting]: 'deleting',
+            [Mode.Error]: 'error',
+          }[mode]
+        }
       </PaneOption>
     )
   }
