@@ -22,6 +22,7 @@ export const UNPUBLISH_COLLECTION_MUTATION = gql`
 
 enum Mode {
   Resting,
+  Confirm,
   Saving,
   Error,
 }
@@ -48,6 +49,11 @@ export const UnpublishCollection = React.forwardRef(
       async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault()
 
+        if (mode === Mode.Resting) {
+          setMode(Mode.Confirm)
+          return
+        }
+
         setMode(Mode.Saving)
 
         try {
@@ -61,17 +67,24 @@ export const UnpublishCollection = React.forwardRef(
 
         refetch()
       },
-      [id, refetch, sendError, sendNotification, unpublish]
+      [id, mode, refetch, sendError, sendNotification, unpublish]
     )
 
     return (
       <PaneOption
         ref={forwardedRef}
         onClick={handleClick}
-        disabled={mode !== Mode.Resting}
+        disabled={mode === Mode.Saving}
         {...rest}
       >
-        unpublish
+        {
+          {
+            [Mode.Resting]: 'unpublish',
+            [Mode.Confirm]: 'confirm',
+            [Mode.Saving]: 'updating',
+            [Mode.Error]: 'error',
+          }[mode]
+        }
       </PaneOption>
     )
   }
