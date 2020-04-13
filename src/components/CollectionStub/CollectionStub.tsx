@@ -34,26 +34,22 @@ const Delta = styled(Box)`
   text-overflow: ellipsis;
   max-width: 20%;
   opacity: 0;
-  transition: opacity 125ms;
+  transition: opacity 125ms, transform 125ms;
+  transform: translateX(-10%);
 `
 
 const selectedMixin = css`
-  > ${Title} {
-    text-decoration: underline;
-  }
-
   > ${Count} {
     color: ${themeGet('colors.secondary')};
   }
 
   > ${Delta} {
     opacity: 1;
+    transform: translateX(0);
   }
 `
 
 const Container = styled(Pill)<PillProps & { selected?: boolean }>`
-  text-decoration: none;
-
   ${({ selected }) =>
     selected &&
     css`
