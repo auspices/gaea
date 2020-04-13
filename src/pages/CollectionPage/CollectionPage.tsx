@@ -148,7 +148,7 @@ export const CollectionPage: React.FC<CollectionPageProps> = ({ id }) => {
 
           {collection.counts.contents > 0 && (
             <BottomNav>
-              <Stack direction="horizontal">
+              <Stack direction={['vertical', 'vertical', 'horizontal']}>
                 <Pagination
                   href={hrefs.collection(collection.slug)}
                   page={page}
