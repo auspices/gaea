@@ -40,4 +40,19 @@ export interface CollectionContentEntityFragment_Link {
   name: string;
 }
 
-export type CollectionContentEntityFragment = CollectionContentEntityFragment_Text | CollectionContentEntityFragment_Image | CollectionContentEntityFragment_Link;
+export interface CollectionContentEntityFragment_Collection_counts {
+  __typename: "CollectionCounts";
+  contents: number;
+}
+
+export interface CollectionContentEntityFragment_Collection {
+  __typename: "Collection";
+  id: number;
+  slug: string;
+  title: string;
+  updatedAt: string;
+  name: string;
+  counts: CollectionContentEntityFragment_Collection_counts;
+}
+
+export type CollectionContentEntityFragment = CollectionContentEntityFragment_Text | CollectionContentEntityFragment_Image | CollectionContentEntityFragment_Link | CollectionContentEntityFragment_Collection;

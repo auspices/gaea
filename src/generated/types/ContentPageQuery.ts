@@ -63,7 +63,22 @@ export interface ContentPageQuery_me_content_entity_Link {
   name: string;
 }
 
-export type ContentPageQuery_me_content_entity = ContentPageQuery_me_content_entity_Image | ContentPageQuery_me_content_entity_Text | ContentPageQuery_me_content_entity_Link;
+export interface ContentPageQuery_me_content_entity_Collection_counts {
+  __typename: "CollectionCounts";
+  contents: number;
+}
+
+export interface ContentPageQuery_me_content_entity_Collection {
+  __typename: "Collection";
+  id: number;
+  name: string;
+  slug: string;
+  title: string;
+  updatedAt: string;
+  counts: ContentPageQuery_me_content_entity_Collection_counts;
+}
+
+export type ContentPageQuery_me_content_entity = ContentPageQuery_me_content_entity_Image | ContentPageQuery_me_content_entity_Text | ContentPageQuery_me_content_entity_Link | ContentPageQuery_me_content_entity_Collection;
 
 export interface ContentPageQuery_me_content_next {
   __typename: "Content";

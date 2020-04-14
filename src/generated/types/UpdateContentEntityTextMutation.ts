@@ -10,7 +10,7 @@ import { EntityTypes } from "./globalTypes";
 // ====================================================
 
 export interface UpdateContentEntityTextMutation_updateEntity_entity {
-  __typename: "Image" | "Text" | "Link";
+  __typename: "Image" | "Text" | "Link" | "Collection";
 }
 
 export interface UpdateContentEntityTextMutation_updateEntity {

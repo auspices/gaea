@@ -30,4 +30,11 @@ export interface ContentEntityHeaderFragment_Link {
   name: string;
 }
 
-export type ContentEntityHeaderFragment = ContentEntityHeaderFragment_Image | ContentEntityHeaderFragment_Text | ContentEntityHeaderFragment_Link;
+export interface ContentEntityHeaderFragment_Collection {
+  __typename: "Collection";
+  id: number;
+  name: string;
+  slug: string;
+}
+
+export type ContentEntityHeaderFragment = ContentEntityHeaderFragment_Image | ContentEntityHeaderFragment_Text | ContentEntityHeaderFragment_Link | ContentEntityHeaderFragment_Collection;

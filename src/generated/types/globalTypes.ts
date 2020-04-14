@@ -8,6 +8,7 @@
 //==============================================================
 
 export enum EntityTypes {
+  COLLECTION = "COLLECTION",
   IMAGE = "IMAGE",
   LINK = "LINK",
   TEXT = "TEXT",

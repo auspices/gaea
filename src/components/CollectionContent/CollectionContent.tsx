@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 import gql from 'graphql-tag'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { pillFocusMixin } from '@auspices/eos'
+import { Box, pillFocusMixin } from '@auspices/eos'
 import { ContextMenu } from '../ContextMenu'
 import { RemoveFromCollection } from '../RemoveFromCollection'
 import {
@@ -14,8 +14,8 @@ import {
   CollectionContentEntity,
 } from '../CollectionContentEntity'
 import { useHrefs } from '../../hooks'
-
 import { CollectionContentFragment } from '../../generated/types/CollectionContentFragment'
+import { Z } from '../../util/zIndexes'
 
 export const COLLECTION_CONTENT_FRAGMENT = gql`
   fragment CollectionContentFragment on Content {
@@ -87,38 +87,40 @@ export const CollectionContent: React.FC<CollectionContentProps> = ({
       {...rest}
     >
       {mode === Mode.Active && (
-        <ContextMenu position="absolute" top="0.5rem" right="0.5rem">
-          <RepositionCollectionContent
-            contentId={content.id}
-            action={ReorderAction.MOVE_TO_TOP}
-          />
+        <Box position="absolute" top={3} right={3} zIndex={Z.DROPDOWN}>
+          <ContextMenu>
+            <RepositionCollectionContent
+              contentId={content.id}
+              action={ReorderAction.MOVE_TO_TOP}
+            />
 
-          <RepositionCollectionContent
-            contentId={content.id}
-            action={ReorderAction.MOVE_TO_BOTTOM}
-          />
+            <RepositionCollectionContent
+              contentId={content.id}
+              action={ReorderAction.MOVE_TO_BOTTOM}
+            />
 
-          <RepositionCollectionContent
-            contentId={content.id}
-            action={ReorderAction.MOVE_DOWN}
-            borderTop="1px solid"
-            borderColor="hint"
-          />
+            <RepositionCollectionContent
+              contentId={content.id}
+              action={ReorderAction.MOVE_DOWN}
+              borderTop="1px solid"
+              borderColor="hint"
+            />
 
-          <RepositionCollectionContent
-            contentId={content.id}
-            action={ReorderAction.MOVE_UP}
-          />
+            <RepositionCollectionContent
+              contentId={content.id}
+              action={ReorderAction.MOVE_UP}
+            />
 
-          <RemoveFromCollection
-            collectionId={collectionId}
-            contentId={content.id}
-            borderTop="1px solid"
-            borderColor="hint"
-          >
-            delete this {content.entity.__typename.toLowerCase()}
-          </RemoveFromCollection>
-        </ContextMenu>
+            <RemoveFromCollection
+              collectionId={collectionId}
+              contentId={content.id}
+              borderTop="1px solid"
+              borderColor="hint"
+            >
+              remove this {content.entity.__typename.toLowerCase()}
+            </RemoveFromCollection>
+          </ContextMenu>
+        </Box>
       )}
 
       <CollectionContentEntity entity={content.entity} />

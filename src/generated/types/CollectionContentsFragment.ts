@@ -40,7 +40,22 @@ export interface CollectionContentsFragment_contents_entity_Link {
   name: string;
 }
 
-export type CollectionContentsFragment_contents_entity = CollectionContentsFragment_contents_entity_Text | CollectionContentsFragment_contents_entity_Image | CollectionContentsFragment_contents_entity_Link;
+export interface CollectionContentsFragment_contents_entity_Collection_counts {
+  __typename: "CollectionCounts";
+  contents: number;
+}
+
+export interface CollectionContentsFragment_contents_entity_Collection {
+  __typename: "Collection";
+  id: number;
+  slug: string;
+  title: string;
+  updatedAt: string;
+  name: string;
+  counts: CollectionContentsFragment_contents_entity_Collection_counts;
+}
+
+export type CollectionContentsFragment_contents_entity = CollectionContentsFragment_contents_entity_Text | CollectionContentsFragment_contents_entity_Image | CollectionContentsFragment_contents_entity_Link | CollectionContentsFragment_contents_entity_Collection;
 
 export interface CollectionContentsFragment_contents {
   __typename: "Content";
