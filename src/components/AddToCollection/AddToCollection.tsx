@@ -1,12 +1,16 @@
 import React, { useCallback, useState } from 'react'
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
-import { Button, Input, Loading, useAlerts } from '@auspices/eos'
-import { usePagination, useRefetch } from '../../hooks'
+import { useDebounce } from 'use-debounce'
+import { Box, Button, ClearableInput, Loading, useAlerts } from '@auspices/eos'
+import { useContextualRef, usePagination, useRefetch } from '../../hooks'
 import { errorMessage } from '../../util/errors'
 import { Form, FormProps } from '../Form'
 import { FileDropzone } from '../FileDropzone'
+import { AddToCollectionExtended } from '../AddToCollectionExtended'
 import { useHistory } from 'react-router'
+import { Z } from '../../util/zIndexes'
+import { AddToCollectionMutation } from '../../generated/types/AddToCollectionMutation'
 
 const ADD_TO_COLLECTION_MUTATION = gql`
   mutation AddToCollectionMutation($id: ID!, $value: String!) {
@@ -36,10 +40,15 @@ export const AddToCollection: React.FC<AddToCollectionProps> = ({
   const { refetch } = useRefetch()
   const { page, per, encode } = usePagination()
   const { sendNotification, sendError } = useAlerts()
-  const [addToCollection] = useMutation(ADD_TO_COLLECTION_MUTATION)
+  const [addToCollection] = useMutation<AddToCollectionMutation>(
+    ADD_TO_COLLECTION_MUTATION
+  )
   const [mode, setMode] = useState(Mode.Resting)
   const [value, setValue] = useState('')
   const [inputKey, setInputKey] = useState(new Date().getTime())
+  const [debouncedValue] = useDebounce(value, 500)
+
+  const { setContextualRef } = useContextualRef()
 
   const handleSubmit = useCallback(
     async (event: React.FormEvent<HTMLFormElement>) => {
@@ -85,10 +94,7 @@ export const AddToCollection: React.FC<AddToCollectionProps> = ({
     ]
   )
 
-  const handleChange = useCallback(
-    ({ target: { value } }) => setValue(value),
-    []
-  )
+  const handleChange = useCallback((value: string) => setValue(value), [])
 
   const handleUpload = useCallback(
     async (url: string) => {
@@ -117,6 +123,11 @@ export const AddToCollection: React.FC<AddToCollectionProps> = ({
     setInputKey(new Date().getTime())
   }, [])
 
+  const handleDone = useCallback(() => {
+    setValue('')
+    setInputKey(new Date().getTime())
+  }, [])
+
   return (
     <>
       <FileDropzone
@@ -125,46 +136,62 @@ export const AddToCollection: React.FC<AddToCollectionProps> = ({
         onComplete={handleComplete}
       />
 
-      <Form onSubmit={handleSubmit} {...rest}>
-        <Loading
-          px={0}
-          py={0}
-          borderWidth={0}
-          flex={1}
-          loading={mode === Mode.Adding}
-        >
-          <Input
-            key={inputKey}
+      <Box position="relative" flex={1} {...rest}>
+        <Form onSubmit={handleSubmit}>
+          <Loading
+            px={0}
+            py={0}
             borderWidth={0}
             flex={1}
-            placeholder="add to this collection"
-            onChange={handleChange}
-            disabled={mode === Mode.Adding}
-            required
-            autoFocus
-            title=""
-            autoComplete="off"
-          />
-        </Loading>
-
-        {value !== '' && (
-          <Button
-            borderWidth={0}
-            borderLeft="1px solid"
-            type="submit"
-            disabled={mode === Mode.Adding}
-            title="or press <enter>"
+            loading={mode === Mode.Adding}
           >
-            {
+            <ClearableInput
+              ref={setContextualRef('collectionInput')}
+              key={inputKey}
+              borderWidth={0}
+              flex={1}
+              placeholder="add to this collection"
+              onChange={handleChange}
+              disabled={mode === Mode.Adding}
+              required
+              autoFocus
+              title=""
+              autoComplete="off"
+            />
+          </Loading>
+
+          {value !== '' && (
+            <Button
+              borderWidth={0}
+              borderLeft="1px solid"
+              type="submit"
+              disabled={mode === Mode.Adding}
+              title="or press <enter>"
+            >
               {
-                [Mode.Resting]: 'add',
-                [Mode.Adding]: 'add',
-                [Mode.Error]: 'error',
-              }[mode]
-            }
-          </Button>
+                {
+                  [Mode.Resting]: 'add',
+                  [Mode.Adding]: 'add',
+                  [Mode.Error]: 'error',
+                }[mode]
+              }
+            </Button>
+          )}
+        </Form>
+
+        {value !== '' && debouncedValue !== '' && (
+          <AddToCollectionExtended
+            value={debouncedValue}
+            position="absolute"
+            top="100%"
+            left={0}
+            right={0}
+            mt="-1px"
+            zIndex={Z.DROPDOWN}
+            onDone={handleDone}
+          />
         )}
-      </Form>
+      </Box>
     </>
   )
 }

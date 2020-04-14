@@ -12,7 +12,14 @@ import {
 import { useActive } from '../../hooks'
 import { Z } from '../../util/zIndexes'
 
-const Toggle = styled(PaneOption).attrs({ borderRadius: 4, px: 3, py: 3 })`
+export const ContextMenuToggle = styled(PaneOption).attrs({
+  borderRadius: 4,
+  px: 3,
+  py: 3,
+  border: '1px solid',
+  borderColor: 'background',
+  backgroundColor: 'background',
+})`
   display: block;
   ${paneShadowMixin}
 `
@@ -47,9 +54,9 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({
         open={mode === Mode.Active}
         onClose={handleClose}
         anchor={
-          <Toggle onClick={handleClick} backgroundColor="background">
+          <ContextMenuToggle onClick={handleClick}>
             <Ellipsis />
-          </Toggle>
+          </ContextMenuToggle>
         }
       >
         <Pane>{children}</Pane>

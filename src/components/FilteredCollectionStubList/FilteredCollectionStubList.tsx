@@ -1,5 +1,6 @@
 import React from 'react'
 import gql from 'graphql-tag'
+import { useQuery } from '@apollo/react-hooks'
 import { Loading } from '@auspices/eos'
 import {
   COLLECTION_STUB_LIST_FRAGMENT,
@@ -9,7 +10,6 @@ import {
   FilteredCollectionStubListQuery,
   FilteredCollectionStubListQueryVariables,
 } from '../../generated/types/FilteredCollectionStubListQuery'
-import { useQuery } from '@apollo/react-hooks'
 
 export const FILTERED_COLLECTION_STUB_LIST_QUERY = gql`
   query FilteredCollectionStubListQuery($query: String!) {

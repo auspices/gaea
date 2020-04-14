@@ -31,7 +31,14 @@ export const CollectionStubList: React.FC<CollectionStubListProps> = ({
   const { getContextualRef } = useContextualRef()
 
   const handleEnter = useCallback(
-    (collection: CollectionStubListFragment) => {
+    ({
+      event,
+      element: collection,
+    }: {
+      event: KeyboardEvent
+      element: CollectionStubListFragment
+    }) => {
+      event.preventDefault()
       history.push(hrefs.collection(collection.slug))
     },
     [history, hrefs]

@@ -45,7 +45,22 @@ export interface CollectionPageQuery_me_collection_contents_entity_Link {
   name: string;
 }
 
-export type CollectionPageQuery_me_collection_contents_entity = CollectionPageQuery_me_collection_contents_entity_Text | CollectionPageQuery_me_collection_contents_entity_Image | CollectionPageQuery_me_collection_contents_entity_Link;
+export interface CollectionPageQuery_me_collection_contents_entity_Collection_counts {
+  __typename: "CollectionCounts";
+  contents: number;
+}
+
+export interface CollectionPageQuery_me_collection_contents_entity_Collection {
+  __typename: "Collection";
+  id: number;
+  slug: string;
+  title: string;
+  updatedAt: string;
+  name: string;
+  counts: CollectionPageQuery_me_collection_contents_entity_Collection_counts;
+}
+
+export type CollectionPageQuery_me_collection_contents_entity = CollectionPageQuery_me_collection_contents_entity_Text | CollectionPageQuery_me_collection_contents_entity_Image | CollectionPageQuery_me_collection_contents_entity_Link | CollectionPageQuery_me_collection_contents_entity_Collection;
 
 export interface CollectionPageQuery_me_collection_contents {
   __typename: "Content";

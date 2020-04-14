@@ -12,23 +12,23 @@ import {
   CONTENT_ENTITY_HEADER_LINK_FRAGMENT,
   ContentEntityHeaderLink,
 } from './components/ContentEntityHeaderLink'
+import {
+  CONTENT_ENTITY_HEADER_COLLECTION_FRAGMENT,
+  ContentEntityHeaderCollection,
+} from './components/ContentEntityHeaderCollection'
 import { ContentEntityHeaderFragment } from '../../generated/types/ContentEntityHeaderFragment'
 
 export const CONTENT_ENTITY_HEADER_FRAGMENT = gql`
   fragment ContentEntityHeaderFragment on Entity {
-    ... on Image {
-      ...ContentEntityHeaderImageFragment
-    }
-    ... on Text {
-      ...ContentEntityHeaderTextFragment
-    }
-    ... on Link {
-      ...ContentEntityHeaderLinkFragment
-    }
+    ...ContentEntityHeaderImageFragment
+    ...ContentEntityHeaderTextFragment
+    ...ContentEntityHeaderLinkFragment
+    ...ContentEntityHeaderCollectionFragment
   }
   ${CONTENT_ENTITY_HEADER_IMAGE_FRAGMENT}
   ${CONTENT_ENTITY_HEADER_TEXT_FRAGMENT}
   ${CONTENT_ENTITY_HEADER_LINK_FRAGMENT}
+  ${CONTENT_ENTITY_HEADER_COLLECTION_FRAGMENT}
 `
 
 type ContentEntityHeader = {
@@ -46,5 +46,7 @@ export const ContentEntityHeader: React.FC<ContentEntityHeader> = ({
       return <ContentEntityHeaderText text={entity} {...rest} />
     case 'Link':
       return <ContentEntityHeaderLink link={entity} {...rest} />
+    case 'Collection':
+      return <ContentEntityHeaderCollection collection={entity} {...rest} />
   }
 }

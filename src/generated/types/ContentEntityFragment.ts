@@ -53,4 +53,18 @@ export interface ContentEntityFragment_Link {
   url: string;
 }
 
-export type ContentEntityFragment = ContentEntityFragment_Image | ContentEntityFragment_Text | ContentEntityFragment_Link;
+export interface ContentEntityFragment_Collection_counts {
+  __typename: "CollectionCounts";
+  contents: number;
+}
+
+export interface ContentEntityFragment_Collection {
+  __typename: "Collection";
+  id: number;
+  title: string;
+  slug: string;
+  updatedAt: string;
+  counts: ContentEntityFragment_Collection_counts;
+}
+
+export type ContentEntityFragment = ContentEntityFragment_Image | ContentEntityFragment_Text | ContentEntityFragment_Link | ContentEntityFragment_Collection;
