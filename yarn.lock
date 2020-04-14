@@ -12057,7 +12057,14 @@ use-debounce@3.4.1:
   resolved "https://registry.yarnpkg.com/use-debounce/-/use-debounce-3.4.1.tgz#361a20e583c1bd4a44f8b29a26793a52a0b84d2c"
   integrity sha512-KHZPsL+cZvOt/ZAsHTcoAK65ImXU0iG9FDeofuj9uJTdUULF6Gjws8HpK+JlIjZpZ7LTqPHZtEknc+Im4cB3AA==
 
-use-keyboard-list-navigation@1.5.0, use-keyboard-list-navigation@^1.5.0:
+use-keyboard-list-navigation@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/use-keyboard-list-navigation/-/use-keyboard-list-navigation-2.0.0.tgz#e16c33ce8c337e066febe00b251b55a9e4b79dfc"
+  integrity sha512-cGE9Bsbu4JevuwMls5mFMBow5ROgrhRnoVg6Owv1oXwS65NjECjkVsGS7W3U/9BGpDKeSL+zKuqcINpCzmHtCA==
+  dependencies:
+    map-cursor-to-max "^1.0.0"
+
+use-keyboard-list-navigation@^1.5.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/use-keyboard-list-navigation/-/use-keyboard-list-navigation-1.5.0.tgz#51af270ebdeeea2efc19bb7ac7492e8c3b1feaab"
   integrity sha512-5HU8X9phyhY6nwxqeex9ptzNNHrA86mgkJ6Ln3tZV1hLdZ3ysLyPfNDmwg2TNi7+Au2LNWRXw/nuQ1rzZlRshw==
