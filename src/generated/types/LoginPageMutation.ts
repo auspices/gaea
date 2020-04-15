@@ -9,6 +9,7 @@
 
 export interface LoginPageMutation_login_user {
   __typename: "User";
+  id: number;
   slug: string;
 }
 

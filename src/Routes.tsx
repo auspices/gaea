@@ -4,6 +4,7 @@ import { useHrefs } from './hooks'
 import { parseRoute } from './util/parseRoute'
 import { RedirectHome } from './components/RedirectHome'
 import { LoginPage } from './pages/LoginPage'
+import { RegisterPage } from './pages/RegisterPage'
 import { CollectionsPage } from './pages/CollectionsPage'
 import { CollectionPage } from './pages/CollectionPage'
 import { CollectionSettingsPage } from './pages/CollectionSettingsPage'
@@ -51,6 +52,16 @@ export const Routes = () => {
         component={() => (
           <ErrorBoundary>
             <LoginPage />
+          </ErrorBoundary>
+        )}
+      />
+
+      <Route
+        exact
+        path="/register"
+        component={() => (
+          <ErrorBoundary>
+            <RegisterPage />
           </ErrorBoundary>
         )}
       />
