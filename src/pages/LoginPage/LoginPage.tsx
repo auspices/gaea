@@ -16,6 +16,7 @@ const LOGIN_PAGE_MUTATION = gql`
     login(input: { username: $username, password: $password }) {
       jwt
       user {
+        id
         slug
       }
     }
