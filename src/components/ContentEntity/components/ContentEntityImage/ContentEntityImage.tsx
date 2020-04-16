@@ -8,8 +8,6 @@ export const CONTENT_ENTITY_IMAGE_FRAGMENT = gql`
     id
     title
     url
-    width
-    height
     placeholder: resized(width: 25, height: 25) {
       urls {
         src: _1x

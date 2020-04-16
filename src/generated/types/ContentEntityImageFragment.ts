@@ -35,8 +35,6 @@ export interface ContentEntityImageFragment {
   id: number;
   title: string;
   url: string;
-  width: number;
-  height: number;
   placeholder: ContentEntityImageFragment_placeholder;
   resized: ContentEntityImageFragment_resized;
 }

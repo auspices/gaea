@@ -3,8 +3,9 @@ import gql from 'graphql-tag'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { Box, BoxProps } from '@auspices/eos'
-import { ContentEntityCollectionFragment } from '../../../../generated/types/ContentEntityCollectionFragment'
+import { CollectionPreview } from '../../../CollectionPreview'
 import { useHrefs } from '../../../../hooks'
+import { ContentEntityCollectionFragment } from '../../../../generated/types/ContentEntityCollectionFragment'
 
 const Container = styled(Box)``
 
@@ -50,6 +51,8 @@ export const ContentEntityCollection: React.FC<ContentEntityCollectionProps> = (
       <Box>{collection.title}</Box>
 
       <Box color="tertiary">{collection.counts.contents || '∅'}</Box>
+
+      <CollectionPreview id={collection.id} my={5} />
 
       <Box
         color="tertiary"
