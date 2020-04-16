@@ -7,10 +7,6 @@
 // GraphQL fragment: CollectionPreviewFragment
 // ====================================================
 
-export interface CollectionPreviewFragment_contents_entity_Link {
-  __typename: "Link" | "Collection";
-}
-
 export interface CollectionPreviewFragment_contents_entity_Image_placeholder_urls {
   __typename: "RetinaImage";
   src: string;
@@ -35,7 +31,17 @@ export interface CollectionPreviewFragment_contents_entity_Text {
   length: number;
 }
 
-export type CollectionPreviewFragment_contents_entity = CollectionPreviewFragment_contents_entity_Link | CollectionPreviewFragment_contents_entity_Image | CollectionPreviewFragment_contents_entity_Text;
+export interface CollectionPreviewFragment_contents_entity_Link {
+  __typename: "Link";
+  id: number;
+}
+
+export interface CollectionPreviewFragment_contents_entity_Collection {
+  __typename: "Collection";
+  id: number;
+}
+
+export type CollectionPreviewFragment_contents_entity = CollectionPreviewFragment_contents_entity_Image | CollectionPreviewFragment_contents_entity_Text | CollectionPreviewFragment_contents_entity_Link | CollectionPreviewFragment_contents_entity_Collection;
 
 export interface CollectionPreviewFragment_contents {
   __typename: "Content";

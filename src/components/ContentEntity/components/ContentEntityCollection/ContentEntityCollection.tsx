@@ -52,7 +52,12 @@ export const ContentEntityCollection: React.FC<ContentEntityCollectionProps> = (
 
       <Box color="tertiary">{collection.counts.contents || '∅'}</Box>
 
-      <CollectionPreview id={collection.id} my={5} />
+      <CollectionPreview
+        id={collection.id}
+        cellSizePx="200px"
+        cellGap={4}
+        my={5}
+      />
 
       <Box
         color="tertiary"

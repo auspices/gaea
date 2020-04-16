@@ -69,7 +69,7 @@ export const CollectionContentEntityCollection: React.FC<CollectionContentEntity
 
     <Box color="tertiary">{collection.counts.contents || '∅'}</Box>
 
-    <CollectionPreview id={collection.id} thumbSize={50} my={5} />
+    <CollectionPreview id={collection.id} cellSizePx="48px" my={5} />
 
     <Delta>{collection.updatedAt}</Delta>
   </Container>

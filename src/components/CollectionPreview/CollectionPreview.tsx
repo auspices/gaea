@@ -7,6 +7,8 @@ import {
   Box,
   BoxProps,
   EmptyFrame,
+  Grid,
+  GridProps,
   Image,
   themeGet,
 } from '@auspices/eos'
@@ -15,11 +17,8 @@ import {
   CollectionPreviewQueryVariables,
 } from '../../generated/types/CollectionPreviewQuery'
 
-const Container = styled(Box)<{ ready: boolean }>`
+const MiniGrid = styled(Grid)<GridProps & { ready: boolean }>`
   position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
   overflow: hidden;
   opacity: 0;
   transition: opacity 1s;
@@ -38,17 +37,12 @@ const Container = styled(Box)<{ ready: boolean }>`
     bottom: 0;
     left: 0;
     height: 75%;
+    /* TODO: Need improved alpha conversion helpers */
     background: linear-gradient(
-      rgba(255, 255, 0, 0.001) 0%,
+      rgba(255, 255, 255, 0.001) 0%,
       ${themeGet('colors.background')} 100%
     );
   }
-`
-
-const Content = styled(Box)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
 `
 
 const Thumb = styled(AspectRatioBox)`
@@ -110,6 +104,12 @@ export const COLLECTION_PREVIEW_FRAGMENT = gql`
           id
           length
         }
+        ... on Link {
+          id
+        }
+        ... on Collection {
+          id
+        }
       }
     }
   }
@@ -127,14 +127,14 @@ export const COLLECTION_PREVIEW_QUERY = gql`
   ${COLLECTION_PREVIEW_FRAGMENT}
 `
 
-export type CollectionPreviewProps = BoxProps & {
+export type CollectionPreviewProps = Omit<GridProps, 'cellSize'> & {
   id: number
   per?: number
-  thumbSize?: number
+  cellSizePx: string
 }
 
 export const CollectionPreview: React.FC<CollectionPreviewProps> = React.memo(
-  ({ id, per = 24, thumbSize = 100, ...rest }) => {
+  ({ id, per = 24, cellSizePx, cellGap = 2, ...rest }) => {
     const { data, loading, error } = useQuery<
       CollectionPreviewQuery,
       CollectionPreviewQueryVariables
@@ -156,37 +156,32 @@ export const CollectionPreview: React.FC<CollectionPreviewProps> = React.memo(
     } = data
 
     return (
-      <Container ready={ready} {...rest}>
+      <MiniGrid ready={ready} cellSize={cellSizePx} cellGap={cellGap} {...rest}>
         {collection.contents.map(({ entity }) => {
           switch (entity.__typename) {
             case 'Image':
               return (
-                <Content
-                  width={thumbSize - thumbSize * 0.25}
-                  height={thumbSize - thumbSize * 0.25}
-                  mr={3}
-                  mb={3}
+                <Thumb
+                  key={entity.id}
+                  aspectWidth={entity.width}
+                  aspectHeight={entity.height}
+                  maxWidth={parseInt(cellSizePx, 10)}
+                  maxHeight={parseInt(cellSizePx, 10)}
+                  backgroundColor="hint"
                 >
-                  <Thumb
-                    aspectWidth={entity.width}
-                    aspectHeight={entity.height}
-                    maxWidth={thumbSize - thumbSize * 0.25}
-                    maxHeight={thumbSize - thumbSize * 0.25}
-                    backgroundColor="hint"
-                  >
-                    <Image
-                      srcs={[entity.placeholder.urls.src]}
-                      width="100%"
-                      height="100%"
-                    />
-                  </Thumb>
-                </Content>
+                  <Image
+                    srcs={[entity.placeholder.urls.src]}
+                    width="100%"
+                    height="100%"
+                  />
+                </Thumb>
               )
             case 'Text':
               return (
                 <Text
-                  width={thumbSize}
-                  height={thumbSize}
+                  key={entity.id}
+                  width="100%"
+                  height="100%"
                   length={entity.length}
                 >
                   {entity.length}
@@ -195,10 +190,9 @@ export const CollectionPreview: React.FC<CollectionPreviewProps> = React.memo(
             case 'Link':
               return (
                 <EmptyFrame
-                  width={thumbSize - thumbSize * 0.25}
-                  height={thumbSize - thumbSize * 0.25}
-                  mr={3}
-                  mb={3}
+                  key={entity.id}
+                  width="100%"
+                  height="100%"
                   color="external"
                   strokeWidth={0.75}
                   outline
@@ -207,13 +201,12 @@ export const CollectionPreview: React.FC<CollectionPreviewProps> = React.memo(
             case 'Collection':
               return (
                 <Box
+                  key={entity.id}
                   border="1px solid"
                   borderColor="primary"
                   borderRadius={2}
-                  width={thumbSize - thumbSize * 0.25}
-                  height={thumbSize - thumbSize * 0.25}
-                  mr={3}
-                  mb={3}
+                  width="100%"
+                  height="100%"
                   p={2}
                 >
                   <Line color="primary" />
@@ -223,7 +216,7 @@ export const CollectionPreview: React.FC<CollectionPreviewProps> = React.memo(
               return null
           }
         })}
-      </Container>
+      </MiniGrid>
     )
   }
 )
