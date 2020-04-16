@@ -46,7 +46,7 @@ export const AddToCollection: React.FC<AddToCollectionProps> = ({
   const [mode, setMode] = useState(Mode.Resting)
   const [value, setValue] = useState('')
   const [inputKey, setInputKey] = useState(new Date().getTime())
-  const [debouncedValue] = useDebounce(value, 500)
+  const [debouncedValue] = useDebounce(value, 250)
 
   const { setContextualRef } = useContextualRef()
 

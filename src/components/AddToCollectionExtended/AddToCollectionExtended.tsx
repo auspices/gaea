@@ -34,7 +34,7 @@ export const AddToCollectionExtended: React.FC<AddToCollectionExtendedProps> = (
   const skip =
     value.length > 65 || (value.startsWith('http') && value.indexOf(' ') === -1)
 
-  const { data, loading, error } = useQuery<
+  const { data, error } = useQuery<
     AddToCollectionExtendedSearchQuery,
     AddToCollectionExtendedSearchQueryVariables
   >(ADD_TO_COLLECTION_EXTENDED_SEARCH_QUERY, {
@@ -47,7 +47,7 @@ export const AddToCollectionExtended: React.FC<AddToCollectionExtendedProps> = (
     return null
   }
 
-  if (loading || !data) return null
+  if (!data) return null
 
   const {
     filtered: { collections },

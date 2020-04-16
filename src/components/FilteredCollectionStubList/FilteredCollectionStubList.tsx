@@ -1,7 +1,7 @@
 import React from 'react'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
-import { Loading } from '@auspices/eos'
+import { Box, Loading, Pill } from '@auspices/eos'
 import {
   COLLECTION_STUB_LIST_FRAGMENT,
   CollectionStubList,
@@ -48,12 +48,20 @@ export const FilteredCollectionStubList: React.FC<FilteredCollectionStubListProp
   }
 
   if (loading || !data) {
-    return <Loading />
+    return <Loading>looking for “{query}”</Loading>
   }
 
   const {
     filtered: { collections },
   } = data
+
+  if (collections.length === 0) {
+    return (
+      <Pill color="secondary" borderColor="secondary">
+        nothing for “{query}”
+      </Pill>
+    )
+  }
 
   return <CollectionStubList collections={collections} {...rest} />
 }
