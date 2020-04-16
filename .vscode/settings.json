@@ -2,7 +2,8 @@
   "files.exclude": {
     ".git/": true,
     "node_modules/": false,
-    "public/": false
+    "public/": false,
+    ".yarn": true
   },
   "search.exclude": {
     "**/node_modules": true,

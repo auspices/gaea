@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import gql from 'graphql-tag'
 import { Box, BoxProps } from '@auspices/eos'
+import { CollectionPreview } from '../../../CollectionPreview'
 import { CollectionContentEntityCollectionFragment } from '../../../../generated/types/CollectionContentEntityCollectionFragment'
 
 export const COLLECTION_CONTENT_ENTITY_COLLECTION_FRAGMENT = gql`
@@ -31,6 +32,9 @@ const Delta = styled(Box).attrs({
 `
 
 const Container = styled(Box)`
+  overflow: hidden;
+  transform: translateZ(0);
+
   &:hover {
     > ${Delta} {
       opacity: 1;
@@ -62,7 +66,11 @@ export const CollectionContentEntityCollection: React.FC<CollectionContentEntity
     {...rest}
   >
     <Box>{collection.name}</Box>
+
     <Box color="tertiary">{collection.counts.contents || '∅'}</Box>
+
+    <CollectionPreview id={collection.id} thumbSize={50} my={5} />
+
     <Delta>{collection.updatedAt}</Delta>
   </Container>
 )
