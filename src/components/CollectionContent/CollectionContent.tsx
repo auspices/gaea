@@ -46,6 +46,7 @@ const Container = styled(Link)`
 enum Mode {
   Resting,
   Active,
+  Open,
 }
 
 type CollectionContentProps = {
@@ -64,14 +65,19 @@ export const CollectionContent: React.FC<CollectionContentProps> = ({
 
   const timer = useRef<number | null>()
 
-  const handleMouseOver = useCallback(() => {
+  const handleMouseEnter = useCallback(() => {
+    if (mode === Mode.Open) return
     timer.current && clearTimeout(timer.current)
     setMode(Mode.Active)
-  }, [])
+  }, [mode])
 
-  const handleMouseOut = useCallback(() => {
+  const handleMouseLeave = useCallback(() => {
+    if (mode === Mode.Open) return
     timer.current = setTimeout(() => setMode(Mode.Resting), 100)
-  }, [])
+  }, [mode])
+
+  const handleOpen = useCallback(() => setMode(Mode.Open), [])
+  const handleClose = useCallback(() => setMode(Mode.Resting), [])
 
   useEffect(() => {
     return () => {
@@ -81,14 +87,14 @@ export const CollectionContent: React.FC<CollectionContentProps> = ({
 
   return (
     <Container
-      onMouseOver={handleMouseOver}
-      onMouseOut={handleMouseOut}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       to={hrefs.content(content.id)}
       {...rest}
     >
-      {mode === Mode.Active && (
+      {mode !== Mode.Resting && (
         <Box position="absolute" top={3} right={3} zIndex={Z.DROPDOWN}>
-          <ContextMenu>
+          <ContextMenu onOpen={handleOpen} onClose={handleClose}>
             <RepositionCollectionContent
               contentId={content.id}
               action={ReorderAction.MOVE_TO_TOP}
@@ -117,7 +123,7 @@ export const CollectionContent: React.FC<CollectionContentProps> = ({
               borderTop="1px solid"
               borderColor="hint"
             >
-              remove this {content.entity.__typename.toLowerCase()}
+              remove {content.entity.__typename.toLowerCase()}
             </RemoveFromCollection>
           </ContextMenu>
         </Box>

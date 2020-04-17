@@ -26,10 +26,14 @@ export const ContextMenuToggle = styled(PaneOption).attrs({
 
 type ContextMenuProps = BoxProps & {
   children: React.ReactElement<any> | React.ReactElement<any>[]
+  onOpen?(): void
+  onClose?(): void
 }
 
 export const ContextMenu: React.FC<ContextMenuProps> = ({
   children,
+  onOpen,
+  onClose,
   ...rest
 }) => {
   const { mode, setMode, Mode } = useActive()
@@ -39,14 +43,15 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({
       event.preventDefault()
       event.stopPropagation()
       setMode(Mode.Active)
+      onOpen && onOpen()
     },
-    [Mode.Active, setMode]
+    [Mode.Active, onOpen, setMode]
   )
 
-  const handleClose = useCallback(() => setMode(Mode.Resting), [
-    Mode.Resting,
-    setMode,
-  ])
+  const handleClose = useCallback(() => {
+    setMode(Mode.Resting)
+    onClose && onClose()
+  }, [Mode.Resting, onClose, setMode])
 
   return (
     <Box zIndex={Z.DROPDOWN} {...rest}>
