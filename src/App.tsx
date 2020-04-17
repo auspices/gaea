@@ -35,7 +35,7 @@ const App = () => {
           <Alerts
             position="fixed"
             bottom={4}
-            left={4}
+            right={4}
             width="20rem"
             zIndex={Z.ALERTS}
           />
