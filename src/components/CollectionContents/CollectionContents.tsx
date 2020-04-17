@@ -1,6 +1,6 @@
 import React from 'react'
 import gql from 'graphql-tag'
-import { Grid } from '@auspices/eos'
+import { Grid, GridProps } from '@auspices/eos'
 import {
   COLLECTION_CONTENT_FRAGMENT,
   CollectionContent,
@@ -18,15 +18,16 @@ export const COLLECTION_CONTENTS_FRAGMENT = gql`
   ${COLLECTION_CONTENT_FRAGMENT}
 `
 
-export type CollectionContentsProps = {
+export type CollectionContentsProps = GridProps & {
   collection: CollectionContentsFragment
 }
 
 export const CollectionContents: React.FC<CollectionContentsProps> = ({
   collection,
+  ...rest
 }) => {
   return (
-    <Grid my={6}>
+    <Grid {...rest}>
       {collection.contents.map((content) => (
         <CollectionContent
           key={content.id}

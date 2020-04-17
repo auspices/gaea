@@ -44,6 +44,8 @@ const Editor = styled(Input).attrs({
   p: 6,
   borderWidth: 0,
 })`
+  resize: none;
+
   &:focus {
     box-shadow: none;
   }

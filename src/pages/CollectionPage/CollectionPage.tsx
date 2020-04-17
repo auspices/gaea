@@ -149,7 +149,7 @@ export const CollectionPage: React.FC<CollectionPageProps> = ({ id }) => {
           <CollectionSettings collection={collection} />
 
           <Box flex="1">
-            <CollectionContents collection={collection} />
+            <CollectionContents my={4} collection={collection} />
           </Box>
 
           {collection.counts.contents > 0 && (
