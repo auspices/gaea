@@ -1,5 +1,6 @@
 import React from 'react'
 import gql from 'graphql-tag'
+import { useInView } from 'react-intersection-observer'
 import { ResponsiveImage } from '@auspices/eos'
 import { CollectionContentEntityImageFragment } from '../../../../generated/types/CollectionContentEntityImageFragment'
 
@@ -26,17 +27,22 @@ export const CollectionContentEntityImage: React.FC<CollectionContentEntityImage
   image,
   ...rest
 }) => {
+  const [ref, inView] = useInView({ triggerOnce: true })
   return (
-    <ResponsiveImage
-      srcs={[image.resized.urls._1x, image.resized.urls._2x]}
-      srcSet={`${image.resized.urls._1x} 1x, ${image.resized.urls._2x} 2x`}
-      alt={image.title}
-      aspectWidth={image.resized.width}
-      aspectHeight={image.resized.height}
-      maxWidth={image.resized.width}
-      maxHeight={image.resized.height}
-      backgroundColor="tertiary"
-      {...rest}
-    />
+    <>
+      {/* TODO: styled-components typings with forwardRef appear to be broken? */}
+      <span ref={ref} />
+
+      <ResponsiveImage
+        srcs={inView ? [image.resized.urls._1x, image.resized.urls._2x] : []}
+        alt={image.title}
+        aspectWidth={image.resized.width}
+        aspectHeight={image.resized.height}
+        maxWidth={image.resized.width}
+        maxHeight={image.resized.height}
+        backgroundColor="tertiary"
+        {...rest}
+      />
+    </>
   )
 }

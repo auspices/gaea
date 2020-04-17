@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import gql from 'graphql-tag'
 import { Box, BoxProps } from '@auspices/eos'
+import { useInView } from 'react-intersection-observer'
 import { CollectionPreview } from '../../../CollectionPreview'
 import { CollectionContentEntityCollectionFragment } from '../../../../generated/types/CollectionContentEntityCollectionFragment'
 
@@ -50,27 +51,34 @@ type CollectionContentEntityCollectionProps = BoxProps & {
 export const CollectionContentEntityCollection: React.FC<CollectionContentEntityCollectionProps> = ({
   collection,
   ...rest
-}) => (
-  <Container
-    border="1px solid"
-    borderColor="primary"
-    borderRadius={4}
-    color="primary"
-    height="100%"
-    width="100%"
-    display="flex"
-    flexDirection="column"
-    justifyContent="flex-start"
-    py={3}
-    px={4}
-    {...rest}
-  >
-    <Box>{collection.name}</Box>
+}) => {
+  const [ref, inView] = useInView({ triggerOnce: true })
 
-    <Box color="tertiary">{collection.counts.contents || '∅'}</Box>
+  return (
+    <Container
+      ref={ref}
+      border="1px solid"
+      borderColor="primary"
+      borderRadius={4}
+      color="primary"
+      height="100%"
+      width="100%"
+      display="flex"
+      flexDirection="column"
+      justifyContent="flex-start"
+      py={3}
+      px={4}
+      {...rest}
+    >
+      <Box>{collection.name}</Box>
 
-    <CollectionPreview id={collection.id} cellSizePx="48px" my={5} />
+      <Box color="tertiary">{collection.counts.contents || '∅'}</Box>
 
-    <Delta>{collection.updatedAt}</Delta>
-  </Container>
-)
+      {inView && (
+        <CollectionPreview id={collection.id} cellSizePx="48px" my={5} />
+      )}
+
+      <Delta>{collection.updatedAt}</Delta>
+    </Container>
+  )
+}
