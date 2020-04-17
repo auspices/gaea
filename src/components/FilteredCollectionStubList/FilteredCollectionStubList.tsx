@@ -1,7 +1,7 @@
 import React from 'react'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
-import { Box, Loading, Pill } from '@auspices/eos'
+import { Loading, Pill } from '@auspices/eos'
 import {
   COLLECTION_STUB_LIST_FRAGMENT,
   CollectionStubList,
