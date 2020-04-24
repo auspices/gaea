@@ -2,7 +2,7 @@ import React from 'react'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
 import styled from 'styled-components'
-import { Box, Stack } from '@auspices/eos'
+import { Box, BoxProps, Stack } from '@auspices/eos'
 import { FileUpload } from '../../components/FileUpload'
 import {
   FilesUploaderQuery,
@@ -33,8 +33,8 @@ const Container = styled(Box)`
   align-items: center;
   justify-content: center;
   margin: auto;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
 `
 
 const List = styled(Box).attrs({
@@ -46,7 +46,7 @@ const List = styled(Box).attrs({
   -webkit-overflow-scrolling: touch;
 `
 
-export type FilesUploaderProps = {
+export type FilesUploaderProps = BoxProps & {
   files: File[]
   onUpload(params: { url: string; file: File }): void
 }
@@ -54,6 +54,7 @@ export type FilesUploaderProps = {
 export const FilesUploader: React.FC<FilesUploaderProps> = ({
   files,
   onUpload,
+  ...rest
 }) => {
   const fileTypes = files.map(
     (file) =>
@@ -81,7 +82,7 @@ export const FilesUploader: React.FC<FilesUploaderProps> = ({
   ][] = data.me.presignedUploadUrls.map((url, i) => [url, files[i]])
 
   return (
-    <Container>
+    <Container {...rest}>
       <List>
         <Stack>
           {uploads.map(([presignedUploadUrl, file], i) => (

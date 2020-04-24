@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@apollo/react-hooks": "3.1.5",
-    "@auspices/eos": "1.24.1",
+    "@auspices/eos": "1.25.0",
     "@seznam/compose-react-refs": "1.0.4",
     "@styled-system/theme-get": "5.1.2",
     "apollo-cache-inmemory": "1.6.5",
@@ -87,7 +87,7 @@
   "devDependencies": {
     "@types/jest": "25.2.1",
     "@types/jwt-decode": "2.2.1",
-    "@types/node": "13.13.1",
+    "@types/node": "13.13.2",
     "@types/qs": "6.9.1",
     "@types/react": "16.9.34",
     "@types/react-dom": "16.9.6",
@@ -97,7 +97,7 @@
     "@types/styled-components": "5.1.0",
     "@types/styled-system": "5.1.9",
     "@types/styled-system__theme-get": "5.0.0",
-    "apollo": "2.27.0",
+    "apollo": "2.27.3",
     "eslint-plugin-import": "2.20.2",
     "husky": "4.2.5",
     "lint-staged": "10.1.7",

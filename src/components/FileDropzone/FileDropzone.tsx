@@ -1,11 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import styled from 'styled-components'
 import { useDropzone } from 'react-dropzone'
-import { Box, useAlerts } from '@auspices/eos'
+import { Modal, useAlerts } from '@auspices/eos'
 import { ACCEPT, FilesUploader } from '../FilesUploader'
 import { errorMessage } from '../../util/errors'
-import { hexAlpha } from '../../util/hexAlpha'
-import { themeGet } from '@styled-system/theme-get'
 import { Z } from '../../util/zIndexes'
 
 enum Mode {
@@ -13,27 +10,6 @@ enum Mode {
   Pending,
   Uploading,
 }
-
-export const Overlay = styled(Box)<{ mode: Mode }>`
-  ${({ mode }) =>
-    `display: ${
-      {
-        [Mode.Resting]: 'none',
-        [Mode.Pending]: 'block',
-        [Mode.Uploading]: 'block',
-      }[mode]
-    };`}
-
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: ${Z.FILE_DROPZONE};
-  background-color: ${(props) =>
-    hexAlpha(themeGet('colors.background')(props), 0.9)};
-  user-select: none;
-`
 
 type FileDropzoneProps = {
   onUpload(url: string): Promise<any>
@@ -123,12 +99,15 @@ export const FileDropzone: React.FC<FileDropzoneProps> = ({
     }
   })
 
+  if (mode === Mode.Resting) return null
+
   return (
-    <Overlay {...getRootProps()} mode={mode}>
+    <Modal {...getRootProps()} overlay zIndex={Z.FILE_DROPZONE}>
       <input {...getInputProps()} />
+
       {acceptedFiles.length > 0 && (
         <FilesUploader files={acceptedFiles} onUpload={handleUpload} />
       )}
-    </Overlay>
+    </Modal>
   )
 }
