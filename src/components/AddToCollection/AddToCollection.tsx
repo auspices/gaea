@@ -7,6 +7,7 @@ import { useContextualRef, usePagination, useRefetch } from '../../hooks'
 import { errorMessage } from '../../util/errors'
 import { Form, FormProps } from '../Form'
 import { FileDropzone } from '../FileDropzone'
+import { FileUploadButton } from '../FileUploadButton'
 import { AddToCollectionExtended } from '../AddToCollectionExtended'
 import { useHistory } from 'react-router'
 import { Z } from '../../util/zIndexes'
@@ -177,6 +178,12 @@ export const AddToCollection: React.FC<AddToCollectionProps> = ({
               }
             </Button>
           )}
+
+          <FileUploadButton
+            key={inputKey}
+            onUpload={handleUpload}
+            onComplete={handleComplete}
+          />
         </Form>
 
         {value !== '' && debouncedValue !== '' && (
