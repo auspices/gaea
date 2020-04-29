@@ -68,7 +68,7 @@ export const Routes = () => {
 
       <Route
         exact
-        path="/:username/xs"
+        path="/xs"
         component={parseRoute(() => (
           <ErrorBoundary>
             <CollectionsPage />
@@ -78,7 +78,7 @@ export const Routes = () => {
 
       <Route
         exact
-        path="/:username/xs/:id"
+        path="/xs/:id"
         component={parseRoute(({ params: { id } }) => (
           <ErrorBoundary>
             <CollectionPage id={id} />
@@ -88,7 +88,7 @@ export const Routes = () => {
 
       <Route
         exact
-        path="/:username/xs/:id/settings"
+        path="/xs/:id/settings"
         component={parseRoute(({ params: { id } }) => (
           <ErrorBoundary>
             <CollectionSettingsPage id={id} />
@@ -98,7 +98,7 @@ export const Routes = () => {
 
       <Route
         exact
-        path="/:username/x/:id"
+        path="/x/:id"
         component={parseRoute(({ params }) => (
           <ErrorBoundary>
             <ContentPage id={params.id} />

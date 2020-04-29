@@ -59,13 +59,10 @@ export const LoginPage: React.FC = () => {
       setMode(Mode.Loading)
       try {
         const { data } = await login({ variables: state })
-        const {
-          jwt,
-          user: { slug },
-        } = data!.login!
+        const { jwt } = data!.login!
         localStorage.setItem('jwt', jwt)
         sendNotification({ body: 'successfully logged in' })
-        history.push(hrefs.collections(slug))
+        history.push(hrefs.collections())
       } catch (err) {
         sendError({ body: errorMessage(err) })
       }

@@ -83,13 +83,10 @@ export const RegisterPage: React.FC = () => {
       setMode(Mode.Loading)
       try {
         const { data } = await register({ variables: state })
-        const {
-          jwt,
-          user: { slug },
-        } = data!.register!
+        const { jwt } = data!.register!
         localStorage.setItem('jwt', jwt)
         sendNotification({ body: 'successfully created account' })
-        history.push(hrefs.collections(slug))
+        history.push(hrefs.collections())
       } catch (err) {
         sendError({ body: errorMessage(err) })
       }

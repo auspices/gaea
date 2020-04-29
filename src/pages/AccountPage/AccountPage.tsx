@@ -54,7 +54,7 @@ export const AccountPage: React.FC = () => {
 
       <Stack flex="1">
         <Stack direction="horizontal">
-          <Button as={Link} to={hrefs.collections(me.slug)}>
+          <Button as={Link} to={hrefs.collections()}>
             <Caret direction="left" mr={3} />
             {me.username}
           </Button>
