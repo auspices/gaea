@@ -9,4 +9,4 @@ export const Form = styled.form<FormProps>`
   ${boxMixin}
 `
 
-Form.defaultProps = { ...PILL, px: 0, py: 0 }
+Form.defaultProps = { ...PILL, backgroundColor: 'transparent', px: 0, py: 0 }
