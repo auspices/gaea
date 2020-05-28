@@ -1,9 +1,17 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { Box, Pill, pillFocusMixin, PillProps, Tag } from '@auspices/eos'
+import {
+  Box,
+  hexToRgb,
+  Pill,
+  pillFocusMixin,
+  PillProps,
+  Stack,
+  Tag,
+  themeGet,
+} from '@auspices/eos'
 import { Link } from 'react-router-dom'
 import gql from 'graphql-tag'
-import { themeGet } from '@styled-system/theme-get'
 import { useHrefs } from '../../hooks'
 import { CollectionStubFragment } from '../../generated/types/CollectionStubFragment'
 
@@ -18,7 +26,7 @@ export const COLLECTION_STUB_FRAGMENT = gql`
     }
     within {
       id
-      title
+      title: toString(length: 20, from: CENTER)
     }
   }
 `
@@ -30,7 +38,9 @@ const Title = styled(Box)`
   max-width: 70%;
 `
 
-const Count = styled(Box)``
+const Count = styled(Box)`
+  flex: 1;
+`
 
 const Delta = styled(Box)`
   white-space: nowrap;
@@ -66,6 +76,38 @@ const Container = styled(Pill)<PillProps & { selected?: boolean }>`
   }
 `
 
+const Tags = styled(Stack).attrs({
+  pr: 6,
+})`
+  overflow: hidden;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: ${themeGet('space.6')};
+    background: linear-gradient(
+      to right,
+      ${(props) => {
+          // TODO: Extract a helper
+          const background = themeGet('colors.background')(props)
+          const { r, g, b } = hexToRgb(background)
+          return `rgba(${[r, g, b].join(',')}, 0.1)`
+        }}
+        0%,
+      ${themeGet('colors.background')} 100%
+    );
+  }
+
+  /* TODO: Better handle tag truncation */
+  > * {
+    white-space: nowrap;
+  }
+`
+
 export type CollectionStubProps = {
   collection: CollectionStubFragment
   selected?: boolean
@@ -89,11 +131,13 @@ export const CollectionStub: React.FC<CollectionStubProps> = ({
         {collection.title}
       </Title>
 
-      {collection.within.map(({ id, title }) => (
-        <Tag key={id} mx={2}>
-          {title}
-        </Tag>
-      ))}
+      {collection.within.length > 0 && (
+        <Tags spacing={2} direction="horizontal">
+          {collection.within.map(({ id, title }) => (
+            <Tag key={id}>{title}</Tag>
+          ))}
+        </Tags>
+      )}
 
       <Count mx={4} color="tertiary">
         {collection.counts.contents || '∅'}
