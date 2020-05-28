@@ -12,6 +12,12 @@ export interface FilteredCollectionStubListQuery_filtered_collections_counts {
   contents: number;
 }
 
+export interface FilteredCollectionStubListQuery_filtered_collections_within {
+  __typename: "Collection";
+  id: number;
+  title: string;
+}
+
 export interface FilteredCollectionStubListQuery_filtered_collections {
   __typename: "Collection";
   id: number;
@@ -19,6 +25,7 @@ export interface FilteredCollectionStubListQuery_filtered_collections {
   title: string;
   updatedAt: string;
   counts: FilteredCollectionStubListQuery_filtered_collections_counts;
+  within: FilteredCollectionStubListQuery_filtered_collections_within[];
 }
 
 export interface FilteredCollectionStubListQuery_filtered {

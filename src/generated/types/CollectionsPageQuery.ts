@@ -17,6 +17,12 @@ export interface CollectionsPageQuery_me_collections_counts {
   contents: number;
 }
 
+export interface CollectionsPageQuery_me_collections_within {
+  __typename: "Collection";
+  id: number;
+  title: string;
+}
+
 export interface CollectionsPageQuery_me_collections {
   __typename: "Collection";
   id: number;
@@ -24,6 +30,7 @@ export interface CollectionsPageQuery_me_collections {
   title: string;
   updatedAt: string;
   counts: CollectionsPageQuery_me_collections_counts;
+  within: CollectionsPageQuery_me_collections_within[];
 }
 
 export interface CollectionsPageQuery_me {

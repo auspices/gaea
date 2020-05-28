@@ -12,6 +12,12 @@ export interface CollectionStubFragment_counts {
   contents: number;
 }
 
+export interface CollectionStubFragment_within {
+  __typename: "Collection";
+  id: number;
+  title: string;
+}
+
 export interface CollectionStubFragment {
   __typename: "Collection";
   id: number;
@@ -19,4 +25,5 @@ export interface CollectionStubFragment {
   title: string;
   updatedAt: string;
   counts: CollectionStubFragment_counts;
+  within: CollectionStubFragment_within[];
 }

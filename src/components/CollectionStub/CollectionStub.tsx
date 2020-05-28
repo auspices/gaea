@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { Box, Pill, pillFocusMixin, PillProps } from '@auspices/eos'
+import { Box, Pill, pillFocusMixin, PillProps, Tag } from '@auspices/eos'
 import { Link } from 'react-router-dom'
 import gql from 'graphql-tag'
 import { themeGet } from '@styled-system/theme-get'
@@ -15,6 +15,10 @@ export const COLLECTION_STUB_FRAGMENT = gql`
     updatedAt(relative: true)
     counts {
       contents
+    }
+    within {
+      id
+      title
     }
   }
 `
@@ -81,7 +85,15 @@ export const CollectionStub: React.FC<CollectionStubProps> = ({
       selected={selected}
       {...rest}
     >
-      <Title>{collection.title}</Title>
+      <Title mr={collection.within.length > 0 ? 4 : 0}>
+        {collection.title}
+      </Title>
+
+      {collection.within.map(({ id, title }) => (
+        <Tag key={id} mx={2}>
+          {title}
+        </Tag>
+      ))}
 
       <Count mx={4} color="tertiary">
         {collection.counts.contents || '∅'}
