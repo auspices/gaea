@@ -39,10 +39,13 @@ const Title = styled(Box)`
 `
 
 const Count = styled(Box)`
-  flex: 1;
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 0 2px ${themeGet('colors.background')};
 `
 
 const Delta = styled(Box)`
+  flex: 1;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -77,7 +80,8 @@ const Container = styled(Pill)<PillProps & { selected?: boolean }>`
 `
 
 const Tags = styled(Stack).attrs({
-  pr: 6,
+  pr: 8,
+  mr: -8,
 })`
   overflow: hidden;
   position: relative;
@@ -88,17 +92,17 @@ const Tags = styled(Stack).attrs({
     top: 0;
     right: 0;
     bottom: 0;
-    width: ${themeGet('space.6')};
+    width: ${themeGet('space.8')};
     background: linear-gradient(
       to right,
       ${(props) => {
           // TODO: Extract a helper
           const background = themeGet('colors.background')(props)
           const { r, g, b } = hexToRgb(background)
-          return `rgba(${[r, g, b].join(',')}, 0.1)`
+          return `rgba(${[r, g, b].join(',')}, 0.001)`
         }}
         0%,
-      ${themeGet('colors.background')} 100%
+      ${themeGet('colors.background')} 50%
     );
   }
 
