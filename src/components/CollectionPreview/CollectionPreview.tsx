@@ -6,6 +6,7 @@ import {
   AspectRatioBox,
   Box,
   BoxProps,
+  color,
   EmptyFrame,
   Grid,
   GridProps,
@@ -37,10 +38,9 @@ const MiniGrid = styled(Grid)<GridProps & { ready: boolean }>`
     bottom: 0;
     left: 0;
     height: 75%;
-    /* TODO: Need improved alpha conversion helpers */
     background: linear-gradient(
-      rgba(255, 255, 255, 0.001) 0%,
-      ${themeGet('colors.background')} 100%
+      ${color('background', 0.001)} 0%,
+      ${color('background')} 100%
     );
   }
 `

@@ -2,7 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import {
   Box,
-  hexToRgb,
+  color,
   Pill,
   pillFocusMixin,
   PillProps,
@@ -41,7 +41,7 @@ const Title = styled(Box)`
 const Count = styled(Box)`
   position: relative;
   z-index: 1;
-  text-shadow: 0 0 2px ${themeGet('colors.background')};
+  text-shadow: 0 0 2px ${color('background')};
 `
 
 const Delta = styled(Box)`
@@ -57,7 +57,7 @@ const Delta = styled(Box)`
 
 const selectedMixin = css`
   > ${Count} {
-    color: ${themeGet('colors.secondary')};
+    color: ${color('secondary')};
   }
 
   > ${Delta} {
@@ -95,14 +95,8 @@ const Tags = styled(Stack).attrs({
     width: ${themeGet('space.8')};
     background: linear-gradient(
       to right,
-      ${(props) => {
-          // TODO: Extract a helper
-          const background = themeGet('colors.background')(props)
-          const { r, g, b } = hexToRgb(background)
-          return `rgba(${[r, g, b].join(',')}, 0.001)`
-        }}
-        0%,
-      ${themeGet('colors.background')} 50%
+      ${color('background', 0.001)} 0%,
+      ${color('background')} 50%
     );
   }
 

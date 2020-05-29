@@ -1,8 +1,7 @@
 import React from 'react'
 import gql from 'graphql-tag'
 import styled, { css } from 'styled-components'
-import { Box, BoxProps } from '@auspices/eos'
-import { themeGet } from '@styled-system/theme-get'
+import { Box, BoxProps, color } from '@auspices/eos'
 import { CollectionContentEntityTextFragment } from '../../../../generated/types/CollectionContentEntityTextFragment'
 
 export const COLLECTION_CONTENT_ENTITY_TEXT_FRAGMENT = gql`
@@ -28,7 +27,7 @@ const Container = styled(Box).attrs({
   width: 100%;
   height: 100%;
 
-  ${({ truncate, ...rest }) => {
+  ${({ truncate }) => {
     return (
       truncate &&
       css`
@@ -41,8 +40,8 @@ const Container = styled(Box).attrs({
           left: 0;
           height: 4rem;
           background: linear-gradient(
-            rgba(255, 255, 0, 0.001) 0%,
-            ${themeGet('colors.background')(rest)} 100%
+            ${color('background', 0.001)} 0%,
+            ${color('background')} 100%
           );
         }
       `

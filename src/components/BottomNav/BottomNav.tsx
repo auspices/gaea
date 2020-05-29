@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
-import { Box, BoxProps, Pill } from '@auspices/eos'
-import { themeGet } from '@styled-system/theme-get'
-import { hexAlpha } from '../../util/hexAlpha'
+import { Box, BoxProps, color, Pill, themeGet } from '@auspices/eos'
 import { Z } from '../../util/zIndexes'
 
 const Container = styled(Box)`
@@ -13,8 +11,7 @@ const Container = styled(Box)`
   }
 
   * {
-    background-color: ${(props) =>
-      hexAlpha(themeGet('colors.background')(props), 0.25)};
+    background-color: ${color('background', 0.25)};
   }
 `
 
