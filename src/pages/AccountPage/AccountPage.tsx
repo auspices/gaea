@@ -74,13 +74,11 @@ export const AccountPage: React.FC = () => {
           input={{ value: me.createdAt, readOnly: true }}
         />
 
-        <Stack direction="horizontal">
-          <Pill>color scheme</Pill>
-
-          <Button flex="1" onClick={toggleScheme} textAlign="left">
+        <Field label="color scheme">
+          <Button flex="1" onClick={toggleScheme}>
             {scheme}
           </Button>
-        </Stack>
+        </Field>
       </Stack>
     </>
   )

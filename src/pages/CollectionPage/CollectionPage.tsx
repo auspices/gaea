@@ -8,9 +8,12 @@ import {
   Button,
   Caret,
   Dropdown,
+  Field,
   Loading,
   PaneOption,
+  Pill,
   Stack,
+  Tag,
 } from '@auspices/eos'
 import { RefetchProvider, useHrefs, usePagination } from '../../hooks'
 import { AddToCollection } from '../../components/AddToCollection'
@@ -47,6 +50,11 @@ export const COLLECTION_PAGE_QUERY = gql`
         counts {
           contents
         }
+        within {
+          id
+          slug
+          title: toString(length: 20, from: CENTER)
+        }
         ...CollectionContentsFragment
         ...CollectionSettingsFragment
       }
@@ -70,11 +78,7 @@ export const CollectionPage: React.FC<CollectionPageProps> = ({ id }) => {
     CollectionPageQueryVariables
   >(COLLECTION_PAGE_QUERY, {
     fetchPolicy: 'network-only',
-    variables: {
-      id,
-      page,
-      per,
-    },
+    variables: { id, page, per },
   })
 
   if (error) {
@@ -145,6 +149,20 @@ export const CollectionPage: React.FC<CollectionPageProps> = ({ id }) => {
 
             <AddToCollection id={collection.id} />
           </Stack>
+
+          {collection.within.length > 0 && (
+            <Field label="collections">
+              <Pill flex="1" px={4} py={0} height="100%">
+                <Stack spacing={2} direction="horizontal" overflowX="auto">
+                  {collection.within.map(({ id, slug, title }) => (
+                    <Tag key={id}>
+                      <Link to={hrefs.collection(slug)}>{title}</Link>
+                    </Tag>
+                  ))}
+                </Stack>
+              </Pill>
+            </Field>
+          )}
 
           <CollectionSettings collection={collection} />
 

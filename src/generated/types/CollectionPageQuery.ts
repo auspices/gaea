@@ -12,6 +12,13 @@ export interface CollectionPageQuery_me_collection_counts {
   contents: number;
 }
 
+export interface CollectionPageQuery_me_collection_within {
+  __typename: "Collection";
+  id: number;
+  slug: string;
+  title: string;
+}
+
 export interface CollectionPageQuery_me_collection_contents_entity_Text {
   __typename: "Text";
   id: number;
@@ -75,6 +82,7 @@ export interface CollectionPageQuery_me_collection {
   key: string | null;
   title: string;
   counts: CollectionPageQuery_me_collection_counts;
+  within: CollectionPageQuery_me_collection_within[];
   contents: CollectionPageQuery_me_collection_contents[];
   metadata: any;
 }
