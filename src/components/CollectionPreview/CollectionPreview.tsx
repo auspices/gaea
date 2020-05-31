@@ -47,11 +47,6 @@ const MiniGrid = styled(Grid)<GridProps & { ready: boolean }>`
 
 const Thumb = styled(AspectRatioBox)`
   overflow: hidden;
-
-  img {
-    filter: blur(${themeGet('space.2')});
-    transform: scale(1.1);
-  }
 `
 
 const Line: React.FC<{ color?: string }> = React.memo(({ color = 'hint' }) => (
@@ -94,7 +89,7 @@ export const COLLECTION_PREVIEW_FRAGMENT = gql`
           id
           width
           height
-          placeholder: resized(width: 25, height: 25) {
+          placeholder: resized(width: 50, height: 50, blur: 10) {
             urls {
               src: _1x
             }
