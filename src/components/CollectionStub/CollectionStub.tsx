@@ -19,6 +19,7 @@ export const COLLECTION_STUB_FRAGMENT = gql`
   fragment CollectionStubFragment on Collection {
     id
     slug
+    key
     title
     updatedAt(relative: true)
     counts {
@@ -99,11 +100,14 @@ const Tags = styled(Stack).attrs({
       ${color('background')} 50%
     );
   }
+`
 
-  /* TODO: Better handle tag truncation */
-  > * {
-    white-space: nowrap;
-  }
+export const Indicator = styled(Box).attrs({ mr: 4 })`
+  position: relative;
+  z-index: 1;
+  width: ${themeGet('space.4')};
+  height: ${themeGet('space.4')};
+  border-radius: 50%;
 `
 
 export type CollectionStubProps = {
@@ -140,6 +144,8 @@ export const CollectionStub: React.FC<CollectionStubProps> = ({
       <Count mx={4} color="tertiary">
         {collection.counts.contents || '∅'}
       </Count>
+
+      {collection.key ? <Indicator bg="accent" /> : <Indicator bg="hint" />}
 
       <Delta color="tertiary" fontSize={0}>
         {collection.updatedAt}

@@ -27,6 +27,7 @@ export interface CollectionsPageQuery_me_collections {
   __typename: "Collection";
   id: number;
   slug: string;
+  key: string | null;
   title: string;
   updatedAt: string;
   counts: CollectionsPageQuery_me_collections_counts;

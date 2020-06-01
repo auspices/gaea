@@ -23,6 +23,7 @@ export interface CreateCollectionMutation_createCollection_collection {
   title: string;
   slug: string;
   id: number;
+  key: string | null;
   updatedAt: string;
   counts: CreateCollectionMutation_createCollection_collection_counts;
   within: CreateCollectionMutation_createCollection_collection_within[];

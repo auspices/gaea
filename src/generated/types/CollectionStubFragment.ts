@@ -22,6 +22,7 @@ export interface CollectionStubFragment {
   __typename: "Collection";
   id: number;
   slug: string;
+  key: string | null;
   title: string;
   updatedAt: string;
   counts: CollectionStubFragment_counts;
