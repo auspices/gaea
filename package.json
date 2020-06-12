@@ -100,7 +100,7 @@
     "apollo": "2.28.3",
     "eslint-plugin-import": "2.21.2",
     "husky": "4.2.5",
-    "lint-staged": "10.2.9",
+    "lint-staged": "10.2.10",
     "prettier": "2.0.5",
     "typescript": "3.9.5"
   }
