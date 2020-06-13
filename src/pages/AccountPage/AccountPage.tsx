@@ -75,7 +75,7 @@ export const AccountPage: React.FC = () => {
         />
 
         <Field label="color scheme">
-          <Button flex="1" onClick={toggleScheme}>
+          <Button width="100%" onClick={toggleScheme}>
             {scheme}
           </Button>
         </Field>
