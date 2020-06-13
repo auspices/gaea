@@ -27,7 +27,7 @@ export const COLLECTION_STUB_FRAGMENT = gql`
     }
     within {
       id
-      title: toString(length: 20, from: CENTER)
+      title
     }
   }
 `

@@ -53,7 +53,7 @@ export const COLLECTION_PAGE_QUERY = gql`
         within {
           id
           slug
-          title: toString(length: 20, from: CENTER)
+          title
         }
         ...CollectionContentsFragment
         ...CollectionSettingsFragment
