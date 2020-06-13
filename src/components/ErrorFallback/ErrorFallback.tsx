@@ -2,6 +2,8 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 import { Box, Pill, Stack } from '@auspices/eos'
 import { errorMessage, GraphQLError } from '../../util/errors'
+import { Redirect } from 'react-router-dom'
+import { useHrefs } from '../../hooks'
 
 const isDevelopment = process.env.NODE_ENV === 'development'
 
@@ -14,6 +16,7 @@ export const ErrorFallback: React.FC<ErrorFallbackProps> = ({
   componentStack,
   error,
 }) => {
+  const hrefs = useHrefs()
   const errorStack = (error.stack || componentStack)
     .trim()
     .split('\n')
@@ -37,19 +40,12 @@ export const ErrorFallback: React.FC<ErrorFallbackProps> = ({
         <title>error</title>
       </Helmet>
 
+      {requireLogin && <Redirect to={hrefs.login()} />}
+
       <Stack>
         {error && (
           <Pill as="h1" color="danger" borderColor="danger">
             {errorMessage(error)}
-
-            {requireLogin && (
-              <>
-                &nbsp;
-                <Box as="a" color="danger" href="/login">
-                  login
-                </Box>
-              </>
-            )}
           </Pill>
         )}
 
