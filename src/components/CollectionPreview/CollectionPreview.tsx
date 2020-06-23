@@ -11,7 +11,6 @@ import {
   Grid,
   GridProps,
   Image,
-  themeGet,
 } from '@auspices/eos'
 import {
   CollectionPreviewQuery,
