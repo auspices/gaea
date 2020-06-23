@@ -10,6 +10,7 @@ import { CollectionPage } from './pages/CollectionPage'
 import { CollectionSettingsPage } from './pages/CollectionSettingsPage'
 import { ContentPage } from './pages/ContentPage'
 import { AccountPage } from './pages/AccountPage'
+import { SubscribePage } from './pages/SubscribePage'
 import { ErrorBoundary } from './components/ErrorBoundary'
 
 export const Routes = () => {
@@ -62,6 +63,16 @@ export const Routes = () => {
         component={() => (
           <ErrorBoundary>
             <RegisterPage />
+          </ErrorBoundary>
+        )}
+      />
+
+      <Route
+        exact
+        path="/subscribe"
+        component={() => (
+          <ErrorBoundary>
+            <SubscribePage />
           </ErrorBoundary>
         )}
       />
