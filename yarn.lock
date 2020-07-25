@@ -65,19 +65,19 @@
   dependencies:
     "@apollographql/graphql-language-service-types" "^2.0.0"
 
-"@auspices/eos@2.3.4":
-  version "2.3.4"
-  resolved "https://registry.yarnpkg.com/@auspices/eos/-/eos-2.3.4.tgz#9ff611b65925926f27bc16035a640aabe7f5c63c"
-  integrity sha512-ZmIjyUuL/CNk/tj/mX2jtF7c1wI1vgr7cIGgAeZX0mlnULxiURH7FHeVquvlKvBwTZmNnLXBHrfaE/KOojTi9Q==
+"@auspices/eos@2.3.5":
+  version "2.3.5"
+  resolved "https://registry.yarnpkg.com/@auspices/eos/-/eos-2.3.5.tgz#1853a1578f42ba3d9104e49385d310b32d094260"
+  integrity sha512-dLP1q5OT/YpybFYBWJ69c+JA8VSqSWV8iGIN2ldH7qNIxcB/uIkhPAKddwKoS3AXPCvVHyD3LEHrUZG+9Y5HOg==
   dependencies:
-    "@popperjs/core" "^2.4.2"
+    "@popperjs/core" "^2.4.4"
     "@seznam/compose-react-refs" "^1.0.4"
     "@styled-system/theme-get" "^5.1.2"
-    csstype "^2.6.10"
-    proportional-scale "^3.0.0"
-    react-children-utilities "^2.1.2"
+    csstype "^2.6.11"
+    proportional-scale "^3.0.1"
+    react-children-utilities "^2.1.4"
     react-focus-on "^3.4.1"
-    styled-reset "^4.1.6"
+    styled-reset "^4.2.1"
     styled-system "^5.1.5"
     use-keyboard-list-navigation "^2.0.1"
 
@@ -1527,7 +1527,7 @@
   resolved "https://registry.yarnpkg.com/@oclif/screen/-/screen-1.0.4.tgz#b740f68609dfae8aa71c3a6cab15d816407ba493"
   integrity sha512-60CHpq+eqnTxLZQ4PGHYNwUX572hgpMHGPtTWMjdTMsAvlm69lZV/4ly6O3sAYkomo4NggGcomrDpBe34rxUqw==
 
-"@popperjs/core@^2.4.2":
+"@popperjs/core@^2.4.4":
   version "2.4.4"
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.4.4.tgz#11d5db19bd178936ec89cd84519c4de439574398"
   integrity sha512-1oO6+dN5kdIA3sKPZhRGJTfGVP4SWV6KqlMOwry4J3HfyD68sl/3KmG7DeYUzvN+RbhXDnv/D8vNNB8168tAMg==
@@ -4526,10 +4526,10 @@ csstype@^2.2.0, csstype@^2.6.9:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.9.tgz#05141d0cd557a56b8891394c1911c40c8a98d098"
   integrity sha512-xz39Sb4+OaTsULgUERcCk+TJj8ylkL4aSVDQiX/ksxbELSqwkgt4d4RD7fovIdgJGSuNYqwZEiVjYY5l0ask+Q==
 
-csstype@^2.6.10:
-  version "2.6.10"
-  resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.10.tgz#e63af50e66d7c266edb6b32909cfd0aabe03928b"
-  integrity sha512-D34BqZU4cIlMCY93rZHbrq9pjTAQJ3U8S8rfBqjwHxkGPThWFjzZDQpgMJY0QViLxth6ZKYiwFBo14RdN44U/w==
+csstype@^2.6.11:
+  version "2.6.11"
+  resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.11.tgz#452f4d024149ecf260a852b025e36562a253ffc5"
+  integrity sha512-l8YyEC9NBkSm783PFTvh0FmJy7s5pFKrDp49ZL7zBGX3fWkO+N4EEyan1qqp8cwPLDcD0OSdyY6hAMoxp34JFw==
 
 cyclist@^1.0.1:
   version "1.0.1"
@@ -10219,10 +10219,10 @@ prop-types@^15.6.2, prop-types@^15.7.2:
     object-assign "^4.1.1"
     react-is "^16.8.1"
 
-proportional-scale@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/proportional-scale/-/proportional-scale-3.0.0.tgz#0dd18547b596d2bcb14479b5c48e9184c976ddd4"
-  integrity sha512-nkjqoDTsfYfmVksCDK5I0nK+0endS0Cgh1CMcN91E2Oj364m/RTFT7aVf9jUT17b9/0W/5tTL1r2Yj+3yAzTwA==
+proportional-scale@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/proportional-scale/-/proportional-scale-3.0.1.tgz#321801b38dd00fa76708dd13697de9e211cdf04b"
+  integrity sha512-Jxf/kFvVqbOA0tgMJaU/ujX8idBY+vy39+13mRSWWTbFeZ5eSb6gT/a/AGeKwbboGYigFGinnshaTAUeJNNgfg==
 
 protocols@^1.1.0, protocols@^1.4.0:
   version "1.4.7"
@@ -10391,10 +10391,10 @@ react-app-polyfill@^1.0.6:
     regenerator-runtime "^0.13.3"
     whatwg-fetch "^3.0.0"
 
-react-children-utilities@^2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/react-children-utilities/-/react-children-utilities-2.1.2.tgz#942d94ce529eb264c50ce432349e279c8e449f7b"
-  integrity sha512-lcjFpja5hMLCZKYU1zwtXSZXGv0lHSOMYLI0EWIbitbnGnFnFjg0Py2T9Mrv6NIRA7MGVu3qCdl9UP/USLVE7w==
+react-children-utilities@^2.1.4:
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/react-children-utilities/-/react-children-utilities-2.1.4.tgz#283003c6385875c777c09153850d15ac21d38da6"
+  integrity sha512-5Mv96nLIxrdbbLtUx6GMn8u4GZ037G8q1349WQisKk8peM8mTFuAUkzzM9E/i8GEUYeAvKa1gASMOIW0W+k4kQ==
 
 react-clientside-effect@^1.2.2:
   version "1.2.2"
@@ -11920,10 +11920,10 @@ styled-components@5.1.1:
     shallowequal "^1.1.0"
     supports-color "^5.5.0"
 
-styled-reset@^4.1.6:
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/styled-reset/-/styled-reset-4.2.0.tgz#9efe1210692b8b64978886e1897d3bc9a80b071c"
-  integrity sha512-z6MsldBuiKLXSbx/5UsGQdevv6TiE3eX9CEYHFgrByE0tvvjRLtbekhgRWFh+UZoopk2xjIMBDIhrWL7nRk0kQ==
+styled-reset@^4.2.1:
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/styled-reset/-/styled-reset-4.2.1.tgz#e134af5b592ea17edaa4495a1ce5f34ffe858a89"
+  integrity sha512-jfnPuL8kvAISHPmqEUONkfTngsSKuM6AhYlA/kVxPSPGdwcGCiCJ010Zm38xNOZw+CFZ9Ph5WivHdatDeDjPRw==
 
 styled-system@5.1.5, styled-system@^5.1.5:
   version "5.1.5"
