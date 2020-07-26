@@ -138,7 +138,7 @@ export const AddToCollection: React.FC<AddToCollectionProps> = ({
       />
 
       <Box position="relative" flex={1} {...rest}>
-        <Form onSubmit={handleSubmit}>
+        <Form alignItems="stretch" onSubmit={handleSubmit}>
           <Loading
             px={0}
             py={0}

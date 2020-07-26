@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react'
 import styled from 'styled-components'
 import { FilesUploader } from '../FilesUploader'
 import {
+  Box,
   boxMixin,
   BUTTON,
   buttonFocusMixin,
@@ -31,7 +32,6 @@ const FileInput = styled.input.attrs({ id: 'file' })`
 const Upload = styled.label.attrs({
   ...BUTTON,
   py: 0,
-  height: '100%',
   for: 'file',
 })`
   ${boxMixin}
@@ -95,7 +95,7 @@ export const FileUploadButton: React.FC<FileUploadButtonProps> = ({
         placement="left"
         distance={10}
       >
-        <span>
+        <Box display="flex" height="auto">
           <FileInput
             type="file"
             accept="image/*"
@@ -106,7 +106,7 @@ export const FileUploadButton: React.FC<FileUploadButtonProps> = ({
           <Upload py={0} {...rest}>
             <Plus size={6} strokeWidth="1px" />
           </Upload>
-        </span>
+        </Box>
       </Tooltip>
 
       {uploadingFiles.length > 0 && (
