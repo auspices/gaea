@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@apollo/react-hooks": "3.1.5",
+    "@apollo/react-hooks": "4.0.0",
     "@auspices/eos": "2.3.5",
     "@seznam/compose-react-refs": "1.0.4",
     "@styled-system/theme-get": "5.1.2",
