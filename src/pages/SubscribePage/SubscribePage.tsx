@@ -16,8 +16,14 @@ const SUBSCRIBE_PAGE_QUERY = gql`
 `
 
 const SUBSCRIBE_MUTATION = gql`
-  mutation SubscribeMutation {
-    subscribeToProduct(input: { product: GAEA }) {
+  mutation SubscribeMutation($priceId: String!, $paymentMethodId: String!) {
+    subscribeToProduct(
+      input: {
+        product: GAEA
+        priceId: $priceId
+        paymentMethodId: $paymentMethodId
+      }
+    ) {
       user {
         subscriptions
       }
@@ -46,7 +52,13 @@ export const SubscribePage: React.FC = () => {
   const handleClick = useCallback(async () => {
     setMode(Mode.Subscribing)
     try {
-      await subscribe()
+      await subscribe({
+        variables: {
+          priceId: 'TODO',
+          paymentMethodId: 'TODO',
+        },
+      })
+
       setMode(Mode.Subscribed)
       sendNotification({ body: 'thank you!' })
     } catch (err) {
