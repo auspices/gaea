@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react'
 import { Helmet } from 'react-helmet'
-import { Button, Loading, Stack, useAlerts } from '@auspices/eos'
+import { Button, Loading, Pill, Stack, useAlerts } from '@auspices/eos'
 import { useMutation, useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
 import { SubscribePageQuery } from '../../generated/types/SubscribePageQuery'
@@ -11,6 +11,13 @@ const SUBSCRIBE_PAGE_QUERY = gql`
   query SubscribePageQuery {
     me {
       subscriptions
+      customer {
+        id
+        subscriptions {
+          id
+          currentPeriodEndAt(relative: true)
+        }
+      }
     }
   }
 `
@@ -76,8 +83,10 @@ export const SubscribePage: React.FC = () => {
   }
 
   const {
-    me: { subscriptions },
+    me: { subscriptions, customer },
   } = data
+
+  const [activeSubscription] = customer.subscriptions
 
   return (
     <>
@@ -87,7 +96,14 @@ export const SubscribePage: React.FC = () => {
 
       <Stack>
         {subscriptions.includes('GAEA') ? (
-          <Button>already subscribed — thank you</Button>
+          [
+            <Pill key="a">thank you</Pill>,
+            <Pill key="b">
+              your subscription will auto-renew in{' '}
+              {activeSubscription.currentPeriodEndAt}
+            </Pill>,
+            <Button key="cancel">cancel your subscription</Button>,
+          ]
         ) : (
           <Button onClick={handleClick}>
             {

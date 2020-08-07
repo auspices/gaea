@@ -7,9 +7,22 @@
 // GraphQL query operation: SubscribePageQuery
 // ====================================================
 
+export interface SubscribePageQuery_me_customer_subscriptions {
+  __typename: "Subscription";
+  id: string;
+  currentPeriodEndAt: string;
+}
+
+export interface SubscribePageQuery_me_customer {
+  __typename: "Customer";
+  id: string;
+  subscriptions: SubscribePageQuery_me_customer_subscriptions[];
+}
+
 export interface SubscribePageQuery_me {
   __typename: "User";
   subscriptions: string[];
+  customer: SubscribePageQuery_me_customer;
 }
 
 export interface SubscribePageQuery {
