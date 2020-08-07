@@ -20,3 +20,8 @@ export interface SubscribeMutation_subscribeToProduct {
 export interface SubscribeMutation {
   subscribeToProduct: SubscribeMutation_subscribeToProduct | null;
 }
+
+export interface SubscribeMutationVariables {
+  priceId: string;
+  paymentMethodId: string;
+}
