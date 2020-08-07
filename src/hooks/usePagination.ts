@@ -2,13 +2,12 @@ import { parse, stringify } from 'qs'
 import { useLocation, useParams } from 'react-router'
 import { THEME } from '@auspices/eos'
 
-const encode = ({
-  page,
-  per,
-}: {
+type Pagination = {
   page: number | string
   per: number | string
-}) => `?${stringify({ page, per })}`
+}
+
+const encode = ({ page, per }: Pagination) => `?${stringify({ page, per })}`
 
 const ROOT_FONT_SIZE = 16.0
 const CELL_WIDTH = parseFloat(THEME.space[10]) * ROOT_FONT_SIZE
@@ -36,7 +35,7 @@ export const usePagination = () => {
   const params = useParams()
   const mode = 'id' in params ? 'grid' : 'list'
 
-  let { page = '1', per = '' } = parse(search.slice(1))
+  let { page = '1', per = '' } = parse(search.slice(1)) as Pagination
 
   if (per === '' && mode === 'grid') {
     const key = WIDTHS.find((currentWidth, i) => {
@@ -52,8 +51,8 @@ export const usePagination = () => {
   }
 
   return {
-    page: parseInt(page, 10),
-    per: parseInt(per, 10),
+    page: parseInt(String(page), 10),
+    per: parseInt(String(per), 10),
     encode,
   }
 }

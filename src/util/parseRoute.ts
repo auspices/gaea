@@ -16,8 +16,8 @@ export const parseRoute = (render: Render) => (props: Props) => {
   const query = {
     ..._query,
     // Always includes a page/per and coerces them into integers if present
-    page: _query.page ? parseInt(_query.page, 10) : 1,
-    per: _query.per ? parseInt(_query.per, 10) : 24,
+    page: _query.page ? parseInt(String(_query.page), 10) : 1,
+    per: _query.per ? parseInt(String(_query.per), 10) : 24,
   }
 
   return render({
