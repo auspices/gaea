@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useReducer, useRef } from 'react'
 import gql from 'graphql-tag'
 import styled from 'styled-components'
-import { useMutation } from '@apollo/react-hooks'
+import { useMutation } from '@apollo/client'
 import { useDebounce } from 'use-debounce'
 import { Box, Input, useAlerts } from '@auspices/eos'
 import { errorMessage } from '../../../../util/errors'

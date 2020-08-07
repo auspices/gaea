@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo } from 'react'
 import gql from 'graphql-tag'
-import { useMutation } from '@apollo/react-hooks'
+import { useMutation } from '@apollo/client'
 import { Button, Stack, StackProps, useAlerts } from '@auspices/eos'
 import { useKeyboardListNavigation } from 'use-keyboard-list-navigation'
 import { useContextualRef, useRefetch } from '../../hooks'

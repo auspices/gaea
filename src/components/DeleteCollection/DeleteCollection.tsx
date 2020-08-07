@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react'
 import gql from 'graphql-tag'
 import { useHistory } from 'react-router-dom'
-import { useMutation } from '@apollo/react-hooks'
+import { useMutation } from '@apollo/client'
 import { Button, Input, Pill, Stack, useAlerts } from '@auspices/eos'
 import { useHrefs } from '../../hooks'
 import { errorMessage } from '../../util/errors'

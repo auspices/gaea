@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react'
 import gql from 'graphql-tag'
-import { useMutation } from '@apollo/react-hooks'
+import { useMutation } from '@apollo/client'
 import { PaneOption, PaneOptionProps, useAlerts } from '@auspices/eos'
 import { useRefetch } from '../../hooks'
 import { errorMessage } from '../../util/errors'
