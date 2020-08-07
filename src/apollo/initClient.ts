@@ -1,19 +1,12 @@
-import { ApolloClient } from 'apollo-client'
-import { createHttpLink } from 'apollo-link-http'
-import { setContext } from 'apollo-link-context'
-import { onError } from 'apollo-link-error'
-import { from } from 'apollo-link'
 import {
+  ApolloClient,
+  createHttpLink,
+  from,
   InMemoryCache,
-  IntrospectionFragmentMatcher,
-} from 'apollo-cache-inmemory'
+} from '@apollo/client'
+import { setContext } from '@apollo/client/link/context'
+import { onError } from '@apollo/client/link/error'
 import jwtDecode from 'jwt-decode'
-
-import introspectionQueryResultData from './fragmentTypes.json'
-
-const fragmentMatcher = new IntrospectionFragmentMatcher({
-  introspectionQueryResultData,
-})
 
 const httpLink = createHttpLink({
   uri: process.env.REACT_APP_GRAPHQL_ENDPOINT,
@@ -60,5 +53,9 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 export const initClient = () =>
   new ApolloClient({
     link: from([errorLink, authLink, httpLink]),
-    cache: new InMemoryCache({ fragmentMatcher }),
+    cache: new InMemoryCache({
+      possibleTypes: {
+        Entity: ['Image', 'Text', 'Link', 'Collection'],
+      },
+    }),
   })

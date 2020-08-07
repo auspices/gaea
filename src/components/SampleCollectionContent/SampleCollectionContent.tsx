@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import { useHistory } from 'react-router-dom'
 import gql from 'graphql-tag'
 import { Button, ButtonProps, useAlerts } from '@auspices/eos'

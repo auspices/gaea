@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react'
 import { useHistory } from 'react-router'
 import gql from 'graphql-tag'
-import { useMutation } from '@apollo/react-hooks'
+import { useMutation } from '@apollo/client'
 import { Helmet } from 'react-helmet'
 import { Box, Button, Input, Stack, useAlerts } from '@auspices/eos'
 import { useHrefs } from '../../hooks'

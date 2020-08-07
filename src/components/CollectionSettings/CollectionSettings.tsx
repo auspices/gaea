@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react'
-import { useMutation } from '@apollo/react-hooks'
+import { useMutation } from '@apollo/client'
 import { useDebouncedCallback } from 'use-debounce'
 import gql from 'graphql-tag'
 import { KeyValueEditor, StackProps, toSchema, useAlerts } from '@auspices/eos'

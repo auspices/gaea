@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react'
 import { Helmet } from 'react-helmet'
 import { Button, Loading, Stack, useAlerts } from '@auspices/eos'
-import { useMutation, useQuery } from '@apollo/react-hooks'
+import { useMutation, useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
 import { SubscribePageQuery } from '../../generated/types/SubscribePageQuery'
 import { SubscribeMutation } from '../../generated/types/SubscribeMutation'

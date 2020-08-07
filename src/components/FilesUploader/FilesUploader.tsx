@@ -1,6 +1,6 @@
 import React from 'react'
 import gql from 'graphql-tag'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import styled from 'styled-components'
 import { Box, BoxProps, Stack } from '@auspices/eos'
 import { FileUpload } from '../../components/FileUpload'

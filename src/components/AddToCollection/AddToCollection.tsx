@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react'
 import gql from 'graphql-tag'
-import { useMutation } from '@apollo/react-hooks'
+import { useMutation } from '@apollo/client'
 import { useDebounce } from 'use-debounce'
 import { Box, Button, ClearableInput, Loading, useAlerts } from '@auspices/eos'
 import { useContextualRef, usePagination, useRefetch } from '../../hooks'

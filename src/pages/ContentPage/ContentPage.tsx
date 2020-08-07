@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from 'react'
 import gql from 'graphql-tag'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import { Link, useHistory } from 'react-router-dom'
 import { Box, Button, Caret, Loading, Stack } from '@auspices/eos'
 import { Helmet } from 'react-helmet'
