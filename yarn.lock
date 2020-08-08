@@ -65,17 +65,17 @@
   dependencies:
     "@apollographql/graphql-language-service-types" "^2.0.0"
 
-"@auspices/eos@2.3.5":
-  version "2.3.5"
-  resolved "https://registry.yarnpkg.com/@auspices/eos/-/eos-2.3.5.tgz#1853a1578f42ba3d9104e49385d310b32d094260"
-  integrity sha512-dLP1q5OT/YpybFYBWJ69c+JA8VSqSWV8iGIN2ldH7qNIxcB/uIkhPAKddwKoS3AXPCvVHyD3LEHrUZG+9Y5HOg==
+"@auspices/eos@2.4.0":
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/@auspices/eos/-/eos-2.4.0.tgz#48f229620ea84803d4c47761d0979fac72ce78a6"
+  integrity sha512-G4YbKihey4RUckI5klZ2MLebHaUHSktSAQpYmBvZUdKcyQ/dpv+td10pmaQIcL/lu2BU/PsmhvGITMm/XPK+Ag==
   dependencies:
     "@popperjs/core" "^2.4.4"
     "@seznam/compose-react-refs" "^1.0.4"
     "@styled-system/theme-get" "^5.1.2"
-    csstype "^2.6.11"
-    proportional-scale "^3.0.1"
-    react-children-utilities "^2.1.4"
+    csstype "^3.0.2"
+    proportional-scale "^4.0.0"
+    react-children-utilities "^2.1.5"
     react-focus-on "^3.4.1"
     styled-reset "^4.2.1"
     styled-system "^5.1.5"
@@ -4425,11 +4425,6 @@ csstype@^2.2.0:
   version "2.6.9"
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.9.tgz#05141d0cd557a56b8891394c1911c40c8a98d098"
   integrity sha512-xz39Sb4+OaTsULgUERcCk+TJj8ylkL4aSVDQiX/ksxbELSqwkgt4d4RD7fovIdgJGSuNYqwZEiVjYY5l0ask+Q==
-
-csstype@^2.6.11:
-  version "2.6.11"
-  resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.11.tgz#452f4d024149ecf260a852b025e36562a253ffc5"
-  integrity sha512-l8YyEC9NBkSm783PFTvh0FmJy7s5pFKrDp49ZL7zBGX3fWkO+N4EEyan1qqp8cwPLDcD0OSdyY6hAMoxp34JFw==
 
 csstype@^3.0.2:
   version "3.0.2"
@@ -10122,10 +10117,10 @@ prop-types@^15.6.2, prop-types@^15.7.2:
     object-assign "^4.1.1"
     react-is "^16.8.1"
 
-proportional-scale@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/proportional-scale/-/proportional-scale-3.0.1.tgz#321801b38dd00fa76708dd13697de9e211cdf04b"
-  integrity sha512-Jxf/kFvVqbOA0tgMJaU/ujX8idBY+vy39+13mRSWWTbFeZ5eSb6gT/a/AGeKwbboGYigFGinnshaTAUeJNNgfg==
+proportional-scale@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/proportional-scale/-/proportional-scale-4.0.0.tgz#888ecdb1e5e710645601bc4edc73d619bca28ff7"
+  integrity sha512-QW0HeiudSHjBQvGnJ35W/gQYaOP09gFSf+xsYSfMYE1DQ+g26aKRN0Hlvce06WeARCUQSlLE7a+jFVMN5feB4Q==
 
 protocols@^1.1.0, protocols@^1.4.0:
   version "1.4.7"
@@ -10294,10 +10289,10 @@ react-app-polyfill@^1.0.6:
     regenerator-runtime "^0.13.3"
     whatwg-fetch "^3.0.0"
 
-react-children-utilities@^2.1.4:
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/react-children-utilities/-/react-children-utilities-2.1.4.tgz#283003c6385875c777c09153850d15ac21d38da6"
-  integrity sha512-5Mv96nLIxrdbbLtUx6GMn8u4GZ037G8q1349WQisKk8peM8mTFuAUkzzM9E/i8GEUYeAvKa1gASMOIW0W+k4kQ==
+react-children-utilities@^2.1.5:
+  version "2.1.5"
+  resolved "https://registry.yarnpkg.com/react-children-utilities/-/react-children-utilities-2.1.5.tgz#80f9fd5358f2e0ba39b2519a799b5b2cc006045d"
+  integrity sha512-CLniy8wErElZAtgPFXUK/xk0Chr+gM57g4Rjg/u7smvuCoVE2GfeIkuoYZ+OwiW4ZMMMAEEL1z0Sn0NNhQLz5A==
 
 react-clientside-effect@^1.2.2:
   version "1.2.2"
