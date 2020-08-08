@@ -14,6 +14,13 @@ export enum EntityTypes {
   TEXT = "TEXT",
 }
 
+export enum PlanInterval {
+  DAY = "DAY",
+  MONTH = "MONTH",
+  WEEK = "WEEK",
+  YEAR = "YEAR",
+}
+
 export enum ReorderAction {
   INSERT_AT = "INSERT_AT",
   MOVE_DOWN = "MOVE_DOWN",

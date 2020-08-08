@@ -3,6 +3,8 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
+import { PlanInterval } from "./globalTypes";
+
 // ====================================================
 // GraphQL query operation: SubscribePageQuery
 // ====================================================
@@ -13,10 +15,18 @@ export interface SubscribePageQuery_me_customer_subscriptions {
   currentPeriodEndAt: string;
 }
 
+export interface SubscribePageQuery_me_customer_plans {
+  __typename: "Plan";
+  id: string;
+  interval: PlanInterval;
+  amount: string;
+}
+
 export interface SubscribePageQuery_me_customer {
   __typename: "Customer";
   id: string;
   subscriptions: SubscribePageQuery_me_customer_subscriptions[];
+  plans: SubscribePageQuery_me_customer_plans[];
 }
 
 export interface SubscribePageQuery_me {

@@ -3,9 +3,13 @@ import { Helmet } from 'react-helmet'
 import { Button, Input, Loading, Pill, Stack, useAlerts } from '@auspices/eos'
 import { useMutation, useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
-import { SubscribePageQuery } from '../../generated/types/SubscribePageQuery'
+import {
+  SubscribePageQuery_me_customer_plans as Plan,
+  SubscribePageQuery,
+} from '../../generated/types/SubscribePageQuery'
 import { SubscribeMutation } from '../../generated/types/SubscribeMutation'
 import { errorMessage } from '../../util/errors'
+import { PlanInterval } from 'generated/types/globalTypes'
 
 const SUBSCRIBE_PAGE_QUERY = gql`
   query SubscribePageQuery {
@@ -15,6 +19,11 @@ const SUBSCRIBE_PAGE_QUERY = gql`
         subscriptions {
           id
           currentPeriodEndAt(relative: true)
+        }
+        plans {
+          id
+          interval
+          amount
         }
       }
     }
@@ -52,6 +61,9 @@ export const SubscribePage: React.FC = () => {
   const [subscribe] = useMutation<SubscribeMutation>(SUBSCRIBE_MUTATION)
 
   const [mode, setMode] = useState(Mode.Resting)
+  const [state, setState] = useState<
+    Partial<{ plan: Plan; paymentMethodId: string }>
+  >({})
 
   const { sendNotification, sendError } = useAlerts()
 
@@ -78,6 +90,10 @@ export const SubscribePage: React.FC = () => {
     },
     [sendError, sendNotification, subscribe]
   )
+
+  const selectPlan = (plan: Plan) => {
+    setState((prevState) => ({ ...prevState, plan }))
+  }
 
   if (error) {
     throw error
@@ -109,13 +125,43 @@ export const SubscribePage: React.FC = () => {
           <Button>cancel your subscription</Button>
         </Stack>
       ) : (
-        <form onSubmit={handleSubmit}>
+        <form>
           <Stack>
+            <Pill>choose a plan</Pill>
+            <Stack direction="horizontal">
+              {customer.plans.map((plan) => {
+                return (
+                  <Button
+                    key={plan.id}
+                    flex="1"
+                    onClick={(event) => {
+                      event.preventDefault()
+                      selectPlan(plan)
+                    }}
+                    selected={state.plan?.id === plan.id}
+                  >
+                    {plan.amount} /{' '}
+                    {
+                      {
+                        [PlanInterval.YEAR]: 'yearly',
+                        [PlanInterval.MONTH]: 'monthly',
+                        [PlanInterval.WEEK]: 'weekly',
+                        [PlanInterval.DAY]: 'daily',
+                      }[plan.interval]
+                    }
+                  </Button>
+                )
+              })}
+            </Stack>
+
             <Input placeholder="TODO" />
+
             <Button>
               {
                 {
-                  [Mode.Resting]: 'subscribe for $35 a month',
+                  [Mode.Resting]: `subscribe ${
+                    state.plan ? `for ${state.plan.amount}` : ''
+                  }`,
                   [Mode.Subscribing]: 'subscribing',
                   [Mode.Subscribed]: 'thank you',
                   [Mode.Error]: 'there was a problem with your subscription',
