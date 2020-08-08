@@ -9,7 +9,7 @@
 
 export interface SubscribeMutation_subscribeToProduct_user {
   __typename: "User";
-  subscriptions: string[];
+  id: number;
 }
 
 export interface SubscribeMutation_subscribeToProduct {

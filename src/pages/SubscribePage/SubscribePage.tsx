@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react'
 import { Helmet } from 'react-helmet'
-import { Button, Loading, Pill, Stack, useAlerts } from '@auspices/eos'
+import { Button, Input, Loading, Pill, Stack, useAlerts } from '@auspices/eos'
 import { useMutation, useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
 import { SubscribePageQuery } from '../../generated/types/SubscribePageQuery'
@@ -10,7 +10,6 @@ import { errorMessage } from '../../util/errors'
 const SUBSCRIBE_PAGE_QUERY = gql`
   query SubscribePageQuery {
     me {
-      subscriptions
       customer {
         id
         subscriptions {
@@ -32,7 +31,7 @@ const SUBSCRIBE_MUTATION = gql`
       }
     ) {
       user {
-        subscriptions
+        id
       }
     }
   }
@@ -56,23 +55,29 @@ export const SubscribePage: React.FC = () => {
 
   const { sendNotification, sendError } = useAlerts()
 
-  const handleClick = useCallback(async () => {
-    setMode(Mode.Subscribing)
-    try {
-      await subscribe({
-        variables: {
-          priceId: 'TODO',
-          paymentMethodId: 'TODO',
-        },
-      })
+  const handleSubmit = useCallback(
+    async (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault()
 
-      setMode(Mode.Subscribed)
-      sendNotification({ body: 'thank you!' })
-    } catch (err) {
-      setMode(Mode.Error)
-      sendError({ body: errorMessage(err) })
-    }
-  }, [sendError, sendNotification, subscribe])
+      setMode(Mode.Subscribing)
+
+      try {
+        await subscribe({
+          variables: {
+            priceId: 'TODO',
+            paymentMethodId: 'TODO',
+          },
+        })
+
+        setMode(Mode.Subscribed)
+        sendNotification({ body: 'thank you!' })
+      } catch (err) {
+        setMode(Mode.Error)
+        sendError({ body: errorMessage(err) })
+      }
+    },
+    [sendError, sendNotification, subscribe]
+  )
 
   if (error) {
     throw error
@@ -83,7 +88,7 @@ export const SubscribePage: React.FC = () => {
   }
 
   const {
-    me: { subscriptions, customer },
+    me: { customer },
   } = data
 
   const [activeSubscription] = customer.subscriptions
@@ -94,29 +99,32 @@ export const SubscribePage: React.FC = () => {
         <title>subscribe</title>
       </Helmet>
 
-      <Stack>
-        {subscriptions.includes('GAEA') ? (
-          [
-            <Pill key="a">thank you</Pill>,
-            <Pill key="b">
-              your subscription will auto-renew in{' '}
-              {activeSubscription.currentPeriodEndAt}
-            </Pill>,
-            <Button key="cancel">cancel your subscription</Button>,
-          ]
-        ) : (
-          <Button onClick={handleClick}>
-            {
+      {activeSubscription ? (
+        <Stack>
+          <Pill>thank you</Pill>,
+          <Pill>
+            your subscription will auto-renew in{' '}
+            {activeSubscription.currentPeriodEndAt}
+          </Pill>
+          <Button>cancel your subscription</Button>
+        </Stack>
+      ) : (
+        <form onSubmit={handleSubmit}>
+          <Stack>
+            <Input placeholder="TODO" />
+            <Button>
               {
-                [Mode.Resting]: 'subscribe for $35 a month',
-                [Mode.Subscribing]: 'subscribing',
-                [Mode.Subscribed]: 'thank you',
-                [Mode.Error]: 'there was a problem with your subscription',
-              }[mode]
-            }
-          </Button>
-        )}
-      </Stack>
+                {
+                  [Mode.Resting]: 'subscribe for $35 a month',
+                  [Mode.Subscribing]: 'subscribing',
+                  [Mode.Subscribed]: 'thank you',
+                  [Mode.Error]: 'there was a problem with your subscription',
+                }[mode]
+              }
+            </Button>
+          </Stack>
+        </form>
+      )}
     </>
   )
 }

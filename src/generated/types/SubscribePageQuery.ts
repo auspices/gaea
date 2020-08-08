@@ -21,7 +21,6 @@ export interface SubscribePageQuery_me_customer {
 
 export interface SubscribePageQuery_me {
   __typename: "User";
-  subscriptions: string[];
   customer: SubscribePageQuery_me_customer;
 }
 
