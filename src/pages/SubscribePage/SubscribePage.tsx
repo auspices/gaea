@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react'
 import { Helmet } from 'react-helmet'
-import { Button, Input, Loading, Pill, Stack, useAlerts } from '@auspices/eos'
+import { Button, Loading, Pill, Stack, useAlerts } from '@auspices/eos'
 import { useMutation, useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
 import {
@@ -8,26 +8,39 @@ import {
   SubscribePageQuery,
 } from '../../generated/types/SubscribePageQuery'
 import { SubscribeMutation } from '../../generated/types/SubscribeMutation'
+import { PlanInterval } from '../../generated/types/globalTypes'
 import { errorMessage } from '../../util/errors'
-import { PlanInterval } from 'generated/types/globalTypes'
+import { CreditCard } from '../../components/CreditCard'
+import {
+  CardNumberElement,
+  useElements,
+  useStripe,
+} from '@stripe/react-stripe-js'
+
+const SUBSCRIBE_PAGE_FRAGMENT = gql`
+  fragment SubscribePageFragment on User {
+    customer {
+      id
+      subscriptions {
+        id
+        currentPeriodEndAt(relative: true)
+      }
+      plans {
+        id
+        interval
+        amount
+      }
+    }
+  }
+`
 
 const SUBSCRIBE_PAGE_QUERY = gql`
   query SubscribePageQuery {
     me {
-      customer {
-        id
-        subscriptions {
-          id
-          currentPeriodEndAt(relative: true)
-        }
-        plans {
-          id
-          interval
-          amount
-        }
-      }
+      ...SubscribePageFragment
     }
   }
+  ${SUBSCRIBE_PAGE_FRAGMENT}
 `
 
 const SUBSCRIBE_MUTATION = gql`
@@ -40,9 +53,10 @@ const SUBSCRIBE_MUTATION = gql`
       }
     ) {
       user {
-        id
+        ...SubscribePageFragment
       }
     }
+    ${SUBSCRIBE_PAGE_FRAGMENT}
   }
 `
 
@@ -67,17 +81,51 @@ export const SubscribePage: React.FC = () => {
 
   const { sendNotification, sendError } = useAlerts()
 
+  const stripe = useStripe()
+  const elements = useElements()
+
   const handleSubmit = useCallback(
     async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault()
 
+      if (!state.plan?.id) {
+        sendError({ body: 'please select a plan to continue' })
+        return
+      }
+
+      if (!stripe || !elements) {
+        console.error('Stripe.js has not loaded yet')
+        sendError({ body: 'please wait and try again' })
+        return
+      }
+
+      const cardElement = elements.getElement(CardNumberElement)
+
+      if (!cardElement) {
+        console.error('Unable to find a CardElement')
+        sendError({ body: 'unable to subscribe at this time' })
+        return
+      }
+
       setMode(Mode.Subscribing)
+
+      const { error, paymentMethod } = await stripe.createPaymentMethod({
+        type: 'card',
+        card: cardElement,
+      })
+
+      if (error || !paymentMethod) {
+        setMode(Mode.Error)
+        sendError({ body: 'unable to save your payment method' })
+        console.error(error)
+        return
+      }
 
       try {
         await subscribe({
           variables: {
-            priceId: 'TODO',
-            paymentMethodId: 'TODO',
+            priceId: state.plan.id,
+            paymentMethodId: paymentMethod.id,
           },
         })
 
@@ -88,7 +136,7 @@ export const SubscribePage: React.FC = () => {
         sendError({ body: errorMessage(err) })
       }
     },
-    [sendError, sendNotification, subscribe]
+    [elements, sendError, sendNotification, state.plan, stripe, subscribe]
   )
 
   const selectPlan = (plan: Plan) => {
@@ -125,7 +173,7 @@ export const SubscribePage: React.FC = () => {
           <Button>cancel your subscription</Button>
         </Stack>
       ) : (
-        <form>
+        <form onSubmit={handleSubmit}>
           <Stack>
             <Pill>choose a plan</Pill>
             <Stack direction="horizontal">
@@ -154,7 +202,7 @@ export const SubscribePage: React.FC = () => {
               })}
             </Stack>
 
-            <Input placeholder="TODO" />
+            <CreditCard />
 
             <Button>
               {
