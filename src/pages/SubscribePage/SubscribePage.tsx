@@ -4,18 +4,19 @@ import { Button, Loading, Pill, Stack, useAlerts } from '@auspices/eos'
 import { useMutation, useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
 import {
-  SubscribePageQuery_me_customer_plans as Plan,
-  SubscribePageQuery,
-} from '../../generated/types/SubscribePageQuery'
-import { SubscribeMutation } from '../../generated/types/SubscribeMutation'
-import { PlanInterval } from '../../generated/types/globalTypes'
-import { errorMessage } from '../../util/errors'
-import { CreditCard } from '../../components/CreditCard'
-import {
   CardNumberElement,
   useElements,
   useStripe,
 } from '@stripe/react-stripe-js'
+import {
+  SubscribePageQuery_me_customer_plans as Plan,
+  SubscribePageQuery,
+} from '../../generated/types/SubscribePageQuery'
+import { SubscribeMutation } from '../../generated/types/SubscribeMutation'
+import { UnsubscribeMutation } from '../../generated/types/UnsubscribeMutation'
+import { PlanInterval } from '../../generated/types/globalTypes'
+import { errorMessage } from '../../util/errors'
+import { CreditCard } from '../../components/CreditCard'
 
 const SUBSCRIBE_PAGE_FRAGMENT = gql`
   fragment SubscribePageFragment on User {
@@ -24,6 +25,7 @@ const SUBSCRIBE_PAGE_FRAGMENT = gql`
       subscriptions {
         id
         currentPeriodEndAt(relative: true)
+        cancelAtPeriodEnd
       }
       plans {
         id
@@ -56,14 +58,25 @@ const SUBSCRIBE_MUTATION = gql`
         ...SubscribePageFragment
       }
     }
-    ${SUBSCRIBE_PAGE_FRAGMENT}
   }
+  ${SUBSCRIBE_PAGE_FRAGMENT}
+`
+
+const UNSUBSCRIBE_MUTATION = gql`
+  mutation UnsubscribeMutation($subscriptionId: String!) {
+    unsubscribeFromProduct(input: { subscriptionId: $subscriptionId }) {
+      user {
+        ...SubscribePageFragment
+      }
+    }
+  }
+  ${SUBSCRIBE_PAGE_FRAGMENT}
 `
 
 enum Mode {
   Resting,
-  Subscribing,
-  Subscribed,
+  Loading,
+  Loaded,
   Error,
 }
 
@@ -73,6 +86,7 @@ export const SubscribePage: React.FC = () => {
   )
 
   const [subscribe] = useMutation<SubscribeMutation>(SUBSCRIBE_MUTATION)
+  const [unsubscribe] = useMutation<UnsubscribeMutation>(UNSUBSCRIBE_MUTATION)
 
   const [mode, setMode] = useState(Mode.Resting)
   const [state, setState] = useState<
@@ -88,13 +102,12 @@ export const SubscribePage: React.FC = () => {
     async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault()
 
-      if (!state.plan?.id) {
+      if (!state.plan) {
         sendError({ body: 'please select a plan to continue' })
         return
       }
 
       if (!stripe || !elements) {
-        console.error('Stripe.js has not loaded yet')
         sendError({ body: 'please wait and try again' })
         return
       }
@@ -102,12 +115,11 @@ export const SubscribePage: React.FC = () => {
       const cardElement = elements.getElement(CardNumberElement)
 
       if (!cardElement) {
-        console.error('Unable to find a CardElement')
         sendError({ body: 'unable to subscribe at this time' })
         return
       }
 
-      setMode(Mode.Subscribing)
+      setMode(Mode.Loading)
 
       const { error, paymentMethod } = await stripe.createPaymentMethod({
         type: 'card',
@@ -117,7 +129,6 @@ export const SubscribePage: React.FC = () => {
       if (error || !paymentMethod) {
         setMode(Mode.Error)
         sendError({ body: 'unable to save your payment method' })
-        console.error(error)
         return
       }
 
@@ -129,7 +140,7 @@ export const SubscribePage: React.FC = () => {
           },
         })
 
-        setMode(Mode.Subscribed)
+        setMode(Mode.Loaded)
         sendNotification({ body: 'thank you!' })
       } catch (err) {
         setMode(Mode.Error)
@@ -138,6 +149,24 @@ export const SubscribePage: React.FC = () => {
     },
     [elements, sendError, sendNotification, state.plan, stripe, subscribe]
   )
+
+  const handleCancel = async () => {
+    setMode(Mode.Loading)
+
+    try {
+      await unsubscribe({
+        variables: {
+          subscriptionId: activeSubscription.id,
+        },
+      })
+
+      setMode(Mode.Loaded)
+      sendNotification({ body: 'your subscription has been cancelled' })
+    } catch (err) {
+      setMode(Mode.Error)
+      sendError({ body: errorMessage(err) })
+    }
+  }
 
   const selectPlan = (plan: Plan) => {
     setState((prevState) => ({ ...prevState, plan }))
@@ -163,16 +192,27 @@ export const SubscribePage: React.FC = () => {
         <title>subscribe</title>
       </Helmet>
 
-      {activeSubscription ? (
+      {activeSubscription && !activeSubscription.cancelAtPeriodEnd && (
         <Stack>
           <Pill>thank you</Pill>,
           <Pill>
-            your subscription will auto-renew in{' '}
+            your subscription will auto-renew{' '}
             {activeSubscription.currentPeriodEndAt}
           </Pill>
-          <Button>cancel your subscription</Button>
+          <Button onClick={handleCancel}>cancel your subscription</Button>
         </Stack>
-      ) : (
+      )}
+
+      {activeSubscription && activeSubscription.cancelAtPeriodEnd && (
+        <Stack>
+          <Pill>
+            your subscription will end {activeSubscription.currentPeriodEndAt}
+          </Pill>
+          <Button>re-activate your subscription</Button>
+        </Stack>
+      )}
+
+      {!activeSubscription && (
         <form onSubmit={handleSubmit}>
           <Stack>
             <Pill>choose a plan</Pill>
@@ -210,8 +250,8 @@ export const SubscribePage: React.FC = () => {
                   [Mode.Resting]: `subscribe ${
                     state.plan ? `for ${state.plan.amount}` : ''
                   }`,
-                  [Mode.Subscribing]: 'subscribing',
-                  [Mode.Subscribed]: 'thank you',
+                  [Mode.Loading]: 'subscribing',
+                  [Mode.Loaded]: 'thank you',
                   [Mode.Error]: 'there was a problem with your subscription',
                 }[mode]
               }
