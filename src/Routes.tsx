@@ -12,6 +12,7 @@ import { ContentPage } from './pages/ContentPage'
 import { AccountPage } from './pages/AccountPage'
 import { SubscribePage } from './pages/SubscribePage'
 import { ErrorBoundary } from './components/ErrorBoundary'
+import { CreditCardProvider } from './components/CreditCard'
 
 export const Routes = () => {
   const hrefs = useHrefs()
@@ -72,7 +73,9 @@ export const Routes = () => {
         path="/subscribe"
         component={() => (
           <ErrorBoundary>
-            <SubscribePage />
+            <CreditCardProvider>
+              <SubscribePage />
+            </CreditCardProvider>
           </ErrorBoundary>
         )}
       />
