@@ -14,6 +14,7 @@ import {
 } from '../../generated/types/SubscribePageQuery'
 import { SubscribeMutation } from '../../generated/types/SubscribeMutation'
 import { UnsubscribeMutation } from '../../generated/types/UnsubscribeMutation'
+import { ReactivateMutation } from '../../generated/types/ReactivateMutation'
 import { PlanInterval } from '../../generated/types/globalTypes'
 import { errorMessage } from '../../util/errors'
 import { CreditCard } from '../../components/CreditCard'
@@ -73,6 +74,17 @@ const UNSUBSCRIBE_MUTATION = gql`
   ${SUBSCRIBE_PAGE_FRAGMENT}
 `
 
+const REACTIVATE_MUTATION = gql`
+  mutation ReactivateMutation($subscriptionId: String!) {
+    reactivateProductSubscription(input: { subscriptionId: $subscriptionId }) {
+      user {
+        ...SubscribePageFragment
+      }
+    }
+  }
+  ${SUBSCRIBE_PAGE_FRAGMENT}
+`
+
 enum Mode {
   Resting,
   Loading,
@@ -87,6 +99,7 @@ export const SubscribePage: React.FC = () => {
 
   const [subscribe] = useMutation<SubscribeMutation>(SUBSCRIBE_MUTATION)
   const [unsubscribe] = useMutation<UnsubscribeMutation>(UNSUBSCRIBE_MUTATION)
+  const [reactivate] = useMutation<ReactivateMutation>(REACTIVATE_MUTATION)
 
   const [mode, setMode] = useState(Mode.Resting)
   const [state, setState] = useState<
@@ -142,6 +155,7 @@ export const SubscribePage: React.FC = () => {
 
         setMode(Mode.Loaded)
         sendNotification({ body: 'thank you!' })
+        setTimeout(() => setMode(Mode.Resting), 3000)
       } catch (err) {
         setMode(Mode.Error)
         sendError({ body: errorMessage(err) })
@@ -162,6 +176,26 @@ export const SubscribePage: React.FC = () => {
 
       setMode(Mode.Loaded)
       sendNotification({ body: 'your subscription has been cancelled' })
+      setTimeout(() => setMode(Mode.Resting), 3000)
+    } catch (err) {
+      setMode(Mode.Error)
+      sendError({ body: errorMessage(err) })
+    }
+  }
+
+  const handleReactivate = async () => {
+    setMode(Mode.Loading)
+
+    try {
+      await reactivate({
+        variables: {
+          subscriptionId: activeSubscription.id,
+        },
+      })
+
+      setMode(Mode.Loaded)
+      sendNotification({ body: 'your subscription has been reactivated' })
+      setTimeout(() => setMode(Mode.Resting), 3000)
     } catch (err) {
       setMode(Mode.Error)
       sendError({ body: errorMessage(err) })
@@ -199,7 +233,17 @@ export const SubscribePage: React.FC = () => {
             your subscription will auto-renew{' '}
             {activeSubscription.currentPeriodEndAt}
           </Pill>
-          <Button onClick={handleCancel}>cancel your subscription</Button>
+          <Button onClick={handleCancel}>
+            {
+              {
+                [Mode.Resting]: 'cancel your subscription',
+                [Mode.Loading]: 'cancelling',
+                [Mode.Loaded]: 'thank you',
+                [Mode.Error]:
+                  'there was a problem when cancelling your subscription',
+              }[mode]
+            }
+          </Button>
         </Stack>
       )}
 
@@ -208,7 +252,17 @@ export const SubscribePage: React.FC = () => {
           <Pill>
             your subscription will end {activeSubscription.currentPeriodEndAt}
           </Pill>
-          <Button>re-activate your subscription</Button>
+          <Button onClick={handleReactivate}>
+            {
+              {
+                [Mode.Resting]: 'reactivate your subscription',
+                [Mode.Loading]: 'reactivating',
+                [Mode.Loaded]: 'thank you',
+                [Mode.Error]:
+                  'there was a problem when reactivating your subscription',
+              }[mode]
+            }
+          </Button>
         </Stack>
       )}
 
