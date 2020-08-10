@@ -155,11 +155,12 @@ export const SubscribePage: React.FC = () => {
 
         setMode(Mode.Loaded)
         sendNotification({ body: 'thank you!' })
-        setTimeout(() => setMode(Mode.Resting), 3000)
       } catch (err) {
         setMode(Mode.Error)
         sendError({ body: errorMessage(err) })
       }
+
+      setTimeout(() => setMode(Mode.Resting), 3000)
     },
     [elements, sendError, sendNotification, state.plan, stripe, subscribe]
   )
@@ -176,11 +177,12 @@ export const SubscribePage: React.FC = () => {
 
       setMode(Mode.Loaded)
       sendNotification({ body: 'your subscription has been cancelled' })
-      setTimeout(() => setMode(Mode.Resting), 3000)
     } catch (err) {
       setMode(Mode.Error)
       sendError({ body: errorMessage(err) })
     }
+
+    setTimeout(() => setMode(Mode.Resting), 3000)
   }
 
   const handleReactivate = async () => {
@@ -195,11 +197,12 @@ export const SubscribePage: React.FC = () => {
 
       setMode(Mode.Loaded)
       sendNotification({ body: 'your subscription has been reactivated' })
-      setTimeout(() => setMode(Mode.Resting), 3000)
     } catch (err) {
       setMode(Mode.Error)
       sendError({ body: errorMessage(err) })
     }
+
+    setTimeout(() => setMode(Mode.Resting), 3000)
   }
 
   const selectPlan = (plan: Plan) => {
