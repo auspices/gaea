@@ -298,12 +298,14 @@ export const SubscribePage: React.FC = () => {
 
             <CreditCard />
 
-            <Button>
+            <Button disabled={!state.plan}>
               {
                 {
-                  [Mode.Resting]: `subscribe ${
-                    state.plan ? `for ${state.plan.amount}` : ''
-                  }`,
+                  [Mode.Resting]: state.plan
+                    ? `subscribe for ${
+                        state.plan.amount
+                      } a ${state.plan.interval.toLowerCase()}`
+                    : 'choose a plan',
                   [Mode.Loading]: 'subscribing',
                   [Mode.Loaded]: 'thank you',
                   [Mode.Error]: 'there was a problem with your subscription',
