@@ -4,7 +4,6 @@ import {
   Box,
   color,
   Pill,
-  pillFocusMixin,
   PillProps,
   Stack,
   Tag,
