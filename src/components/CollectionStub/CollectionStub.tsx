@@ -68,12 +68,7 @@ const selectedMixin = css`
 `
 
 const Container = styled(Pill)<PillProps & { selected?: boolean }>`
-  ${({ selected }) =>
-    selected &&
-    css`
-      ${selectedMixin}
-      ${pillFocusMixin}
-    `}
+  ${({ selected }) => selected && selectedMixin}
 
   &:hover {
     ${selectedMixin}
@@ -129,6 +124,8 @@ export const CollectionStub: React.FC<CollectionStubProps> = ({
       selected={selected}
       {...rest}
     >
+      {selected && <>→&nbsp;</>}
+
       <Title mr={collection.within.length > 0 ? 4 : 0}>
         {collection.title}
       </Title>
