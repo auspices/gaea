@@ -1,9 +1,13 @@
 import React from 'react'
-import { loadStripe } from '@stripe/stripe-js'
+import { loadStripe } from '@stripe/stripe-js/pure'
 import { Elements } from '@stripe/react-stripe-js'
 
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY!)
-
-export const CreditCardProvider: React.FC = ({ children }) => (
-  <Elements stripe={stripePromise}>{children}</Elements>
-)
+export const CreditCardProvider: React.FC = ({ children }) => {
+  return (
+    <Elements
+      stripe={loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY!)}
+    >
+      {children}
+    </Elements>
+  )
+}
