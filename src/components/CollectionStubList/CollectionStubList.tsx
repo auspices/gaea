@@ -57,7 +57,7 @@ export const CollectionStubList: React.FC<CollectionStubListProps> = ({
         <CollectionStub
           key={collection.id}
           collection={collection}
-          selected={index === i}
+          highlighted={index === i}
         />
       ))}
     </Stack>

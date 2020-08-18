@@ -2,9 +2,9 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import {
   Box,
+  Button,
+  ButtonProps,
   color,
-  Pill,
-  PillProps,
   Stack,
   Tag,
   themeGet,
@@ -55,7 +55,7 @@ const Delta = styled(Box)`
   transform: translateX(-10%);
 `
 
-const selectedMixin = css`
+const highlightedMixin = css`
   > ${Count} {
     color: ${color('secondary')};
   }
@@ -66,11 +66,12 @@ const selectedMixin = css`
   }
 `
 
-const Container = styled(Pill)<PillProps & { selected?: boolean }>`
-  ${({ selected }) => selected && selectedMixin}
+const Container = styled(Button)<ButtonProps>`
+  justify-content: flex-start;
 
+  ${({ highlighted }) => highlighted && highlightedMixin}
   &:hover {
-    ${selectedMixin}
+    ${highlightedMixin}
   }
 `
 
@@ -106,12 +107,12 @@ export const Indicator = styled(Box).attrs({ mr: 4 })`
 
 export type CollectionStubProps = {
   collection: CollectionStubFragment
-  selected?: boolean
+  highlighted?: boolean
 }
 
 export const CollectionStub: React.FC<CollectionStubProps> = ({
   collection,
-  selected,
+  highlighted,
   ...rest
 }) => {
   const hrefs = useHrefs()
@@ -120,11 +121,9 @@ export const CollectionStub: React.FC<CollectionStubProps> = ({
     <Container
       as={Link}
       to={hrefs.collection(collection.slug)}
-      selected={selected}
+      highlighted={highlighted}
       {...rest}
     >
-      {selected && <>→&nbsp;</>}
-
       <Title mr={collection.within.length > 0 ? 4 : 0}>
         {collection.title}
       </Title>
