@@ -52,7 +52,7 @@ export const AddToCollectionExtendedOptions: React.FC<AddToCollectionExtendedOpt
   onDone,
   ...rest
 }) => {
-  const { id = '' } = useParams()
+  const { id = '' } = useParams<{ id: string }>()
   const { refetch } = useRefetch()
   const { sendError, sendNotification } = useAlerts()
 
