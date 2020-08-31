@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { Modal } from '@auspices/eos'
+import { LocusOption, Modal } from '@auspices/eos'
 import { useHistory } from 'react-router'
 import gql from 'graphql-tag'
 import { useLazyQuery } from '@apollo/client'
@@ -74,29 +74,36 @@ export const Locus: React.FC = () => {
     LocusCollectionsQueryVariables
   >(LOCUS_COLLECTIONS_QUERY)
 
+  const [options, setOptions] = useState<LocusOption[]>([])
+
   const handleChange = useCallback(
     (query: string) => {
-      if (query === '') return
+      // Reset to default
+      if (query === '') {
+        setOptions([
+          {
+            label: `go to next page`,
+            onClick: () =>
+              history.push({ search: encode({ page: page + 1, per }) }),
+          },
+          ...(page !== 1
+            ? [
+                {
+                  label: `go to previous page`,
+                  onClick: () =>
+                    history.push({ search: encode({ page: page - 1, per }) }),
+                },
+              ]
+            : []),
+        ])
+        return
+      }
+
+      // Search
       getCollections({ variables: { query } })
     },
-    [getCollections]
+    [encode, getCollections, history, page, per]
   )
-
-  const [options, setOptions] = useState([
-    {
-      label: `go to next page`,
-      onClick: () => history.push({ search: encode({ page: page + 1, per }) }),
-    },
-    ...(page !== 1
-      ? [
-          {
-            label: `go to previous page`,
-            onClick: () =>
-              history.push({ search: encode({ page: page - 1, per }) }),
-          },
-        ]
-      : []),
-  ])
 
   useEffect(() => {
     if (error || loading || !data) return
@@ -108,7 +115,7 @@ export const Locus: React.FC = () => {
     if (collections.length === 0) return
 
     setOptions(
-      collections.map(({ id, title, slug }) => {
+      collections.map(({ title, slug }) => {
         return {
           label: title,
           onClick: () => {
