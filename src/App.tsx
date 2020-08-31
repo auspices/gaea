@@ -15,6 +15,7 @@ import { ContextualRefsProvider } from './hooks'
 import { initClient } from './apollo/initClient'
 import { Routes } from './Routes'
 import { Z } from './util/zIndexes'
+import { Locus } from './components/Locus'
 
 const client = initClient()
 
@@ -41,6 +42,8 @@ const App = () => {
           />
 
           <Routes />
+
+          <Locus />
         </Box>
       </AlertsProvider>
     </ThemeProvider>
