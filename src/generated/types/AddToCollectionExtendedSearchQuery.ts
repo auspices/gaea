@@ -21,6 +21,9 @@ export interface AddToCollectionExtendedSearchQuery_filtered {
 }
 
 export interface AddToCollectionExtendedSearchQuery {
+  /**
+   * The logged in current user  
+   */
   filtered: AddToCollectionExtendedSearchQuery_filtered;
 }
 

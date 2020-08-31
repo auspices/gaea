@@ -96,6 +96,9 @@ export interface CollectionPageQuery_me {
 }
 
 export interface CollectionPageQuery {
+  /**
+   * The logged in current user  
+   */
   me: CollectionPageQuery_me;
 }
 

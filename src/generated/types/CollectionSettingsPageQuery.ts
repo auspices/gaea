@@ -23,6 +23,9 @@ export interface CollectionSettingsPageQuery_me {
 }
 
 export interface CollectionSettingsPageQuery {
+  /**
+   * The logged in current user  
+   */
   me: CollectionSettingsPageQuery_me;
 }
 

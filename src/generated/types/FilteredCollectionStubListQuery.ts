@@ -36,6 +36,9 @@ export interface FilteredCollectionStubListQuery_filtered {
 }
 
 export interface FilteredCollectionStubListQuery {
+  /**
+   * The logged in current user  
+   */
   filtered: FilteredCollectionStubListQuery_filtered;
 }
 

@@ -17,5 +17,8 @@ export interface AccountPageQuery_me {
 }
 
 export interface AccountPageQuery {
+  /**
+   * The logged in current user  
+   */
   me: AccountPageQuery_me;
 }

@@ -109,6 +109,9 @@ export interface ContentPageQuery_me {
 }
 
 export interface ContentPageQuery {
+  /**
+   * The logged in current user  
+   */
   me: ContentPageQuery_me;
 }
 

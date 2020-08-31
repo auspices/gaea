@@ -62,6 +62,9 @@ export interface CollectionPreviewQuery_me {
 }
 
 export interface CollectionPreviewQuery {
+  /**
+   * The logged in current user  
+   */
   me: CollectionPreviewQuery_me;
 }
 

@@ -44,6 +44,9 @@ export interface CollectionsPageQuery_me {
 }
 
 export interface CollectionsPageQuery {
+  /**
+   * The logged in current user  
+   */
   me: CollectionsPageQuery_me;
 }
 

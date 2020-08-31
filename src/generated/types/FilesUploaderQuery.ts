@@ -16,6 +16,9 @@ export interface FilesUploaderQuery_me {
 }
 
 export interface FilesUploaderQuery {
+  /**
+   * The logged in current user  
+   */
   me: FilesUploaderQuery_me;
 }
 

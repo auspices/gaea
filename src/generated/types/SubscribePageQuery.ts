@@ -36,5 +36,8 @@ export interface SubscribePageQuery_me {
 }
 
 export interface SubscribePageQuery {
+  /**
+   * The logged in current user  
+   */
   me: SubscribePageQuery_me;
 }

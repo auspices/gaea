@@ -26,6 +26,9 @@ export interface SampleCollectionContentQuery_me {
 }
 
 export interface SampleCollectionContentQuery {
+  /**
+   * The logged in current user  
+   */
   me: SampleCollectionContentQuery_me;
 }
 
