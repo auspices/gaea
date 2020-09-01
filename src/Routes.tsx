@@ -1,6 +1,6 @@
 import React from 'react'
 import { Redirect, Route, Switch } from 'react-router-dom'
-import { useHrefs } from './hooks'
+import { PATTERNS, useHrefs } from './hooks'
 import { parseRoute } from './util/parseRoute'
 import { RedirectHome } from './components/RedirectHome'
 import { LoginPage } from './pages/LoginPage'
@@ -21,7 +21,7 @@ export const Routes = () => {
     <Switch>
       <Route
         exact
-        path="/"
+        path={PATTERNS.root}
         component={() => {
           const jwt = localStorage.getItem('jwt')
           const isLoggedIn = !!jwt
@@ -40,7 +40,7 @@ export const Routes = () => {
 
       <Route
         exact
-        path="/account"
+        path={PATTERNS.account}
         component={() => (
           <ErrorBoundary>
             <AccountPage />
@@ -50,7 +50,7 @@ export const Routes = () => {
 
       <Route
         exact
-        path="/login"
+        path={PATTERNS.login}
         component={() => (
           <ErrorBoundary>
             <LoginPage />
@@ -60,7 +60,7 @@ export const Routes = () => {
 
       <Route
         exact
-        path="/register"
+        path={PATTERNS.register}
         component={() => (
           <ErrorBoundary>
             <RegisterPage />
@@ -70,7 +70,7 @@ export const Routes = () => {
 
       <Route
         exact
-        path="/subscribe"
+        path={PATTERNS.subscribe}
         component={() => (
           <ErrorBoundary>
             <CreditCardProvider>
@@ -82,7 +82,7 @@ export const Routes = () => {
 
       <Route
         exact
-        path="/xs"
+        path={PATTERNS.collections}
         component={parseRoute(() => (
           <ErrorBoundary>
             <CollectionsPage />
@@ -92,7 +92,7 @@ export const Routes = () => {
 
       <Route
         exact
-        path="/xs/:id"
+        path={PATTERNS.collection}
         component={parseRoute(({ params: { id } }) => (
           <ErrorBoundary>
             <CollectionPage id={id} />
@@ -102,7 +102,7 @@ export const Routes = () => {
 
       <Route
         exact
-        path="/xs/:id/settings"
+        path={PATTERNS.collectionSettings}
         component={parseRoute(({ params: { id } }) => (
           <ErrorBoundary>
             <CollectionSettingsPage id={id} />
@@ -112,7 +112,7 @@ export const Routes = () => {
 
       <Route
         exact
-        path="/x/:id"
+        path={PATTERNS.content}
         component={parseRoute(({ params }) => (
           <ErrorBoundary>
             <ContentPage id={params.id} />
