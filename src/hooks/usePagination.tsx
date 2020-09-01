@@ -1,10 +1,4 @@
-import React, {
-  Dispatch,
-  SetStateAction,
-  useContext,
-  useEffect,
-  useState,
-} from 'react'
+import React, { Dispatch, SetStateAction, useContext, useState } from 'react'
 import { parse, stringify } from 'qs'
 import { useLocation, useParams } from 'react-router'
 import { paginate, THEME } from '@auspices/eos'
