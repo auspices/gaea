@@ -26,7 +26,7 @@ export const LocusMenu: React.FC<LocusMenuProps> = ({
   }, [debouncedQuery, onChange])
 
   return (
-    <Stack width="50vw" bg="background">
+    <Stack width={['75vw', '75vw', '50vw']} bg="background">
       <ClearableInput
         ref={ref}
         placeholder="type a command, search..."
