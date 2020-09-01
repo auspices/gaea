@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, useContext, useState } from 'react'
 import { parse, stringify } from 'qs'
-import { useLocation, useParams } from 'react-router'
+import { matchPath, useLocation } from 'react-router'
 import { paginate, THEME } from '@auspices/eos'
 
 const PaginationContext = React.createContext<{
@@ -47,11 +47,12 @@ const DEFAULT_GRID_PER = 12
 const DEFAULT_LIST_PER = 24
 
 export const usePagination = () => {
-  const { search } = useLocation()
+  const { pathname, search } = useLocation()
   const { total, setTotal } = useContext(PaginationContext)
-  const params = useParams()
 
-  const mode = 'id' in params ? 'grid' : 'list'
+  const mode = matchPath(pathname, { path: '/xs', exact: true })
+    ? 'list'
+    : 'grid'
 
   let { page = '1', per = '' } = parse(search.slice(1)) as Pagination
 
