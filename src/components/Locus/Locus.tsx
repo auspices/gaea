@@ -46,6 +46,7 @@ export const Locus: React.FC = () => {
       // Reset to default
       if (query === '') {
         setOptions([
+          // Pagination options
           ...(nextPage !== page
             ? [
                 {
@@ -74,6 +75,7 @@ export const Locus: React.FC = () => {
     [encode, getCollections, history, nextPage, page, per, prevPage]
   )
 
+  // Respond to search
   useEffect(() => {
     if (error || loading || !data) return
 
@@ -86,7 +88,7 @@ export const Locus: React.FC = () => {
     setOptions(
       collections.map(({ title, slug }) => {
         return {
-          label: title,
+          label: `go to ${title}`,
           onClick: () => {
             history.push(hrefs.collection(slug))
           },
