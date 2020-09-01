@@ -1,6 +1,28 @@
+import React, {
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
 import { parse, stringify } from 'qs'
 import { useLocation, useParams } from 'react-router'
-import { THEME } from '@auspices/eos'
+import { paginate, THEME } from '@auspices/eos'
+
+const PaginationContext = React.createContext<{
+  total: number
+  setTotal: Dispatch<SetStateAction<number>>
+}>({ total: 0, setTotal: () => {} })
+
+export const PaginationProvider: React.FC = ({ children }) => {
+  const [total, setTotal] = useState(0)
+
+  return (
+    <PaginationContext.Provider value={{ total, setTotal }}>
+      {children}
+    </PaginationContext.Provider>
+  )
+}
 
 type Pagination = {
   page: number | string
@@ -32,7 +54,9 @@ const DEFAULT_LIST_PER = 24
 
 export const usePagination = () => {
   const { search } = useLocation()
+  const { total, setTotal } = useContext(PaginationContext)
   const params = useParams()
+
   const mode = 'id' in params ? 'grid' : 'list'
 
   let { page = '1', per = '' } = parse(search.slice(1)) as Pagination
@@ -50,9 +74,23 @@ export const usePagination = () => {
     per = DEFAULT_LIST_PER
   }
 
+  page = parseInt(String(page), 10)
+  per = parseInt(String(per), 10)
+
+  const { totalPages, nextPage, prevPage } = paginate({
+    page,
+    per,
+    total,
+  })
+
   return {
-    page: parseInt(String(page), 10),
-    per: parseInt(String(per), 10),
+    page,
+    per,
+    total,
+    totalPages,
+    nextPage,
+    prevPage,
     encode,
+    setTotal,
   }
 }

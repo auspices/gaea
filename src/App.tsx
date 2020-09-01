@@ -11,7 +11,7 @@ import {
   ThemerProvider,
   useThemer,
 } from '@auspices/eos'
-import { ContextualRefsProvider } from './hooks'
+import { ContextualRefsProvider, PaginationProvider } from './hooks'
 import { initClient } from './apollo/initClient'
 import { Routes } from './Routes'
 import { Z } from './util/zIndexes'
@@ -55,14 +55,16 @@ export default () => {
     <BrowserRouter>
       <ApolloProvider client={client}>
         <ContextualRefsProvider>
-          <ThemerProvider>
-            <Helmet
-              defaultTitle="loading / auspices"
-              titleTemplate="%s / auspices"
-            />
+          <PaginationProvider>
+            <ThemerProvider>
+              <Helmet
+                defaultTitle="loading / auspices"
+                titleTemplate="%s / auspices"
+              />
 
-            <App />
-          </ThemerProvider>
+              <App />
+            </ThemerProvider>
+          </PaginationProvider>
         </ContextualRefsProvider>
       </ApolloProvider>
     </BrowserRouter>
