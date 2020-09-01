@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { LocusOption, Modal } from '@auspices/eos'
+import { Modal } from '@auspices/eos'
 import { useHistory } from 'react-router'
 import gql from 'graphql-tag'
 import { useLazyQuery } from '@apollo/client'
@@ -7,6 +7,7 @@ import { usePagination } from '../../hooks'
 import * as hrefs from '../../hooks/useHrefs'
 import { Z } from '../../util/zIndexes'
 import { LocusMenu } from './LocusMenu'
+import { LocusOption } from './LocusOptions'
 import {
   LocusCollectionsQuery,
   LocusCollectionsQueryVariables,
@@ -33,7 +34,7 @@ enum Mode {
 export const Locus: React.FC = () => {
   const history = useHistory()
 
-  const { page, per, encode } = usePagination()
+  const { page, per, nextPage, prevPage, encode } = usePagination()
 
   const [mode, setMode] = useState(Mode.Resting)
 
@@ -81,17 +82,21 @@ export const Locus: React.FC = () => {
       // Reset to default
       if (query === '') {
         setOptions([
-          {
-            label: `go to next page`,
-            onClick: () =>
-              history.push({ search: encode({ page: page + 1, per }) }),
-          },
-          ...(page !== 1
+          ...(nextPage !== page
+            ? [
+                {
+                  label: `go to next page`,
+                  onClick: () =>
+                    history.push({ search: encode({ page: nextPage, per }) }),
+                },
+              ]
+            : []),
+          ...(prevPage !== page
             ? [
                 {
                   label: `go to previous page`,
                   onClick: () =>
-                    history.push({ search: encode({ page: page - 1, per }) }),
+                    history.push({ search: encode({ page: prevPage, per }) }),
                 },
               ]
             : []),
@@ -102,7 +107,7 @@ export const Locus: React.FC = () => {
       // Search
       getCollections({ variables: { query } })
     },
-    [encode, getCollections, history, page, per]
+    [encode, getCollections, history, nextPage, page, per, prevPage]
   )
 
   useEffect(() => {
