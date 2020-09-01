@@ -12,6 +12,7 @@ import {
   LocusCollectionsQuery,
   LocusCollectionsQueryVariables,
 } from '../../generated/types/LocusCollectionsQuery'
+import { Mode, useLocusToggle } from './useLocusToggle'
 
 export const LOCUS_COLLECTIONS_QUERY = gql`
   query LocusCollectionsQuery($query: String!) {
@@ -26,49 +27,12 @@ export const LOCUS_COLLECTIONS_QUERY = gql`
   }
 `
 
-enum Mode {
-  Resting,
-  Open,
-}
-
 export const Locus: React.FC = () => {
   const history = useHistory()
 
   const { page, per, nextPage, prevPage, encode } = usePagination()
 
-  const [mode, setMode] = useState(Mode.Resting)
-
-  const toggleMode = useCallback(() => {
-    setMode(
-      (prevMode) =>
-        ({ [Mode.Resting]: Mode.Open, [Mode.Open]: Mode.Resting }[prevMode])
-    )
-  }, [])
-
-  const handleKeyDown = useCallback(
-    (event: KeyboardEvent) => {
-      // <cmd+k>
-      if (event.metaKey && event.key === 'k') {
-        event.preventDefault()
-        toggleMode()
-      }
-
-      // <esc>
-      if (event.key === 'Escape') {
-        setMode(Mode.Resting)
-      }
-    },
-    [toggleMode]
-  )
-
-  const handleClose = () => setMode(Mode.Resting)
-
-  useEffect(() => {
-    document.addEventListener('keydown', handleKeyDown)
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown)
-    }
-  }, [handleKeyDown])
+  const { mode, handleClose } = useLocusToggle()
 
   const [getCollections, { loading, data, error }] = useLazyQuery<
     LocusCollectionsQuery,
