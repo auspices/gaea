@@ -165,7 +165,7 @@ export const AddToCollectionExtendedOptions: React.FC<AddToCollectionExtendedOpt
   return (
     <Stack {...rest}>
       {list.map((option, i) => (
-        <Button key={i} focus={index === i} onClick={option.onClick}>
+        <Button key={i} highlighted={index === i} onClick={option.onClick}>
           {option.label}
         </Button>
       ))}
