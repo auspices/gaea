@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Stack, StackProps } from '@auspices/eos'
 import { useKeyboardListNavigation } from 'use-keyboard-list-navigation'
 
-export type LocusOption = { label: string; onClick?(): void }
+export type LocusOption = { key: string; label: string; onClick?(): void }
 
 export type LocusOptionsProps = StackProps & {
   options: LocusOption[]

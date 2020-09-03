@@ -1,12 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { ClearableInput, Stack } from '@auspices/eos'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
+import { ClearableInput, Stack, StackProps } from '@auspices/eos'
 import { useDebounce } from 'use-debounce/lib'
 import { LocusOption, LocusOptions } from './LocusOptions'
+import Fuse from 'fuse.js'
 
-export type LocusMenuProps = {
+export type LocusMenuProps = StackProps & {
   options: LocusOption[]
   waitForInteractive?: boolean
-  onChange(query: string): void
+  onChange?(query: string): void
+  onDebouncedChange?(debouncedQuery: string): void
   onEnter?(): void
 }
 
@@ -14,19 +16,31 @@ export const LocusMenu: React.FC<LocusMenuProps> = ({
   options,
   waitForInteractive,
   onChange,
+  onDebouncedChange,
   onEnter,
+  ...rest
 }) => {
   const ref = useRef<HTMLInputElement | null>(null)
 
   const [query, setQuery] = useState('')
   const [debouncedQuery] = useDebounce(query, 150)
 
-  useEffect(() => {
-    onChange(debouncedQuery)
-  }, [debouncedQuery, onChange])
+  const fuse = useMemo(() => {
+    return new Fuse(options, { keys: ['label'] })
+  }, [options])
+
+  const filteredOptions = useMemo(() => {
+    return fuse.search(query).map(({ item }) => item)
+  }, [fuse, query])
+
+  useEffect(() => onChange && onChange(query), [query, onChange])
+  useEffect(() => onDebouncedChange && onDebouncedChange(debouncedQuery), [
+    debouncedQuery,
+    onDebouncedChange,
+  ])
 
   return (
-    <Stack width={['75vw', '75vw', '50vw']} bg="background">
+    <Stack width={['75vw', '75vw', '50vw']} bg="background" {...rest}>
       <ClearableInput
         ref={ref}
         placeholder="type a command, search..."
@@ -35,7 +49,9 @@ export const LocusMenu: React.FC<LocusMenuProps> = ({
 
       {options.length > 0 && (
         <LocusOptions
-          options={options}
+          options={
+            query !== '' && filteredOptions.length ? filteredOptions : options
+          }
           waitForInteractive={waitForInteractive}
           onEnter={onEnter}
         />
@@ -43,3 +59,5 @@ export const LocusMenu: React.FC<LocusMenuProps> = ({
     </Stack>
   )
 }
+
+export default LocusMenu

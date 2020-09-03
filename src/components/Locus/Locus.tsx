@@ -1,18 +1,19 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import { Modal } from '@auspices/eos'
+import React, { Suspense, useCallback, useEffect, useState } from 'react'
+import { Box, Modal, Spinner } from '@auspices/eos'
 import { useHistory } from 'react-router'
 import gql from 'graphql-tag'
 import { useLazyQuery } from '@apollo/client'
 import { usePagination } from '../../hooks'
 import * as hrefs from '../../hooks/useHrefs'
 import { Z } from '../../util/zIndexes'
-import { LocusMenu } from './LocusMenu'
 import { LocusOption } from './LocusOptions'
 import {
   LocusCollectionsQuery,
   LocusCollectionsQueryVariables,
 } from '../../generated/types/LocusCollectionsQuery'
 import { Mode, useLocusToggle } from './useLocusToggle'
+
+const LocusMenu = React.lazy(() => import('./LocusMenu'))
 
 export const LOCUS_COLLECTIONS_QUERY = gql`
   query LocusCollectionsQuery($query: String!) {
@@ -29,53 +30,53 @@ export const LOCUS_COLLECTIONS_QUERY = gql`
 
 export const Locus: React.FC = () => {
   const history = useHistory()
-
   const { page, per, nextPage, prevPage, encode } = usePagination()
-
   const { mode, handleClose } = useLocusToggle()
-
   const [getCollections, { loading, data, error }] = useLazyQuery<
     LocusCollectionsQuery,
     LocusCollectionsQueryVariables
   >(LOCUS_COLLECTIONS_QUERY)
 
-  const [options, setOptions] = useState<LocusOption[]>([])
+  const defaultOptions: LocusOption[] = [
+    ...(nextPage !== page
+      ? [
+          {
+            key: 'next',
+            label: `go to next page`,
+            onClick: () =>
+              history.push({ search: encode({ page: nextPage, per }) }),
+          },
+        ]
+      : []),
+    ...(prevPage !== page
+      ? [
+          {
+            key: 'previous',
+            label: `go to previous page`,
+            onClick: () =>
+              history.push({ search: encode({ page: prevPage, per }) }),
+          },
+        ]
+      : []),
+  ]
 
-  const handleChange = useCallback(
-    (query: string) => {
-      // Reset to default
-      if (query === '') {
-        setOptions([
-          // Pagination options
-          ...(nextPage !== page
-            ? [
-                {
-                  label: `go to next page`,
-                  onClick: () =>
-                    history.push({ search: encode({ page: nextPage, per }) }),
-                },
-              ]
-            : []),
-          ...(prevPage !== page
-            ? [
-                {
-                  label: `go to previous page`,
-                  onClick: () =>
-                    history.push({ search: encode({ page: prevPage, per }) }),
-                },
-              ]
-            : []),
-        ])
-        return
-      }
+  const [dynamicOptions, setDynamicOptions] = useState<LocusOption[]>([])
 
-      // Search
-      getCollections({ variables: { query } })
+  const handleChange = useCallback((query: string) => {
+    if (query === '') {
+      setDynamicOptions([])
+      return
+    }
+  }, [])
+
+  const handleDebouncedChange = useCallback(
+    (debouncedQuery: string) => {
+      if (debouncedQuery === '') return
+      getCollections({ variables: { query: debouncedQuery } })
     },
-    [encode, getCollections, history, nextPage, page, per, prevPage]
+    [getCollections]
   )
 
-  // Respond to search
   useEffect(() => {
     if (error || loading || !data) return
 
@@ -85,9 +86,10 @@ export const Locus: React.FC = () => {
 
     if (collections.length === 0) return
 
-    setOptions(
+    setDynamicOptions(
       collections.map(({ title, slug }) => {
         return {
+          key: title,
           label: `go to ${title}`,
           onClick: () => {
             history.push(hrefs.collection(slug))
@@ -101,12 +103,19 @@ export const Locus: React.FC = () => {
 
   return (
     <Modal overlay zIndex={Z.MODAL} onClose={handleClose}>
-      <LocusMenu
-        options={options}
-        waitForInteractive={false}
-        onChange={handleChange}
-        onEnter={handleClose}
-      />
+      <Suspense fallback={<Spinner />}>
+        <Box height="100vh">
+          <LocusMenu
+            position="relative"
+            top="25%"
+            options={[...defaultOptions, ...dynamicOptions]}
+            waitForInteractive={false}
+            onChange={handleChange}
+            onDebouncedChange={handleDebouncedChange}
+            onEnter={handleClose}
+          />
+        </Box>
+      </Suspense>
     </Modal>
   )
 }
