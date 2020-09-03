@@ -6,19 +6,17 @@ export type LocusOption = { key: string; label: string; onClick?(): void }
 
 export type LocusOptionsProps = StackProps & {
   options: LocusOption[]
-  waitForInteractive?: boolean
   onEnter?(): void
 }
 
 export const LocusOptions: React.FC<LocusOptionsProps> = ({
   options,
-  waitForInteractive = true,
   onEnter,
   ...rest
 }) => {
   const { index } = useKeyboardListNavigation({
     list: options,
-    waitForInteractive,
+    waitForInteractive: false,
     onEnter: ({ element: { onClick } }) => {
       onClick && onClick()
       onEnter && onEnter()

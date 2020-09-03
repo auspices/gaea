@@ -6,7 +6,6 @@ import Fuse from 'fuse.js'
 
 export type LocusMenuProps = StackProps & {
   options: LocusOption[]
-  waitForInteractive?: boolean
   onChange?(query: string): void
   onDebouncedChange?(debouncedQuery: string): void
   onEnter?(): void
@@ -14,7 +13,6 @@ export type LocusMenuProps = StackProps & {
 
 export const LocusMenu: React.FC<LocusMenuProps> = ({
   options,
-  waitForInteractive,
   onChange,
   onDebouncedChange,
   onEnter,
@@ -59,7 +57,6 @@ export const LocusMenu: React.FC<LocusMenuProps> = ({
           options={
             query !== '' && filteredOptions.length ? filteredOptions : options
           }
-          waitForInteractive={waitForInteractive}
           onEnter={onEnter}
         />
       )}

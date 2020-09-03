@@ -102,16 +102,15 @@ export const Locus: React.FC = () => {
   if (mode === Mode.Resting) return null
 
   return (
-    <Suspense fallback={<Spinner />}>
-      <Modal overlay zIndex={Z.MODAL} onClose={handleClose}>
+    <Modal overlay zIndex={Z.MODAL} onClose={handleClose}>
+      <Suspense fallback={<Spinner />}>
         <LocusMenu
           options={[...defaultOptions, ...dynamicOptions]}
-          waitForInteractive={false}
           onChange={handleChange}
           onDebouncedChange={handleDebouncedChange}
           onEnter={handleClose}
         />
-      </Modal>
-    </Suspense>
+      </Suspense>
+    </Modal>
   )
 }
