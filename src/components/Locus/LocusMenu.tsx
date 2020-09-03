@@ -39,6 +39,13 @@ export const LocusMenu: React.FC<LocusMenuProps> = ({
     onDebouncedChange,
   ])
 
+  useEffect(() => {
+    if (!ref.current) return
+    // Lazy loading creates a disconnect between the click
+    // and the default autofocus. Manually focus on mount.
+    ref.current.focus()
+  }, [])
+
   return (
     <Stack width={['75vw', '75vw', '50vw']} bg="background" {...rest}>
       <ClearableInput

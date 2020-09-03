@@ -102,20 +102,16 @@ export const Locus: React.FC = () => {
   if (mode === Mode.Resting) return null
 
   return (
-    <Modal overlay zIndex={Z.MODAL} onClose={handleClose}>
-      <Suspense fallback={<Spinner />}>
-        <Box height="100vh">
-          <LocusMenu
-            position="relative"
-            top="25%"
-            options={[...defaultOptions, ...dynamicOptions]}
-            waitForInteractive={false}
-            onChange={handleChange}
-            onDebouncedChange={handleDebouncedChange}
-            onEnter={handleClose}
-          />
-        </Box>
-      </Suspense>
-    </Modal>
+    <Suspense fallback={<Spinner />}>
+      <Modal overlay zIndex={Z.MODAL} onClose={handleClose}>
+        <LocusMenu
+          options={[...defaultOptions, ...dynamicOptions]}
+          waitForInteractive={false}
+          onChange={handleChange}
+          onDebouncedChange={handleDebouncedChange}
+          onEnter={handleClose}
+        />
+      </Modal>
+    </Suspense>
   )
 }
