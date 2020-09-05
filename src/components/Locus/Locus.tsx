@@ -3,7 +3,7 @@ import { Modal, Spinner } from '@auspices/eos'
 import { useHistory } from 'react-router'
 import gql from 'graphql-tag'
 import { useLazyQuery } from '@apollo/client'
-import { usePagination } from '../../hooks'
+import { useMatchesPath, usePagination } from '../../hooks'
 import * as hrefs from '../../hooks/useHrefs'
 import { Z } from '../../util/zIndexes'
 import { LocusOption } from './LocusOptions'
@@ -37,8 +37,10 @@ export const Locus: React.FC = () => {
     LocusCollectionsQueryVariables
   >(LOCUS_COLLECTIONS_QUERY)
 
+  const { matches } = useMatchesPath()
+
   const defaultOptions: LocusOption[] = [
-    ...(nextPage !== page
+    ...(nextPage !== page && (matches.collection || matches.collections)
       ? [
           {
             key: 'next',
@@ -48,7 +50,7 @@ export const Locus: React.FC = () => {
           },
         ]
       : []),
-    ...(prevPage !== page
+    ...(prevPage !== page && (matches.collection || matches.collections)
       ? [
           {
             key: 'previous',
