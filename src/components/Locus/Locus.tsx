@@ -28,6 +28,13 @@ export const LOCUS_COLLECTIONS_QUERY = gql`
   }
 `
 
+const addCommand = (
+  condition: boolean,
+  options: LocusOption | LocusOption[]
+): LocusOption[] => {
+  return condition ? [options].flat() : []
+}
+
 export const Locus: React.FC = () => {
   const history = useHistory()
   const { page, per, nextPage, prevPage, encode } = usePagination()
@@ -40,26 +47,33 @@ export const Locus: React.FC = () => {
   const { matches } = useMatchesPath()
 
   const defaultOptions: LocusOption[] = [
-    ...(nextPage !== page && (matches.collection || matches.collections)
-      ? [
-          {
-            key: 'next',
-            label: `go to next page`,
-            onClick: () =>
-              history.push({ search: encode({ page: nextPage, per }) }),
-          },
-        ]
-      : []),
-    ...(prevPage !== page && (matches.collection || matches.collections)
-      ? [
-          {
-            key: 'previous',
-            label: `go to previous page`,
-            onClick: () =>
-              history.push({ search: encode({ page: prevPage, per }) }),
-          },
-        ]
-      : []),
+    ...addCommand(
+      nextPage !== page && (matches.collection || matches.collections),
+      [
+        {
+          key: 'next',
+          label: `go to next page`,
+          onClick: () =>
+            history.push({ search: encode({ page: nextPage, per }) }),
+        },
+      ]
+    ),
+    ...addCommand(
+      prevPage !== page && (matches.collection || matches.collections),
+      [
+        {
+          key: 'previous',
+          label: `go to previous page`,
+          onClick: () =>
+            history.push({ search: encode({ page: prevPage, per }) }),
+        },
+      ]
+    ),
+    ...addCommand(!matches.collections, {
+      key: 'home',
+      label: 'go home',
+      onClick: () => history.push(hrefs.root()),
+    }),
   ]
 
   const [dynamicOptions, setDynamicOptions] = useState<LocusOption[]>([])
