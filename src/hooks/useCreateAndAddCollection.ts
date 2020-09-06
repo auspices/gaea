@@ -6,9 +6,7 @@ import { useRefetch } from './useRefetch'
 import { errorMessage } from '../util/errors'
 import { AddCollectionToCollectionMutation } from '../generated/types/AddCollectionToCollectionMutation'
 import { CreateCollectionToAddMutation } from '../generated/types/CreateCollectionToAddMutation'
-import { useParams } from 'react-router'
 import { useMatchesPath } from './useMatchesPath'
-import { PATTERNS } from './useHrefs'
 
 export const CREATE_COLLECTION_TO_ADD_MUTATION = gql`
   mutation CreateCollectionToAddMutation($title: String!) {
