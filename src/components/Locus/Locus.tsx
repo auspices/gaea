@@ -37,8 +37,11 @@ const addCommand = (
 
 export const Locus: React.FC = () => {
   const history = useHistory()
+
   const { page, per, nextPage, prevPage, encode } = usePagination()
+
   const { mode, handleClose } = useLocusToggle()
+
   const [getCollections, { loading, data, error }] = useLazyQuery<
     LocusCollectionsQuery,
     LocusCollectionsQueryVariables
@@ -48,7 +51,7 @@ export const Locus: React.FC = () => {
 
   const defaultOptions: LocusOption[] = [
     ...addCommand(
-      nextPage !== page && (matches.collection || matches.collections),
+      nextPage !== page && (!!matches.collection || !!matches.collections),
       [
         {
           key: 'next',
@@ -59,7 +62,7 @@ export const Locus: React.FC = () => {
       ]
     ),
     ...addCommand(
-      prevPage !== page && (matches.collection || matches.collections),
+      prevPage !== page && (!!matches.collection || !!matches.collections),
       [
         {
           key: 'previous',
