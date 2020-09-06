@@ -24,7 +24,7 @@ export const LocusMenu: React.FC<LocusMenuProps> = ({
   const [debouncedQuery] = useDebounce(query, 150)
 
   const fuse = useMemo(() => {
-    return new Fuse(options, { keys: ['label'] })
+    return new Fuse(options, { keys: ['key'] })
   }, [options])
 
   const filteredOptions = useMemo(() => {
