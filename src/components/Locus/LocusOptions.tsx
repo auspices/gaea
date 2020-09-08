@@ -2,11 +2,15 @@ import React from 'react'
 import { Button, Stack, StackProps } from '@auspices/eos'
 import { useKeyboardListNavigation } from 'use-keyboard-list-navigation'
 
-export type LocusOption = { key: string; label: string; onClick?(): void }
+export type LocusOption = {
+  key: string
+  label: string
+  onClick(done: () => void): void
+}
 
 export type LocusOptionsProps = StackProps & {
   options: LocusOption[]
-  onEnter?(): void
+  onEnter(): void
 }
 
 export const LocusOptions: React.FC<LocusOptionsProps> = ({
@@ -18,8 +22,7 @@ export const LocusOptions: React.FC<LocusOptionsProps> = ({
     list: options,
     waitForInteractive: false,
     onEnter: ({ element: { onClick } }) => {
-      onClick && onClick()
-      onEnter && onEnter()
+      onClick(onEnter)
     },
   })
 
@@ -27,7 +30,11 @@ export const LocusOptions: React.FC<LocusOptionsProps> = ({
     <Stack {...rest}>
       {options.map(({ onClick, label }, i) => {
         return (
-          <Button key={i} highlighted={index === i} onClick={onClick}>
+          <Button
+            key={i}
+            highlighted={index === i}
+            onClick={() => onClick(onEnter)}
+          >
             {label}
           </Button>
         )

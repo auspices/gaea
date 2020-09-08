@@ -73,7 +73,7 @@ export const useCreateAndAddCollection = () => {
         sendError({ body: errorMessage(err) })
       }
 
-      return refetch()
+      await refetch()
     },
     [
       addCollectionToCollectionMutation,

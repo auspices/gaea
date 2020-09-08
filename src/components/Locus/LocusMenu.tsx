@@ -8,7 +8,7 @@ export type LocusMenuProps = StackProps & {
   options: LocusOption[]
   onChange?(query: string): void
   onDebouncedChange?(debouncedQuery: string): void
-  onEnter?(): void
+  onEnter(): void
 }
 
 export const LocusMenu: React.FC<LocusMenuProps> = ({

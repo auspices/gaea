@@ -3,7 +3,11 @@ import { Modal, Spinner } from '@auspices/eos'
 import { useHistory } from 'react-router'
 import gql from 'graphql-tag'
 import { useLazyQuery } from '@apollo/client'
-import { useMatchesPath, usePagination } from '../../hooks'
+import {
+  useCreateAndAddCollection,
+  useMatchesPath,
+  usePagination,
+} from '../../hooks'
 import * as hrefs from '../../hooks/useHrefs'
 import { Z } from '../../util/zIndexes'
 import { LocusOption } from './LocusOptions'
@@ -11,7 +15,7 @@ import {
   LocusCollectionsQuery,
   LocusCollectionsQueryVariables,
 } from '../../generated/types/LocusCollectionsQuery'
-import { Mode, useLocusToggle } from './useLocusToggle'
+import { Mode as Toggle, useLocusToggle } from './useLocusToggle'
 
 const LocusMenu = React.lazy(() => import('./LocusMenu'))
 
@@ -35,12 +39,18 @@ const addCommand = (
   return condition ? [options].flat() : []
 }
 
+enum Mode {
+  Resting,
+  Busy,
+}
+
 export const Locus: React.FC = () => {
   const history = useHistory()
 
   const { page, per, nextPage, prevPage, encode } = usePagination()
 
-  const { mode, handleClose } = useLocusToggle()
+  const [mode, setMode] = useState(Mode.Resting)
+  const { mode: toggle, handleClose } = useLocusToggle()
 
   const [getCollections, { loading, data, error }] = useLazyQuery<
     LocusCollectionsQuery,
@@ -49,6 +59,8 @@ export const Locus: React.FC = () => {
 
   const { matches } = useMatchesPath()
 
+  const { createAndAddCollectionToCollection } = useCreateAndAddCollection()
+
   const defaultOptions: LocusOption[] = [
     ...addCommand(
       nextPage !== page && (!!matches.collection || !!matches.collections),
@@ -56,8 +68,10 @@ export const Locus: React.FC = () => {
         {
           key: 'next',
           label: `go to next page`,
-          onClick: () =>
-            history.push({ search: encode({ page: nextPage, per }) }),
+          onClick: (done) => {
+            history.push({ search: encode({ page: nextPage, per }) })
+            done()
+          },
         },
       ]
     ),
@@ -67,26 +81,51 @@ export const Locus: React.FC = () => {
         {
           key: 'previous',
           label: `go to previous page`,
-          onClick: () =>
-            history.push({ search: encode({ page: prevPage, per }) }),
+          onClick: (done) => {
+            history.push({ search: encode({ page: prevPage, per }) })
+            done()
+          },
         },
       ]
     ),
     ...addCommand(!matches.collections, {
       key: 'home',
       label: 'go home',
-      onClick: () => history.push(hrefs.root()),
+      onClick: (done) => {
+        history.push(hrefs.root())
+        done()
+      },
     }),
   ]
 
+  const [searchResults, setSearchResults] = useState<LocusOption[]>([])
   const [dynamicOptions, setDynamicOptions] = useState<LocusOption[]>([])
 
-  const handleChange = useCallback((query: string) => {
-    if (query === '') {
-      setDynamicOptions([])
-      return
-    }
-  }, [])
+  const handleChange = useCallback(
+    (query: string) => {
+      if (query === '') {
+        setSearchResults([])
+        return
+      }
+
+      setDynamicOptions([
+        ...addCommand(!!matches.collection, {
+          key: query,
+          label: `create and add ${query}`,
+          onClick: (done) => {
+            setMode(Mode.Busy)
+            createAndAddCollectionToCollection(query).then(() => {
+              setMode(Mode.Resting)
+              done()
+              // TODO: Debug refetch
+              window.location.reload()
+            })
+          },
+        }),
+      ])
+    },
+    [createAndAddCollectionToCollection, matches.collection]
+  )
 
   const handleDebouncedChange = useCallback(
     (debouncedQuery: string) => {
@@ -105,30 +144,35 @@ export const Locus: React.FC = () => {
 
     if (collections.length === 0) return
 
-    setDynamicOptions(
+    setSearchResults(
       collections.map(({ title, slug }) => {
         return {
           key: title,
           label: `go to ${title}`,
-          onClick: () => {
+          onClick: (done) => {
             history.push(hrefs.collection(slug))
+            done()
           },
         }
       })
     )
   }, [data, error, history, loading])
 
-  if (mode === Mode.Resting) return null
+  if (toggle === Toggle.Resting) return null
 
   return (
     <Modal overlay zIndex={Z.MODAL} onClose={handleClose}>
       <Suspense fallback={<Spinner />}>
-        <LocusMenu
-          options={[...defaultOptions, ...dynamicOptions]}
-          onChange={handleChange}
-          onDebouncedChange={handleDebouncedChange}
-          onEnter={handleClose}
-        />
+        {mode === Mode.Resting ? (
+          <LocusMenu
+            options={[...defaultOptions, ...dynamicOptions, ...searchResults]}
+            onChange={handleChange}
+            onDebouncedChange={handleDebouncedChange}
+            onEnter={handleClose}
+          />
+        ) : (
+          <Spinner />
+        )}
       </Suspense>
     </Modal>
   )
