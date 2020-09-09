@@ -66,17 +66,16 @@
   dependencies:
     "@apollographql/graphql-language-service-types" "^2.0.0"
 
-"@auspices/eos@2.9.1":
-  version "2.9.1"
-  resolved "https://registry.yarnpkg.com/@auspices/eos/-/eos-2.9.1.tgz#77d7182753da3d0e8cf652bff53202f94323cd6d"
-  integrity sha512-FWlWKm0iNepsfhTDGPZ6LClI7kPqpnRIUNhLBwuc6mucenZsq+F2oZYMRKfaUZaigPOiu3w1UVEF47DlYkeTsw==
+"@auspices/eos@2.10.1":
+  version "2.10.1"
+  resolved "https://registry.yarnpkg.com/@auspices/eos/-/eos-2.10.1.tgz#d60a0b93e982cdd144804e7beab40c915c08d9ee"
+  integrity sha512-NSspwieE6fbF7Ius7+/aP6Cc0qoKpgkXoXgX3vICKrg0ByXdppI+92kUO5ux7pTkhKqm67Zc8sM70vuU//Tf/Q==
   dependencies:
     "@popperjs/core" "^2.4.4"
     "@seznam/compose-react-refs" "^1.0.4"
     "@styled-system/theme-get" "^5.1.2"
     "@types/styled-system" "5.1.10"
     "@types/styled-system__theme-get" "5.0.0"
-    csstype "3.0.2"
     proportional-scale "^4.0.0"
     react-children-utilities "^2.1.5"
     react-focus-on "^3.5.0"
@@ -4471,15 +4470,15 @@ cssstyle@^1.0.0, cssstyle@^1.1.1:
   dependencies:
     cssom "0.3.x"
 
-csstype@3.0.2, csstype@^3.0.2:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.0.2.tgz#ee5ff8f208c8cd613b389f7b222c9801ca62b3f7"
-  integrity sha512-ofovWglpqoqbfLNOTBNZLSbMuGrblAf1efvvArGKOZMBrIoJeu5UsAipQolkijtyQx5MtAzT/J9IHj/CEY1mJw==
-
 csstype@^2.2.0:
   version "2.6.9"
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.9.tgz#05141d0cd557a56b8891394c1911c40c8a98d098"
   integrity sha512-xz39Sb4+OaTsULgUERcCk+TJj8ylkL4aSVDQiX/ksxbELSqwkgt4d4RD7fovIdgJGSuNYqwZEiVjYY5l0ask+Q==
+
+csstype@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.0.2.tgz#ee5ff8f208c8cd613b389f7b222c9801ca62b3f7"
+  integrity sha512-ofovWglpqoqbfLNOTBNZLSbMuGrblAf1efvvArGKOZMBrIoJeu5UsAipQolkijtyQx5MtAzT/J9IHj/CEY1mJw==
 
 cyclist@^1.0.1:
   version "1.0.1"

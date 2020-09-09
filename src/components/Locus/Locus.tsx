@@ -1,5 +1,5 @@
 import React, { Suspense, useCallback, useEffect, useState } from 'react'
-import { Modal, Spinner } from '@auspices/eos'
+import { Box, Modal, Spinner } from '@auspices/eos'
 import { useHistory } from 'react-router'
 import gql from 'graphql-tag'
 import { useLazyQuery } from '@apollo/client'
@@ -105,6 +105,7 @@ export const Locus: React.FC = () => {
     (query: string) => {
       if (query === '') {
         setSearchResults([])
+        setDynamicOptions([])
         return
       }
 
@@ -161,10 +162,22 @@ export const Locus: React.FC = () => {
   if (toggle === Toggle.Resting) return null
 
   return (
-    <Modal overlay zIndex={Z.MODAL} onClose={handleClose}>
-      <Suspense fallback={<Spinner />}>
+    <Modal
+      overlay
+      zIndex={Z.MODAL}
+      alignItems="flex-start"
+      onClose={handleClose}
+    >
+      <Suspense
+        fallback={
+          <Box display="flex" height="100vh" alignItems="center">
+            <Spinner />
+          </Box>
+        }
+      >
         {mode === Mode.Resting ? (
           <LocusMenu
+            mt="25vh"
             options={[...defaultOptions, ...dynamicOptions, ...searchResults]}
             onChange={handleChange}
             onDebouncedChange={handleDebouncedChange}
