@@ -11,6 +11,7 @@ import {
 import * as hrefs from '../../hooks/useHrefs'
 import { Z } from '../../util/zIndexes'
 import { LocusOption } from './LocusOptions'
+import { LocusLabel } from './LocusLabel'
 import {
   LocusCollectionsQuery,
   LocusCollectionsQueryVariables,
@@ -112,7 +113,7 @@ export const Locus: React.FC = () => {
       setDynamicOptions([
         ...addCommand(!!matches.collection, {
           key: query,
-          label: `create and add ${query}`,
+          label: <LocusLabel isMutation>create and add {query}</LocusLabel>,
           onClick: (done) => {
             setMode(Mode.Busy)
             createAndAddCollectionToCollection(query).then(() => {

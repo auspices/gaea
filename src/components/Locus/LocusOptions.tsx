@@ -4,7 +4,7 @@ import { useKeyboardListNavigation } from 'use-keyboard-list-navigation'
 
 export type LocusOption = {
   key: string
-  label: string
+  label: string | JSX.Element
   onClick(done: () => void): void
 }
 
