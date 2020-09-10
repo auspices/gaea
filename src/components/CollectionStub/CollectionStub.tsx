@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import styled, { css } from 'styled-components'
 import {
   Box,
@@ -11,6 +11,7 @@ import {
 } from '@auspices/eos'
 import { Link } from 'react-router-dom'
 import gql from 'graphql-tag'
+import scrollIntoView from 'scroll-into-view-if-needed'
 import { useHrefs } from '../../hooks'
 import { CollectionStubFragment } from '../../generated/types/CollectionStubFragment'
 
@@ -116,9 +117,16 @@ export const CollectionStub: React.FC<CollectionStubProps> = ({
   ...rest
 }) => {
   const hrefs = useHrefs()
+  const ref = useRef<HTMLAnchorElement | null>(null)
+
+  useEffect(() => {
+    if (!ref.current || !highlighted) return
+    scrollIntoView(ref.current, { scrollMode: 'if-needed', block: 'center' })
+  }, [highlighted])
 
   return (
     <Container
+      ref={ref}
       as={Link}
       to={hrefs.collection(collection.slug)}
       highlighted={highlighted}
