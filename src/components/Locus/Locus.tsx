@@ -1,5 +1,5 @@
 import React, { Suspense, useCallback, useEffect, useState } from 'react'
-import { Box, Modal, Spinner } from '@auspices/eos'
+import { Modal } from '@auspices/eos'
 import { useHistory } from 'react-router'
 import gql from 'graphql-tag'
 import { useLazyQuery } from '@apollo/client'
@@ -17,6 +17,7 @@ import {
   LocusCollectionsQueryVariables,
 } from '../../generated/types/LocusCollectionsQuery'
 import { Mode as Toggle, useLocusToggle } from './useLocusToggle'
+import { LocusBusy } from './LocusBusy'
 
 const LocusMenu = React.lazy(() => import('./LocusMenu'))
 
@@ -50,7 +51,7 @@ export const Locus: React.FC = () => {
 
   const { page, per, nextPage, prevPage, encode } = usePagination()
 
-  const [mode, setMode] = useState(Mode.Resting)
+  const [mode, setMode] = useState(Mode.Busy)
   const { mode: toggle, handleClose } = useLocusToggle()
 
   const [getCollections, { loading, data, error }] = useLazyQuery<
@@ -169,13 +170,7 @@ export const Locus: React.FC = () => {
       alignItems="flex-start"
       onClose={handleClose}
     >
-      <Suspense
-        fallback={
-          <Box display="flex" height="100vh" alignItems="center">
-            <Spinner />
-          </Box>
-        }
-      >
+      <Suspense fallback={<LocusBusy />}>
         {mode === Mode.Resting ? (
           <LocusMenu
             mt="25vh"
@@ -185,7 +180,7 @@ export const Locus: React.FC = () => {
             onEnter={handleClose}
           />
         ) : (
-          <Spinner />
+          <LocusBusy />
         )}
       </Suspense>
     </Modal>
