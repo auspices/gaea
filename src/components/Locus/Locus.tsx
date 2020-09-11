@@ -51,7 +51,7 @@ export const Locus: React.FC = () => {
 
   const { page, per, nextPage, prevPage, encode } = usePagination()
 
-  const [mode, setMode] = useState(Mode.Busy)
+  const [mode, setMode] = useState(Mode.Resting)
   const { mode: toggle, handleClose } = useLocusToggle()
 
   const [getCollections, { loading, data, error }] = useLazyQuery<
