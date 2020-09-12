@@ -91,7 +91,7 @@ export const Locus: React.FC = () => {
       ]
     ),
     ...addCommand(!!matches.content, {
-      key: 'home',
+      key: 'back',
       label: 'go back',
       onClick: (done) => {
         history.goBack()
