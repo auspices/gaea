@@ -90,6 +90,14 @@ export const Locus: React.FC = () => {
         },
       ]
     ),
+    ...addCommand(!!matches.content, {
+      key: 'home',
+      label: 'go back',
+      onClick: (done) => {
+        history.goBack()
+        done()
+      },
+    }),
     ...addCommand(!matches.collections, {
       key: 'home',
       label: 'go home',
