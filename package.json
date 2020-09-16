@@ -98,7 +98,7 @@
     "apollo": "2.30.3",
     "eslint-plugin-import": "2.22.0",
     "husky": "4.3.0",
-    "lint-staged": "10.3.0",
+    "lint-staged": "10.4.0",
     "prettier": "2.1.2",
     "typescript": "3.9.7"
   }
