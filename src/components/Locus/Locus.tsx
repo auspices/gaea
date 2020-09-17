@@ -156,18 +156,29 @@ export const Locus: React.FC = () => {
     if (collections.length === 0) return
 
     setSearchResults(
-      collections.map(({ title, slug }) => {
-        return {
-          key: title,
-          label: `go to ${title}`,
-          onClick: (done) => {
-            history.push(hrefs.collection(slug))
-            done()
+      collections.flatMap(({ title, slug }, i) => {
+        return [
+          ...addCommand(i === 0 && !!matches.content, {
+            key: title,
+            label: <LocusLabel isMutation>add this to {title}</LocusLabel>,
+            onClick: (done) => {
+              alert('TODO')
+              done()
+            },
+          }),
+
+          {
+            key: title,
+            label: `go to ${title}`,
+            onClick: (done) => {
+              history.push(hrefs.collection(slug))
+              done()
+            },
           },
-        }
+        ]
       })
     )
-  }, [data, error, history, loading])
+  }, [data, error, history, loading, matches.content])
 
   if (toggle === Toggle.Resting) return null
 
