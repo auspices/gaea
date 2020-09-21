@@ -1,25 +1,54 @@
-import React, { createContext, useContext } from 'react'
+import React, {
+  createContext,
+  MutableRefObject,
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+} from 'react'
 
-const RefetchContext = createContext<{ refetch(): Promise<any> }>({
-  refetch: () => Promise.resolve(),
+type Refetch = () => Promise<any>
+
+const DEFAULT_REFETCH: Refetch = () => Promise.resolve()
+
+const RefetchContext = createContext<{
+  refetch: MutableRefObject<Refetch>
+  setRefetch(nextRefetch: Refetch): void
+}>({
+  refetch: { current: DEFAULT_REFETCH },
+  setRefetch: () => {},
 })
 
-type RefetchProviderProps = {
-  refetch(): Promise<any>
-}
+type RefetchProviderProps = { refetch?: Refetch }
 
 export const RefetchProvider: React.FC<RefetchProviderProps> = ({
   children,
-  refetch,
+  refetch = () => Promise.resolve(),
 }) => {
+  const ref = useRef(refetch)
+
+  const setRefetch = useCallback((nextRefetch: () => Promise<any>) => {
+    ref.current = nextRefetch
+  }, [])
+
   return (
-    <RefetchContext.Provider value={{ refetch }}>
+    <RefetchContext.Provider value={{ refetch: ref, setRefetch }}>
       {children}
     </RefetchContext.Provider>
   )
 }
 
-export const useRefetch = () => {
-  const { refetch } = useContext(RefetchContext)
-  return { refetch }
+export const useRefetch = ({
+  refetch: nextRefetch,
+}: {
+  refetch?: Refetch
+} = {}) => {
+  const { setRefetch, refetch } = useContext(RefetchContext)
+
+  useEffect(() => {
+    if (!nextRefetch) return
+    setRefetch(nextRefetch)
+  }, [nextRefetch, setRefetch])
+
+  return { setRefetch, refetch: refetch?.current }
 }

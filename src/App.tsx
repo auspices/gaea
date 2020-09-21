@@ -11,7 +11,11 @@ import {
   ThemerProvider,
   useThemer,
 } from '@auspices/eos'
-import { ContextualRefsProvider, PaginationProvider } from './hooks'
+import {
+  ContextualRefsProvider,
+  PaginationProvider,
+  RefetchProvider,
+} from './hooks'
 import { initClient } from './apollo/initClient'
 import { Routes } from './Routes'
 import { Z } from './util/zIndexes'
@@ -24,28 +28,30 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <AlertsProvider>
-        <Box
-          display="flex"
-          flexDirection="column"
-          p={[0, 0, 2, 4]}
-          minHeight="100vh"
-        >
-          <GlobalStyles />
+      <RefetchProvider>
+        <AlertsProvider>
+          <Box
+            display="flex"
+            flexDirection="column"
+            p={[0, 0, 2, 4]}
+            minHeight="100vh"
+          >
+            <GlobalStyles />
 
-          <Alerts
-            position="fixed"
-            bottom={4}
-            right={4}
-            width="20rem"
-            zIndex={Z.ALERTS}
-          />
+            <Alerts
+              position="fixed"
+              bottom={4}
+              right={4}
+              width="20rem"
+              zIndex={Z.ALERTS}
+            />
 
-          <Routes />
+            <Routes />
 
-          <Locus />
-        </Box>
-      </AlertsProvider>
+            <Locus />
+          </Box>
+        </AlertsProvider>
+      </RefetchProvider>
     </ThemeProvider>
   )
 }

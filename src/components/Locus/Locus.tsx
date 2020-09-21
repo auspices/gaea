@@ -128,8 +128,6 @@ export const Locus: React.FC = () => {
             createAndAddCollectionToCollection(query).then(() => {
               setMode(Mode.Resting)
               done()
-              // TODO: Debug refetch
-              window.location.reload()
             })
           },
         }),
