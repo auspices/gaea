@@ -4,6 +4,7 @@ import { useHistory } from 'react-router'
 import gql from 'graphql-tag'
 import { useLazyQuery } from '@apollo/client'
 import {
+  useAddEntityToCollection,
   useCreateAndAddCollection,
   useMatchesPath,
   usePagination,
@@ -62,6 +63,7 @@ export const Locus: React.FC = () => {
   const { matches } = useMatchesPath()
 
   const { createAndAddCollectionToCollection } = useCreateAndAddCollection()
+  const { addEntityFromContentToCollection } = useAddEntityToCollection()
 
   const defaultOptions: LocusOption[] = [
     ...addCommand(
@@ -156,12 +158,19 @@ export const Locus: React.FC = () => {
     setSearchResults(
       collections.flatMap(({ title, slug }, i) => {
         return [
-          ...addCommand(i === 0 && !!matches.content, {
+          ...addCommand((i === 0 || i === 1) && !!matches.content, {
             key: title,
             label: <LocusLabel isMutation>add this to {title}</LocusLabel>,
             onClick: (done) => {
-              alert('TODO')
-              done()
+              setMode(Mode.Busy)
+              debugger
+              addEntityFromContentToCollection(
+                slug,
+                matches.content!.params.id
+              ).then(() => {
+                setMode(Mode.Resting)
+                done()
+              })
             },
           }),
 
@@ -176,7 +185,14 @@ export const Locus: React.FC = () => {
         ]
       })
     )
-  }, [data, error, history, loading, matches.content])
+  }, [
+    addEntityFromContentToCollection,
+    data,
+    error,
+    history,
+    loading,
+    matches.content,
+  ])
 
   if (toggle === Toggle.Resting) return null
 

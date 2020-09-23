@@ -5,17 +5,17 @@ import { useAlerts } from '@auspices/eos'
 import { useRefetch } from './useRefetch'
 import { errorMessage } from '../util/errors'
 import { AddEntityToCollectionMutation } from '../generated/types/AddEntityToCollectionMutation'
+import { AddEntityFromContentToCollectionMutation } from '../generated/types/AddEntityFromContentToCollectionMutation'
 import { EntityTypes } from '../generated/types/globalTypes'
-import { useMatchesPath } from './useMatchesPath'
 
 export const ADD_ENTITY_TO_COLLECTION_MUTATION = gql`
   mutation AddEntityToCollectionMutation(
-    $parentId: ID!
-    $childId: ID!
-    $type: EntityTypes!
+    $id: ID!
+    $entityId: ID!
+    $entityType: EntityTypes!
   ) {
     addEntityToCollection(
-      input: { id: $parentId, entity: { id: $childId, type: $type } }
+      input: { id: $id, entity: { id: $entityId, type: $entityType } }
     ) {
       collection {
         id
@@ -27,11 +27,22 @@ export const ADD_ENTITY_TO_COLLECTION_MUTATION = gql`
   }
 `
 
-export const useCreateAndAddCollection = () => {
-  const { matches } = useMatchesPath()
-  const match = matches.collection
-  const { id = '' } = match ? match.params : {}
+export const ADD_ENTITY_FROM_CONTENT_TO_COLLECTION_MUTATION = gql`
+  mutation AddEntityFromContentToCollectionMutation($id: ID!, $contentId: ID!) {
+    addEntityFromContentToCollection(
+      input: { id: $id, contentId: $contentId }
+    ) {
+      collection {
+        id
+      }
+      content {
+        id
+      }
+    }
+  }
+`
 
+export const useAddEntityToCollection = () => {
   const { refetch } = useRefetch()
   const { sendError, sendNotification } = useAlerts()
 
@@ -40,22 +51,52 @@ export const useCreateAndAddCollection = () => {
   >(ADD_ENTITY_TO_COLLECTION_MUTATION)
 
   const handleAddEntityToCollection = useCallback(
-    async (childId: number, childName: string, type: EntityTypes) => {
+    async (
+      id: number | string,
+      entityId: number | string,
+      entityType: EntityTypes
+    ) => {
       try {
         await addEntityToCollectionMutation({
-          variables: { parentId: id, childId, type },
+          variables: { id, entityId, entityType },
         })
-        sendNotification({ body: `successfully added ${childName}` })
+        sendNotification({ body: 'successfully added' })
       } catch (err) {
         sendError({ body: errorMessage(err) })
       }
 
       await refetch()
     },
-    [addEntityToCollectionMutation, id, refetch, sendError, sendNotification]
+    [addEntityToCollectionMutation, refetch, sendError, sendNotification]
+  )
+
+  const [addEntityFromContentToCollectionMutation] = useMutation<
+    AddEntityFromContentToCollectionMutation
+  >(ADD_ENTITY_FROM_CONTENT_TO_COLLECTION_MUTATION)
+
+  const handleAddEntityFromContentToCollection = useCallback(
+    async (id: number | string, contentId: number | string) => {
+      try {
+        await addEntityFromContentToCollectionMutation({
+          variables: { id, contentId },
+        })
+        sendNotification({ body: 'successfully added' })
+      } catch (err) {
+        sendError({ body: errorMessage(err) })
+      }
+
+      await refetch()
+    },
+    [
+      addEntityFromContentToCollectionMutation,
+      refetch,
+      sendError,
+      sendNotification,
+    ]
   )
 
   return {
     addEntityToCollection: handleAddEntityToCollection,
+    addEntityFromContentToCollection: handleAddEntityFromContentToCollection,
   }
 }

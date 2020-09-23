@@ -30,7 +30,7 @@ export interface AddEntityToCollectionMutation {
 }
 
 export interface AddEntityToCollectionMutationVariables {
-  parentId: string;
-  childId: string;
-  type: EntityTypes;
+  id: string;
+  entityId: string;
+  entityType: EntityTypes;
 }
