@@ -163,7 +163,6 @@ export const Locus: React.FC = () => {
             label: <LocusLabel isMutation>add this to {title}</LocusLabel>,
             onClick: (done) => {
               setMode(Mode.Busy)
-              debugger
               addEntityFromContentToCollection(
                 slug,
                 matches.content!.params.id
