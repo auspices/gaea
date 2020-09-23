@@ -50,5 +50,5 @@ export const useRefetch = ({
     setRefetch(nextRefetch)
   }, [nextRefetch, setRefetch])
 
-  return { setRefetch, refetch: refetch?.current }
+  return { setRefetch, refetch: refetch?.current ?? DEFAULT_REFETCH }
 }
