@@ -67,22 +67,22 @@
   dependencies:
     "@apollographql/graphql-language-service-types" "^2.0.0"
 
-"@auspices/eos@2.12.1":
-  version "2.12.1"
-  resolved "https://registry.yarnpkg.com/@auspices/eos/-/eos-2.12.1.tgz#9899512cc5e649953cc25ec8addfcab03a368cac"
-  integrity sha512-xqo3BdHOKnDIjdM53aQ8mGpB+8Tso7cwUHBT3kuzypA87ojlQcwJ6LefxG3Fz8qtvzOip5AX60iZZFLkBi2OMw==
+"@auspices/eos@2.12.2":
+  version "2.12.2"
+  resolved "https://registry.yarnpkg.com/@auspices/eos/-/eos-2.12.2.tgz#4091e205395d01a6e89f1b5bda28754ffe773212"
+  integrity sha512-ZI+5A48HRRVP9eW1hsddFUk5cuUudyLWXfDcXj6z0Pelji6AJWnYtCF6dRbT+57raw4JAu1eUwkwq4He5iLYzw==
   dependencies:
-    "@popperjs/core" "^2.4.4"
+    "@popperjs/core" "^2.5.1"
     "@seznam/compose-react-refs" "^1.0.4"
     "@styled-system/theme-get" "^5.1.2"
     "@types/styled-system" "5.1.10"
     "@types/styled-system__theme-get" "5.0.0"
     proportional-scale "^4.0.0"
-    react-children-utilities "^2.1.5"
+    react-children-utilities "^2.1.6"
     react-focus-on "^3.5.0"
-    styled-reset "^4.2.2"
+    styled-reset "^4.2.3"
     styled-system "^5.1.5"
-    use-keyboard-list-navigation "^2.0.1"
+    use-keyboard-list-navigation "^2.2.0"
 
 "@babel/code-frame@7.8.3", "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.8.3":
   version "7.8.3"
@@ -1543,10 +1543,10 @@
   resolved "https://registry.yarnpkg.com/@oclif/screen/-/screen-1.0.4.tgz#b740f68609dfae8aa71c3a6cab15d816407ba493"
   integrity sha512-60CHpq+eqnTxLZQ4PGHYNwUX572hgpMHGPtTWMjdTMsAvlm69lZV/4ly6O3sAYkomo4NggGcomrDpBe34rxUqw==
 
-"@popperjs/core@^2.4.4":
-  version "2.4.4"
-  resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.4.4.tgz#11d5db19bd178936ec89cd84519c4de439574398"
-  integrity sha512-1oO6+dN5kdIA3sKPZhRGJTfGVP4SWV6KqlMOwry4J3HfyD68sl/3KmG7DeYUzvN+RbhXDnv/D8vNNB8168tAMg==
+"@popperjs/core@^2.5.1":
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.5.1.tgz#32b99c0a2b6120d200556fa2d5cd9211ca711881"
+  integrity sha512-VVOiO4HSzITdcRxUNopcDmI6kE3gNRGq+1Kna1djqx7uCWhaRWpkSl7QxK/i1X3+S5F3dlEQ50qhmBB/JNWubQ==
 
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.0"
@@ -10285,10 +10285,10 @@ react-app-polyfill@^1.0.6:
     regenerator-runtime "^0.13.3"
     whatwg-fetch "^3.0.0"
 
-react-children-utilities@^2.1.5:
-  version "2.1.5"
-  resolved "https://registry.yarnpkg.com/react-children-utilities/-/react-children-utilities-2.1.5.tgz#80f9fd5358f2e0ba39b2519a799b5b2cc006045d"
-  integrity sha512-CLniy8wErElZAtgPFXUK/xk0Chr+gM57g4Rjg/u7smvuCoVE2GfeIkuoYZ+OwiW4ZMMMAEEL1z0Sn0NNhQLz5A==
+react-children-utilities@^2.1.6:
+  version "2.1.6"
+  resolved "https://registry.yarnpkg.com/react-children-utilities/-/react-children-utilities-2.1.6.tgz#9d60e247a2165b90b4ad01455aed98ea72a919be"
+  integrity sha512-w98UfUMzg7eg008CNmz7VYuog//kcXTnB26r0rGc+7kzKQ1sP9Yry29sDj9AL/TQ9C/7UCkFadaHnNKYdyhL2A==
 
 react-clientside-effect@^1.2.2:
   version "1.2.2"
@@ -11831,10 +11831,10 @@ styled-components@5.2.0:
     shallowequal "^1.1.0"
     supports-color "^5.5.0"
 
-styled-reset@^4.2.2:
-  version "4.2.2"
-  resolved "https://registry.yarnpkg.com/styled-reset/-/styled-reset-4.2.2.tgz#a8b60d246323e0ec137e64f9e0aa5c2704bd3fdb"
-  integrity sha512-HOYxeqR5xUqq7mHCcbtHYpH8HuNuBcyVJfltxuJb9RatffjY3ifTqukoSUjW3iPWZp7hGEV8Kk9CFGi54M2nsA==
+styled-reset@^4.2.3:
+  version "4.2.3"
+  resolved "https://registry.yarnpkg.com/styled-reset/-/styled-reset-4.2.3.tgz#6575cd62bf85bdb998fda63203a7c9a85371ce9e"
+  integrity sha512-0Njd9PfnijolnSSjX60V9yo99EQS5WIZCBWc4pABFqk1kRn6SHlVsiBqfYKrnTTOlLKF+tva0k7pnJpCf0hXsg==
 
 styled-system@5.1.5, styled-system@^5.1.5:
   version "5.1.5"
@@ -12439,17 +12439,10 @@ use-debounce@4.0.0:
   resolved "https://registry.yarnpkg.com/use-debounce/-/use-debounce-4.0.0.tgz#8e8303494c1b4ced9a10427f3b8191f097ab2647"
   integrity sha512-ZdOEjLNwdCn99dx1D+umZe1Dolki7m7QYmkprugKfpOjXGHQsI6AUkFdolHfp+rm3QX8cQSiA5r0eDrXClv5wA==
 
-use-keyboard-list-navigation@2.2.0:
+use-keyboard-list-navigation@2.2.0, use-keyboard-list-navigation@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/use-keyboard-list-navigation/-/use-keyboard-list-navigation-2.2.0.tgz#bf7873489dffd2a2c4af67d1b7b3a8dcbc71dc0b"
   integrity sha512-g1u1hk+8bWXUbSW+g7e5kjuJN0shg5sr36/evVB0fEQcs8XKw5sk1Til1Ce2M9QwwjozwoNqBCz7K5vRq8p34A==
-  dependencies:
-    map-cursor-to-max "^1.0.0"
-
-use-keyboard-list-navigation@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/use-keyboard-list-navigation/-/use-keyboard-list-navigation-2.0.1.tgz#a5ccf2c59e215aec03bfb8eba5ae85ef56ec8c79"
-  integrity sha512-uAIIA0m/oejL4E0qet8jVZZaM/95QlT6SEl5PxUEpKPLoWcSyufqy/S1U0/yx3bPHq4Ny3iBLB3ZN7T4agBKZQ==
   dependencies:
     map-cursor-to-max "^1.0.0"
 
