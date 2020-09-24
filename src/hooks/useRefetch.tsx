@@ -50,5 +50,19 @@ export const useRefetch = ({
     setRefetch(nextRefetch)
   }, [nextRefetch, setRefetch])
 
-  return { setRefetch, refetch: refetch?.current ?? DEFAULT_REFETCH }
+  const handleRefetch = useCallback(() => {
+    try {
+      // If refetch isn't overwritten on route changes it may be stale.
+      // Rather than resetting it on route changes, attempt to invoke the
+      // last reference and resolve if we fail.
+      return (refetch?.current ?? DEFAULT_REFETCH)()
+    } catch (error) {
+      return Promise.resolve()
+    }
+  }, [refetch])
+
+  return {
+    setRefetch,
+    refetch: handleRefetch,
+  }
 }
