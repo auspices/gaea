@@ -5,9 +5,10 @@ import {
   Button,
   ButtonProps,
   color,
-  Stack,
-  Tag,
+  colorHash,
+  space,
   themeGet,
+  Tooltip,
 } from '@auspices/eos'
 import { Link } from 'react-router-dom'
 import gql from 'graphql-tag'
@@ -68,33 +69,12 @@ const highlightedMixin = css`
 `
 
 const Container = styled(Button)<ButtonProps>`
+  position: relative;
   justify-content: flex-start;
 
   ${({ highlighted }) => highlighted && highlightedMixin}
   &:hover {
     ${highlightedMixin}
-  }
-`
-
-const Tags = styled(Stack).attrs({
-  pr: 8,
-  mr: -8,
-})`
-  overflow: hidden;
-  position: relative;
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: ${themeGet('space.8')};
-    background: linear-gradient(
-      to right,
-      ${color('background', 0.001)} 0%,
-      ${color('background')} 50%
-    );
   }
 `
 
@@ -136,14 +116,6 @@ export const CollectionStub: React.FC<CollectionStubProps> = ({
         {collection.title}
       </Title>
 
-      {collection.within.length > 0 && (
-        <Tags spacing={2} direction="horizontal">
-          {collection.within.map(({ id, title }) => (
-            <Tag key={id}>{title}</Tag>
-          ))}
-        </Tags>
-      )}
-
       <Count mx={4} color="tertiary">
         {collection.counts.contents || '∅'}
       </Count>
@@ -153,6 +125,21 @@ export const CollectionStub: React.FC<CollectionStubProps> = ({
       <Delta color="tertiary" fontSize={0}>
         {collection.updatedAt}
       </Delta>
+
+      <Box position="absolute" top={0} right={0} bottom={0} display="flex">
+        {collection.within.length > 0 &&
+          collection.within.map(({ id, title }) => {
+            return (
+              <Tooltip
+                key={id}
+                label={<Box style={{ whiteSpace: 'nowrap' }}>{title}</Box>}
+                placement="left"
+              >
+                <Box bg={colorHash(title)} height="100%" width={space(3)} />
+              </Tooltip>
+            )
+          })}
+      </Box>
     </Container>
   )
 }

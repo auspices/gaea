@@ -7,13 +7,13 @@ import {
   Box,
   Button,
   Caret,
+  colorHash,
   Dropdown,
-  Field,
   Loading,
   PaneOption,
-  Pill,
+  space,
   Stack,
-  Tag,
+  Tooltip,
 } from '@auspices/eos'
 import { useHrefs, usePagination, useRefetch } from '../../hooks'
 import { AddToCollection } from '../../components/AddToCollection'
@@ -148,22 +148,26 @@ export const CollectionPage: React.FC<CollectionPageProps> = ({ id }) => {
             </Dropdown>
           </Stack>
 
-          <AddToCollection id={collection.id} />
-        </Stack>
+          <Stack direction="horizontal" flex={1}>
+            <AddToCollection id={collection.id} />
 
-        {collection.within.length > 0 && (
-          <Field label="collections">
-            <Pill flex="1" px={4} py={0} height="100%">
-              <Stack spacing={2} direction="horizontal" overflowX="auto">
-                {collection.within.map(({ id, slug, title }) => (
-                  <Tag key={id}>
-                    <Link to={hrefs.collection(slug)}>{title}</Link>
-                  </Tag>
-                ))}
-              </Stack>
-            </Pill>
-          </Field>
-        )}
+            <Box border="1px solid" display="flex">
+              {collection.within.length > 0 &&
+                collection.within.map(({ id, title, slug }) => {
+                  return (
+                    <Tooltip key={id} label={title} placement="right">
+                      <Box
+                        as={Link}
+                        to={hrefs.collection(slug)}
+                        bg={colorHash(title)}
+                        width={space(3)}
+                      />
+                    </Tooltip>
+                  )
+                })}
+            </Box>
+          </Stack>
+        </Stack>
 
         <CollectionSettings collection={collection} />
 
