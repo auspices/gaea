@@ -1,16 +1,13 @@
 import React, { useCallback, useState } from 'react'
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/client'
-import { useDebounce } from 'use-debounce'
 import { Box, Button, ClearableInput, Loading, useAlerts } from '@auspices/eos'
 import { useContextualRef, usePagination, useRefetch } from '../../hooks'
 import { errorMessage } from '../../util/errors'
 import { Form, FormProps } from '../Form'
 import { FileDropzone } from '../FileDropzone'
 import { FileUploadButton } from '../FileUploadButton'
-import { AddToCollectionExtended } from '../AddToCollectionExtended'
 import { useHistory } from 'react-router'
-import { Z } from '../../util/zIndexes'
 import { AddToCollectionMutation } from '../../generated/types/AddToCollectionMutation'
 
 const ADD_TO_COLLECTION_MUTATION = gql`
@@ -47,7 +44,6 @@ export const AddToCollection: React.FC<AddToCollectionProps> = ({
   const [mode, setMode] = useState(Mode.Resting)
   const [value, setValue] = useState('')
   const [inputKey, setInputKey] = useState(new Date().getTime())
-  const [debouncedValue] = useDebounce(value, 250)
 
   const { setContextualRef } = useContextualRef()
 
@@ -124,11 +120,6 @@ export const AddToCollection: React.FC<AddToCollectionProps> = ({
     setInputKey(new Date().getTime())
   }, [])
 
-  const handleDone = useCallback(() => {
-    setValue('')
-    setInputKey(new Date().getTime())
-  }, [])
-
   return (
     <>
       <FileDropzone
@@ -185,19 +176,6 @@ export const AddToCollection: React.FC<AddToCollectionProps> = ({
             onComplete={handleComplete}
           />
         </Form>
-
-        {value !== '' && debouncedValue !== '' && (
-          <AddToCollectionExtended
-            value={debouncedValue}
-            position="absolute"
-            top="100%"
-            left={0}
-            right={0}
-            mt="-1px"
-            zIndex={Z.DROPDOWN}
-            onDone={handleDone}
-          />
-        )}
       </Box>
     </>
   )
