@@ -19,6 +19,7 @@ import {
 } from '../../generated/types/LocusCollectionsQuery'
 import { Mode as Toggle, useLocusToggle } from './useLocusToggle'
 import { LocusBusy } from './LocusBusy'
+import { EntityTypes } from '../../generated/types/globalTypes'
 
 const LocusMenu = React.lazy(() => import('./LocusMenu'))
 
@@ -63,7 +64,10 @@ export const Locus: React.FC = () => {
   const { matches } = useMatchesPath()
 
   const { createAndAddCollectionToCollection } = useCreateAndAddCollection()
-  const { addEntityFromContentToCollection } = useAddEntityToCollection()
+  const {
+    addEntityFromContentToCollection,
+    addEntityToCollection,
+  } = useAddEntityToCollection()
 
   const defaultOptions: LocusOption[] = [
     ...addCommand(
@@ -158,6 +162,28 @@ export const Locus: React.FC = () => {
     setSearchResults(
       collections.flatMap(({ title, slug }, i) => {
         return [
+          // Add collection to collection
+          ...addCommand((i === 0 || i === 1) && !!matches.collection, {
+            key: title,
+            label: (
+              <LocusLabel isMutation>
+                add {title} to the current collection
+              </LocusLabel>
+            ),
+            onClick: (done) => {
+              setMode(Mode.Busy)
+              addEntityToCollection(
+                matches.collection!.params.id,
+                slug,
+                EntityTypes.COLLECTION
+              ).then(() => {
+                setMode(Mode.Resting)
+                done()
+              })
+            },
+          }),
+
+          // Add entity to collection
           ...addCommand((i === 0 || i === 1) && !!matches.content, {
             key: title,
             label: <LocusLabel isMutation>add this to {title}</LocusLabel>,
@@ -186,10 +212,12 @@ export const Locus: React.FC = () => {
     )
   }, [
     addEntityFromContentToCollection,
+    addEntityToCollection,
     data,
     error,
     history,
     loading,
+    matches.collection,
     matches.content,
   ])
 
