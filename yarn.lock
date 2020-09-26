@@ -67,16 +67,16 @@
   dependencies:
     "@apollographql/graphql-language-service-types" "^2.0.0"
 
-"@auspices/eos@2.13.0":
-  version "2.13.0"
-  resolved "https://registry.yarnpkg.com/@auspices/eos/-/eos-2.13.0.tgz#177579a8d4cc3edb04d3c1abdd5ff2062079b0bf"
-  integrity sha512-oFkwFnODxvIBRbGfgORl6Fj3fTYEZm4JfnGpHdf3EaUIykjScBkpXtEoksCXTohxKvRwJcY2vgHP+1w9ZcPerg==
+"@auspices/eos@2.13.1":
+  version "2.13.1"
+  resolved "https://registry.yarnpkg.com/@auspices/eos/-/eos-2.13.1.tgz#d5fbc8b5fc0289b71ac50032394d7774073aa254"
+  integrity sha512-to5gEcvrDiaoPEog2WEleY9cpmK0qeWZD3ERmNKfBy976jc4TT49r8kYG0LLMP8amHQOqbP8avZFXdyZx7unLg==
   dependencies:
     "@popperjs/core" "^2.5.1"
     "@seznam/compose-react-refs" "^1.0.4"
     "@styled-system/theme-get" "^5.1.2"
     "@types/styled-system" "5.1.10"
-    "@types/styled-system__theme-get" "5.0.0"
+    "@types/styled-system__theme-get" "5.0.1"
     proportional-scale "^4.0.0"
     react-children-utilities "^2.1.6"
     react-focus-on "^3.5.0"
@@ -2016,11 +2016,6 @@
   integrity sha512-OmVjC9OzyUckAgdavJBc+t5oCJrNXTlzWl9vo2x47leqpX1REq2qJC49SEtzbu1OnWSzcD68Uq3Aj8TeX+Kvtg==
   dependencies:
     csstype "^3.0.2"
-
-"@types/styled-system__theme-get@5.0.0":
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/@types/styled-system__theme-get/-/styled-system__theme-get-5.0.0.tgz#639edd3d39aad91b47746db1cbc4f5a0c6e640a7"
-  integrity sha512-Q8B2vdj78SpPjvresEZbEgnPb7TBTFD0S8sz2HJCd1mn1xjnXzJZhXJFdfZb2KrybfjuJ0Suu3jg4hZz3SyVtg==
 
 "@types/styled-system__theme-get@5.0.1":
   version "5.0.1"
