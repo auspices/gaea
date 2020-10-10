@@ -11,8 +11,7 @@ import {
 } from '../../hooks'
 import * as hrefs from '../../hooks/useHrefs'
 import { Z } from '../../util/zIndexes'
-import { LocusOption } from './LocusOptions'
-import { LocusLabel } from './LocusLabel'
+import { Kind, LocusOption } from './LocusOptions'
 import {
   LocusCollectionsQuery,
   LocusCollectionsQueryVariables,
@@ -76,6 +75,7 @@ export const Locus: React.FC = () => {
         {
           key: 'next',
           label: `go to next page`,
+          kind: Kind.ACTION,
           onClick: (done) => {
             history.push({ search: encode({ page: nextPage, per }) })
             done()
@@ -89,6 +89,7 @@ export const Locus: React.FC = () => {
         {
           key: 'previous',
           label: `go to previous page`,
+          kind: Kind.ACTION,
           onClick: (done) => {
             history.push({ search: encode({ page: prevPage, per }) })
             done()
@@ -99,6 +100,7 @@ export const Locus: React.FC = () => {
     ...addCommand(!!matches.content, {
       key: 'back',
       label: 'go back',
+      kind: Kind.ACTION,
       onClick: (done) => {
         history.goBack()
         done()
@@ -107,6 +109,7 @@ export const Locus: React.FC = () => {
     ...addCommand(!matches.collections, {
       key: 'home',
       label: 'go home',
+      kind: Kind.ACTION,
       onClick: (done) => {
         history.push(hrefs.root())
         done()
@@ -128,7 +131,12 @@ export const Locus: React.FC = () => {
       setDynamicOptions([
         ...addCommand(!!matches.collection, {
           key: query,
-          label: <LocusLabel isMutation>create and add {query}</LocusLabel>,
+          label: (
+            <>
+              create and add <u>{query}</u> to the current collection
+            </>
+          ),
+          kind: Kind.MUTATION,
           onClick: (done) => {
             setMode(Mode.Busy)
             createAndAddCollectionToCollection(query).then(() => {
@@ -166,10 +174,11 @@ export const Locus: React.FC = () => {
           ...addCommand((i === 0 || i === 1) && !!matches.collection, {
             key: title,
             label: (
-              <LocusLabel isMutation>
-                add {title} to the current collection
-              </LocusLabel>
+              <>
+                add <u>{title}</u> to the current collection
+              </>
             ),
+            kind: Kind.MUTATION,
             onClick: (done) => {
               setMode(Mode.Busy)
               addEntityToCollection(
@@ -186,7 +195,12 @@ export const Locus: React.FC = () => {
           // Add entity to collection
           ...addCommand((i === 0 || i === 1) && !!matches.content, {
             key: title,
-            label: <LocusLabel isMutation>add this to {title}</LocusLabel>,
+            label: (
+              <>
+                add this to <u>{title}</u>
+              </>
+            ),
+            kind: Kind.MUTATION,
             onClick: (done) => {
               setMode(Mode.Busy)
               addEntityFromContentToCollection(
@@ -201,7 +215,12 @@ export const Locus: React.FC = () => {
 
           {
             key: title,
-            label: `go to ${title}`,
+            label: (
+              <>
+                go to&nbsp;<u>{title}</u>
+              </>
+            ),
+            kind: Kind.SEARCH,
             onClick: (done) => {
               history.push(hrefs.collection(slug))
               done()

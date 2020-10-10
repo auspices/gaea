@@ -1,8 +1,12 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { ClearableInput, Stack, StackProps } from '@auspices/eos'
 import { useDebounce } from 'use-debounce/lib'
-import { LocusOption, LocusOptions } from './LocusOptions'
+import { Kind, LocusOption, LocusOptions } from './LocusOptions'
 import Fuse from 'fuse.js'
+
+// const partition = <T,>(xs: T[], condition: (item: T) => boolean) => {
+//   return [xs.filter((x) => condition(x)), xs.filter((x) => !condition(x))]
+// }
 
 export type LocusMenuProps = StackProps & {
   options: LocusOption[]
@@ -23,9 +27,14 @@ export const LocusMenu: React.FC<LocusMenuProps> = ({
   const [query, setQuery] = useState('')
   const [debouncedQuery] = useDebounce(query, 150)
 
+  const topSearchResult = options.find((option) => option.kind === Kind.SEARCH)
+  const remainingOptions = options.filter(
+    (option) => option.key !== topSearchResult?.key
+  )
+
   const fuse = useMemo(() => {
-    return new Fuse(options, { keys: ['key'] })
-  }, [options])
+    return new Fuse(remainingOptions, { keys: ['key'] })
+  }, [remainingOptions])
 
   const filteredOptions = useMemo(() => {
     return fuse.search(query).map(({ item }) => item)
@@ -55,7 +64,9 @@ export const LocusMenu: React.FC<LocusMenuProps> = ({
       {options.length > 0 && (
         <LocusOptions
           options={
-            query !== '' && filteredOptions.length ? filteredOptions : options
+            query !== '' && filteredOptions.length
+              ? [topSearchResult!, ...filteredOptions].filter(Boolean)
+              : options
           }
           onEnter={onEnter}
         />

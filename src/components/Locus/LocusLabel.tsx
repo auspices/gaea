@@ -10,15 +10,11 @@ export const LocusLabel: React.FC<LocusLabelProps> = ({
   isMutation,
 }) => {
   return isMutation ? (
-    <>
-      <Box as="span" color="tertiary">
-        {'<'}
-      </Box>
+    <Box color="accent">
+      {'<'}
       {children}
-      <Box as="span" color="tertiary">
-        {'>'}
-      </Box>
-    </>
+      {'>'}
+    </Box>
   ) : (
     <>{children}</>
   )
