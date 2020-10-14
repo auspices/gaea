@@ -67,6 +67,7 @@ export const FilesUploader: React.FC<FilesUploaderProps> = ({
     FilesUploaderQuery,
     FilesUploaderQueryVariables
   >(FILES_UPLOADER_QUERY, {
+    fetchPolicy: 'network-only',
     variables: { fileTypes },
   })
 
