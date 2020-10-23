@@ -9,7 +9,7 @@
     "@stripe/react-stripe-js": "1.1.2",
     "@stripe/stripe-js": "1.10.0",
     "@styled-system/theme-get": "5.1.2",
-    "axios": "0.20.0",
+    "axios": "0.21.0",
     "fuse.js": "6.4.2",
     "graphql": "15.3.0",
     "graphql-tag": "2.11.0",
