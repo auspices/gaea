@@ -66,10 +66,10 @@
   dependencies:
     "@apollographql/graphql-language-service-types" "^2.0.0"
 
-"@auspices/eos@2.13.2":
-  version "2.13.2"
-  resolved "https://registry.yarnpkg.com/@auspices/eos/-/eos-2.13.2.tgz#59d645909703b68addb368ebe8421a38b9ee6c52"
-  integrity sha512-UZsO9rOQhGkGQuANMsspR4CUeBF3BQV/0Nb0c5y7sVvZQVtKhqBp7oje5qQdrwrOuLe4VMxUhJpw35MoHJ8zBw==
+"@auspices/eos@2.14.2":
+  version "2.14.2"
+  resolved "https://registry.yarnpkg.com/@auspices/eos/-/eos-2.14.2.tgz#9ae8dde92af296d49f2d87dd45b061a3aee6e203"
+  integrity sha512-CvgLYj68dQVJkucRSGLDPPXqhmfbDFwyiCeT7nmr4XOrqO5g4pEDXYZkhkuM7Sqc6tCIk8BA67QiAYrROSp45A==
   dependencies:
     "@popperjs/core" "^2.5.1"
     "@seznam/compose-react-refs" "^1.0.4"
@@ -77,7 +77,6 @@
     "@types/styled-system" "5.1.10"
     "@types/styled-system__theme-get" "5.0.1"
     proportional-scale "^4.0.0"
-    react-children-utilities "^2.1.6"
     react-focus-on "^3.5.0"
     styled-reset "^4.2.3"
     styled-system "^5.1.5"
@@ -10294,11 +10293,6 @@ react-app-polyfill@^1.0.6:
     raf "^3.4.1"
     regenerator-runtime "^0.13.3"
     whatwg-fetch "^3.0.0"
-
-react-children-utilities@^2.1.6:
-  version "2.1.6"
-  resolved "https://registry.yarnpkg.com/react-children-utilities/-/react-children-utilities-2.1.6.tgz#9d60e247a2165b90b4ad01455aed98ea72a919be"
-  integrity sha512-w98UfUMzg7eg008CNmz7VYuog//kcXTnB26r0rGc+7kzKQ1sP9Yry29sDj9AL/TQ9C/7UCkFadaHnNKYdyhL2A==
 
 react-clientside-effect@^1.2.2:
   version "1.2.2"
