@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@apollo/client": "3.3.2",
+    "@apollo/client": "3.3.3",
     "@auspices/eos": "2.14.2",
     "@seznam/compose-react-refs": "1.0.5",
     "@stripe/react-stripe-js": "1.1.2",
@@ -95,7 +95,7 @@
     "@types/styled-components": "5.1.4",
     "@types/styled-system": "5.1.10",
     "@types/styled-system__theme-get": "5.0.1",
-    "apollo": "2.31.1",
+    "apollo": "2.31.2",
     "eslint-plugin-import": "2.22.1",
     "husky": "4.3.0",
     "lint-staged": "10.5.2",
