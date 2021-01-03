@@ -29,6 +29,9 @@
     "use-debounce": "4.0.0",
     "use-keyboard-list-navigation": "2.2.0"
   },
+  "resolutions": {
+    "graphql": "15.4.0"
+  },
   "scripts": {
     "build": "react-scripts build",
     "eject": "react-scripts eject",
