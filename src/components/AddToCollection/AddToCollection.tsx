@@ -1,8 +1,13 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/client'
 import { Box, Button, ClearableInput, Loading, useAlerts } from '@auspices/eos'
-import { useContextualRef, usePagination, useRefetch } from '../../hooks'
+import {
+  useContextualRef,
+  useHrefs,
+  usePagination,
+  useRefetch,
+} from '../../hooks'
 import { errorMessage } from '../../util/errors'
 import { Form, FormProps } from '../Form'
 import { FileDropzone } from '../FileDropzone'
@@ -14,6 +19,9 @@ const ADD_TO_COLLECTION_MUTATION = gql`
   mutation AddToCollectionMutation($id: ID!, $value: String!) {
     addToCollection(input: { id: $id, value: $value }) {
       collection {
+        id
+      }
+      content {
         id
       }
     }
@@ -34,6 +42,7 @@ export const AddToCollection: React.FC<AddToCollectionProps> = ({
   id,
   ...rest
 }) => {
+  const hrefs = useHrefs()
   const history = useHistory()
   const { refetch } = useRefetch()
   const { page, per, encode } = usePagination()
@@ -44,51 +53,80 @@ export const AddToCollection: React.FC<AddToCollectionProps> = ({
   const [mode, setMode] = useState(Mode.Resting)
   const [value, setValue] = useState('')
   const [inputKey, setInputKey] = useState(new Date().getTime())
+  const [goToContent, setGoToContent] = useState(false)
 
   const { setContextualRef } = useContextualRef()
 
-  const handleSubmit = useCallback(
-    async (event: React.FormEvent<HTMLFormElement>) => {
-      event.preventDefault()
+  const handleKeyDown = (event: KeyboardEvent) => {
+    if (event.key === 'Meta') setGoToContent(true)
+  }
 
-      setMode(Mode.Adding)
+  const handleKeyUp = (event: KeyboardEvent) => {
+    if (event.key === 'Meta') setGoToContent(false)
+  }
 
-      try {
-        await addToCollection({
-          variables: {
-            id,
-            value,
-            page: 1,
-            per,
-          },
-        })
-      } catch (err) {
-        sendError({ body: errorMessage(err) })
-        setMode(Mode.Error)
-      }
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown)
+    window.addEventListener('keyup', handleKeyUp)
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+      window.removeEventListener('keyup', handleKeyUp)
+    }
+  }, [])
 
-      refetch()
+  const addInput = useCallback(async () => {
+    setMode(Mode.Adding)
+
+    try {
+      const { data } = await addToCollection({
+        variables: {
+          id,
+          value,
+          page: 1,
+          per,
+        },
+      })
+
       sendNotification({ body: 'added successfully' })
       setMode(Mode.Resting)
       setValue('')
       setInputKey(new Date().getTime())
 
+      if (goToContent) {
+        history.push(hrefs.content(data?.addToCollection?.content.id!))
+        return
+      }
+
+      refetch()
+
       if (page !== 1) {
         history.push({ search: encode({ page: 1, per }) })
       }
+    } catch (err) {
+      sendError({ body: errorMessage(err) })
+      setMode(Mode.Error)
+    }
+  }, [
+    addToCollection,
+    encode,
+    goToContent,
+    history,
+    hrefs,
+    id,
+    page,
+    per,
+    refetch,
+    sendError,
+    sendNotification,
+    value,
+  ])
+
+  const handleSubmit = useCallback(
+    async (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault()
+      addInput()
     },
-    [
-      addToCollection,
-      encode,
-      history,
-      id,
-      page,
-      per,
-      refetch,
-      sendError,
-      sendNotification,
-      value,
-    ]
+    [addInput]
   )
 
   const handleChange = useCallback((value: string) => setValue(value), [])
@@ -106,12 +144,12 @@ export const AddToCollection: React.FC<AddToCollectionProps> = ({
             per,
           },
         })
+
+        sendNotification({ body: 'added successfully' })
+        refetch()
       } catch (err) {
         sendError({ body: errorMessage(err) })
       }
-
-      refetch()
-      sendNotification({ body: 'added successfully' })
     },
     [addToCollection, id, per, refetch, sendError, sendNotification]
   )
@@ -144,6 +182,13 @@ export const AddToCollection: React.FC<AddToCollectionProps> = ({
               flex={1}
               placeholder="add to this collection"
               onChange={handleChange}
+              onKeyDown={(event) => {
+                // <Meta> supresses the form submission by default.
+                // Force it on <Enter>.
+                if (event.key === 'Enter') {
+                  addInput()
+                }
+              }}
               disabled={mode === Mode.Adding}
               required
               autoFocus
@@ -162,7 +207,7 @@ export const AddToCollection: React.FC<AddToCollectionProps> = ({
             >
               {
                 {
-                  [Mode.Resting]: 'add',
+                  [Mode.Resting]: goToContent ? 'add + go' : 'add',
                   [Mode.Adding]: 'add',
                   [Mode.Error]: 'error',
                 }[mode]

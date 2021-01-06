@@ -12,9 +12,15 @@ export interface AddToCollectionMutation_addToCollection_collection {
   id: number;
 }
 
+export interface AddToCollectionMutation_addToCollection_content {
+  __typename: "Content";
+  id: number;
+}
+
 export interface AddToCollectionMutation_addToCollection {
   __typename: "AddToCollectionPayload";
   collection: AddToCollectionMutation_addToCollection_collection;
+  content: AddToCollectionMutation_addToCollection_content;
 }
 
 export interface AddToCollectionMutation {
