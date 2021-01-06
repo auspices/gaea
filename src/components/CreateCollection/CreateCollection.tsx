@@ -2,7 +2,13 @@ import React, { useCallback, useState } from 'react'
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/client'
 import { useHistory } from 'react-router-dom'
-import { Button, ClearableInput, useAlerts, useConfirm } from '@auspices/eos'
+import {
+  Box,
+  Button,
+  ClearableInput,
+  useAlerts,
+  useConfirm,
+} from '@auspices/eos'
 import { useContextualRef, useHrefs } from '../../hooks'
 import { errorMessage } from '../../util/errors'
 import { Form } from '../Form'
@@ -122,7 +128,7 @@ export const CreateCollection: React.FC<CreateCollectionProps> = ({
         )}
       </Form>
 
-      <Confirmation zIndex={Z.MODAL}>create “{value}”</Confirmation>
+      <Confirmation zIndex={Z.MODAL}>{`create “${value}”`}</Confirmation>
     </>
   )
 }
