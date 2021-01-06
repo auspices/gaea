@@ -122,7 +122,7 @@ export const CreateCollection: React.FC<CreateCollectionProps> = ({
         )}
       </Form>
 
-      <Confirmation zIndex={Z.MODAL} />
+      <Confirmation zIndex={Z.MODAL}>create “{value}”</Confirmation>
     </>
   )
 }
