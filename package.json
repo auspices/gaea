@@ -98,7 +98,7 @@
     "@types/styled-components": "5.1.6",
     "@types/styled-system": "5.1.10",
     "@types/styled-system__theme-get": "5.0.1",
-    "apollo": "2.32.0",
+    "apollo": "2.32.1",
     "eslint-plugin-import": "2.22.1",
     "husky": "4.3.7",
     "lint-staged": "10.5.3",
