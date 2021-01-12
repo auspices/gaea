@@ -185,7 +185,7 @@ export const AddToCollection: React.FC<AddToCollectionProps> = ({
               onKeyDown={(event) => {
                 // <Meta> supresses the form submission by default.
                 // Force it on <Enter>.
-                if (event.key === 'Enter') {
+                if (event.key === 'Enter' && value !== '') {
                   addInput()
                 }
               }}
