@@ -14,7 +14,7 @@
     "graphql": "15.4.0",
     "graphql-tag": "2.11.0",
     "jwt-decode": "2.2.0",
-    "qs": "6.9.4",
+    "qs": "6.9.5",
     "react": "16.14.0",
     "react-dom": "16.14.0",
     "react-dropzone": "11.2.4",
