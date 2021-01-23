@@ -17,7 +17,6 @@ export interface CapturePageCollectionsQuery_me_collections {
 export interface CapturePageCollectionsQuery_me {
   __typename: "User";
   id: number;
-  username: string;
   collections: CapturePageCollectionsQuery_me_collections[];
 }
 

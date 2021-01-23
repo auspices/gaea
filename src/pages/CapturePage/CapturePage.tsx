@@ -19,8 +19,8 @@ import {
   AddToCollectionsMutationVariables,
 } from '../../generated/types/AddToCollectionsMutation'
 import { Link } from 'react-router-dom'
-import { HREFS } from 'hooks'
-import { BottomNav } from 'components/BottomNav'
+import { HREFS } from '../../hooks'
+import { BottomNav } from '../../components/BottomNav'
 
 export const ADD_TO_COLLECTIONS_MUTATION = gql`
   mutation AddToCollectionsMutation(
@@ -43,7 +43,6 @@ const CAPTURE_PAGE_COLLECTIONS_QUERY = gql`
   query CapturePageCollectionsQuery {
     me {
       id
-      username
       collections(per: 5) {
         id
         name
@@ -145,7 +144,7 @@ export const CapturePage: React.FC = () => {
   }
 
   const {
-    me: { username, collections },
+    me: { collections },
   } = data
 
   return (
