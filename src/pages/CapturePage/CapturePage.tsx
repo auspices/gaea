@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useReducer } from 'react'
 import { Helmet } from 'react-helmet'
 import {
   Box,
@@ -11,10 +11,8 @@ import {
   useAlerts,
 } from '@auspices/eos'
 import gql from 'graphql-tag'
-import { useHistory } from 'react-router-dom'
 import { useMutation, useQuery } from '@apollo/client'
 import { CapturePageCollectionsQuery } from '../../generated/types/CapturePageCollectionsQuery'
-import { HREFS } from '../../hooks'
 import { errorMessage } from '../../util/errors'
 import {
   AddToCollectionsMutation,
@@ -62,12 +60,46 @@ const PROGRESS = {
   [Mode.Saving]: 99,
 }
 
-export const CapturePage: React.FC = () => {
-  const [mode, setMode] = useState(Mode.Input)
-  const [value, setValue] = useState('')
-  const [ids, setIds] = useState<number[]>([])
+type State = {
+  mode: Mode
+  value: string
+  ids: number[]
+}
 
-  const history = useHistory()
+const INITIAL_STATE = {
+  mode: Mode.Input,
+  value: '',
+  ids: [],
+}
+
+type Action =
+  | { type: 'RESET' }
+  | { type: 'UPDATE'; payload: Partial<State> }
+  | { type: 'TOGGLE'; payload: number }
+
+const reducer = (state: State, action: Action) => {
+  switch (action.type) {
+    case 'RESET':
+      return INITIAL_STATE
+    case 'UPDATE':
+      return {
+        ...state,
+        ...action.payload,
+      }
+    case 'TOGGLE':
+      const ids = state.ids.includes(action.payload)
+        ? state.ids.filter((id) => id !== action.payload)
+        : [...new Set([...state.ids, action.payload])]
+
+      return {
+        ...state,
+        ids,
+      }
+  }
+}
+
+export const CapturePage: React.FC = () => {
+  const [{ mode, value, ids }, dispatch] = useReducer(reducer, INITIAL_STATE)
 
   const { sendError, sendNotification } = useAlerts()
 
@@ -85,7 +117,7 @@ export const CapturePage: React.FC = () => {
   }
 
   const handleSave = async () => {
-    setMode(Mode.Saving)
+    dispatch({ type: 'UPDATE', payload: { mode: Mode.Saving } })
 
     try {
       await addToCollectionsMutation({
@@ -96,11 +128,10 @@ export const CapturePage: React.FC = () => {
       })
 
       sendNotification({ body: 'successfully added' })
-
-      history.push(HREFS.root())
+      dispatch({ type: 'RESET' })
     } catch (err) {
       sendError({ body: errorMessage(err) })
-      setMode(Mode.Add)
+      dispatch({ type: 'UPDATE', payload: { mode: Mode.Add } })
     }
   }
 
@@ -133,7 +164,10 @@ export const CapturePage: React.FC = () => {
                       HTMLTextAreaElement | HTMLInputElement
                     >
                   ) => {
-                    setValue(event.currentTarget.value)
+                    dispatch({
+                      type: 'UPDATE',
+                      payload: { value: event.currentTarget.value },
+                    })
                   }}
                   autoFocus
                   required
@@ -141,7 +175,9 @@ export const CapturePage: React.FC = () => {
 
                 <Button
                   disabled={value === ''}
-                  onClick={() => setMode(Mode.Add)}
+                  onClick={() => {
+                    dispatch({ type: 'UPDATE', payload: { mode: Mode.Add } })
+                  }}
                 >
                   next <Caret ml={3} direction="right" />
                 </Button>
@@ -158,18 +194,7 @@ export const CapturePage: React.FC = () => {
                         <Button
                           selected={ids.includes(collection.id)}
                           onClick={() => {
-                            if (ids.includes(collection.id)) {
-                              setIds((prevCollectionIDs) =>
-                                prevCollectionIDs.filter(
-                                  (id) => id !== collection.id
-                                )
-                              )
-                              return
-                            }
-
-                            setIds((prevCollectionIDs) => [
-                              ...new Set([...prevCollectionIDs, collection.id]),
-                            ])
+                            dispatch({ type: 'TOGGLE', payload: collection.id })
                           }}
                         >
                           add to {collection.name}
