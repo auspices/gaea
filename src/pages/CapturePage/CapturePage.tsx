@@ -18,6 +18,9 @@ import {
   AddToCollectionsMutation,
   AddToCollectionsMutationVariables,
 } from '../../generated/types/AddToCollectionsMutation'
+import { Link } from 'react-router-dom'
+import { HREFS } from 'hooks'
+import { BottomNav } from 'components/BottomNav'
 
 export const ADD_TO_COLLECTIONS_MUTATION = gql`
   mutation AddToCollectionsMutation(
@@ -39,6 +42,8 @@ export const ADD_TO_COLLECTIONS_MUTATION = gql`
 const CAPTURE_PAGE_COLLECTIONS_QUERY = gql`
   query CapturePageCollectionsQuery {
     me {
+      id
+      username
       collections(per: 5) {
         id
         name
@@ -135,20 +140,21 @@ export const CapturePage: React.FC = () => {
     }
   }
 
+  if (loading || !data) {
+    return <Loading />
+  }
+
+  const {
+    me: { username, collections },
+  } = data
+
   return (
     <>
       <Helmet>
         <title>capture</title>
       </Helmet>
 
-      <ProgressBar
-        position="fixed"
-        top={0}
-        right={0}
-        left={0}
-        zIndex={1}
-        progress={PROGRESS[mode]}
-      />
+      <ProgressBar progress={PROGRESS[mode]} />
 
       {(() => {
         switch (mode) {
@@ -189,12 +195,15 @@ export const CapturePage: React.FC = () => {
               <Stack>
                 {!loading && !error && (
                   <Stack>
-                    {data?.me.collections.map((collection) => {
+                    {collections.map((collection) => {
                       return (
                         <Button
                           selected={ids.includes(collection.id)}
                           onClick={() => {
-                            dispatch({ type: 'TOGGLE', payload: collection.id })
+                            dispatch({
+                              type: 'TOGGLE',
+                              payload: collection.id,
+                            })
                           }}
                         >
                           add to {collection.name}
@@ -225,6 +234,13 @@ export const CapturePage: React.FC = () => {
             )
         }
       })()}
+
+      <BottomNav>
+        <Button as={Link} to={HREFS.collections()} width="100%">
+          <Caret direction="left" mr={3} />
+          index
+        </Button>
+      </BottomNav>
     </>
   )
 }
