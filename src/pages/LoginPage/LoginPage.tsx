@@ -10,6 +10,7 @@ import {
   LoginPageMutation,
   LoginPageMutationVariables,
 } from '../../generated/types/LoginPageMutation'
+import { parse } from 'qs'
 
 const LOGIN_PAGE_MUTATION = gql`
   mutation LoginPageMutation($username: String!, $password: String!) {
@@ -30,7 +31,6 @@ enum Mode {
 
 export const LoginPage: React.FC = () => {
   const history = useHistory()
-
   const hrefs = useHrefs()
 
   const [mode, setMode] = useState(Mode.Resting)
@@ -60,9 +60,13 @@ export const LoginPage: React.FC = () => {
       try {
         const { data } = await login({ variables: state })
         const { jwt } = data!.login!
+
         localStorage.setItem('jwt', jwt)
+
         sendNotification({ body: 'successfully logged in' })
-        history.push(hrefs.collections())
+
+        const { redirectTo } = parse(history.location.search.slice(1))
+        history.push(redirectTo ? String(redirectTo) : hrefs.collections())
       } catch (err) {
         sendError({ body: errorMessage(err) })
       }

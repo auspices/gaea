@@ -2,7 +2,7 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 import { Box, Pill, Stack } from '@auspices/eos'
 import { errorMessage, GraphQLError } from '../../util/errors'
-import { Redirect } from 'react-router-dom'
+import { Redirect, useHistory } from 'react-router-dom'
 import { useHrefs } from '../../hooks'
 
 const isDevelopment = process.env.NODE_ENV === 'development'
@@ -16,7 +16,9 @@ export const ErrorFallback: React.FC<ErrorFallbackProps> = ({
   componentStack,
   error,
 }) => {
+  const history = useHistory()
   const hrefs = useHrefs()
+
   const errorStack = (error.stack || componentStack)
     .trim()
     .split('\n')
@@ -40,7 +42,13 @@ export const ErrorFallback: React.FC<ErrorFallbackProps> = ({
         <title>error</title>
       </Helmet>
 
-      {requireLogin && <Redirect to={hrefs.login()} />}
+      {requireLogin && (
+        <Redirect
+          to={hrefs.login(
+            [history.location.pathname, history.location.search].join('')
+          )}
+        />
+      )}
 
       <Stack>
         {error && (

@@ -14,7 +14,10 @@ export const PATTERNS = {
 }
 
 export const root = () => PATTERNS.root
-export const login = () => PATTERNS.login
+export const login = (redirectTo?: string) =>
+  redirectTo
+    ? `${PATTERNS.login}?redirectTo=${encodeURIComponent(redirectTo)}`
+    : PATTERNS.login
 export const register = () => PATTERNS.register
 export const subscribe = () => PATTERNS.subscribe
 export const account = () => PATTERNS.account
