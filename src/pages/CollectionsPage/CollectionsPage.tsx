@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react'
 import gql from 'graphql-tag'
 import { Link, useHistory } from 'react-router-dom'
-import { Dropdown, Loading, PaneOption, Stack, useThemer } from '@auspices/eos'
+import { Dropdown, Loading, PaneOption, Stack } from '@auspices/eos'
 import { useApolloClient, useQuery } from '@apollo/client'
 import { useDebounce } from 'use-debounce'
 import { Helmet } from 'react-helmet'
@@ -59,8 +59,6 @@ export const CollectionsPage: React.FC<CollectionsPageProps> = () => {
 
   const client = useApolloClient()
 
-  const { scheme, toggleScheme } = useThemer()
-
   const handleLogout = useCallback(() => {
     client.resetStore()
     localStorage.removeItem('jwt')
@@ -89,16 +87,8 @@ export const CollectionsPage: React.FC<CollectionsPageProps> = () => {
       <Stack>
         <Stack direction="horizontal">
           <Dropdown label={username} zIndex={Z.DROPDOWN}>
-            <PaneOption as={Link} to={hrefs.collections()}>
-              refresh
-            </PaneOption>
-
             <PaneOption as={Link} to={hrefs.account()}>
               settings
-            </PaneOption>
-
-            <PaneOption onClick={toggleScheme}>
-              {{ dark: 'light', light: 'dark' }[scheme]}
             </PaneOption>
 
             <PaneOption

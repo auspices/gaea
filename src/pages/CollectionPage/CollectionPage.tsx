@@ -110,10 +110,6 @@ export const CollectionPage: React.FC<CollectionPageProps> = ({ id }) => {
             </Button>
 
             <Dropdown flex="1" label={collection.title} zIndex={Z.DROPDOWN}>
-              <PaneOption as={Link} to={hrefs.collection(collection.slug)}>
-                refresh
-              </PaneOption>
-
               <PaneOption
                 as={Link}
                 to={hrefs.collectionSettings(collection.slug)}
