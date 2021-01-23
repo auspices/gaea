@@ -10,6 +10,7 @@ export const PATTERNS = {
   collection: '/xs/:id',
   collectionSettings: '/xs/:id/settings',
   content: '/x/:id',
+  capture: '/capture',
 }
 
 export const root = () => PATTERNS.root
@@ -24,6 +25,7 @@ export const collectionSettings = (id: string) =>
 export const content = (id: number) =>
   PATTERNS.content.replace(':id', String(id))
 export const data = (key: string) => `${GLYPH_ENDPOINT}/graph/${key}`
+export const capture = () => PATTERNS.capture
 
 export const HREFS = {
   root,
@@ -34,6 +36,7 @@ export const HREFS = {
   collectionSettings,
   content,
   data,
+  capture,
 }
 
 export const useHrefs = () => {

@@ -13,6 +13,7 @@ import { AccountPage } from './pages/AccountPage'
 import { SubscribePage } from './pages/SubscribePage'
 import { ErrorBoundary } from './components/ErrorBoundary'
 import { CreditCardProvider } from './components/CreditCard'
+import { CapturePage } from 'pages/CapturePage'
 
 export const Routes = () => {
   const hrefs = useHrefs()
@@ -116,6 +117,16 @@ export const Routes = () => {
         component={parseRoute(({ params }) => (
           <ErrorBoundary>
             <ContentPage id={params.id} />
+          </ErrorBoundary>
+        ))}
+      />
+
+      <Route
+        exact
+        path={PATTERNS.capture}
+        component={parseRoute(({ params }) => (
+          <ErrorBoundary>
+            <CapturePage />
           </ErrorBoundary>
         ))}
       />
