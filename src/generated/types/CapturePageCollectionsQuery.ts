@@ -26,3 +26,7 @@ export interface CapturePageCollectionsQuery {
    */
   me: CapturePageCollectionsQuery_me;
 }
+
+export interface CapturePageCollectionsQueryVariables {
+  query?: string | null;
+}

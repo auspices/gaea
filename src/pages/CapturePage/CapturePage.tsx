@@ -6,20 +6,24 @@ import {
   Caret,
   Input,
   Loading,
+  Pill,
   ProgressBar,
   Stack,
   useAlerts,
 } from '@auspices/eos'
 import gql from 'graphql-tag'
 import { useMutation, useQuery } from '@apollo/client'
-import { CapturePageCollectionsQuery } from '../../generated/types/CapturePageCollectionsQuery'
+import {
+  CapturePageCollectionsQuery,
+  CapturePageCollectionsQueryVariables,
+} from '../../generated/types/CapturePageCollectionsQuery'
 import { errorMessage } from '../../util/errors'
 import {
   AddToCollectionsMutation,
   AddToCollectionsMutationVariables,
 } from '../../generated/types/AddToCollectionsMutation'
 import { Link } from 'react-router-dom'
-import { HREFS } from '../../hooks'
+import { collection, HREFS } from '../../hooks'
 import { BottomNav } from '../../components/BottomNav'
 
 export const ADD_TO_COLLECTIONS_MUTATION = gql`
@@ -40,10 +44,10 @@ export const ADD_TO_COLLECTIONS_MUTATION = gql`
 `
 
 const CAPTURE_PAGE_COLLECTIONS_QUERY = gql`
-  query CapturePageCollectionsQuery {
+  query CapturePageCollectionsQuery($query: String) {
     me {
       id
-      collections(per: 5) {
+      collections(per: 5, query: $query) {
         id
         name
         href
@@ -67,12 +71,14 @@ const PROGRESS = {
 type State = {
   mode: Mode
   value: string
+  query: string
   ids: number[]
 }
 
 const INITIAL_STATE = {
-  mode: Mode.Input,
+  mode: Mode.Add,
   value: '',
+  query: '',
   ids: [],
 }
 
@@ -103,7 +109,10 @@ const reducer = (state: State, action: Action) => {
 }
 
 export const CapturePage: React.FC = () => {
-  const [{ mode, value, ids }, dispatch] = useReducer(reducer, INITIAL_STATE)
+  const [{ mode, value, query, ids }, dispatch] = useReducer(
+    reducer,
+    INITIAL_STATE
+  )
 
   const { sendError, sendNotification } = useAlerts()
 
@@ -112,9 +121,12 @@ export const CapturePage: React.FC = () => {
     AddToCollectionsMutationVariables
   >(ADD_TO_COLLECTIONS_MUTATION)
 
-  const { loading, data, error } = useQuery<CapturePageCollectionsQuery>(
-    CAPTURE_PAGE_COLLECTIONS_QUERY
-  )
+  const { loading, data, error } = useQuery<
+    CapturePageCollectionsQuery,
+    CapturePageCollectionsQueryVariables
+  >(CAPTURE_PAGE_COLLECTIONS_QUERY, {
+    variables: { query },
+  })
 
   if (error) {
     throw error
@@ -139,13 +151,9 @@ export const CapturePage: React.FC = () => {
     }
   }
 
-  if (loading || !data) {
+  if (mode === Mode.Input && (loading || !data)) {
     return <Loading />
   }
-
-  const {
-    me: { collections },
-  } = data
 
   return (
     <>
@@ -192,25 +200,55 @@ export const CapturePage: React.FC = () => {
           case Mode.Add:
             return (
               <Stack>
-                {!loading && !error && (
-                  <Stack>
-                    {collections.map((collection) => {
-                      return (
-                        <Button
-                          selected={ids.includes(collection.id)}
-                          onClick={() => {
-                            dispatch({
-                              type: 'TOGGLE',
-                              payload: collection.id,
-                            })
-                          }}
-                        >
-                          add to {collection.name}
-                        </Button>
-                      )
-                    })}
-                  </Stack>
-                )}
+                <Input
+                  placeholder="find collection"
+                  defaultValue={query}
+                  autoFocus
+                  onChange={(event) => {
+                    dispatch({
+                      type: 'UPDATE',
+                      payload: { query: event.currentTarget.value },
+                    })
+                  }}
+                />
+
+                {(() => {
+                  if (loading || !data) {
+                    return <Loading>looking for “{query}”</Loading>
+                  }
+
+                  const {
+                    me: { collections },
+                  } = data
+
+                  if (collections.length === 0) {
+                    return (
+                      <Pill color="secondary" borderColor="secondary">
+                        nothing for “{query}”
+                      </Pill>
+                    )
+                  }
+
+                  return (
+                    <>
+                      {collections.map((collection) => {
+                        return (
+                          <Button
+                            selected={ids.includes(collection.id)}
+                            onClick={() => {
+                              dispatch({
+                                type: 'TOGGLE',
+                                payload: collection.id,
+                              })
+                            }}
+                          >
+                            add to {collection.name}
+                          </Button>
+                        )
+                      })}
+                    </>
+                  )
+                })()}
 
                 {ids.length > 0 && (
                   <Button onClick={handleSave}>
