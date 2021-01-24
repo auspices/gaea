@@ -23,7 +23,7 @@ import {
   AddToCollectionsMutationVariables,
 } from '../../generated/types/AddToCollectionsMutation'
 import { Link } from 'react-router-dom'
-import { collection, HREFS } from '../../hooks'
+import { HREFS } from '../../hooks'
 import { BottomNav } from '../../components/BottomNav'
 
 export const ADD_TO_COLLECTIONS_MUTATION = gql`
