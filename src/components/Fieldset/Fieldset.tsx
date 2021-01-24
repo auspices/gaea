@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from 'react'
-import { Field, Stack, StackProps } from '@auspices/eos'
-import { useUpdateEffect } from '../../hooks'
+import { Field, Stack, StackProps, useUpdateEffect } from '@auspices/eos'
 
 export type FieldsetData = Record<
   string,
