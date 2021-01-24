@@ -8,7 +8,6 @@ import {
   Input,
   Loading,
   Pill,
-  ProgressBar,
   Stack,
   useAlerts,
 } from '@auspices/eos'
@@ -48,7 +47,7 @@ const CAPTURE_PAGE_COLLECTIONS_QUERY = gql`
   query CapturePageCollectionsQuery($query: String) {
     me {
       id
-      collections(per: 10, query: $query) {
+      collections(per: 5, query: $query) {
         id
         name
         href
@@ -61,12 +60,6 @@ enum Mode {
   Input,
   Add,
   Saving,
-}
-
-const PROGRESS = {
-  [Mode.Input]: 0,
-  [Mode.Add]: 50,
-  [Mode.Saving]: 99,
 }
 
 type State = {
@@ -162,8 +155,6 @@ export const CapturePage: React.FC = () => {
         <title>capture</title>
       </Helmet>
 
-      <ProgressBar progress={PROGRESS[mode]} />
-
       {(() => {
         switch (mode) {
           case Mode.Input:
@@ -251,13 +242,6 @@ export const CapturePage: React.FC = () => {
                     </>
                   )
                 })()}
-
-                {ids.length > 0 && (
-                  <Button onClick={handleSave}>
-                    add to ({ids.length})
-                    <Caret ml={3} direction="right" />
-                  </Button>
-                )}
               </Stack>
             )
 
@@ -281,13 +265,9 @@ export const CapturePage: React.FC = () => {
             index
           </Button>
 
-          <Button
-            flex={1}
-            onClick={() => {
-              dispatch({ type: 'RESET' })
-            }}
-          >
-            reset
+          <Button flex={1} onClick={handleSave} disabled={ids.length === 0}>
+            add {ids.length > 0 && `to (${ids.length})`}
+            <Caret ml={3} direction="right" />
           </Button>
         </Stack>
       </BottomNav>
