@@ -91,6 +91,10 @@ export const CollectionsPage: React.FC<CollectionsPageProps> = () => {
               settings
             </PaneOption>
 
+            <PaneOption as={Link} to={hrefs.capture()}>
+              capture
+            </PaneOption>
+
             <PaneOption
               borderTop="1px solid"
               borderColor="hint"
