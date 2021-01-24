@@ -4,6 +4,7 @@ import {
   Box,
   Button,
   Caret,
+  ClearableInput,
   Input,
   Loading,
   Pill,
@@ -47,7 +48,7 @@ const CAPTURE_PAGE_COLLECTIONS_QUERY = gql`
   query CapturePageCollectionsQuery($query: String) {
     me {
       id
-      collections(per: 5, query: $query) {
+      collections(per: 10, query: $query) {
         id
         name
         href
@@ -76,7 +77,7 @@ type State = {
 }
 
 const INITIAL_STATE = {
-  mode: Mode.Add,
+  mode: Mode.Input,
   value: '',
   query: '',
   ids: [],
@@ -170,6 +171,7 @@ export const CapturePage: React.FC = () => {
               <Stack>
                 <Input
                   as="textarea"
+                  rows={4}
                   placeholder="begin typing"
                   defaultValue={value}
                   onChange={(
@@ -200,14 +202,14 @@ export const CapturePage: React.FC = () => {
           case Mode.Add:
             return (
               <Stack>
-                <Input
+                <ClearableInput
                   placeholder="find collection"
                   defaultValue={query}
                   autoFocus
-                  onChange={(event) => {
+                  onChange={(query) => {
                     dispatch({
                       type: 'UPDATE',
-                      payload: { query: event.currentTarget.value },
+                      payload: { query },
                     })
                   }}
                 />
@@ -273,10 +275,21 @@ export const CapturePage: React.FC = () => {
       })()}
 
       <BottomNav>
-        <Button as={Link} to={HREFS.collections()} width="100%">
-          <Caret direction="left" mr={3} />
-          index
-        </Button>
+        <Stack direction="horizontal">
+          <Button as={Link} to={HREFS.collections()}>
+            <Caret direction="left" mr={3} />
+            index
+          </Button>
+
+          <Button
+            flex={1}
+            onClick={() => {
+              dispatch({ type: 'RESET' })
+            }}
+          >
+            reset
+          </Button>
+        </Stack>
       </BottomNav>
     </>
   )
