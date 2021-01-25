@@ -161,25 +161,39 @@ export const ContentPage: React.FC<ContentPageProps> = ({ id }) => {
 
         {(content.previous || content.next) && (
           <BottomNav>
-            <Stack direction="horizontal">
-              {content.previous && (
-                <Button
-                  flex="1"
-                  as={Link}
-                  to={hrefs.content(content.previous.id)}
-                >
-                  past
-                </Button>
-              )}
+            <Stack direction={['vertical', 'vertical', 'horizontal']}>
+              <Stack direction="horizontal" flex="1">
+                {content.previous ? (
+                  <Button
+                    flex="1"
+                    as={Link}
+                    to={hrefs.content(content.previous.id)}
+                  >
+                    past
+                  </Button>
+                ) : (
+                  <Button flex="1" disabled>
+                    past
+                  </Button>
+                )}
 
-              {content.next && (
-                <Button flex="1" as={Link} to={hrefs.content(content.next.id)}>
-                  next
-                </Button>
-              )}
+                {content.next ? (
+                  <Button
+                    flex="1"
+                    as={Link}
+                    to={hrefs.content(content.next.id)}
+                  >
+                    next
+                  </Button>
+                ) : (
+                  <Button flex="1" disabled>
+                    next
+                  </Button>
+                )}
+              </Stack>
 
               <SampleCollectionContent id={collection.slug}>
-                rand
+                random
               </SampleCollectionContent>
             </Stack>
           </BottomNav>

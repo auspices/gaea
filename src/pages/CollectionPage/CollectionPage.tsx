@@ -187,7 +187,7 @@ export const CollectionPage: React.FC<CollectionPageProps> = ({ id }) => {
                   id={collection.slug}
                   flex={collection.counts.contents <= per ? 1 : null}
                 >
-                  rand
+                  random
                 </SampleCollectionContent>
               )}
             </Stack>
