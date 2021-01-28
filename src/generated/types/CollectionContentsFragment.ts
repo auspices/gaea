@@ -7,12 +7,6 @@
 // GraphQL fragment: CollectionContentsFragment
 // ====================================================
 
-export interface CollectionContentsFragment_contents_entity_Text {
-  __typename: "Text";
-  id: number;
-  body: string;
-}
-
 export interface CollectionContentsFragment_contents_entity_Image_resized_urls {
   __typename: "RetinaImage";
   _1x: string;
@@ -28,13 +22,22 @@ export interface CollectionContentsFragment_contents_entity_Image_resized {
 
 export interface CollectionContentsFragment_contents_entity_Image {
   __typename: "Image";
+  label: string;
   id: number;
   title: string;
   resized: CollectionContentsFragment_contents_entity_Image_resized;
 }
 
+export interface CollectionContentsFragment_contents_entity_Text {
+  __typename: "Text";
+  label: string;
+  id: number;
+  body: string;
+}
+
 export interface CollectionContentsFragment_contents_entity_Link {
   __typename: "Link";
+  label: string;
   id: number;
   url: string;
   name: string;
@@ -47,6 +50,7 @@ export interface CollectionContentsFragment_contents_entity_Collection_counts {
 
 export interface CollectionContentsFragment_contents_entity_Collection {
   __typename: "Collection";
+  label: string;
   id: number;
   slug: string;
   title: string;
@@ -55,7 +59,7 @@ export interface CollectionContentsFragment_contents_entity_Collection {
   counts: CollectionContentsFragment_contents_entity_Collection_counts;
 }
 
-export type CollectionContentsFragment_contents_entity = CollectionContentsFragment_contents_entity_Text | CollectionContentsFragment_contents_entity_Image | CollectionContentsFragment_contents_entity_Link | CollectionContentsFragment_contents_entity_Collection;
+export type CollectionContentsFragment_contents_entity = CollectionContentsFragment_contents_entity_Image | CollectionContentsFragment_contents_entity_Text | CollectionContentsFragment_contents_entity_Link | CollectionContentsFragment_contents_entity_Collection;
 
 export interface CollectionContentsFragment_contents {
   __typename: "Content";

@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react'
 import { Helmet } from 'react-helmet'
-import { Button, Loading, Pill, Stack, useAlerts } from '@auspices/eos'
+import { Button, Cell, Loading, Stack, useAlerts } from '@auspices/eos'
 import { useMutation, useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
 import {
@@ -231,11 +231,11 @@ export const SubscribePage: React.FC = () => {
 
       {activeSubscription && !activeSubscription.cancelAtPeriodEnd && (
         <Stack>
-          <Pill>thank you</Pill>,
-          <Pill>
+          <Cell>thank you</Cell>,
+          <Cell>
             your subscription will auto-renew{' '}
             {activeSubscription.currentPeriodEndAt}
-          </Pill>
+          </Cell>
           <Button onClick={handleCancel}>
             {
               {
@@ -252,9 +252,9 @@ export const SubscribePage: React.FC = () => {
 
       {activeSubscription && activeSubscription.cancelAtPeriodEnd && (
         <Stack>
-          <Pill>
+          <Cell>
             your subscription will end {activeSubscription.currentPeriodEndAt}
-          </Pill>
+          </Cell>
           <Button onClick={handleReactivate}>
             {
               {
@@ -272,7 +272,7 @@ export const SubscribePage: React.FC = () => {
       {!activeSubscription && (
         <form onSubmit={handleSubmit}>
           <Stack>
-            <Pill>choose a plan</Pill>
+            <Cell>choose a plan</Cell>
             <Stack direction="horizontal">
               {customer.plans.map((plan) => {
                 return (

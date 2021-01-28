@@ -13,11 +13,12 @@ export const COLLECTION_CONTENT_ENTITY_TEXT_FRAGMENT = gql`
 
 const Container = styled(Box).attrs({
   fontSize: 0,
-  borderTop: '1px solid',
+  border: '1px solid',
   borderColor: 'hint',
+  borderRadius: 2,
   color: 'primary',
-  py: 3,
-  px: [3, 0],
+  py: 2,
+  px: 3,
 })<{ truncate: boolean }>`
   position: relative;
   display: flex;

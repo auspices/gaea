@@ -19,12 +19,6 @@ export interface CollectionPageQuery_me_collection_within {
   title: string;
 }
 
-export interface CollectionPageQuery_me_collection_contents_entity_Text {
-  __typename: "Text";
-  id: number;
-  body: string;
-}
-
 export interface CollectionPageQuery_me_collection_contents_entity_Image_resized_urls {
   __typename: "RetinaImage";
   _1x: string;
@@ -40,13 +34,22 @@ export interface CollectionPageQuery_me_collection_contents_entity_Image_resized
 
 export interface CollectionPageQuery_me_collection_contents_entity_Image {
   __typename: "Image";
+  label: string;
   id: number;
   title: string;
   resized: CollectionPageQuery_me_collection_contents_entity_Image_resized;
 }
 
+export interface CollectionPageQuery_me_collection_contents_entity_Text {
+  __typename: "Text";
+  label: string;
+  id: number;
+  body: string;
+}
+
 export interface CollectionPageQuery_me_collection_contents_entity_Link {
   __typename: "Link";
+  label: string;
   id: number;
   url: string;
   name: string;
@@ -59,6 +62,7 @@ export interface CollectionPageQuery_me_collection_contents_entity_Collection_co
 
 export interface CollectionPageQuery_me_collection_contents_entity_Collection {
   __typename: "Collection";
+  label: string;
   id: number;
   slug: string;
   title: string;
@@ -67,7 +71,7 @@ export interface CollectionPageQuery_me_collection_contents_entity_Collection {
   counts: CollectionPageQuery_me_collection_contents_entity_Collection_counts;
 }
 
-export type CollectionPageQuery_me_collection_contents_entity = CollectionPageQuery_me_collection_contents_entity_Text | CollectionPageQuery_me_collection_contents_entity_Image | CollectionPageQuery_me_collection_contents_entity_Link | CollectionPageQuery_me_collection_contents_entity_Collection;
+export type CollectionPageQuery_me_collection_contents_entity = CollectionPageQuery_me_collection_contents_entity_Image | CollectionPageQuery_me_collection_contents_entity_Text | CollectionPageQuery_me_collection_contents_entity_Link | CollectionPageQuery_me_collection_contents_entity_Collection;
 
 export interface CollectionPageQuery_me_collection_contents {
   __typename: "Content";

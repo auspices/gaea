@@ -1,8 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import gql from 'graphql-tag'
-import styled from 'styled-components'
-import { Link } from 'react-router-dom'
-import { Box, pillFocusMixin } from '@auspices/eos'
+import { Box, File } from '@auspices/eos'
 import { ContextMenu } from '../ContextMenu'
 import { RemoveFromCollection } from '../RemoveFromCollection'
 import {
@@ -16,31 +14,28 @@ import {
 import { useHrefs } from '../../hooks'
 import { CollectionContentFragment } from '../../generated/types/CollectionContentFragment'
 import { Z } from '../../util/zIndexes'
+import { useHistory } from 'react-router-dom'
 
 export const COLLECTION_CONTENT_FRAGMENT = gql`
   fragment CollectionContentFragment on Content {
     id
     entity {
+      ... on Image {
+        label: toString(length: 35, from: CENTER)
+      }
+      ... on Text {
+        label: toString(length: 35, from: TAIL)
+      }
+      ... on Link {
+        label: toString(length: 35, from: CENTER)
+      }
+      ... on Collection {
+        label: toString(length: 35, from: CENTER)
+      }
       ...CollectionContentEntityFragment
     }
   }
   ${COLLECTION_CONTENT_ENTITY_FRAGMENT}
-`
-
-const Container = styled(Link)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  text-decoration: none;
-  position: relative;
-  transition: box-shadow 250ms ease;
-  border-radius: 4px;
-
-  &:focus {
-    ${pillFocusMixin}
-  }
 `
 
 enum Mode {
@@ -62,6 +57,7 @@ export const CollectionContent: React.FC<CollectionContentProps> = ({
   const [mode, setMode] = useState(Mode.Resting)
 
   const hrefs = useHrefs()
+  const history = useHistory()
 
   const timer = useRef<number | null>()
 
@@ -76,8 +72,25 @@ export const CollectionContent: React.FC<CollectionContentProps> = ({
     timer.current = setTimeout(() => setMode(Mode.Resting), 100)
   }, [mode])
 
-  const handleOpen = useCallback(() => setMode(Mode.Open), [])
-  const handleClose = useCallback(() => setMode(Mode.Resting), [])
+  const handleOpen = () => setMode(Mode.Open)
+  const handleClose = () => setMode(Mode.Resting)
+
+  const handleClick = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    if (event.metaKey || event.shiftKey) {
+      // Pass through new tab clicks
+      return
+    }
+
+    event.preventDefault()
+  }
+
+  const handleDoubleClick = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    history.push(hrefs.content(content.id))
+  }
 
   useEffect(() => {
     return () => {
@@ -86,10 +99,16 @@ export const CollectionContent: React.FC<CollectionContentProps> = ({
   }, [])
 
   return (
-    <Container
+    <File
+      position="relative"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      to={hrefs.content(content.id)}
+      name={content.entity.label}
+      // @ts-ignore
+      as="a"
+      href={hrefs.content(content.id)}
+      onClick={handleClick}
+      onDoubleClick={handleDoubleClick}
       {...rest}
     >
       {mode !== Mode.Resting && (
@@ -130,6 +149,6 @@ export const CollectionContent: React.FC<CollectionContentProps> = ({
       )}
 
       <CollectionContentEntity entity={content.entity} />
-    </Container>
+    </File>
   )
 }
