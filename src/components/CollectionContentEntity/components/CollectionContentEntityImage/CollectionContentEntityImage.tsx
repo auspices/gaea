@@ -8,7 +8,7 @@ export const COLLECTION_CONTENT_ENTITY_IMAGE_FRAGMENT = gql`
   fragment CollectionContentEntityImageFragment on Image {
     id
     title
-    resized(width: 250, height: 250) {
+    resized(width: 300, height: 300, quality: 85) {
       width
       height
       urls {

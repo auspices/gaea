@@ -13,7 +13,7 @@ export const CONTENT_ENTITY_IMAGE_FRAGMENT = gql`
         src: _1x
       }
     }
-    resized(width: 900, height: 900) {
+    resized(width: 900, height: 900, quality: 95) {
       width
       height
       urls {
