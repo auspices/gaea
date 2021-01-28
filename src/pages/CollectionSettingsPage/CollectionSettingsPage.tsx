@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react'
 import gql from 'graphql-tag'
 import { Link } from 'react-router-dom'
 import { useMutation, useQuery } from '@apollo/client'
-import { Button, Caret, Loading, Pill, Stack, useAlerts } from '@auspices/eos'
+import { Button, Caret, Cell, Loading, Stack, useAlerts } from '@auspices/eos'
 import { Helmet } from 'react-helmet'
 import { useHrefs } from '../../hooks'
 import { DeleteCollection } from '../../components/DeleteCollection'
@@ -60,9 +60,11 @@ export const CollectionSettingsPage: React.FC<CollectionSettingsPageProps> = ({
     variables: { id },
   })
 
-  const [updateCollectionSettings] = useMutation<
-    UpadateCollectionSettingsMutation
-  >(UPDATE_COLLECTION_SETTINGS_MUTATION)
+  const [
+    updateCollectionSettings,
+  ] = useMutation<UpadateCollectionSettingsMutation>(
+    UPDATE_COLLECTION_SETTINGS_MUTATION
+  )
 
   const hrefs = useHrefs()
 
@@ -141,9 +143,9 @@ export const CollectionSettingsPage: React.FC<CollectionSettingsPageProps> = ({
             </Button>
           </Stack>
 
-          <Pill as="h1" flex="1">
+          <Cell as="h1" flex="1">
             settings
-          </Pill>
+          </Cell>
         </Stack>
 
         <Stack

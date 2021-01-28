@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react'
 import gql from 'graphql-tag'
 import { useHistory } from 'react-router-dom'
 import { useMutation } from '@apollo/client'
-import { Button, Input, Pill, Stack, useAlerts } from '@auspices/eos'
+import { Button, Cell, Input, Stack, useAlerts } from '@auspices/eos'
 import { useHrefs } from '../../hooks'
 import { errorMessage } from '../../util/errors'
 import { DeleteCollectionMutation } from '../../generated/types/DeleteCollectionMutation'
@@ -94,14 +94,14 @@ export const DeleteCollection: React.FC<DeleteCollectionProps> = ({
       {mode === Mode.Confirm && (
         <form onSubmit={handleDelete}>
           <Stack>
-            <Pill
+            <Cell
               color="danger"
               borderColor="danger"
               alignItems="center"
               zIndex={1}
             >
               are you sure?
-            </Pill>
+            </Cell>
 
             <Input
               color="danger"

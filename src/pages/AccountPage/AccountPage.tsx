@@ -6,9 +6,9 @@ import { Helmet } from 'react-helmet'
 import {
   Button,
   Caret,
+  Cell,
   Field,
   Loading,
-  Pill,
   Stack,
   useThemer,
 } from '@auspices/eos'
@@ -59,7 +59,7 @@ export const AccountPage: React.FC = () => {
             {me.username}
           </Button>
 
-          <Pill flex="1">settings</Pill>
+          <Cell flex="1">settings</Cell>
         </Stack>
 
         <Field

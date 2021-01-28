@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
-import { Box, BoxProps, color, Pill, themeGet } from '@auspices/eos'
+import { Box, BoxProps, Cell, color, themeGet } from '@auspices/eos'
 import { Z } from '../../util/zIndexes'
 
 const Container = styled(Box)`
@@ -31,7 +31,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({ children, ...rest }) => {
 
   return (
     <>
-      <Pill
+      <Cell
         opacity={0}
         color="tertiary"
         borderColor="tertiary"
@@ -39,7 +39,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({ children, ...rest }) => {
         height={placeholderHeight}
       >
         the end
-      </Pill>
+      </Cell>
 
       <Container
         ref={ref}

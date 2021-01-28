@@ -1,6 +1,6 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import { Box, Pill, Stack } from '@auspices/eos'
+import { Box, Cell, Stack } from '@auspices/eos'
 import { errorMessage, GraphQLError } from '../../util/errors'
 import { Redirect, useHistory } from 'react-router-dom'
 import { useHrefs } from '../../hooks'
@@ -52,12 +52,12 @@ export const ErrorFallback: React.FC<ErrorFallbackProps> = ({
 
       <Stack>
         {error && (
-          <Pill as="h1" color="danger" borderColor="danger">
+          <Cell as="h1" color="danger" borderColor="danger">
             {errorMessage(error)}
-          </Pill>
+          </Cell>
         )}
 
-        <Pill as="h2" color="danger" borderColor="danger">
+        <Cell as="h2" color="danger" borderColor="danger">
           <span>
             could a version perhaps be false somewhat in the way a jigsaw puzzle
             can be wrongly put together, or a motor fail to run, a poster to
@@ -66,10 +66,10 @@ export const ErrorFallback: React.FC<ErrorFallbackProps> = ({
               go home
             </Box>
           </span>
-        </Pill>
+        </Cell>
 
         {isDevelopment && (
-          <Pill
+          <Cell
             as="pre"
             fontFamily="mono"
             fontSize={0}
@@ -78,7 +78,7 @@ export const ErrorFallback: React.FC<ErrorFallbackProps> = ({
             borderColor="danger"
           >
             {stackTrace}
-          </Pill>
+          </Cell>
         )}
       </Stack>
     </>

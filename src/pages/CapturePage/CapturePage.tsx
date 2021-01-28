@@ -4,10 +4,10 @@ import {
   Box,
   Button,
   Caret,
+  Cell,
   ClearableInput,
   Input,
   Loading,
-  Pill,
   Stack,
   useAlerts,
 } from '@auspices/eos'
@@ -216,9 +216,9 @@ export const CapturePage: React.FC = () => {
 
                   if (collections.length === 0) {
                     return (
-                      <Pill color="secondary" borderColor="secondary">
+                      <Cell color="secondary" borderColor="secondary">
                         nothing for “{query}”
-                      </Pill>
+                      </Cell>
                     )
                   }
 

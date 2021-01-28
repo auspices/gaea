@@ -1,7 +1,7 @@
 import React from 'react'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/client'
-import { Loading, Pill } from '@auspices/eos'
+import { Cell, Loading } from '@auspices/eos'
 import {
   COLLECTION_STUB_LIST_FRAGMENT,
   CollectionStubList,
@@ -57,9 +57,9 @@ export const FilteredCollectionStubList: React.FC<FilteredCollectionStubListProp
 
   if (collections.length === 0) {
     return (
-      <Pill color="secondary" borderColor="secondary">
+      <Cell color="secondary" borderColor="secondary">
         nothing for “{query}”
-      </Pill>
+      </Cell>
     )
   }
 
