@@ -80,22 +80,17 @@ export const FileDropzone: React.FC<FileDropzoneProps> = ({
 
   // Use `dragenter` event on `window` to trigger the actual drop-zone,
   // instead of the Component's element.
-  const showDropZone = () => setMode(Mode.Pending)
+  const showDropZone = (event: DragEvent) => {
+    // Prevent non-file drags from registering
+    if (!event.dataTransfer?.types.includes('Files')) return
 
-  const handleFalseDrop = (event: DragEvent) => {
-    if (!event.dataTransfer?.types.includes('Files')) {
-      // If you accidently drag some link on the page around, cancel
-      setMode(Mode.Resting)
-      return
-    }
+    setMode(Mode.Pending)
   }
 
   useEffect(() => {
     window.addEventListener('dragenter', showDropZone)
-    window.addEventListener('drop', handleFalseDrop)
     return () => {
       window.removeEventListener('dragenter', showDropZone)
-      window.removeEventListener('drop', handleFalseDrop)
     }
   })
 

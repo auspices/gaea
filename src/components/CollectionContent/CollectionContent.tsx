@@ -78,11 +78,6 @@ export const CollectionContent: React.FC<CollectionContentProps> = ({
   const handleClick = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
-    if (event.metaKey || event.shiftKey) {
-      // Pass through new tab clicks
-      return
-    }
-
     event.preventDefault()
   }
 
