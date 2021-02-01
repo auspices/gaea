@@ -1,6 +1,6 @@
 import React from 'react'
 import gql from 'graphql-tag'
-import { Grid, GridProps } from '@auspices/eos'
+import { Grid, GridProps, MultiSelect } from '@auspices/eos'
 import {
   COLLECTION_CONTENT_FRAGMENT,
   CollectionContent,
@@ -27,14 +27,16 @@ export const CollectionContents: React.FC<CollectionContentsProps> = ({
   ...rest
 }) => {
   return (
-    <Grid {...rest}>
-      {collection.contents.map((content) => (
-        <CollectionContent
-          key={content.id}
-          collectionId={collection.id}
-          content={content}
-        />
-      ))}
-    </Grid>
+    <MultiSelect>
+      <Grid {...rest}>
+        {collection.contents.map((content) => (
+          <CollectionContent
+            key={content.id}
+            collectionId={collection.id}
+            content={content}
+          />
+        ))}
+      </Grid>
+    </MultiSelect>
   )
 }
