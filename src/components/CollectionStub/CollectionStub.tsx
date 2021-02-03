@@ -1,15 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import styled, { css } from 'styled-components'
-import {
-  Box,
-  Button,
-  ButtonProps,
-  color,
-  colorHash,
-  space,
-  themeGet,
-  Tooltip,
-} from '@auspices/eos'
+import { Box, Button, ButtonProps, color, themeGet } from '@auspices/eos'
 import { Link } from 'react-router-dom'
 import gql from 'graphql-tag'
 import scrollIntoView from 'scroll-into-view-if-needed'
@@ -25,10 +16,6 @@ export const COLLECTION_STUB_FRAGMENT = gql`
     updatedAt(relative: true)
     counts {
       contents
-    }
-    within {
-      id
-      title
     }
   }
 `
@@ -112,9 +99,7 @@ export const CollectionStub: React.FC<CollectionStubProps> = ({
       highlighted={highlighted}
       {...rest}
     >
-      <Title mr={collection.within.length > 0 ? 4 : 0}>
-        {collection.title}
-      </Title>
+      <Title>{collection.title}</Title>
 
       <Count mx={4} color="tertiary">
         {collection.counts.contents || '∅'}
@@ -125,21 +110,6 @@ export const CollectionStub: React.FC<CollectionStubProps> = ({
       <Delta color="tertiary" fontSize={0}>
         {collection.updatedAt}
       </Delta>
-
-      <Box position="absolute" top={0} right={0} bottom={0} display="flex">
-        {collection.within.length > 0 &&
-          collection.within.map(({ id, title }) => {
-            return (
-              <Tooltip
-                key={id}
-                label={<Box style={{ whiteSpace: 'nowrap' }}>{title}</Box>}
-                placement="left"
-              >
-                <Box bg={colorHash(title)} height="100%" width={space(3)} />
-              </Tooltip>
-            )
-          })}
-      </Box>
     </Container>
   )
 }
