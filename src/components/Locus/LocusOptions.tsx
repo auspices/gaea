@@ -2,14 +2,6 @@ import React from 'react'
 import { Button, Stack, StackProps } from '@auspices/eos'
 import { useKeyboardListNavigation } from 'use-keyboard-list-navigation'
 import { LocusLabel } from './LocusLabel'
-import styled from 'styled-components'
-
-const Option = styled(Button)`
-  u {
-    text-decoration: ${({ highlighted }) =>
-      highlighted ? 'underline' : 'none'};
-  }
-`
 
 export enum Kind {
   ACTION,
@@ -46,13 +38,15 @@ export const LocusOptions: React.FC<LocusOptionsProps> = ({
     <Stack {...rest}>
       {options.map(({ onClick, label, kind }, i) => {
         return (
-          <Option
+          <Button
             key={i}
             highlighted={index === i}
             onClick={() => onClick(onEnter)}
+            justifyContent="flex-start"
+            textAlign="left"
           >
             <LocusLabel isMutation={kind === Kind.MUTATION}>{label}</LocusLabel>
-          </Option>
+          </Button>
         )
       })}
     </Stack>

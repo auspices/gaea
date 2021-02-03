@@ -4,10 +4,6 @@ import { useDebounce } from 'use-debounce/lib'
 import { Kind, LocusOption, LocusOptions } from './LocusOptions'
 import Fuse from 'fuse.js'
 
-// const partition = <T,>(xs: T[], condition: (item: T) => boolean) => {
-//   return [xs.filter((x) => condition(x)), xs.filter((x) => !condition(x))]
-// }
-
 export type LocusMenuProps = StackProps & {
   options: LocusOption[]
   onChange?(query: string): void
@@ -33,11 +29,18 @@ export const LocusMenu: React.FC<LocusMenuProps> = ({
   )
 
   const fuse = useMemo(() => {
-    return new Fuse(remainingOptions, { keys: ['key'] })
+    return new Fuse(remainingOptions, {
+      keys: ['key'],
+      isCaseSensitive: false,
+      includeScore: true,
+    })
   }, [remainingOptions])
 
   const filteredOptions = useMemo(() => {
-    return fuse.search(query).map(({ item }) => item)
+    return fuse.search(query).map(({ item, ...rest }) => {
+      console.log(item.key, rest.score)
+      return item
+    })
   }, [fuse, query])
 
   useEffect(() => onChange && onChange(query), [query, onChange])
@@ -53,6 +56,7 @@ export const LocusMenu: React.FC<LocusMenuProps> = ({
     ref.current.focus()
   }, [])
 
+  console.log({ filteredOptions })
   return (
     <Stack width={['75vw', '75vw', '50vw']} bg="background" {...rest}>
       <ClearableInput
