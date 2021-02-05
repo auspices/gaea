@@ -59,7 +59,10 @@ export const ContentSettings: React.FC<ContentSettingsProps> = ({
     [content.id, sendError, sendNotification, updateContent]
   )
 
-  const [debouncedHandleChange] = useDebouncedCallback(handleChange, 500)
+  const { callback: debouncedHandleChange } = useDebouncedCallback(
+    handleChange,
+    500
+  )
 
   return (
     <KeyValueEditor
