@@ -59,7 +59,7 @@ export const CollectionContent: React.FC<CollectionContentProps> = ({
   const hrefs = useHrefs()
   const history = useHistory()
 
-  const timer = useRef<number | null>()
+  const timer = useRef<ReturnType<typeof setTimeout>>()
 
   const handleMouseEnter = useCallback(() => {
     if (mode === Mode.Open) return

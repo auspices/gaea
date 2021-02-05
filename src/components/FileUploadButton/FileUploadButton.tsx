@@ -58,8 +58,10 @@ export const FileUploadButton: React.FC<FileUploadButtonProps> = ({
 
   const handleChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      setAcceptedFiles([...event.target.files])
-      setUploadingFIles([...event.target.files])
+      if (event.target.files) {
+        setAcceptedFiles([...event.target.files])
+        setUploadingFIles([...event.target.files])
+      }
     },
     []
   )
