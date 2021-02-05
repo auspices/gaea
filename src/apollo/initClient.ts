@@ -19,7 +19,7 @@ const authLink = setContext((_, { headers }) => {
   if (!jwt) return { headers }
 
   const now = Date.now().valueOf() / 1000
-  const { exp } = jwtDecode(jwt)
+  const { exp } = jwtDecode<{ exp: number }>(jwt)
 
   if (now > exp) {
     // Token is expired: Remove the token from storage
