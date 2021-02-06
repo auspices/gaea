@@ -7,7 +7,7 @@ import {
   Pane,
   PaneOption,
   paneShadowMixin,
-  Popper,
+  usePopper,
 } from '@auspices/eos'
 import { useActive } from '../../hooks'
 import { Z } from '../../util/zIndexes'
@@ -38,7 +38,7 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({
 }) => {
   const { mode, setMode, Mode } = useActive()
 
-  const handleClick = useCallback(
+  const handleMouseDown = useCallback(
     (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       event.preventDefault()
       event.stopPropagation()
@@ -53,19 +53,20 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({
     onClose && onClose()
   }, [Mode.Resting, onClose, setMode])
 
+  const { anchorRef, childrenRef, open } = usePopper({
+    open: mode === Mode.Active,
+    placement: 'bottom',
+    type: 'mousedown',
+    onClose: handleClose,
+  })
+
   return (
     <Box zIndex={Z.DROPDOWN} {...rest}>
-      <Popper
-        open={mode === Mode.Active}
-        onClose={handleClose}
-        anchor={
-          <ContextMenuToggle onClick={handleClick}>
-            <Ellipsis />
-          </ContextMenuToggle>
-        }
-      >
-        <Pane>{children}</Pane>
-      </Popper>
+      <ContextMenuToggle ref={anchorRef} onMouseDown={handleMouseDown}>
+        <Ellipsis />
+      </ContextMenuToggle>
+
+      {open && <Pane ref={childrenRef}>{children}</Pane>}
     </Box>
   )
 }
