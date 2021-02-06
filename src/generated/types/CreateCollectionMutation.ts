@@ -12,12 +12,6 @@ export interface CreateCollectionMutation_createCollection_collection_counts {
   contents: number;
 }
 
-export interface CreateCollectionMutation_createCollection_collection_within {
-  __typename: "Collection";
-  id: number;
-  title: string;
-}
-
 export interface CreateCollectionMutation_createCollection_collection {
   __typename: "Collection";
   title: string;
@@ -26,7 +20,6 @@ export interface CreateCollectionMutation_createCollection_collection {
   key: string | null;
   updatedAt: string;
   counts: CreateCollectionMutation_createCollection_collection_counts;
-  within: CreateCollectionMutation_createCollection_collection_within[];
 }
 
 export interface CreateCollectionMutation_createCollection {

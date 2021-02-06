@@ -35,6 +35,8 @@ export interface CollectionPageQuery_me_collection_contents_entity_Image_resized
 export interface CollectionPageQuery_me_collection_contents_entity_Image {
   __typename: "Image";
   label: string;
+  width: number;
+  height: number;
   id: number;
   title: string;
   resized: CollectionPageQuery_me_collection_contents_entity_Image_resized;

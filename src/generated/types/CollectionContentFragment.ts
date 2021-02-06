@@ -23,6 +23,8 @@ export interface CollectionContentFragment_entity_Image_resized {
 export interface CollectionContentFragment_entity_Image {
   __typename: "Image";
   label: string;
+  width: number;
+  height: number;
   id: number;
   title: string;
   resized: CollectionContentFragment_entity_Image_resized;

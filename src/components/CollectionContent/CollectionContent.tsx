@@ -22,6 +22,8 @@ export const COLLECTION_CONTENT_FRAGMENT = gql`
     entity {
       ... on Image {
         label: toString(length: 35, from: CENTER)
+        width
+        height
       }
       ... on Text {
         label: toString(length: 35, from: TAIL)
@@ -81,9 +83,7 @@ export const CollectionContent: React.FC<CollectionContentProps> = ({
     event.preventDefault()
   }
 
-  const handleDoubleClick = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
+  const handleDoubleClick = () => {
     history.push(hrefs.content(content.id))
   }
 
@@ -93,17 +93,27 @@ export const CollectionContent: React.FC<CollectionContentProps> = ({
     }
   }, [])
 
+  const meta = (() => {
+    switch (content.entity.__typename) {
+      case 'Image':
+        return `${content.entity.width}×${content.entity.height}`
+      default:
+        return undefined
+    }
+  })()
+
   return (
     <File
       position="relative"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       name={content.entity.label}
+      meta={meta}
+      onClick={handleClick}
+      onDoubleClick={handleDoubleClick}
       // @ts-ignore
       as="a"
       href={hrefs.content(content.id)}
-      onClick={handleClick}
-      onDoubleClick={handleDoubleClick}
       {...rest}
     >
       {mode !== Mode.Resting && (
