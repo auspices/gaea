@@ -105,7 +105,7 @@ export const CollectionStub: React.FC<CollectionStubProps> = ({
         {collection.counts.contents || '∅'}
       </Count>
 
-      <Indicator bg={collection.key ? 'primary' : 'hint'} />
+      {collection.key && <Indicator bg="hint" />}
 
       <Delta color="tertiary" fontSize={0}>
         {collection.updatedAt}
