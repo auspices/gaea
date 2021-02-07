@@ -87,6 +87,7 @@ export interface CollectionPageQuery_me_collection {
   slug: string;
   key: string | null;
   title: string;
+  updatedAt: string;
   counts: CollectionPageQuery_me_collection_counts;
   within: CollectionPageQuery_me_collection_within[];
   contents: CollectionPageQuery_me_collection_contents[];

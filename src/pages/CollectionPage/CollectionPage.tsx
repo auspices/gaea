@@ -7,13 +7,12 @@ import {
   Box,
   Button,
   Caret,
-  colorHash,
   Dropdown,
+  Ellipsis,
+  Flyout,
   Loading,
   PaneOption,
-  space,
   Stack,
-  Tooltip,
 } from '@auspices/eos'
 import { useHrefs, usePagination, useRefetch } from '../../hooks'
 import { AddToCollection } from '../../components/AddToCollection'
@@ -47,6 +46,7 @@ export const COLLECTION_PAGE_QUERY = gql`
         slug
         key
         title
+        updatedAt(relative: true)
         counts {
           contents
         }
@@ -142,35 +142,55 @@ export const CollectionPage: React.FC<CollectionPageProps> = ({ id }) => {
                 />
               )}
             </Dropdown>
-          </Stack>
 
-          <Stack direction="horizontal" flex={1}>
-            <AddToCollection id={collection.id} />
+            <Dropdown
+              label={
+                <>
+                  &nbsp;
+                  <Ellipsis />
+                </>
+              }
+              zIndex={Z.DROPDOWN}
+            >
+              <PaneOption>last updated {collection.updatedAt}</PaneOption>
 
-            <Box border="1px solid" display="flex">
-              {collection.within.length > 0 &&
-                collection.within.map(({ id, title, slug }) => {
-                  return (
-                    <Tooltip key={id} label={title} placement="right">
-                      <Box
+              {collection.within.length > 0 ? (
+                <Flyout
+                  borderTop="1px solid"
+                  borderColor="hint"
+                  label={
+                    <Box as="span">
+                      backlinks{' '}
+                      <Box as="span" color="tertiary">
+                        {collection.within.length}
+                      </Box>
+                    </Box>
+                  }
+                >
+                  {collection.within.map(({ id, title, slug }) => {
+                    return (
+                      <PaneOption
+                        key={id}
                         as={Link}
                         to={hrefs.collection(slug)}
-                        bg={colorHash(title)}
-                        width={space(3)}
-                      />
-                    </Tooltip>
-                  )
-                })}
-            </Box>
+                      >
+                        {title}
+                      </PaneOption>
+                    )
+                  })}
+                </Flyout>
+              ) : (
+                <PaneOption disabled>no backlinks</PaneOption>
+              )}
+            </Dropdown>
           </Stack>
+
+          <AddToCollection id={collection.id} />
         </Stack>
-
         <CollectionSettings collection={collection} />
-
         <Box flex="1">
           <CollectionContents my={4} collection={collection} />
         </Box>
-
         {collection.counts.contents > 0 && (
           <BottomNav>
             <Stack direction={['vertical', 'vertical', 'horizontal']}>
