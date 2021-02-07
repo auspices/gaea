@@ -110,6 +110,10 @@ export const CollectionPage: React.FC<CollectionPageProps> = ({ id }) => {
             </Button>
 
             <Dropdown flex="1" label={collection.title} zIndex={Z.DROPDOWN}>
+              <PaneOption disabled>
+                last updated {collection.updatedAt}
+              </PaneOption>
+
               <PaneOption
                 as={Link}
                 to={hrefs.collectionSettings(collection.slug)}
@@ -141,18 +145,6 @@ export const CollectionPage: React.FC<CollectionPageProps> = ({ id }) => {
                   id={collection.id}
                 />
               )}
-            </Dropdown>
-
-            <Dropdown
-              label={
-                <>
-                  &nbsp;
-                  <Ellipsis />
-                </>
-              }
-              zIndex={Z.DROPDOWN}
-            >
-              <PaneOption>last updated {collection.updatedAt}</PaneOption>
 
               {collection.within.length > 0 ? (
                 <Flyout
