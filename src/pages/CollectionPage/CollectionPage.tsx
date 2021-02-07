@@ -167,6 +167,7 @@ export const CollectionPage: React.FC<CollectionPageProps> = ({ id }) => {
                     </Box>
                   }
                 >
+                  {/* TODO: Move this into an async component that only fetches when needed */}
                   {collection.within.map(({ id, title, slug }) => {
                     return (
                       <PaneOption
