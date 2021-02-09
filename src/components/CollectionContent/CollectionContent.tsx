@@ -16,6 +16,8 @@ import { CollectionContentFragment } from '../../generated/types/CollectionConte
 import { Z } from '../../util/zIndexes'
 import { useHistory } from 'react-router-dom'
 
+export const MAX_WIDTH = 310
+
 export const COLLECTION_CONTENT_FRAGMENT = gql`
   fragment CollectionContentFragment on Content {
     id
@@ -104,6 +106,7 @@ export const CollectionContent: React.FC<CollectionContentProps> = ({
 
   return (
     <File
+      maxWidth={MAX_WIDTH}
       position="relative"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
