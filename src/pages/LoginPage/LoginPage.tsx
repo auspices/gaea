@@ -11,6 +11,7 @@ import {
   LoginPageMutationVariables,
 } from '../../generated/types/LoginPageMutation'
 import { parse } from 'qs'
+import { AUTOFOCUS } from '../../util/autoFocus'
 
 const LOGIN_PAGE_MUTATION = gql`
   mutation LoginPageMutation($username: String!, $password: String!) {
@@ -89,7 +90,7 @@ export const LoginPage: React.FC = () => {
             placeholder="username"
             onChange={handleChange}
             required
-            autoFocus
+            autoFocus={AUTOFOCUS}
             autoCorrect="off"
             autoCapitalize="none"
           />

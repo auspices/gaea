@@ -12,6 +12,7 @@ import {
   CreateCollectionMutationVariables,
 } from '../../generated/types/CreateCollectionMutation'
 import { Z } from '../../util/zIndexes'
+import { AUTOFOCUS } from '../../util/autoFocus'
 
 export const CREATE_COLLECTION_MUTATION = gql`
   mutation CreateCollectionMutation($title: String!) {
@@ -96,7 +97,7 @@ export const CreateCollection: React.FC<CreateCollectionProps> = ({
           onChange={handleChange}
           disabled={mode === Mode.Creating}
           required
-          autoFocus
+          autoFocus={AUTOFOCUS}
           autoComplete="off"
           title=""
           borderWidth={0}

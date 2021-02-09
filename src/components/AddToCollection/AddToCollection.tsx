@@ -14,6 +14,7 @@ import { FileDropzone } from '../FileDropzone'
 import { FileUploadButton } from '../FileUploadButton'
 import { useHistory } from 'react-router'
 import { AddToCollectionMutation } from '../../generated/types/AddToCollectionMutation'
+import { AUTOFOCUS } from '../../util/autoFocus'
 
 const ADD_TO_COLLECTION_MUTATION = gql`
   mutation AddToCollectionMutation($id: ID!, $value: String!) {
@@ -191,7 +192,7 @@ export const AddToCollection: React.FC<AddToCollectionProps> = ({
               }}
               disabled={mode === Mode.Adding}
               required
-              autoFocus
+              autoFocus={AUTOFOCUS}
               title=""
               autoComplete="off"
             />

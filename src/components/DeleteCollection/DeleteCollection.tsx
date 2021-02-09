@@ -6,6 +6,7 @@ import { Button, Cell, Input, Stack, useAlerts } from '@auspices/eos'
 import { useHrefs } from '../../hooks'
 import { errorMessage } from '../../util/errors'
 import { DeleteCollectionMutation } from '../../generated/types/DeleteCollectionMutation'
+import { AUTOFOCUS } from '../../util/autoFocus'
 
 export const DELETE_COLLECTION_MUTATION = gql`
   mutation DeleteCollectionMutation($id: ID!) {
@@ -108,7 +109,7 @@ export const DeleteCollection: React.FC<DeleteCollectionProps> = ({
               borderColor="danger"
               placeholder={`type “${confirmation.toLowerCase()}” to confirm`}
               onChange={handleChange}
-              autoFocus
+              autoFocus={AUTOFOCUS}
             />
 
             <Stack direction="horizontal">

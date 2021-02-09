@@ -10,6 +10,7 @@ import {
   RegisterPageMutation,
   RegisterPageMutationVariables,
 } from '../../generated/types/RegisterPageMutation'
+import { AUTOFOCUS } from '../../util/autoFocus'
 
 const REGISTER_PAGE_MUTATION = gql`
   mutation RegisterPageMutation(
@@ -109,7 +110,7 @@ export const RegisterPage: React.FC = () => {
             name="secret"
             onChange={handleChange}
             required
-            autoFocus
+            autoFocus={AUTOFOCUS}
             autoCorrect="off"
             autoCapitalize="none"
           />
