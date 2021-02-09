@@ -2,7 +2,14 @@ import React, { useCallback, useState } from 'react'
 import gql from 'graphql-tag'
 import { useHistory } from 'react-router-dom'
 import { useMutation } from '@apollo/client'
-import { Button, Cell, Input, Stack, useAlerts } from '@auspices/eos'
+import {
+  Button,
+  ButtonProps,
+  Cell,
+  Input,
+  Stack,
+  useAlerts,
+} from '@auspices/eos'
 import { useHrefs } from '../../hooks'
 import { errorMessage } from '../../util/errors'
 import { DeleteCollectionMutation } from '../../generated/types/DeleteCollectionMutation'
@@ -22,7 +29,7 @@ enum Mode {
   Deleting,
 }
 
-type DeleteCollectionProps = {
+type DeleteCollectionProps = ButtonProps & {
   id: string
   confirmation: string
 }

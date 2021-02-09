@@ -2,7 +2,16 @@ import React, { useCallback, useState } from 'react'
 import gql from 'graphql-tag'
 import { Link } from 'react-router-dom'
 import { useMutation, useQuery } from '@apollo/client'
-import { Button, Caret, Cell, Loading, Stack, useAlerts } from '@auspices/eos'
+import {
+  Button,
+  Caret,
+  Cell,
+  Field,
+  Loading,
+  Split,
+  Stack,
+  useAlerts,
+} from '@auspices/eos'
 import { Helmet } from 'react-helmet'
 import { useHrefs } from '../../hooks'
 import { DeleteCollection } from '../../components/DeleteCollection'
@@ -13,6 +22,7 @@ import {
   CollectionSettingsPageQuery,
   CollectionSettingsPageQueryVariables,
 } from '../../generated/types/CollectionSettingsPageQuery'
+import { BottomNav } from '../../components/BottomNav'
 
 export const UPDATE_COLLECTION_SETTINGS_MUTATION = gql`
   mutation UpadateCollectionSettingsMutation($id: ID!, $title: String) {
@@ -158,19 +168,28 @@ export const CollectionSettingsPage: React.FC<CollectionSettingsPageProps> = ({
             onChange={handleChange}
           />
 
-          <Button type="submit" disabled={mode !== Mode.Dirty}>
-            {
+          <Split>
+            <></>
+            <Button width="100%" type="submit" disabled={mode !== Mode.Dirty}>
               {
-                [Mode.Resting]: 'save',
-                [Mode.Dirty]: 'save',
-                [Mode.Saving]: 'saving',
-              }[mode]
-            }
-          </Button>
+                {
+                  [Mode.Resting]: 'save',
+                  [Mode.Dirty]: 'save',
+                  [Mode.Saving]: 'saving',
+                }[mode]
+              }
+            </Button>
+          </Split>
         </Stack>
-
-        <DeleteCollection id={id} confirmation={collection.title} />
       </Stack>
+
+      <BottomNav>
+        <DeleteCollection
+          width="100%"
+          id={id}
+          confirmation={collection.title}
+        />
+      </BottomNav>
     </>
   )
 }
