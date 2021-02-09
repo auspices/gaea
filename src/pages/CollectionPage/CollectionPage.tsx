@@ -7,10 +7,12 @@ import {
   Box,
   Button,
   Caret,
+  Divider,
   Dropdown,
   Ellipsis,
   Flyout,
   Loading,
+  PaneHeader,
   PaneOption,
   Stack,
 } from '@auspices/eos'
@@ -110,9 +112,7 @@ export const CollectionPage: React.FC<CollectionPageProps> = ({ id }) => {
             </Button>
 
             <Dropdown flex="1" label={collection.title} zIndex={Z.DROPDOWN}>
-              <PaneOption disabled>
-                last updated {collection.updatedAt}
-              </PaneOption>
+              <PaneHeader>last updated {collection.updatedAt}</PaneHeader>
 
               <PaneOption
                 as={Link}
@@ -121,6 +121,8 @@ export const CollectionPage: React.FC<CollectionPageProps> = ({ id }) => {
                 settings
               </PaneOption>
 
+              <Divider />
+
               {collection.key ? (
                 <>
                   <PaneOption
@@ -128,8 +130,6 @@ export const CollectionPage: React.FC<CollectionPageProps> = ({ id }) => {
                     as="a"
                     href={hrefs.data(collection.key)}
                     target="_blank"
-                    borderTop="1px solid"
-                    borderColor="hint"
                   >
                     data
                   </PaneOption>
@@ -139,17 +139,13 @@ export const CollectionPage: React.FC<CollectionPageProps> = ({ id }) => {
                   <PublishCollection id={collection.id} regenerate />
                 </>
               ) : (
-                <PublishCollection
-                  borderTop="1px solid"
-                  borderColor="hint"
-                  id={collection.id}
-                />
+                <PublishCollection id={collection.id} />
               )}
+
+              <Divider />
 
               {collection.within.length > 0 ? (
                 <Flyout
-                  borderTop="1px solid"
-                  borderColor="hint"
                   label={
                     <Box as="span">
                       backlinks{' '}
@@ -173,7 +169,7 @@ export const CollectionPage: React.FC<CollectionPageProps> = ({ id }) => {
                   })}
                 </Flyout>
               ) : (
-                <PaneOption disabled>no backlinks</PaneOption>
+                <PaneHeader>no backlinks</PaneHeader>
               )}
             </Dropdown>
           </Stack>

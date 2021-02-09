@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react'
 import gql from 'graphql-tag'
 import { Link, useHistory } from 'react-router-dom'
-import { Dropdown, Loading, PaneOption, Stack } from '@auspices/eos'
+import { Divider, Dropdown, Loading, PaneOption, Stack } from '@auspices/eos'
 import { useApolloClient, useQuery } from '@apollo/client'
 import { useDebounce } from 'use-debounce'
 import { Helmet } from 'react-helmet'
@@ -95,13 +95,9 @@ export const CollectionsPage: React.FC<CollectionsPageProps> = () => {
               capture
             </PaneOption>
 
-            <PaneOption
-              borderTop="1px solid"
-              borderColor="hint"
-              onClick={handleLogout}
-            >
-              logout
-            </PaneOption>
+            <Divider />
+
+            <PaneOption onClick={handleLogout}>logout</PaneOption>
           </Dropdown>
 
           <CreateCollection onChange={setQuery} />

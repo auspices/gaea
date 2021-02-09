@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import styled from 'styled-components'
 import {
   Box,
@@ -38,7 +38,7 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({
 }) => {
   const { mode, setMode, Mode } = useActive()
 
-  const handleMouseDown = useCallback(
+  const handleOpen = useCallback(
     (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       event.preventDefault()
       event.stopPropagation()
@@ -60,9 +60,32 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({
     onClose: handleClose,
   })
 
+  const handleKeydown = useCallback(
+    ({ key }: KeyboardEvent) => {
+      switch (key) {
+        case 'Escape':
+          handleClose()
+          break
+        default:
+          break
+      }
+    },
+    [handleClose]
+  )
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeydown)
+    return () => window.removeEventListener('keydown', handleKeydown)
+  }, [handleKeydown])
+
   return (
     <Box zIndex={Z.DROPDOWN} {...rest}>
-      <ContextMenuToggle ref={anchorRef} onMouseDown={handleMouseDown}>
+      <ContextMenuToggle
+        ref={anchorRef}
+        onMouseDown={handleOpen}
+        onClick={handleOpen}
+        disabled={open}
+      >
         <Ellipsis />
       </ContextMenuToggle>
 

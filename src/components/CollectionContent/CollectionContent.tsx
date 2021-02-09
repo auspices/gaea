@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import gql from 'graphql-tag'
-import { Box, File } from '@auspices/eos'
+import { Box, Divider, File } from '@auspices/eos'
 import { ContextMenu } from '../ContextMenu'
 import { RemoveFromCollection } from '../RemoveFromCollection'
 import {
@@ -132,11 +132,11 @@ export const CollectionContent: React.FC<CollectionContentProps> = ({
               action={ReorderAction.MOVE_TO_BOTTOM}
             />
 
+            <Divider />
+
             <RepositionCollectionContent
               contentId={content.id}
               action={ReorderAction.MOVE_DOWN}
-              borderTop="1px solid"
-              borderColor="hint"
             />
 
             <RepositionCollectionContent
@@ -144,11 +144,11 @@ export const CollectionContent: React.FC<CollectionContentProps> = ({
               action={ReorderAction.MOVE_UP}
             />
 
+            <Divider />
+
             <RemoveFromCollection
               collectionId={collectionId}
               contentId={content.id}
-              borderTop="1px solid"
-              borderColor="hint"
             >
               remove {content.entity.__typename.toLowerCase()}
             </RemoveFromCollection>
