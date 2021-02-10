@@ -66,10 +66,10 @@
   dependencies:
     "@apollographql/graphql-language-service-types" "^2.0.0"
 
-"@auspices/eos@2.21.2":
-  version "2.21.2"
-  resolved "https://registry.yarnpkg.com/@auspices/eos/-/eos-2.21.2.tgz#66dc45c2b45411e3e22d76b4484dd6cd6b106675"
-  integrity sha512-lA1IJO+E1ksCD5P3WXZzseb6qnAi9CzYNLFD5vvMwgJTXyvrs78C+LjsUuwVNeb1a85E/wTD0AWhNTZDr9YVeA==
+"@auspices/eos@2.21.3":
+  version "2.21.3"
+  resolved "https://registry.yarnpkg.com/@auspices/eos/-/eos-2.21.3.tgz#d31bdb2a148bb702c74e5f64647cd75b5ede917d"
+  integrity sha512-U7Ual0ZP7JaL7RUwrBYdWsaQQRY4bRyLSBZVW3Th/D6wTkMV/Ut+Zer8XWLgsvucIXL9m1bCqnRt4AzLAfa69g==
   dependencies:
     "@popperjs/core" "^2.6.0"
     "@seznam/compose-react-refs" "^1.0.5"
