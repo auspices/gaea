@@ -23,24 +23,22 @@ export const LocusMenu: React.FC<LocusMenuProps> = ({
   const [query, setQuery] = useState('')
   const [debouncedQuery] = useDebounce(query, 150)
 
-  const topSearchResult = options.find((option) => option.kind === Kind.SEARCH)
-  const remainingOptions = options.filter(
-    (option) => option.key !== topSearchResult?.key
+  const actions = options.filter((option) => option.kind === Kind.ACTION)
+  const topResult = options.find((option) => option.kind === Kind.SEARCH)
+  const results = options.filter(
+    (option) => option.kind !== Kind.ACTION && option.label !== topResult?.label
   )
 
   const fuse = useMemo(() => {
-    return new Fuse(remainingOptions, {
+    return new Fuse(actions, {
       keys: ['key'],
       isCaseSensitive: false,
       includeScore: true,
     })
-  }, [remainingOptions])
+  }, [actions])
 
-  const filteredOptions = useMemo(() => {
-    return fuse.search(query).map(({ item, ...rest }) => {
-      console.log(item.key, rest.score)
-      return item
-    })
+  const filteredActions = useMemo(() => {
+    return fuse.search(query).map(({ item }) => item)
   }, [fuse, query])
 
   useEffect(() => onChange && onChange(query), [query, onChange])
@@ -56,7 +54,6 @@ export const LocusMenu: React.FC<LocusMenuProps> = ({
     ref.current.focus()
   }, [])
 
-  console.log({ filteredOptions })
   return (
     <Stack width={['75vw', '75vw', '50vw']} bg="background" {...rest}>
       <ClearableInput
@@ -68,8 +65,8 @@ export const LocusMenu: React.FC<LocusMenuProps> = ({
       {options.length > 0 && (
         <LocusOptions
           options={
-            query !== '' && filteredOptions.length
-              ? [topSearchResult!, ...filteredOptions].filter(Boolean)
+            query !== ''
+              ? [topResult!, ...filteredActions, ...results].filter(Boolean)
               : options
           }
           onEnter={onEnter}
