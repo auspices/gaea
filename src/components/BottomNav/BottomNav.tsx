@@ -35,6 +35,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({ children, ...rest }) => {
         opacity={0}
         color="tertiary"
         borderColor="tertiary"
+        marginBottom="env(safe-area-inset-bottom)"
         zIndex={-1}
         height={placeholderHeight}
       >
