@@ -1,7 +1,7 @@
 import React from 'react'
 import gql from 'graphql-tag'
 import { Link } from 'react-router-dom'
-import { Dropdown, PaneOption, Truncate } from '@auspices/eos'
+import { Button, Caret, Dropdown, PaneOption, Truncate } from '@auspices/eos'
 import { Z } from '../../../../util/zIndexes'
 import { useHrefs } from '../../../../hooks'
 import { ContentEntityHeaderCollectionFragment } from '../../../../generated/types/ContentEntityHeaderCollectionFragment'
@@ -25,7 +25,12 @@ export const ContentEntityHeaderCollection: React.FC<ContentEntityHeaderCollecti
   const hrefs = useHrefs()
   return (
     <Dropdown
-      label={<Truncate title={collection.name}>{collection.name}</Truncate>}
+      label={({ open, ...rest }) => (
+        <Button width="100%" {...rest}>
+          <Truncate title={collection.name}>{collection.name}</Truncate>
+          <Caret ml={3} direction={open ? 'up' : 'down'} />
+        </Button>
+      )}
       zIndex={Z.DROPDOWN}
       flex="1"
       {...rest}

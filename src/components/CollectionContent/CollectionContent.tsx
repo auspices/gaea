@@ -76,9 +76,6 @@ export const CollectionContent: React.FC<CollectionContentProps> = ({
     timer.current = setTimeout(() => setMode(Mode.Resting), 100)
   }, [mode])
 
-  const handleOpen = () => setMode(Mode.Open)
-  const handleClose = () => setMode(Mode.Resting)
-
   const handleClick = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
@@ -121,7 +118,7 @@ export const CollectionContent: React.FC<CollectionContentProps> = ({
     >
       {mode !== Mode.Resting && (
         <Box position="absolute" top={3} right={3} zIndex={Z.DROPDOWN}>
-          <ContextMenu onOpen={handleOpen} onClose={handleClose}>
+          <ContextMenu>
             <RepositionCollectionContent
               contentId={content.id}
               action={ReorderAction.MOVE_TO_TOP}

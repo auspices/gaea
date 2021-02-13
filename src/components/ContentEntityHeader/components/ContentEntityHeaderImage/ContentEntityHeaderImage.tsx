@@ -1,6 +1,6 @@
 import React from 'react'
 import gql from 'graphql-tag'
-import { Dropdown, PaneOption, Truncate } from '@auspices/eos'
+import { Button, Caret, Dropdown, PaneOption, Truncate } from '@auspices/eos'
 import { ContentEntityHeaderImageFragment } from '../../../../generated/types/ContentEntityHeaderImageFragment'
 import { Z } from '../../../../util/zIndexes'
 
@@ -24,7 +24,12 @@ export const ContentEntityHeaderImage: React.FC<ContentEntityHeaderImageProps> =
 }) => {
   return (
     <Dropdown
-      label={<Truncate title={image.name}>{image.name}</Truncate>}
+      label={({ open, ...rest }) => (
+        <Button width="100%" {...rest}>
+          <Truncate title={image.name}>{image.name}</Truncate>
+          <Caret ml={3} direction={open ? 'up' : 'down'} />
+        </Button>
+      )}
       zIndex={Z.DROPDOWN}
       flex="1"
       {...rest}
