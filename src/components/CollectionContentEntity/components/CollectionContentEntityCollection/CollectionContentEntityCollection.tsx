@@ -58,7 +58,7 @@ export const CollectionContentEntityCollection: React.FC<CollectionContentEntity
     <Container
       ref={ref}
       border="1px solid"
-      borderColor="primary"
+      borderColor="border"
       borderRadius={4}
       color="primary"
       height="100%"
