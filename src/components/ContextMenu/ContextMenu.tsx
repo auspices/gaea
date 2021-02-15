@@ -23,7 +23,7 @@ export const Toggle = styled(PaneOption).attrs({
 `
 
 type ContextMenuProps = BoxProps & {
-  children: React.ReactElement<any> | React.ReactElement<any>[]
+  children: React.ReactNode
   onOpen?(): void
   onClose?(): void
 }

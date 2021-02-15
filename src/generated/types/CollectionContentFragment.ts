@@ -66,5 +66,6 @@ export type CollectionContentFragment_entity = CollectionContentFragment_entity_
 export interface CollectionContentFragment {
   __typename: "Content";
   id: number;
+  position: number;
   entity: CollectionContentFragment_entity;
 }

@@ -78,6 +78,7 @@ export type CollectionPageQuery_me_collection_contents_entity = CollectionPageQu
 export interface CollectionPageQuery_me_collection_contents {
   __typename: "Content";
   id: number;
+  position: number;
   entity: CollectionPageQuery_me_collection_contents_entity;
 }
 

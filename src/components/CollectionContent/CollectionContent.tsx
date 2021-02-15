@@ -13,14 +13,25 @@ import {
 } from '../CollectionContentEntity'
 import { useHrefs } from '../../hooks'
 import { CollectionContentFragment } from '../../generated/types/CollectionContentFragment'
+import { CollectionContentCollectionFragment } from '../../generated/types/CollectionContentCollectionFragment'
 import { Z } from '../../util/zIndexes'
 import { useHistory } from 'react-router-dom'
 
 export const MAX_WIDTH = 310
 
+export const COLLECTION_CONTENT_COLLECTION_FRAGMENT = gql`
+  fragment CollectionContentCollectionFragment on Collection {
+    id
+    counts {
+      contents
+    }
+  }
+`
+
 export const COLLECTION_CONTENT_FRAGMENT = gql`
   fragment CollectionContentFragment on Content {
     id
+    position
     entity {
       ... on Image {
         label: toString(length: 35, from: CENTER)
@@ -49,13 +60,13 @@ enum Mode {
 }
 
 type CollectionContentProps = {
+  collection: CollectionContentCollectionFragment
   content: CollectionContentFragment
-  collectionId: number
 }
 
 export const CollectionContent: React.FC<CollectionContentProps> = ({
   content,
-  collectionId,
+  collection,
   ...rest
 }) => {
   const [mode, setMode] = useState(Mode.Resting)
@@ -119,32 +130,40 @@ export const CollectionContent: React.FC<CollectionContentProps> = ({
       {mode !== Mode.Resting && (
         <Box position="absolute" top={3} right={3} zIndex={Z.DROPDOWN}>
           <ContextMenu>
-            <RepositionCollectionContent
-              contentId={content.id}
-              action={ReorderAction.MOVE_TO_TOP}
-            />
+            {content.position !== 0 && (
+              <RepositionCollectionContent
+                contentId={content.id}
+                action={ReorderAction.MOVE_TO_TOP}
+              />
+            )}
 
-            <RepositionCollectionContent
-              contentId={content.id}
-              action={ReorderAction.MOVE_TO_BOTTOM}
-            />
+            {content.position !== collection.counts.contents - 1 && (
+              <RepositionCollectionContent
+                contentId={content.id}
+                action={ReorderAction.MOVE_TO_BOTTOM}
+              />
+            )}
 
             <Divider />
 
-            <RepositionCollectionContent
-              contentId={content.id}
-              action={ReorderAction.MOVE_DOWN}
-            />
+            {content.position !== 0 && (
+              <RepositionCollectionContent
+                contentId={content.id}
+                action={ReorderAction.MOVE_UP}
+              />
+            )}
 
-            <RepositionCollectionContent
-              contentId={content.id}
-              action={ReorderAction.MOVE_UP}
-            />
+            {content.position !== collection.counts.contents - 1 && (
+              <RepositionCollectionContent
+                contentId={content.id}
+                action={ReorderAction.MOVE_DOWN}
+              />
+            )}
 
             <Divider />
 
             <RemoveFromCollection
-              collectionId={collectionId}
+              collectionId={collection.id}
               contentId={content.id}
             >
               remove {content.entity.__typename.toLowerCase()}
