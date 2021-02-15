@@ -197,13 +197,13 @@ export const CollectionPreview: React.FC<CollectionPreviewProps> = React.memo(
                 <Box
                   key={entity.id}
                   border="1px solid"
-                  borderColor="primary"
+                  borderColor="border"
                   borderRadius={2}
                   width="100%"
                   height="100%"
                   p={2}
                 >
-                  <Line color="primary" />
+                  <Line color="border" />
                 </Box>
               )
             default:

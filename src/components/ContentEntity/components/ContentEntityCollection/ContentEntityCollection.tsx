@@ -44,7 +44,7 @@ export const ContentEntityCollection: React.FC<ContentEntityCollectionProps> = (
       my={4}
       borderRadius={4}
       border="1px solid"
-      borderColor="primary"
+      borderColor="border"
       color="primary"
       {...rest}
     >
