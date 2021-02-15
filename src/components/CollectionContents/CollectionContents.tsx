@@ -2,6 +2,7 @@ import React from 'react'
 import gql from 'graphql-tag'
 import { Grid, GridProps, MultiSelect } from '@auspices/eos'
 import {
+  COLLECTION_CONTENT_COLLECTION_FRAGMENT,
   COLLECTION_CONTENT_FRAGMENT,
   CollectionContent,
 } from '../../components/CollectionContent'
@@ -10,12 +11,14 @@ import { CollectionContentsFragment } from '../../generated/types/CollectionCont
 export const COLLECTION_CONTENTS_FRAGMENT = gql`
   fragment CollectionContentsFragment on Collection {
     id
+    ...CollectionContentCollectionFragment
     contents(page: $page, per: $per) {
       id
       ...CollectionContentFragment
     }
   }
   ${COLLECTION_CONTENT_FRAGMENT}
+  ${COLLECTION_CONTENT_COLLECTION_FRAGMENT}
 `
 
 export type CollectionContentsProps = GridProps & {
@@ -32,7 +35,7 @@ export const CollectionContents: React.FC<CollectionContentsProps> = ({
         {collection.contents.map((content) => (
           <CollectionContent
             key={content.id}
-            collectionId={collection.id}
+            collection={collection}
             content={content}
           />
         ))}

@@ -7,6 +7,11 @@
 // GraphQL fragment: CollectionContentsFragment
 // ====================================================
 
+export interface CollectionContentsFragment_counts {
+  __typename: "CollectionCounts";
+  contents: number;
+}
+
 export interface CollectionContentsFragment_contents_entity_Image_resized_urls {
   __typename: "RetinaImage";
   _1x: string;
@@ -66,11 +71,13 @@ export type CollectionContentsFragment_contents_entity = CollectionContentsFragm
 export interface CollectionContentsFragment_contents {
   __typename: "Content";
   id: number;
+  position: number;
   entity: CollectionContentsFragment_contents_entity;
 }
 
 export interface CollectionContentsFragment {
   __typename: "Collection";
   id: number;
+  counts: CollectionContentsFragment_counts;
   contents: CollectionContentsFragment_contents[];
 }
