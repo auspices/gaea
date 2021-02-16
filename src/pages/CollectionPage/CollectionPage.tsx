@@ -30,7 +30,10 @@ import {
   COLLECTION_CONTENTS_GRID_FRAGMENT,
   CollectionContentsGrid,
 } from '../../components/CollectionContentsGrid'
-import { CollectionContentsList } from '../../components/CollectionContentsList'
+import {
+  COLLECTION_CONTENTS_LIST_FRAGMENT,
+  CollectionContentsList,
+} from '../../components/CollectionContentsList'
 import {
   COLLECTION_SETTINGS_FRAGMENT,
   CollectionSettings,
@@ -63,11 +66,13 @@ export const COLLECTION_PAGE_QUERY = gql`
           title
         }
         ...CollectionContentsGridFragment
+        ...CollectionContentsListFragment
         ...CollectionSettingsFragment
       }
     }
   }
   ${COLLECTION_CONTENTS_GRID_FRAGMENT}
+  ${COLLECTION_CONTENTS_LIST_FRAGMENT}
   ${COLLECTION_SETTINGS_FRAGMENT}
 `
 
@@ -189,7 +194,7 @@ export const CollectionPage: React.FC<CollectionPageProps> = ({ id }) => {
           {
             {
               grid: <CollectionContentsGrid my={4} collection={collection} />,
-              list: <CollectionContentsList my={4} />,
+              list: <CollectionContentsList my={4} collection={collection} />,
             }[view]
           }
         </Box>
