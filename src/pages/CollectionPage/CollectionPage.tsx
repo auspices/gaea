@@ -175,10 +175,13 @@ export const CollectionPage: React.FC<CollectionPageProps> = ({ id }) => {
 
           <AddToCollection id={collection.id} />
         </Stack>
+
         <CollectionSettings collection={collection} />
+
         <Box flex="1">
           <CollectionContents my={4} collection={collection} />
         </Box>
+
         {collection.counts.contents > 0 && (
           <BottomNav>
             <Stack direction={['vertical', 'vertical', 'horizontal']}>
