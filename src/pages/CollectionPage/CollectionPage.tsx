@@ -15,7 +15,12 @@ import {
   PaneOption,
   Stack,
 } from '@auspices/eos'
-import { useHrefs, usePagination, useRefetch } from '../../hooks'
+import {
+  useHrefs,
+  usePagination,
+  useQueryString,
+  useRefetch,
+} from '../../hooks'
 import { AddToCollection } from '../../components/AddToCollection'
 import { Pagination } from '../../components/Pagination'
 import { BottomNav } from '../../components/BottomNav'
@@ -25,6 +30,7 @@ import {
   COLLECTION_CONTENTS_GRID_FRAGMENT,
   CollectionContentsGrid,
 } from '../../components/CollectionContentsGrid'
+import { CollectionContentsList } from '../../components/CollectionContentsList'
 import {
   COLLECTION_SETTINGS_FRAGMENT,
   CollectionSettings,
@@ -70,6 +76,7 @@ type CollectionPageProps = {
 }
 
 export const CollectionPage: React.FC<CollectionPageProps> = ({ id }) => {
+  const { view = 'grid' } = useQueryString<{ view: 'list' | 'grid' }>()
   const { page, per } = usePagination()
 
   const hrefs = useHrefs()
@@ -179,7 +186,12 @@ export const CollectionPage: React.FC<CollectionPageProps> = ({ id }) => {
         <CollectionSettings collection={collection} />
 
         <Box flex="1">
-          <CollectionContentsGrid my={4} collection={collection} />
+          {
+            {
+              grid: <CollectionContentsGrid my={4} collection={collection} />,
+              list: <CollectionContentsList my={4} />,
+            }[view]
+          }
         </Box>
 
         {collection.counts.contents > 0 && (
