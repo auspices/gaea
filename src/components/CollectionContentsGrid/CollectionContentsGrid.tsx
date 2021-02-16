@@ -5,11 +5,11 @@ import {
   COLLECTION_CONTENT_COLLECTION_FRAGMENT,
   COLLECTION_CONTENT_FRAGMENT,
   CollectionContent,
-} from '../../components/CollectionContent'
-import { CollectionContentsFragment } from '../../generated/types/CollectionContentsFragment'
+} from '../CollectionContent'
+import { CollectionContentsGridFragment } from '../../generated/types/CollectionContentsGridFragment'
 
-export const COLLECTION_CONTENTS_FRAGMENT = gql`
-  fragment CollectionContentsFragment on Collection {
+export const COLLECTION_CONTENTS_GRID_FRAGMENT = gql`
+  fragment CollectionContentsGridFragment on Collection {
     id
     ...CollectionContentCollectionFragment
     contents(page: $page, per: $per) {
@@ -21,11 +21,11 @@ export const COLLECTION_CONTENTS_FRAGMENT = gql`
   ${COLLECTION_CONTENT_COLLECTION_FRAGMENT}
 `
 
-export type CollectionContentsProps = GridProps & {
-  collection: CollectionContentsFragment
+export type CollectionContentsGridProps = GridProps & {
+  collection: CollectionContentsGridFragment
 }
 
-export const CollectionContents: React.FC<CollectionContentsProps> = ({
+export const CollectionContentsGrid: React.FC<CollectionContentsGridProps> = ({
   collection,
   ...rest
 }) => {

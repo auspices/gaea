@@ -22,9 +22,9 @@ import { BottomNav } from '../../components/BottomNav'
 import { PublishCollection } from '../../components/PublishCollection'
 import { UnpublishCollection } from '../../components/UnpublishCollection'
 import {
-  COLLECTION_CONTENTS_FRAGMENT,
-  CollectionContents,
-} from '../../components/CollectionContents'
+  COLLECTION_CONTENTS_GRID_FRAGMENT,
+  CollectionContentsGrid,
+} from '../../components/CollectionContentsGrid'
 import {
   COLLECTION_SETTINGS_FRAGMENT,
   CollectionSettings,
@@ -56,12 +56,12 @@ export const COLLECTION_PAGE_QUERY = gql`
           slug
           title
         }
-        ...CollectionContentsFragment
+        ...CollectionContentsGridFragment
         ...CollectionSettingsFragment
       }
     }
   }
-  ${COLLECTION_CONTENTS_FRAGMENT}
+  ${COLLECTION_CONTENTS_GRID_FRAGMENT}
   ${COLLECTION_SETTINGS_FRAGMENT}
 `
 
@@ -179,7 +179,7 @@ export const CollectionPage: React.FC<CollectionPageProps> = ({ id }) => {
         <CollectionSettings collection={collection} />
 
         <Box flex="1">
-          <CollectionContents my={4} collection={collection} />
+          <CollectionContentsGrid my={4} collection={collection} />
         </Box>
 
         {collection.counts.contents > 0 && (
