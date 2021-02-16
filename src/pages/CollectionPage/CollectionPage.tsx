@@ -9,7 +9,6 @@ import {
   Caret,
   Divider,
   Dropdown,
-  Ellipsis,
   Flyout,
   Loading,
   PaneHeader,

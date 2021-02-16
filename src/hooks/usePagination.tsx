@@ -1,7 +1,8 @@
 import React, { Dispatch, SetStateAction, useContext, useState } from 'react'
-import { parse, stringify } from 'qs'
+import { stringify } from 'qs'
 import { matchPath, useLocation } from 'react-router'
 import { paginate, THEME } from '@auspices/eos'
+import { useQueryString } from './useQueryString'
 
 const PaginationContext = React.createContext<{
   total: number
@@ -47,14 +48,14 @@ const DEFAULT_GRID_PER = 12
 const DEFAULT_LIST_PER = 24
 
 export const usePagination = () => {
-  const { pathname, search } = useLocation()
+  const { pathname } = useLocation()
   const { total, setTotal } = useContext(PaginationContext)
 
   const mode = matchPath(pathname, { path: '/xs', exact: true })
     ? 'list'
     : 'grid'
 
-  let { page = '1', per = '' } = parse(search.slice(1)) as Pagination
+  let { page = '1', per = '' } = useQueryString<Pagination>()
 
   if (per === '' && mode === 'grid') {
     const key = WIDTHS.find((currentWidth, i) => {
