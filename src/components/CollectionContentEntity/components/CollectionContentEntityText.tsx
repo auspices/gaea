@@ -1,8 +1,9 @@
 import React from 'react'
 import gql from 'graphql-tag'
-import styled, { css } from 'styled-components'
-import { Box, BoxProps, color } from '@auspices/eos'
+import styled from 'styled-components'
+import { Box, BoxProps } from '@auspices/eos'
 import { CollectionContentEntityTextFragment } from '../../../generated/types/CollectionContentEntityTextFragment'
+import { FadeOut } from '../../FadeOut'
 
 export const COLLECTION_CONTENT_ENTITY_TEXT_FRAGMENT = gql`
   fragment CollectionContentEntityTextFragment on Text {
@@ -10,14 +11,6 @@ export const COLLECTION_CONTENT_ENTITY_TEXT_FRAGMENT = gql`
     body: toString(length: 800)
   }
 `
-
-const FadeOut = styled(Box)`
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  mask-image: linear-gradient(to top, transparent 0%, black 33%);
-`
-
 const Container = styled(Box).attrs({
   fontSize: 0,
   border: '1px solid',

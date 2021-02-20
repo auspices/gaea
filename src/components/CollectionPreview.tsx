@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/client'
 import {
   AspectRatioBox,
   Box,
   BoxProps,
-  color,
   EmptyFrame,
   Grid,
   GridProps,
@@ -16,32 +15,12 @@ import {
   CollectionPreviewQuery,
   CollectionPreviewQueryVariables,
 } from '../generated/types/CollectionPreviewQuery'
+import { FadeOut } from './FadeOut'
 
-const MiniGrid = styled(Grid)<GridProps & { ready: boolean }>`
+const MiniGrid = styled(Grid)`
   position: relative;
   overflow: hidden;
-  opacity: 0;
   transition: opacity 1s;
-
-  ${({ ready }) =>
-    ready &&
-    css`
-      opacity: 1;
-    `}
-
-  &:after {
-    content: '';
-    display: block;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    height: 75%;
-    background: linear-gradient(
-      ${color('background', 0.001)} 0%,
-      ${color('background')} 100%
-    );
-  }
 `
 
 const Thumb = styled(AspectRatioBox)`
@@ -150,67 +129,74 @@ export const CollectionPreview: React.FC<CollectionPreviewProps> = React.memo(
     } = data
 
     return (
-      <MiniGrid ready={ready} cellSize={cellSizePx} cellGap={cellGap} {...rest}>
-        {collection.contents.map(({ entity }) => {
-          switch (entity.__typename) {
-            case 'Image':
-              return (
-                <Thumb
-                  key={entity.id}
-                  aspectWidth={entity.width}
-                  aspectHeight={entity.height}
-                  maxWidth={parseInt(cellSizePx, 10)}
-                  maxHeight={parseInt(cellSizePx, 10)}
-                  backgroundColor="hint"
-                >
-                  <Image
-                    srcs={[entity.placeholder.urls.src]}
+      <FadeOut>
+        <MiniGrid
+          cellSize={cellSizePx}
+          cellGap={cellGap}
+          opacity={ready ? 1 : 0}
+          {...rest}
+        >
+          {collection.contents.map(({ entity }) => {
+            switch (entity.__typename) {
+              case 'Image':
+                return (
+                  <Thumb
+                    key={entity.id}
+                    aspectWidth={entity.width}
+                    aspectHeight={entity.height}
+                    maxWidth={parseInt(cellSizePx, 10)}
+                    maxHeight={parseInt(cellSizePx, 10)}
+                    backgroundColor="hint"
+                  >
+                    <Image
+                      srcs={[entity.placeholder.urls.src]}
+                      width="100%"
+                      height="100%"
+                    />
+                  </Thumb>
+                )
+              case 'Text':
+                return (
+                  <Text
+                    key={entity.id}
                     width="100%"
                     height="100%"
+                    length={entity.length}
+                  >
+                    {entity.length}
+                  </Text>
+                )
+              case 'Link':
+                return (
+                  <EmptyFrame
+                    key={entity.id}
+                    width="100%"
+                    height="100%"
+                    color="external"
+                    strokeWidth={0.75}
+                    outline
                   />
-                </Thumb>
-              )
-            case 'Text':
-              return (
-                <Text
-                  key={entity.id}
-                  width="100%"
-                  height="100%"
-                  length={entity.length}
-                >
-                  {entity.length}
-                </Text>
-              )
-            case 'Link':
-              return (
-                <EmptyFrame
-                  key={entity.id}
-                  width="100%"
-                  height="100%"
-                  color="external"
-                  strokeWidth={0.75}
-                  outline
-                />
-              )
-            case 'Collection':
-              return (
-                <Box
-                  key={entity.id}
-                  border="1px solid"
-                  borderColor="border"
-                  borderRadius={2}
-                  width="100%"
-                  height="100%"
-                  p={2}
-                >
-                  <Line color="border" />
-                </Box>
-              )
-            default:
-              return null
-          }
-        })}
-      </MiniGrid>
+                )
+              case 'Collection':
+                return (
+                  <Box
+                    key={entity.id}
+                    border="1px solid"
+                    borderColor="border"
+                    borderRadius={2}
+                    width="100%"
+                    height="100%"
+                    p={2}
+                  >
+                    <Line color="border" />
+                  </Box>
+                )
+              default:
+                return null
+            }
+          })}
+        </MiniGrid>
+      </FadeOut>
     )
   }
 )
