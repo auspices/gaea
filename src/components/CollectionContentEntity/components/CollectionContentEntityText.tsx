@@ -11,6 +11,13 @@ export const COLLECTION_CONTENT_ENTITY_TEXT_FRAGMENT = gql`
   }
 `
 
+const FadeOut = styled(Box)`
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  mask-image: linear-gradient(to top, transparent 0%, black 33%);
+`
+
 const Container = styled(Box).attrs({
   fontSize: 0,
   border: '1px solid',
@@ -19,36 +26,14 @@ const Container = styled(Box).attrs({
   color: 'primary',
   py: 2,
   px: 3,
-})<{ truncate: boolean }>`
+})`
   position: relative;
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
-  overflow: hidden;
   width: 100%;
   height: 100%;
   white-space: pre-wrap;
-
-  ${({ truncate }) => {
-    return (
-      truncate &&
-      css`
-        &:after {
-          content: '';
-          display: block;
-          position: absolute;
-          right: 0;
-          bottom: 0;
-          left: 0;
-          height: 4rem;
-          background: linear-gradient(
-            ${color('background', 0.001)} 0%,
-            ${color('background')} 100%
-          );
-        }
-      `
-    )
-  }}
 `
 
 type CollectionContentEntityTextProps = BoxProps & {
@@ -58,5 +43,9 @@ type CollectionContentEntityTextProps = BoxProps & {
 export const CollectionContentEntityText: React.FC<CollectionContentEntityTextProps> = ({
   text,
 }) => {
-  return <Container truncate={text.body.length > 500}>{text.body}</Container>
+  return (
+    <Container>
+      {true ? <FadeOut>{text.body}</FadeOut> : <>{text.body}</>}
+    </Container>
+  )
 }
