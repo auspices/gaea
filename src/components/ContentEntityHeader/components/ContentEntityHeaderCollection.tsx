@@ -2,9 +2,9 @@ import React from 'react'
 import gql from 'graphql-tag'
 import { Link } from 'react-router-dom'
 import { Button, Caret, Dropdown, PaneOption, Truncate } from '@auspices/eos'
-import { Z } from '../../../../util/zIndexes'
-import { useHrefs } from '../../../../hooks'
-import { ContentEntityHeaderCollectionFragment } from '../../../../generated/types/ContentEntityHeaderCollectionFragment'
+import { Z } from '../../../util/zIndexes'
+import { useHrefs } from '../../../hooks'
+import { ContentEntityHeaderCollectionFragment } from '../../../generated/types/ContentEntityHeaderCollectionFragment'
 
 export const CONTENT_ENTITY_HEADER_COLLECTION_FRAGMENT = gql`
   fragment ContentEntityHeaderCollectionFragment on Collection {

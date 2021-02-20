@@ -3,8 +3,8 @@ import styled from 'styled-components'
 import gql from 'graphql-tag'
 import { Box, BoxProps } from '@auspices/eos'
 import { useInView } from 'react-intersection-observer'
-import { CollectionPreview } from '../../../CollectionPreview'
-import { CollectionContentEntityCollectionFragment } from '../../../../generated/types/CollectionContentEntityCollectionFragment'
+import { CollectionPreview } from '../../CollectionPreview'
+import { CollectionContentEntityCollectionFragment } from '../../../generated/types/CollectionContentEntityCollectionFragment'
 
 export const COLLECTION_CONTENT_ENTITY_COLLECTION_FRAGMENT = gql`
   fragment CollectionContentEntityCollectionFragment on Collection {

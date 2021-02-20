@@ -1,8 +1,8 @@
 import React from 'react'
 import gql from 'graphql-tag'
 import { Dropdown, PaneOption } from '@auspices/eos'
-import { ContentEntityHeaderTextFragment } from '../../../../generated/types/ContentEntityHeaderTextFragment'
-import { Z } from '../../../../util/zIndexes'
+import { ContentEntityHeaderTextFragment } from '../../../generated/types/ContentEntityHeaderTextFragment'
+import { Z } from '../../../util/zIndexes'
 
 export const CONTENT_ENTITY_HEADER_TEXT_FRAGMENT = gql`
   fragment ContentEntityHeaderTextFragment on Text {

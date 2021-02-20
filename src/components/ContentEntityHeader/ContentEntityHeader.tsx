@@ -31,11 +31,11 @@ export const CONTENT_ENTITY_HEADER_FRAGMENT = gql`
   ${CONTENT_ENTITY_HEADER_COLLECTION_FRAGMENT}
 `
 
-type ContentEntityHeader = {
+type ContentEntityHeaderProps = {
   entity: ContentEntityHeaderFragment
 }
 
-export const ContentEntityHeader: React.FC<ContentEntityHeader> = ({
+export const ContentEntityHeader: React.FC<ContentEntityHeaderProps> = ({
   entity,
   ...rest
 }) => {

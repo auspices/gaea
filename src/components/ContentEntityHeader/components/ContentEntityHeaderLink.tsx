@@ -1,8 +1,8 @@
 import React from 'react'
 import gql from 'graphql-tag'
 import { Dropdown, PaneOption } from '@auspices/eos'
-import { ContentEntityHeaderLinkFragment } from '../../../../generated/types/ContentEntityHeaderLinkFragment'
-import { Z } from '../../../../util/zIndexes'
+import { ContentEntityHeaderLinkFragment } from '../../../generated/types/ContentEntityHeaderLinkFragment'
+import { Z } from '../../../util/zIndexes'
 
 export const CONTENT_ENTITY_HEADER_LINK_FRAGMENT = gql`
   fragment ContentEntityHeaderLinkFragment on Link {

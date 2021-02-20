@@ -2,7 +2,7 @@ import React from 'react'
 import gql from 'graphql-tag'
 import styled, { css } from 'styled-components'
 import { Box, BoxProps, color } from '@auspices/eos'
-import { CollectionContentEntityTextFragment } from '../../../../generated/types/CollectionContentEntityTextFragment'
+import { CollectionContentEntityTextFragment } from '../../../generated/types/CollectionContentEntityTextFragment'
 
 export const COLLECTION_CONTENT_ENTITY_TEXT_FRAGMENT = gql`
   fragment CollectionContentEntityTextFragment on Text {

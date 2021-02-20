@@ -1,7 +1,7 @@
 import React from 'react'
 import gql from 'graphql-tag'
 import { Box, ResponsiveImage } from '@auspices/eos'
-import { ContentEntityImageFragment } from '../../../../generated/types/ContentEntityImageFragment'
+import { ContentEntityImageFragment } from '../../../generated/types/ContentEntityImageFragment'
 
 export const CONTENT_ENTITY_IMAGE_FRAGMENT = gql`
   fragment ContentEntityImageFragment on Image {

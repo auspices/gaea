@@ -3,9 +3,9 @@ import gql from 'graphql-tag'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { Box, BoxProps } from '@auspices/eos'
-import { CollectionPreview } from '../../../CollectionPreview'
-import { useHrefs } from '../../../../hooks'
-import { ContentEntityCollectionFragment } from '../../../../generated/types/ContentEntityCollectionFragment'
+import { CollectionPreview } from '../../CollectionPreview'
+import { useHrefs } from '../../../hooks'
+import { ContentEntityCollectionFragment } from '../../../generated/types/ContentEntityCollectionFragment'
 
 const Container = styled(Box)``
 

@@ -1,8 +1,8 @@
 import React from 'react'
 import gql from 'graphql-tag'
 import { Button, Caret, Dropdown, PaneOption, Truncate } from '@auspices/eos'
-import { ContentEntityHeaderImageFragment } from '../../../../generated/types/ContentEntityHeaderImageFragment'
-import { Z } from '../../../../util/zIndexes'
+import { ContentEntityHeaderImageFragment } from '../../../generated/types/ContentEntityHeaderImageFragment'
+import { Z } from '../../../util/zIndexes'
 
 export const CONTENT_ENTITY_HEADER_IMAGE_FRAGMENT = gql`
   fragment ContentEntityHeaderImageFragment on Image {

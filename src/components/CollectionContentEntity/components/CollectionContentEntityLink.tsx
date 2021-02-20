@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import gql from 'graphql-tag'
 import { Box, BoxProps } from '@auspices/eos'
-import { CollectionContentEntityLinkFragment } from '../../../../generated/types/CollectionContentEntityLinkFragment'
+import { CollectionContentEntityLinkFragment } from '../../../generated/types/CollectionContentEntityLinkFragment'
 
 export const COLLECTION_CONTENT_ENTITY_LINK_FRAGMENT = gql`
   fragment CollectionContentEntityLinkFragment on Link {
