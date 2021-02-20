@@ -38,8 +38,9 @@
     "gql:types": "apollo codegen:generate --target typescript --outputFlat src/generated/types",
     "gql:types:clean": "rm -rf src/generated/types",
     "gql:types:regenerate": "yarn gql:types:clean && yarn gql:types",
-    "start-prod": "REACT_APP_GRAPHQL_ENDPOINT=https://atlas.auspic.es/graphql react-scripts start",
-    "start": "react-scripts start",
+    "start:local": "REACT_APP_GRAPHQL_ENDPOINT=http://localhost:5000/graphql react-scripts start",
+    "start:prod": "REACT_APP_GRAPHQL_ENDPOINT=https://atlas.auspic.es/graphql react-scripts start",
+    "start": "yarn start:prod",
     "test": "react-scripts test",
     "unlink-all": "yalc remove --all && yarn --check-files"
   },
