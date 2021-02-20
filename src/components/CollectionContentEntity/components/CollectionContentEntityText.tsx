@@ -27,6 +27,7 @@ const Container = styled(Box).attrs({
   overflow: hidden;
   width: 100%;
   height: 100%;
+  white-space: pre-wrap;
 
   ${({ truncate }) => {
     return (
@@ -56,4 +57,6 @@ type CollectionContentEntityTextProps = BoxProps & {
 
 export const CollectionContentEntityText: React.FC<CollectionContentEntityTextProps> = ({
   text,
-}) => <Container truncate={text.body.length > 500}>{text.body}</Container>
+}) => {
+  return <Container truncate={text.body.length > 500}>{text.body}</Container>
+}
