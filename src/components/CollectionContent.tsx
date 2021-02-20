@@ -1,37 +1,33 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import gql from 'graphql-tag'
-import { Box, Divider, File } from '@auspices/eos'
-import { ContextMenu } from './ContextMenu'
-import { RemoveFromCollection } from './RemoveFromCollection'
-import {
-  ReorderAction,
-  RepositionCollectionContent,
-} from './RepositionCollectionContent'
+import { File } from '@auspices/eos'
 import {
   COLLECTION_CONTENT_ENTITY_FRAGMENT,
   CollectionContentEntity,
 } from './CollectionContentEntity'
 import { useHrefs } from '../hooks'
-import { CollectionContentFragment } from '../generated/types/CollectionContentFragment'
+import { CollectionContentContentFragment } from '../generated/types/CollectionContentContentFragment'
 import { CollectionContentCollectionFragment } from '../generated/types/CollectionContentCollectionFragment'
-import { Z } from '../util/zIndexes'
 import { useHistory } from 'react-router-dom'
+import {
+  COLLECTION_CONTENT_CONTEXT_MENU_COLLECTION_FRAGMENT,
+  COLLECTION_CONTENT_CONTEXT_MENU_CONTENT_FRAGMENT,
+  CollectionContentContextMenu,
+} from './CollectionContentContextMenu'
 
 export const MAX_WIDTH = 310
 
 export const COLLECTION_CONTENT_COLLECTION_FRAGMENT = gql`
   fragment CollectionContentCollectionFragment on Collection {
-    id
-    counts {
-      contents
-    }
+    ...CollectionContentContextMenuCollectionFragment
   }
+  ${COLLECTION_CONTENT_CONTEXT_MENU_COLLECTION_FRAGMENT}
 `
 
-export const COLLECTION_CONTENT_FRAGMENT = gql`
-  fragment CollectionContentFragment on Content {
+export const COLLECTION_CONTENT_CONTENT_FRAGMENT = gql`
+  fragment CollectionContentContentFragment on Content {
     id
-    position
+    ...CollectionContentContextMenuContentFragment
     entity {
       ... on Image {
         label: toString(length: 35, from: CENTER)
@@ -51,6 +47,7 @@ export const COLLECTION_CONTENT_FRAGMENT = gql`
     }
   }
   ${COLLECTION_CONTENT_ENTITY_FRAGMENT}
+  ${COLLECTION_CONTENT_CONTEXT_MENU_CONTENT_FRAGMENT}
 `
 
 enum Mode {
@@ -61,7 +58,7 @@ enum Mode {
 
 type CollectionContentProps = {
   collection: CollectionContentCollectionFragment
-  content: CollectionContentFragment
+  content: CollectionContentContentFragment
 }
 
 export const CollectionContent: React.FC<CollectionContentProps> = ({
@@ -128,48 +125,13 @@ export const CollectionContent: React.FC<CollectionContentProps> = ({
       {...rest}
     >
       {mode !== Mode.Resting && (
-        <Box position="absolute" top={3} right={3} zIndex={Z.DROPDOWN}>
-          <ContextMenu>
-            {content.position !== 0 && (
-              <RepositionCollectionContent
-                contentId={content.id}
-                action={ReorderAction.MOVE_TO_TOP}
-              />
-            )}
-
-            {content.position !== collection.counts.contents - 1 && (
-              <RepositionCollectionContent
-                contentId={content.id}
-                action={ReorderAction.MOVE_TO_BOTTOM}
-              />
-            )}
-
-            <Divider />
-
-            {content.position !== 0 && (
-              <RepositionCollectionContent
-                contentId={content.id}
-                action={ReorderAction.MOVE_UP}
-              />
-            )}
-
-            {content.position !== collection.counts.contents - 1 && (
-              <RepositionCollectionContent
-                contentId={content.id}
-                action={ReorderAction.MOVE_DOWN}
-              />
-            )}
-
-            <Divider />
-
-            <RemoveFromCollection
-              collectionId={collection.id}
-              contentId={content.id}
-            >
-              remove {content.entity.__typename.toLowerCase()}
-            </RemoveFromCollection>
-          </ContextMenu>
-        </Box>
+        <CollectionContentContextMenu
+          position="absolute"
+          top={3}
+          right={3}
+          collection={collection}
+          content={content}
+        />
       )}
 
       <CollectionContentEntity entity={content.entity} />

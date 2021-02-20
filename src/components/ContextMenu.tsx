@@ -8,7 +8,7 @@ import {
   PaneOption,
   paneShadowMixin,
 } from '@auspices/eos'
-import { Z } from '../../util/zIndexes'
+import { Z } from '../util/zIndexes'
 
 export const Toggle = styled(PaneOption).attrs({
   borderRadius: 4,
@@ -22,8 +22,7 @@ export const Toggle = styled(PaneOption).attrs({
   ${paneShadowMixin}
 `
 
-type ContextMenuProps = BoxProps & {
-  children: React.ReactNode
+export type ContextMenuProps = BoxProps & {
   onOpen?(): void
   onClose?(): void
 }
