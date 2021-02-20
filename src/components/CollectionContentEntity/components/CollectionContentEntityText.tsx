@@ -45,7 +45,11 @@ export const CollectionContentEntityText: React.FC<CollectionContentEntityTextPr
 }) => {
   return (
     <Container>
-      {true ? <FadeOut>{text.body}</FadeOut> : <>{text.body}</>}
+      {text.body.length > 500 ? (
+        <FadeOut>{text.body}</FadeOut>
+      ) : (
+        <>{text.body}</>
+      )}
     </Container>
   )
 }
