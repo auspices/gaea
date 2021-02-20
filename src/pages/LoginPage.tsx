@@ -4,14 +4,14 @@ import gql from 'graphql-tag'
 import { useMutation } from '@apollo/client'
 import { Helmet } from 'react-helmet'
 import { Box, Button, Input, Stack, useAlerts } from '@auspices/eos'
-import { useHrefs } from '../../hooks'
-import { errorMessage } from '../../util/errors'
+import { useHrefs } from '../hooks'
+import { errorMessage } from '../util/errors'
 import {
   LoginPageMutation,
   LoginPageMutationVariables,
-} from '../../generated/types/LoginPageMutation'
+} from '../generated/types/LoginPageMutation'
 import { parse } from 'qs'
-import { AUTOFOCUS } from '../../util/autoFocus'
+import { AUTOFOCUS } from '../util/autoFocus'
 
 const LOGIN_PAGE_MUTATION = gql`
   mutation LoginPageMutation($username: String!, $password: String!) {

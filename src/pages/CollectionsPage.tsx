@@ -5,20 +5,20 @@ import { Divider, Dropdown, Loading, PaneOption, Stack } from '@auspices/eos'
 import { useApolloClient, useQuery } from '@apollo/client'
 import { useDebounce } from 'use-debounce'
 import { Helmet } from 'react-helmet'
-import { useHrefs, usePagination } from '../../hooks'
-import { Pagination } from '../../components/Pagination'
-import { BottomNav } from '../../components/BottomNav'
-import { CreateCollection } from '../../components/CreateCollection'
+import { useHrefs, usePagination } from '../hooks'
+import { Pagination } from '../components/Pagination'
+import { BottomNav } from '../components/BottomNav'
+import { CreateCollection } from '../components/CreateCollection'
 import {
   COLLECTION_STUB_LIST_FRAGMENT,
   CollectionStubList,
-} from '../../components/CollectionStubList'
-import { FilteredCollectionStubList } from '../../components/FilteredCollectionStubList'
+} from '../components/CollectionStubList'
+import { FilteredCollectionStubList } from '../components/FilteredCollectionStubList'
 import {
   CollectionsPageQuery,
   CollectionsPageQueryVariables,
-} from '../../generated/types/CollectionsPageQuery'
-import { Z } from '../../util/zIndexes'
+} from '../generated/types/CollectionsPageQuery'
+import { Z } from '../util/zIndexes'
 
 export const COLLECTIONS_PAGE_QUERY = gql`
   query CollectionsPageQuery($page: Int, $per: Int) {

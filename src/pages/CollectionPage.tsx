@@ -15,35 +15,30 @@ import {
   PaneOption,
   Stack,
 } from '@auspices/eos'
-import {
-  useHrefs,
-  usePagination,
-  useQueryString,
-  useRefetch,
-} from '../../hooks'
-import { AddToCollection } from '../../components/AddToCollection'
-import { Pagination } from '../../components/Pagination'
-import { BottomNav } from '../../components/BottomNav'
-import { PublishCollection } from '../../components/PublishCollection'
-import { UnpublishCollection } from '../../components/UnpublishCollection'
+import { useHrefs, usePagination, useQueryString, useRefetch } from '../hooks'
+import { AddToCollection } from '../components/AddToCollection'
+import { Pagination } from '../components/Pagination'
+import { BottomNav } from '../components/BottomNav'
+import { PublishCollection } from '../components/PublishCollection'
+import { UnpublishCollection } from '../components/UnpublishCollection'
 import {
   COLLECTION_CONTENTS_GRID_FRAGMENT,
   CollectionContentsGrid,
-} from '../../components/CollectionContentsGrid'
+} from '../components/CollectionContentsGrid'
 import {
   COLLECTION_CONTENTS_LIST_FRAGMENT,
   CollectionContentsList,
-} from '../../components/CollectionContentsList'
+} from '../components/CollectionContentsList'
 import {
   COLLECTION_SETTINGS_FRAGMENT,
   CollectionSettings,
-} from '../../components/CollectionSettings'
-import { SampleCollectionContent } from '../../components/SampleCollectionContent'
+} from '../components/CollectionSettings'
+import { SampleCollectionContent } from '../components/SampleCollectionContent'
 import {
   CollectionPageQuery,
   CollectionPageQueryVariables,
-} from '../../generated/types/CollectionPageQuery'
-import { Z } from '../../util/zIndexes'
+} from '../generated/types/CollectionPageQuery'
+import { Z } from '../util/zIndexes'
 
 export const COLLECTION_PAGE_QUERY = gql`
   query CollectionPageQuery($id: ID!, $page: Int, $per: Int) {

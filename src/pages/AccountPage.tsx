@@ -12,8 +12,8 @@ import {
   Stack,
   useThemer,
 } from '@auspices/eos'
-import { useHrefs } from '../../hooks'
-import { AccountPageQuery } from '../../generated/types/AccountPageQuery'
+import { useHrefs } from '../hooks'
+import { AccountPageQuery } from '../generated/types/AccountPageQuery'
 
 export const ACCOUNT_PAGE_QUERY = gql`
   query AccountPageQuery {

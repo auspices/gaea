@@ -16,15 +16,15 @@ import { useMutation, useQuery } from '@apollo/client'
 import {
   CapturePageCollectionsQuery,
   CapturePageCollectionsQueryVariables,
-} from '../../generated/types/CapturePageCollectionsQuery'
-import { errorMessage } from '../../util/errors'
+} from '../generated/types/CapturePageCollectionsQuery'
+import { errorMessage } from '../util/errors'
 import {
   AddToCollectionsMutation,
   AddToCollectionsMutationVariables,
-} from '../../generated/types/AddToCollectionsMutation'
+} from '../generated/types/AddToCollectionsMutation'
 import { Link } from 'react-router-dom'
-import { HREFS } from '../../hooks'
-import { BottomNav } from '../../components/BottomNav'
+import { HREFS } from '../hooks'
+import { BottomNav } from '../components/BottomNav'
 
 export const ADD_TO_COLLECTIONS_MUTATION = gql`
   mutation AddToCollectionsMutation(

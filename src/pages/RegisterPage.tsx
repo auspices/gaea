@@ -4,13 +4,13 @@ import gql from 'graphql-tag'
 import { useMutation } from '@apollo/client'
 import { Helmet } from 'react-helmet'
 import { Box, Button, Input, Stack, useAlerts } from '@auspices/eos'
-import { useHrefs } from '../../hooks'
-import { errorMessage } from '../../util/errors'
+import { useHrefs } from '../hooks'
+import { errorMessage } from '../util/errors'
 import {
   RegisterPageMutation,
   RegisterPageMutationVariables,
-} from '../../generated/types/RegisterPageMutation'
-import { AUTOFOCUS } from '../../util/autoFocus'
+} from '../generated/types/RegisterPageMutation'
+import { AUTOFOCUS } from '../util/autoFocus'
 
 const REGISTER_PAGE_MUTATION = gql`
   mutation RegisterPageMutation(

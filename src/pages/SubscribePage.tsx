@@ -11,13 +11,13 @@ import {
 import {
   SubscribePageQuery_me_customer_plans as Plan,
   SubscribePageQuery,
-} from '../../generated/types/SubscribePageQuery'
-import { SubscribeMutation } from '../../generated/types/SubscribeMutation'
-import { UnsubscribeMutation } from '../../generated/types/UnsubscribeMutation'
-import { ReactivateMutation } from '../../generated/types/ReactivateMutation'
-import { PlanInterval } from '../../generated/types/globalTypes'
-import { errorMessage } from '../../util/errors'
-import { CreditCard } from '../../components/CreditCard'
+} from '../generated/types/SubscribePageQuery'
+import { SubscribeMutation } from '../generated/types/SubscribeMutation'
+import { UnsubscribeMutation } from '../generated/types/UnsubscribeMutation'
+import { ReactivateMutation } from '../generated/types/ReactivateMutation'
+import { PlanInterval } from '../generated/types/globalTypes'
+import { errorMessage } from '../util/errors'
+import { CreditCard } from '../components/CreditCard'
 
 const SUBSCRIBE_PAGE_FRAGMENT = gql`
   fragment SubscribePageFragment on User {

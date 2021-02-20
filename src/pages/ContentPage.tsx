@@ -4,25 +4,25 @@ import { useQuery } from '@apollo/client'
 import { Link, useHistory } from 'react-router-dom'
 import { Box, Button, Caret, Loading, Stack } from '@auspices/eos'
 import { Helmet } from 'react-helmet'
-import { useHrefs } from '../../hooks/useHrefs'
-import { BottomNav } from '../../components/BottomNav'
+import { useHrefs } from '../hooks/useHrefs'
+import { BottomNav } from '../components/BottomNav'
 import {
   CONTENT_ENTITY_FRAGMENT,
   ContentEntity,
-} from '../../components/ContentEntity'
+} from '../components/ContentEntity'
 import {
   CONTENT_ENTITY_HEADER_FRAGMENT,
   ContentEntityHeader,
-} from '../../components/ContentEntityHeader'
+} from '../components/ContentEntityHeader'
 import {
   CONTENT_SETTINGS_FRAGMENT,
   ContentSettings,
-} from '../../components/ContentSettings'
-import { SampleCollectionContent } from '../../components/SampleCollectionContent'
+} from '../components/ContentSettings'
+import { SampleCollectionContent } from '../components/SampleCollectionContent'
 import {
   ContentPageQuery,
   ContentPageQueryVariables,
-} from '../../generated/types/ContentPageQuery'
+} from '../generated/types/ContentPageQuery'
 
 export const CONTENT_PAGE_QUERY = gql`
   query ContentPageQuery($id: ID!) {

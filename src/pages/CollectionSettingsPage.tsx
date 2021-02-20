@@ -6,23 +6,22 @@ import {
   Button,
   Caret,
   Cell,
-  Field,
   Loading,
   Split,
   Stack,
   useAlerts,
 } from '@auspices/eos'
 import { Helmet } from 'react-helmet'
-import { useHrefs } from '../../hooks'
-import { DeleteCollection } from '../../components/DeleteCollection'
-import { Fieldset, FieldsetData } from '../../components/Fieldset'
-import { errorMessage } from '../../util/errors'
-import { UpadateCollectionSettingsMutation } from '../../generated/types/UpadateCollectionSettingsMutation'
+import { useHrefs } from '../hooks'
+import { DeleteCollection } from '../components/DeleteCollection'
+import { Fieldset, FieldsetData } from '../components/Fieldset'
+import { errorMessage } from '../util/errors'
+import { UpadateCollectionSettingsMutation } from '../generated/types/UpadateCollectionSettingsMutation'
 import {
   CollectionSettingsPageQuery,
   CollectionSettingsPageQueryVariables,
-} from '../../generated/types/CollectionSettingsPageQuery'
-import { BottomNav } from '../../components/BottomNav'
+} from '../generated/types/CollectionSettingsPageQuery'
+import { BottomNav } from '../components/BottomNav'
 
 export const UPDATE_COLLECTION_SETTINGS_MUTATION = gql`
   mutation UpadateCollectionSettingsMutation($id: ID!, $title: String) {
