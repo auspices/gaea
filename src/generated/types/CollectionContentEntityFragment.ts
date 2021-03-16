@@ -10,27 +10,27 @@
 export interface CollectionContentEntityFragment_Text {
   __typename: "Text";
   id: number;
-  body: string;
+  blurb: string;
 }
 
-export interface CollectionContentEntityFragment_Image_resized_urls {
+export interface CollectionContentEntityFragment_Image_thumbnail_urls {
   __typename: "RetinaImage";
   _1x: string;
   _2x: string;
 }
 
-export interface CollectionContentEntityFragment_Image_resized {
+export interface CollectionContentEntityFragment_Image_thumbnail {
   __typename: "ResizedImage";
   width: number;
   height: number;
-  urls: CollectionContentEntityFragment_Image_resized_urls;
+  urls: CollectionContentEntityFragment_Image_thumbnail_urls;
 }
 
 export interface CollectionContentEntityFragment_Image {
   __typename: "Image";
   id: number;
   title: string;
-  resized: CollectionContentEntityFragment_Image_resized;
+  thumbnail: CollectionContentEntityFragment_Image_thumbnail;
 }
 
 export interface CollectionContentEntityFragment_Link {

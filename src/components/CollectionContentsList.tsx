@@ -7,6 +7,7 @@ import {
   COLLECTION_CONTENT_CONTEXT_MENU_CONTENT_FRAGMENT,
   CollectionContentContextMenu,
 } from './CollectionContentContextMenu'
+import { CONTENT_ENTITY_FRAGMENT, ContentEntity } from './ContentEntity'
 
 export const COLLECTION_CONTENTS_LIST_FRAGMENT = gql`
   fragment CollectionContentsListFragment on Collection {
@@ -15,10 +16,14 @@ export const COLLECTION_CONTENTS_LIST_FRAGMENT = gql`
     contents(page: $page, per: $per) {
       id
       ...CollectionContentContextMenuContentFragment
+      entity {
+        ...ContentEntityFragment
+      }
     }
   }
   ${COLLECTION_CONTENT_CONTEXT_MENU_CONTENT_FRAGMENT}
   ${COLLECTION_CONTENT_CONTEXT_MENU_COLLECTION_FRAGMENT}
+  ${CONTENT_ENTITY_FRAGMENT}
 `
 
 type CollectionContentsListProps = StackProps & {
@@ -30,11 +35,11 @@ export const CollectionContentsList: React.FC<CollectionContentsListProps> = ({
   ...rest
 }) => {
   return (
-    <Stack spacing={4} {...rest}>
+    <Stack spacing={8} maxWidth={1200} mx="auto" {...rest}>
       {collection.contents.map((content) => {
         return (
-          <Box key={content.id} border="1px solid" position="relative">
-            {content.id}
+          <Box key={content.id} position="relative">
+            <ContentEntity entity={content.entity} />
 
             <CollectionContentContextMenu
               position="absolute"

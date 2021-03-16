@@ -8,7 +8,7 @@ import { FadeOut } from '../../FadeOut'
 export const COLLECTION_CONTENT_ENTITY_TEXT_FRAGMENT = gql`
   fragment CollectionContentEntityTextFragment on Text {
     id
-    body: toString(length: 800)
+    blurb: toString(length: 800)
   }
 `
 const Container = styled(Box).attrs({
@@ -38,10 +38,10 @@ export const CollectionContentEntityText: React.FC<CollectionContentEntityTextPr
 }) => {
   return (
     <Container>
-      {text.body.length > 500 ? (
-        <FadeOut>{text.body}</FadeOut>
+      {text.blurb.length > 500 ? (
+        <FadeOut>{text.blurb}</FadeOut>
       ) : (
-        <>{text.body}</>
+        <>{text.blurb}</>
       )}
     </Container>
   )

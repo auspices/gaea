@@ -1,1 +1,5 @@
 export * from './ContentEntity'
+export * from './components/ContentEntityCollection'
+export * from './components/ContentEntityImage'
+export * from './components/ContentEntityLink'
+export * from './components/ContentEntityText'

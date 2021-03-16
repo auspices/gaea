@@ -12,17 +12,17 @@ export interface CollectionContentsGridFragment_counts {
   contents: number;
 }
 
-export interface CollectionContentsGridFragment_contents_entity_Image_resized_urls {
+export interface CollectionContentsGridFragment_contents_entity_Image_thumbnail_urls {
   __typename: "RetinaImage";
   _1x: string;
   _2x: string;
 }
 
-export interface CollectionContentsGridFragment_contents_entity_Image_resized {
+export interface CollectionContentsGridFragment_contents_entity_Image_thumbnail {
   __typename: "ResizedImage";
   width: number;
   height: number;
-  urls: CollectionContentsGridFragment_contents_entity_Image_resized_urls;
+  urls: CollectionContentsGridFragment_contents_entity_Image_thumbnail_urls;
 }
 
 export interface CollectionContentsGridFragment_contents_entity_Image {
@@ -32,14 +32,14 @@ export interface CollectionContentsGridFragment_contents_entity_Image {
   height: number;
   id: number;
   title: string;
-  resized: CollectionContentsGridFragment_contents_entity_Image_resized;
+  thumbnail: CollectionContentsGridFragment_contents_entity_Image_thumbnail;
 }
 
 export interface CollectionContentsGridFragment_contents_entity_Text {
   __typename: "Text";
   label: string;
   id: number;
-  body: string;
+  blurb: string;
 }
 
 export interface CollectionContentsGridFragment_contents_entity_Link {

@@ -8,7 +8,7 @@ export const COLLECTION_CONTENT_ENTITY_IMAGE_FRAGMENT = gql`
   fragment CollectionContentEntityImageFragment on Image {
     id
     title
-    resized(width: 300, height: 300, quality: 85) {
+    thumbnail: resized(width: 300, height: 300, quality: 85) {
       width
       height
       urls {
@@ -34,12 +34,14 @@ export const CollectionContentEntityImage: React.FC<CollectionContentEntityImage
       <span ref={ref} />
 
       <ResponsiveImage
-        srcs={inView ? [image.resized.urls._1x, image.resized.urls._2x] : []}
+        srcs={
+          inView ? [image.thumbnail.urls._1x, image.thumbnail.urls._2x] : []
+        }
         alt={image.title}
-        aspectWidth={image.resized.width}
-        aspectHeight={image.resized.height}
-        maxWidth={image.resized.width}
-        maxHeight={image.resized.height}
+        aspectWidth={image.thumbnail.width}
+        aspectHeight={image.thumbnail.height}
+        maxWidth={image.thumbnail.width}
+        maxHeight={image.thumbnail.height}
         backgroundColor="tertiary"
         {...rest}
       />

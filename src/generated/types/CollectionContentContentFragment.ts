@@ -7,17 +7,17 @@
 // GraphQL fragment: CollectionContentContentFragment
 // ====================================================
 
-export interface CollectionContentContentFragment_entity_Image_resized_urls {
+export interface CollectionContentContentFragment_entity_Image_thumbnail_urls {
   __typename: "RetinaImage";
   _1x: string;
   _2x: string;
 }
 
-export interface CollectionContentContentFragment_entity_Image_resized {
+export interface CollectionContentContentFragment_entity_Image_thumbnail {
   __typename: "ResizedImage";
   width: number;
   height: number;
-  urls: CollectionContentContentFragment_entity_Image_resized_urls;
+  urls: CollectionContentContentFragment_entity_Image_thumbnail_urls;
 }
 
 export interface CollectionContentContentFragment_entity_Image {
@@ -27,14 +27,14 @@ export interface CollectionContentContentFragment_entity_Image {
   height: number;
   id: number;
   title: string;
-  resized: CollectionContentContentFragment_entity_Image_resized;
+  thumbnail: CollectionContentContentFragment_entity_Image_thumbnail;
 }
 
 export interface CollectionContentContentFragment_entity_Text {
   __typename: "Text";
   label: string;
   id: number;
-  body: string;
+  blurb: string;
 }
 
 export interface CollectionContentContentFragment_entity_Link {

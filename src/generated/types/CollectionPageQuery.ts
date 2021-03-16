@@ -19,6 +19,29 @@ export interface CollectionPageQuery_me_collection_within {
   title: string;
 }
 
+export interface CollectionPageQuery_me_collection_contents_entity_Image_thumbnail_urls {
+  __typename: "RetinaImage";
+  _1x: string;
+  _2x: string;
+}
+
+export interface CollectionPageQuery_me_collection_contents_entity_Image_thumbnail {
+  __typename: "ResizedImage";
+  width: number;
+  height: number;
+  urls: CollectionPageQuery_me_collection_contents_entity_Image_thumbnail_urls;
+}
+
+export interface CollectionPageQuery_me_collection_contents_entity_Image_placeholder_urls {
+  __typename: "RetinaImage";
+  src: string;
+}
+
+export interface CollectionPageQuery_me_collection_contents_entity_Image_placeholder {
+  __typename: "ResizedImage";
+  urls: CollectionPageQuery_me_collection_contents_entity_Image_placeholder_urls;
+}
+
 export interface CollectionPageQuery_me_collection_contents_entity_Image_resized_urls {
   __typename: "RetinaImage";
   _1x: string;
@@ -39,6 +62,9 @@ export interface CollectionPageQuery_me_collection_contents_entity_Image {
   height: number;
   id: number;
   title: string;
+  thumbnail: CollectionPageQuery_me_collection_contents_entity_Image_thumbnail;
+  url: string;
+  placeholder: CollectionPageQuery_me_collection_contents_entity_Image_placeholder;
   resized: CollectionPageQuery_me_collection_contents_entity_Image_resized;
 }
 
@@ -46,6 +72,7 @@ export interface CollectionPageQuery_me_collection_contents_entity_Text {
   __typename: "Text";
   label: string;
   id: number;
+  blurb: string;
   body: string;
 }
 

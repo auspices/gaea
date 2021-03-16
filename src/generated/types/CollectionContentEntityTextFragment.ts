@@ -10,5 +10,5 @@
 export interface CollectionContentEntityTextFragment {
   __typename: "Text";
   id: number;
-  body: string;
+  blurb: string;
 }
