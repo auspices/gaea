@@ -24,7 +24,7 @@
     "react-router-dom": "5.2.0",
     "react-scripts": "4.0.2",
     "scroll-into-view-if-needed": "2.2.28",
-    "styled-components": "5.2.2",
+    "styled-components": "5.2.3",
     "styled-system": "5.1.5",
     "use-debounce": "5.2.1",
     "use-keyboard-list-navigation": "2.3.1"
