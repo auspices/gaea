@@ -1,5 +1,5 @@
 import React from 'react'
-import gql from 'graphql-tag'
+import { gql } from 'graphql-tag'
 import { Grid, GridProps, MultiSelect } from '@auspices/eos'
 import {
   COLLECTION_CONTENT_COLLECTION_FRAGMENT,

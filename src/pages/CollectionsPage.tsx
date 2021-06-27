@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react'
-import gql from 'graphql-tag'
+import { gql } from 'graphql-tag'
 import { Link, useHistory } from 'react-router-dom'
 import { Divider, Dropdown, Loading, PaneOption, Stack } from '@auspices/eos'
 import { useApolloClient, useQuery } from '@apollo/client'

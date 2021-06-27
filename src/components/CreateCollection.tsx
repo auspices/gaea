@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react'
-import gql from 'graphql-tag'
+import { gql } from 'graphql-tag'
 import { useMutation } from '@apollo/client'
 import { useHistory } from 'react-router-dom'
 import { Button, ClearableInput, useAlerts, useConfirm } from '@auspices/eos'

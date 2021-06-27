@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from 'graphql-tag'
 import React from 'react'
 import {
   CONTENT_ENTITY_HEADER_IMAGE_FRAGMENT,

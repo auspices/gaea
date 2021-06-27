@@ -1,7 +1,7 @@
 import React, { Suspense, useCallback, useEffect, useState } from 'react'
 import { Modal } from '@auspices/eos'
 import { useHistory } from 'react-router'
-import gql from 'graphql-tag'
+import { gql } from 'graphql-tag'
 import { useLazyQuery } from '@apollo/client'
 import {
   useAddEntityToCollection,
@@ -63,10 +63,8 @@ export const Locus: React.FC = () => {
   const { matches } = useMatchesPath()
 
   const { createAndAddCollectionToCollection } = useCreateAndAddCollection()
-  const {
-    addEntityFromContentToCollection,
-    addEntityToCollection,
-  } = useAddEntityToCollection()
+  const { addEntityFromContentToCollection, addEntityToCollection } =
+    useAddEntityToCollection()
 
   const defaultOptions: LocusOption[] = [
     ...addCommand(

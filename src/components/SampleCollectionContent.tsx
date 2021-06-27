@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useQuery } from '@apollo/client'
 import { useHistory } from 'react-router-dom'
-import gql from 'graphql-tag'
+import { gql } from 'graphql-tag'
 import { Button, ButtonProps, useAlerts } from '@auspices/eos'
 import {
   SampleCollectionContentQuery,
@@ -34,55 +34,52 @@ enum Mode {
   Redirecting,
 }
 
-export const SampleCollectionContent: React.FC<SampleCollectionContentProps> = ({
-  id,
-  children,
-  ...rest
-}) => {
-  const { sendError } = useAlerts()
+export const SampleCollectionContent: React.FC<SampleCollectionContentProps> =
+  ({ id, children, ...rest }) => {
+    const { sendError } = useAlerts()
 
-  const hrefs = useHrefs()
+    const hrefs = useHrefs()
 
-  const history = useHistory()
+    const history = useHistory()
 
-  const [mode, setMode] = useState(Mode.Resting)
-  const handleClick = useCallback(() => setMode(Mode.Redirecting), [])
+    const [mode, setMode] = useState(Mode.Resting)
+    const handleClick = useCallback(() => setMode(Mode.Redirecting), [])
 
-  const { data, loading, error } = useQuery<
-    SampleCollectionContentQuery,
-    SampleCollectionContentQueryVariables
-  >(SAMPLE_COLLECTION_CONTENT_QUERY, {
-    fetchPolicy: 'network-only',
-    skip: mode !== Mode.Redirecting,
-    variables: { id },
-  })
+    const { data, loading, error } = useQuery<
+      SampleCollectionContentQuery,
+      SampleCollectionContentQueryVariables
+    >(SAMPLE_COLLECTION_CONTENT_QUERY, {
+      fetchPolicy: 'network-only',
+      skip: mode !== Mode.Redirecting,
+      variables: { id },
+    })
 
-  useEffect(() => {
-    if (error) {
-      sendError({ body: errorMessage(error) })
-      setMode(Mode.Resting)
-    }
+    useEffect(() => {
+      if (error) {
+        sendError({ body: errorMessage(error) })
+        setMode(Mode.Resting)
+      }
 
-    if (loading || !data) return
+      if (loading || !data) return
 
-    const {
-      me: {
-        collection: { contents },
-      },
-    } = data
+      const {
+        me: {
+          collection: { contents },
+        },
+      } = data
 
-    const [{ id }] = contents
+      const [{ id }] = contents
 
-    history.push(hrefs.content(id))
-  }, [data, error, history, hrefs, loading, sendError])
+      history.push(hrefs.content(id))
+    }, [data, error, history, hrefs, loading, sendError])
 
-  return (
-    <Button
-      onClick={handleClick}
-      disabled={mode === Mode.Redirecting}
-      {...rest}
-    >
-      {children}
-    </Button>
-  )
-}
+    return (
+      <Button
+        onClick={handleClick}
+        disabled={mode === Mode.Redirecting}
+        {...rest}
+      >
+        {children}
+      </Button>
+    )
+  }

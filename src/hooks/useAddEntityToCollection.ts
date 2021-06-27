@@ -1,5 +1,5 @@
 import { useCallback } from 'react'
-import gql from 'graphql-tag'
+import { gql } from 'graphql-tag'
 import { useMutation } from '@apollo/client'
 import { useAlerts } from '@auspices/eos'
 import { useRefetch } from './useRefetch'
@@ -46,9 +46,10 @@ export const useAddEntityToCollection = () => {
   const { refetch } = useRefetch()
   const { sendError, sendNotification } = useAlerts()
 
-  const [addEntityToCollectionMutation] = useMutation<
-    AddEntityToCollectionMutation
-  >(ADD_ENTITY_TO_COLLECTION_MUTATION)
+  const [addEntityToCollectionMutation] =
+    useMutation<AddEntityToCollectionMutation>(
+      ADD_ENTITY_TO_COLLECTION_MUTATION
+    )
 
   const handleAddEntityToCollection = useCallback(
     async (
@@ -70,9 +71,10 @@ export const useAddEntityToCollection = () => {
     [addEntityToCollectionMutation, refetch, sendError, sendNotification]
   )
 
-  const [addEntityFromContentToCollectionMutation] = useMutation<
-    AddEntityFromContentToCollectionMutation
-  >(ADD_ENTITY_FROM_CONTENT_TO_COLLECTION_MUTATION)
+  const [addEntityFromContentToCollectionMutation] =
+    useMutation<AddEntityFromContentToCollectionMutation>(
+      ADD_ENTITY_FROM_CONTENT_TO_COLLECTION_MUTATION
+    )
 
   const handleAddEntityFromContentToCollection = useCallback(
     async (id: number | string, contentId: number | string) => {

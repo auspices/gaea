@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react'
-import gql from 'graphql-tag'
+import { gql } from 'graphql-tag'
 import { useHistory } from 'react-router'
 import { useKeyboardListNavigation } from 'use-keyboard-list-navigation'
 import { Stack, StackProps } from '@auspices/eos'

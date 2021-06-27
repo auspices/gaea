@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import gql from 'graphql-tag'
+import { gql } from 'graphql-tag'
 import { useMutation } from '@apollo/client'
 import { Box, Button, ClearableInput, Loading, useAlerts } from '@auspices/eos'
 import { useContextualRef, useHrefs, usePagination, useRefetch } from '../hooks'

@@ -1,5 +1,5 @@
 import React from 'react'
-import gql from 'graphql-tag'
+import { gql } from 'graphql-tag'
 import { useQuery } from '@apollo/client'
 import { Cell, Loading } from '@auspices/eos'
 import {
@@ -29,39 +29,36 @@ export type FilteredCollectionStubListProps = {
   onCompleted?(): void
 }
 
-export const FilteredCollectionStubList: React.FC<FilteredCollectionStubListProps> = ({
-  query,
-  onCompleted,
-  ...rest
-}) => {
-  const { data, loading, error } = useQuery<
-    FilteredCollectionStubListQuery,
-    FilteredCollectionStubListQueryVariables
-  >(FILTERED_COLLECTION_STUB_LIST_QUERY, {
-    skip: !query,
-    variables: { query: query || '' },
-    onCompleted,
-  })
+export const FilteredCollectionStubList: React.FC<FilteredCollectionStubListProps> =
+  ({ query, onCompleted, ...rest }) => {
+    const { data, loading, error } = useQuery<
+      FilteredCollectionStubListQuery,
+      FilteredCollectionStubListQueryVariables
+    >(FILTERED_COLLECTION_STUB_LIST_QUERY, {
+      skip: !query,
+      variables: { query: query || '' },
+      onCompleted,
+    })
 
-  if (error) {
-    throw error
+    if (error) {
+      throw error
+    }
+
+    if (loading || !data) {
+      return <Loading>looking for “{query}”</Loading>
+    }
+
+    const {
+      filtered: { collections },
+    } = data
+
+    if (collections.length === 0) {
+      return (
+        <Cell color="secondary" borderColor="secondary">
+          nothing for “{query}”
+        </Cell>
+      )
+    }
+
+    return <CollectionStubList collections={collections} {...rest} />
   }
-
-  if (loading || !data) {
-    return <Loading>looking for “{query}”</Loading>
-  }
-
-  const {
-    filtered: { collections },
-  } = data
-
-  if (collections.length === 0) {
-    return (
-      <Cell color="secondary" borderColor="secondary">
-        nothing for “{query}”
-      </Cell>
-    )
-  }
-
-  return <CollectionStubList collections={collections} {...rest} />
-}

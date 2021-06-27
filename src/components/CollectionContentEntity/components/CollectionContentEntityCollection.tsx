@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import gql from 'graphql-tag'
+import { gql } from 'graphql-tag'
 import { Box, BoxProps } from '@auspices/eos'
 import { useInView } from 'react-intersection-observer'
 import { CollectionPreview } from '../../CollectionPreview'
@@ -48,37 +48,35 @@ type CollectionContentEntityCollectionProps = BoxProps & {
   collection: CollectionContentEntityCollectionFragment
 }
 
-export const CollectionContentEntityCollection: React.FC<CollectionContentEntityCollectionProps> = ({
-  collection,
-  ...rest
-}) => {
-  const [ref, inView] = useInView({ triggerOnce: true })
+export const CollectionContentEntityCollection: React.FC<CollectionContentEntityCollectionProps> =
+  ({ collection, ...rest }) => {
+    const [ref, inView] = useInView({ triggerOnce: true })
 
-  return (
-    <Container
-      ref={ref}
-      border="1px solid"
-      borderColor="border"
-      borderRadius={4}
-      color="primary"
-      height="100%"
-      width="100%"
-      display="flex"
-      flexDirection="column"
-      justifyContent="flex-start"
-      py={3}
-      px={4}
-      {...rest}
-    >
-      <Box>{collection.name}</Box>
+    return (
+      <Container
+        ref={ref}
+        border="1px solid"
+        borderColor="border"
+        borderRadius={4}
+        color="primary"
+        height="100%"
+        width="100%"
+        display="flex"
+        flexDirection="column"
+        justifyContent="flex-start"
+        py={3}
+        px={4}
+        {...rest}
+      >
+        <Box>{collection.name}</Box>
 
-      <Box color="tertiary">{collection.counts.contents || '∅'}</Box>
+        <Box color="tertiary">{collection.counts.contents || '∅'}</Box>
 
-      {inView && (
-        <CollectionPreview id={collection.id} cellSizePx="48px" my={5} />
-      )}
+        {inView && (
+          <CollectionPreview id={collection.id} cellSizePx="48px" my={5} />
+        )}
 
-      <Delta>{collection.updatedAt}</Delta>
-    </Container>
-  )
-}
+        <Delta>{collection.updatedAt}</Delta>
+      </Container>
+    )
+  }

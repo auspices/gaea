@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useReducer, useRef } from 'react'
-import gql from 'graphql-tag'
+import { gql } from 'graphql-tag'
 import styled from 'styled-components'
 import { useMutation } from '@apollo/client'
 import { useDebounce } from 'use-debounce'

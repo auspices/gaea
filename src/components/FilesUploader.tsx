@@ -1,5 +1,5 @@
 import React from 'react'
-import gql from 'graphql-tag'
+import { gql } from 'graphql-tag'
 import { useQuery } from '@apollo/client'
 import styled from 'styled-components'
 import { Box, BoxProps, Stack } from '@auspices/eos'
@@ -77,10 +77,9 @@ export const FilesUploader: React.FC<FilesUploaderProps> = ({
 
   if (loading || !data) return null
 
-  const uploads: [
-    string,
-    File
-  ][] = data.me.presignedUploadUrls.map((url, i) => [url, files[i]])
+  const uploads: [string, File][] = data.me.presignedUploadUrls.map(
+    (url, i) => [url, files[i]]
+  )
 
   return (
     <Container {...rest}>

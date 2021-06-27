@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react'
 import { Helmet } from 'react-helmet'
 import { Button, Cell, Loading, Stack, useAlerts } from '@auspices/eos'
 import { useMutation, useQuery } from '@apollo/client'
-import gql from 'graphql-tag'
+import { gql } from 'graphql-tag'
 import {
   CardNumberElement,
   useElements,
@@ -93,9 +93,8 @@ enum Mode {
 }
 
 export const SubscribePage: React.FC = () => {
-  const { loading, data, error } = useQuery<SubscribePageQuery>(
-    SUBSCRIBE_PAGE_QUERY
-  )
+  const { loading, data, error } =
+    useQuery<SubscribePageQuery>(SUBSCRIBE_PAGE_QUERY)
 
   const [subscribe] = useMutation<SubscribeMutation>(SUBSCRIBE_MUTATION)
   const [unsubscribe] = useMutation<UnsubscribeMutation>(UNSUBSCRIBE_MUTATION)

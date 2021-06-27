@@ -56,7 +56,7 @@ const App = () => {
   )
 }
 
-export default () => {
+const init = () => {
   return (
     <BrowserRouter>
       <ApolloProvider client={client}>
@@ -76,3 +76,5 @@ export default () => {
     </BrowserRouter>
   )
 }
+
+export default init

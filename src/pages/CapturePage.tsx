@@ -11,7 +11,7 @@ import {
   Stack,
   useAlerts,
 } from '@auspices/eos'
-import gql from 'graphql-tag'
+import { gql } from 'graphql-tag'
 import { useMutation, useQuery } from '@apollo/client'
 import {
   CapturePageCollectionsQuery,

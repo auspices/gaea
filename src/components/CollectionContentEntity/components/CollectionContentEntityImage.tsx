@@ -1,5 +1,5 @@
 import React from 'react'
-import gql from 'graphql-tag'
+import { gql } from 'graphql-tag'
 import { useInView } from 'react-intersection-observer'
 import { ResponsiveImage } from '@auspices/eos'
 import { CollectionContentEntityImageFragment } from '../../../generated/types/CollectionContentEntityImageFragment'
@@ -23,28 +23,26 @@ type CollectionContentEntityImageProps = {
   image: CollectionContentEntityImageFragment
 }
 
-export const CollectionContentEntityImage: React.FC<CollectionContentEntityImageProps> = ({
-  image,
-  ...rest
-}) => {
-  const [ref, inView] = useInView({ triggerOnce: true })
-  return (
-    <>
-      {/* TODO: styled-components typings with forwardRef appear to be broken? */}
-      <span ref={ref} />
+export const CollectionContentEntityImage: React.FC<CollectionContentEntityImageProps> =
+  ({ image, ...rest }) => {
+    const [ref, inView] = useInView({ triggerOnce: true })
+    return (
+      <>
+        {/* TODO: styled-components typings with forwardRef appear to be broken? */}
+        <span ref={ref} />
 
-      <ResponsiveImage
-        srcs={
-          inView ? [image.thumbnail.urls._1x, image.thumbnail.urls._2x] : []
-        }
-        alt={image.title}
-        aspectWidth={image.thumbnail.width}
-        aspectHeight={image.thumbnail.height}
-        maxWidth={image.thumbnail.width}
-        maxHeight={image.thumbnail.height}
-        backgroundColor="tertiary"
-        {...rest}
-      />
-    </>
-  )
-}
+        <ResponsiveImage
+          srcs={
+            inView ? [image.thumbnail.urls._1x, image.thumbnail.urls._2x] : []
+          }
+          alt={image.title}
+          aspectWidth={image.thumbnail.width}
+          aspectHeight={image.thumbnail.height}
+          maxWidth={image.thumbnail.width}
+          maxHeight={image.thumbnail.height}
+          backgroundColor="tertiary"
+          {...rest}
+        />
+      </>
+    )
+  }

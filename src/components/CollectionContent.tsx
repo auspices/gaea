@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import gql from 'graphql-tag'
+import { gql } from 'graphql-tag'
 import { File } from '@auspices/eos'
 import {
   COLLECTION_CONTENT_ENTITY_FRAGMENT,

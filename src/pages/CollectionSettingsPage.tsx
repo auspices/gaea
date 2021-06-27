@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react'
-import gql from 'graphql-tag'
+import { gql } from 'graphql-tag'
 import { Link } from 'react-router-dom'
 import { useMutation, useQuery } from '@apollo/client'
 import {
@@ -69,11 +69,10 @@ export const CollectionSettingsPage: React.FC<CollectionSettingsPageProps> = ({
     variables: { id },
   })
 
-  const [
-    updateCollectionSettings,
-  ] = useMutation<UpadateCollectionSettingsMutation>(
-    UPDATE_COLLECTION_SETTINGS_MUTATION
-  )
+  const [updateCollectionSettings] =
+    useMutation<UpadateCollectionSettingsMutation>(
+      UPDATE_COLLECTION_SETTINGS_MUTATION
+    )
 
   const hrefs = useHrefs()
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import gql from 'graphql-tag'
+import { gql } from 'graphql-tag'
 import { useQuery } from '@apollo/client'
 import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet'

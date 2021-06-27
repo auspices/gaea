@@ -1,5 +1,5 @@
 import React from 'react'
-import gql from 'graphql-tag'
+import { gql } from 'graphql-tag'
 import { Box, ResponsiveImage } from '@auspices/eos'
 import { ContentEntityImageFragment } from '../../../generated/types/ContentEntityImageFragment'
 

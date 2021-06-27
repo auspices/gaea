@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import gql from 'graphql-tag'
+import { gql } from 'graphql-tag'
 import { useQuery } from '@apollo/client'
 import {
   AspectRatioBox,

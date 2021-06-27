@@ -1,5 +1,5 @@
 import React from 'react'
-import gql from 'graphql-tag'
+import { gql } from 'graphql-tag'
 import { ContentEntityFragment } from '../../generated/types/ContentEntityFragment'
 import {
   CONTENT_ENTITY_IMAGE_FRAGMENT,

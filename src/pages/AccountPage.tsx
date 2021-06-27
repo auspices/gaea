@@ -1,5 +1,5 @@
 import React from 'react'
-import gql from 'graphql-tag'
+import { gql } from 'graphql-tag'
 import { Link } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
 import { Helmet } from 'react-helmet'
@@ -32,9 +32,8 @@ export const AccountPage: React.FC = () => {
 
   const hrefs = useHrefs()
 
-  const { data, error, loading } = useQuery<AccountPageQuery>(
-    ACCOUNT_PAGE_QUERY
-  )
+  const { data, error, loading } =
+    useQuery<AccountPageQuery>(ACCOUNT_PAGE_QUERY)
 
   if (error) {
     throw error

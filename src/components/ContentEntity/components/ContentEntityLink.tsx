@@ -1,5 +1,5 @@
 import React from 'react'
-import gql from 'graphql-tag'
+import { gql } from 'graphql-tag'
 import { Box, BoxProps, EmptyFrame, Truncate } from '@auspices/eos'
 import { ContentEntityLinkFragment } from '../../../generated/types/ContentEntityLinkFragment'
 
