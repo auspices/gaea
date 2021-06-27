@@ -66,10 +66,7 @@ export const CollectionSettings: React.FC<CollectionSettingsProps> = ({
     [collection.id, sendError, sendNotification, updateCollection]
   )
 
-  const { callback: debouncedHandleChange } = useDebouncedCallback(
-    handleChange,
-    500
-  )
+  const debouncedHandleChange = useDebouncedCallback(handleChange, 500)
 
   return (
     <KeyValueEditor

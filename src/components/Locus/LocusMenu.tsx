@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { ClearableInput, Stack, StackProps } from '@auspices/eos'
-import { useDebounce } from 'use-debounce/lib'
+import { useDebounce } from 'use-debounce'
 import { Kind, LocusOption, LocusOptions } from './LocusOptions'
 import Fuse from 'fuse.js'
 
@@ -42,10 +42,10 @@ export const LocusMenu: React.FC<LocusMenuProps> = ({
   }, [fuse, query])
 
   useEffect(() => onChange && onChange(query), [query, onChange])
-  useEffect(() => onDebouncedChange && onDebouncedChange(debouncedQuery), [
-    debouncedQuery,
-    onDebouncedChange,
-  ])
+  useEffect(
+    () => onDebouncedChange && onDebouncedChange(debouncedQuery),
+    [debouncedQuery, onDebouncedChange]
+  )
 
   useEffect(() => {
     if (!ref.current) return
