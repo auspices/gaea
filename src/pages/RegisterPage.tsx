@@ -102,7 +102,12 @@ export const RegisterPage: React.FC = () => {
         <title>register</title>
       </Helmet>
 
-      <Box as="form" width="100%" onSubmit={handleSubmit}>
+      <Box
+        as="form"
+        width="100%"
+        // @ts-ignore
+        onSubmit={handleSubmit}
+      >
         <Stack>
           <Input
             flex="1"

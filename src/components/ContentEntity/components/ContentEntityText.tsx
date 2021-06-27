@@ -148,6 +148,7 @@ export const ContentEntityText: React.FC<ContentEntityTextProps> = ({
 
       <Editor
         as="textarea"
+        // @ts-ignore
         ref={textareaRef}
         defaultValue={text.body}
         onChange={handleChange}

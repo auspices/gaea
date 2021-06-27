@@ -82,7 +82,12 @@ export const LoginPage: React.FC = () => {
         <title>login</title>
       </Helmet>
 
-      <Box as="form" width="100%" onSubmit={handleSubmit}>
+      <Box
+        as="form"
+        width="100%"
+        // @ts-ignore
+        onSubmit={handleSubmit}
+      >
         <Stack direction={['vertical', 'vertical', 'horizontal']}>
           <Input
             flex="1"
