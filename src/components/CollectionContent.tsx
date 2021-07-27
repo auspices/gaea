@@ -43,6 +43,9 @@ export const COLLECTION_CONTENT_CONTENT_FRAGMENT = gql`
       ... on Collection {
         label: toString(length: 35, from: CENTER)
       }
+      ... on Attachment {
+        label: toString(length: 35, from: CENTER)
+      }
       ...CollectionContentEntityFragment
     }
   }

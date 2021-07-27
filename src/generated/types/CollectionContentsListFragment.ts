@@ -70,7 +70,16 @@ export interface CollectionContentsListFragment_contents_entity_Collection {
   counts: CollectionContentsListFragment_contents_entity_Collection_counts;
 }
 
-export type CollectionContentsListFragment_contents_entity = CollectionContentsListFragment_contents_entity_Image | CollectionContentsListFragment_contents_entity_Text | CollectionContentsListFragment_contents_entity_Link | CollectionContentsListFragment_contents_entity_Collection;
+export interface CollectionContentsListFragment_contents_entity_Attachment {
+  __typename: "Attachment";
+  id: number;
+  url: string;
+  name: string;
+  fileSize: string;
+  contentType: string;
+}
+
+export type CollectionContentsListFragment_contents_entity = CollectionContentsListFragment_contents_entity_Image | CollectionContentsListFragment_contents_entity_Text | CollectionContentsListFragment_contents_entity_Link | CollectionContentsListFragment_contents_entity_Collection | CollectionContentsListFragment_contents_entity_Attachment;
 
 export interface CollectionContentsListFragment_contents {
   __typename: "Content";

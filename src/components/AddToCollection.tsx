@@ -8,12 +8,22 @@ import { Form, FormProps } from './Form'
 import { FileDropzone } from './FileDropzone'
 import { FileUploadButton } from './FileUploadButton'
 import { useHistory } from 'react-router'
-import { AddToCollectionMutation } from '../generated/types/AddToCollectionMutation'
+import {
+  AddToCollectionMutation,
+  AddToCollectionMutationVariables,
+} from '../generated/types/AddToCollectionMutation'
 import { AUTOFOCUS } from '../util/autoFocus'
 
 const ADD_TO_COLLECTION_MUTATION = gql`
-  mutation AddToCollectionMutation($id: ID!, $value: String!) {
-    addToCollection(input: { id: $id, value: $value }) {
+  mutation AddToCollectionMutation(
+    $id: ID!
+    $value: String
+    $image: ImageInput
+    $attachment: AttachmentInput
+  ) {
+    addToCollection(
+      input: { id: $id, value: $value, image: $image, attachment: $attachment }
+    ) {
       collection {
         id
       }
@@ -43,9 +53,10 @@ export const AddToCollection: React.FC<AddToCollectionProps> = ({
   const { refetch } = useRefetch()
   const { page, per, encode } = usePagination()
   const { sendNotification, sendError } = useAlerts()
-  const [addToCollection] = useMutation<AddToCollectionMutation>(
-    ADD_TO_COLLECTION_MUTATION
-  )
+  const [addToCollection] = useMutation<
+    AddToCollectionMutation,
+    AddToCollectionMutationVariables
+  >(ADD_TO_COLLECTION_MUTATION)
   const [mode, setMode] = useState(Mode.Resting)
   const [value, setValue] = useState('')
   const [inputKey, setInputKey] = useState(new Date().getTime())
@@ -75,12 +86,7 @@ export const AddToCollection: React.FC<AddToCollectionProps> = ({
 
     try {
       const { data } = await addToCollection({
-        variables: {
-          id,
-          value,
-          page: 1,
-          per,
-        },
+        variables: { id: String(id), value },
       })
 
       sendNotification({ body: 'added successfully' })
@@ -128,16 +134,25 @@ export const AddToCollection: React.FC<AddToCollectionProps> = ({
   const handleChange = useCallback((value: string) => setValue(value), [])
 
   const handleUpload = useCallback(
-    async (url: string) => {
+    async ({ url, file }: { url: string; file: File }) => {
       sendNotification({ body: 'processing upload...' })
+
+      const upload = file.type.startsWith('image/')
+        ? { image: { url } }
+        : {
+            attachment: {
+              url,
+              fileName: file.name,
+              fileContentType: file.type,
+              fileContentLength: file.size,
+            },
+          }
 
       try {
         await addToCollection({
           variables: {
-            id,
-            value: url,
-            page: 1,
-            per,
+            id: String(id),
+            ...upload,
           },
         })
 
@@ -147,7 +162,7 @@ export const AddToCollection: React.FC<AddToCollectionProps> = ({
         sendError({ body: errorMessage(err) })
       }
     },
-    [addToCollection, id, per, refetch, sendError, sendNotification]
+    [addToCollection, id, refetch, sendError, sendNotification]
   )
 
   const handleComplete = useCallback(() => {

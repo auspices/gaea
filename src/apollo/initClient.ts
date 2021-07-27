@@ -55,7 +55,7 @@ export const initClient = () =>
     link: from([errorLink, authLink, httpLink]),
     cache: new InMemoryCache({
       possibleTypes: {
-        Entity: ['Image', 'Text', 'Link', 'Collection'],
+        Entity: ['Image', 'Text', 'Link', 'Collection', 'Attachment'],
       },
     }),
   })

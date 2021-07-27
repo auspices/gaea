@@ -65,4 +65,13 @@ export interface ContentEntityFragment_Collection {
   counts: ContentEntityFragment_Collection_counts;
 }
 
-export type ContentEntityFragment = ContentEntityFragment_Image | ContentEntityFragment_Text | ContentEntityFragment_Link | ContentEntityFragment_Collection;
+export interface ContentEntityFragment_Attachment {
+  __typename: "Attachment";
+  id: number;
+  url: string;
+  name: string;
+  fileSize: string;
+  contentType: string;
+}
+
+export type ContentEntityFragment = ContentEntityFragment_Image | ContentEntityFragment_Text | ContentEntityFragment_Link | ContentEntityFragment_Collection | ContentEntityFragment_Attachment;

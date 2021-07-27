@@ -37,4 +37,11 @@ export interface ContentEntityHeaderFragment_Collection {
   slug: string;
 }
 
-export type ContentEntityHeaderFragment = ContentEntityHeaderFragment_Image | ContentEntityHeaderFragment_Text | ContentEntityHeaderFragment_Link | ContentEntityHeaderFragment_Collection;
+export interface ContentEntityHeaderFragment_Attachment {
+  __typename: "Attachment";
+  id: number;
+  url: string;
+  name: string;
+}
+
+export type ContentEntityHeaderFragment = ContentEntityHeaderFragment_Image | ContentEntityHeaderFragment_Text | ContentEntityHeaderFragment_Link | ContentEntityHeaderFragment_Collection | ContentEntityHeaderFragment_Attachment;

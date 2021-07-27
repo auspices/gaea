@@ -66,7 +66,16 @@ export interface CollectionContentsGridFragment_contents_entity_Collection {
   counts: CollectionContentsGridFragment_contents_entity_Collection_counts;
 }
 
-export type CollectionContentsGridFragment_contents_entity = CollectionContentsGridFragment_contents_entity_Image | CollectionContentsGridFragment_contents_entity_Text | CollectionContentsGridFragment_contents_entity_Link | CollectionContentsGridFragment_contents_entity_Collection;
+export interface CollectionContentsGridFragment_contents_entity_Attachment {
+  __typename: "Attachment";
+  label: string;
+  id: number;
+  url: string;
+  fileSize: string;
+  contentType: string;
+}
+
+export type CollectionContentsGridFragment_contents_entity = CollectionContentsGridFragment_contents_entity_Image | CollectionContentsGridFragment_contents_entity_Text | CollectionContentsGridFragment_contents_entity_Link | CollectionContentsGridFragment_contents_entity_Collection | CollectionContentsGridFragment_contents_entity_Attachment;
 
 export interface CollectionContentsGridFragment_contents {
   __typename: "Content";

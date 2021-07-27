@@ -29,10 +29,29 @@ export enum ReorderAction {
   MOVE_UP = "MOVE_UP",
 }
 
-export enum SupportedUpload {
-  GIF = "GIF",
-  JPEG = "JPEG",
-  PNG = "PNG",
+/**
+ * Input needed to create an Attachment
+ */
+export interface AttachmentInput {
+  url: string;
+  fileName: string;
+  fileContentType: string;
+  fileContentLength: number;
+}
+
+/**
+ * Input needed to create an Image
+ */
+export interface ImageInput {
+  url: string;
+}
+
+/**
+ * Input needed to create an Upload
+ */
+export interface UploadInput {
+  name: string;
+  type: string;
 }
 
 //==============================================================

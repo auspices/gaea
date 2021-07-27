@@ -8,24 +8,15 @@ import {
   FilesUploaderQuery,
   FilesUploaderQueryVariables,
 } from '../generated/types/FilesUploaderQuery'
-import { SupportedUpload } from '../generated/types/globalTypes'
 
 export const FILES_UPLOADER_QUERY = gql`
-  query FilesUploaderQuery($fileTypes: [SupportedUpload!]!) {
+  query FilesUploaderQuery($uploads: [UploadInput!]!) {
     me {
       id
-      presignedUploadUrls(types: $fileTypes)
+      presignedUploadUrls(uploads: $uploads)
     }
   }
 `
-
-export const SUPPORTED_UPLOAD_TYPES = {
-  'image/jpeg': 'JPEG',
-  'image/gif': 'GIF',
-  'image/png': 'PNG',
-} as const
-
-export const ACCEPT = Object.keys(SUPPORTED_UPLOAD_TYPES).join(',')
 
 const Container = styled(Box)`
   display: flex;
@@ -56,19 +47,17 @@ export const FilesUploader: React.FC<FilesUploaderProps> = ({
   onUpload,
   ...rest
 }) => {
-  const fileTypes = files.map(
-    (file) =>
-      SUPPORTED_UPLOAD_TYPES[
-        file.type as keyof typeof SUPPORTED_UPLOAD_TYPES
-      ] as SupportedUpload
-  )
-
   const { data, error, loading } = useQuery<
     FilesUploaderQuery,
     FilesUploaderQueryVariables
   >(FILES_UPLOADER_QUERY, {
     fetchPolicy: 'network-only',
-    variables: { fileTypes },
+    variables: {
+      uploads: files.map((file) => ({
+        name: file.name,
+        type: file.type,
+      })),
+    },
   })
 
   if (error) {

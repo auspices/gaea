@@ -16,6 +16,10 @@ import {
   CONTENT_ENTITY_HEADER_COLLECTION_FRAGMENT,
   ContentEntityHeaderCollection,
 } from './components/ContentEntityHeaderCollection'
+import {
+  CONTENT_ENTITY_HEADER_ATTACHMENT_FRAGMENT,
+  ContentEntityHeaderAttachment,
+} from './components/ContentEntityHeaderAttachment'
 import { ContentEntityHeaderFragment } from '../../generated/types/ContentEntityHeaderFragment'
 
 export const CONTENT_ENTITY_HEADER_FRAGMENT = gql`
@@ -24,11 +28,13 @@ export const CONTENT_ENTITY_HEADER_FRAGMENT = gql`
     ...ContentEntityHeaderTextFragment
     ...ContentEntityHeaderLinkFragment
     ...ContentEntityHeaderCollectionFragment
+    ...ContentEntityHeaderAttachmentFragment
   }
   ${CONTENT_ENTITY_HEADER_IMAGE_FRAGMENT}
   ${CONTENT_ENTITY_HEADER_TEXT_FRAGMENT}
   ${CONTENT_ENTITY_HEADER_LINK_FRAGMENT}
   ${CONTENT_ENTITY_HEADER_COLLECTION_FRAGMENT}
+  ${CONTENT_ENTITY_HEADER_ATTACHMENT_FRAGMENT}
 `
 
 type ContentEntityHeaderProps = {
@@ -48,5 +54,7 @@ export const ContentEntityHeader: React.FC<ContentEntityHeaderProps> = ({
       return <ContentEntityHeaderLink link={entity} {...rest} />
     case 'Collection':
       return <ContentEntityHeaderCollection collection={entity} {...rest} />
+    case 'Attachment':
+      return <ContentEntityHeaderAttachment attachment={entity} {...rest} />
   }
 }

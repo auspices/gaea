@@ -78,7 +78,16 @@ export interface ContentPageQuery_me_content_entity_Collection {
   counts: ContentPageQuery_me_content_entity_Collection_counts;
 }
 
-export type ContentPageQuery_me_content_entity = ContentPageQuery_me_content_entity_Image | ContentPageQuery_me_content_entity_Text | ContentPageQuery_me_content_entity_Link | ContentPageQuery_me_content_entity_Collection;
+export interface ContentPageQuery_me_content_entity_Attachment {
+  __typename: "Attachment";
+  id: number;
+  url: string;
+  name: string;
+  fileSize: string;
+  contentType: string;
+}
+
+export type ContentPageQuery_me_content_entity = ContentPageQuery_me_content_entity_Image | ContentPageQuery_me_content_entity_Text | ContentPageQuery_me_content_entity_Link | ContentPageQuery_me_content_entity_Collection | ContentPageQuery_me_content_entity_Attachment;
 
 export interface ContentPageQuery_me_content_next {
   __typename: "Content";

@@ -8,7 +8,7 @@
 // ====================================================
 
 export interface CollectionContentContextMenuContentFragment_entity {
-  __typename: "Collection" | "Image" | "Link" | "Text";
+  __typename: "Attachment" | "Collection" | "Image" | "Link" | "Text";
 }
 
 export interface CollectionContentContextMenuContentFragment {
