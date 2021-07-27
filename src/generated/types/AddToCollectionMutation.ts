@@ -3,6 +3,8 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
+import { ImageInput, AttachmentInput } from "./globalTypes";
+
 // ====================================================
 // GraphQL mutation operation: AddToCollectionMutation
 // ====================================================
@@ -29,5 +31,7 @@ export interface AddToCollectionMutation {
 
 export interface AddToCollectionMutationVariables {
   id: string;
-  value: string;
+  value?: string | null;
+  image?: ImageInput | null;
+  attachment?: AttachmentInput | null;
 }

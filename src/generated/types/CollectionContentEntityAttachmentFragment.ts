@@ -4,15 +4,13 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: RedirectHomeQuery
+// GraphQL fragment: CollectionContentEntityAttachmentFragment
 // ====================================================
 
-export interface RedirectHomeQuery_me {
-  __typename: "User";
+export interface CollectionContentEntityAttachmentFragment {
+  __typename: "Attachment";
   id: number;
-  slug: string;
-}
-
-export interface RedirectHomeQuery {
-  me: RedirectHomeQuery_me;
+  url: string;
+  fileSize: string;
+  contentType: string;
 }

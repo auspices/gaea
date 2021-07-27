@@ -42,7 +42,7 @@ const Upload = styled.label.attrs({
 `
 
 type FileUploadButtonProps = {
-  onUpload(url: string): Promise<any>
+  onUpload({ url, file }: { url: string; file: File }): Promise<any>
   onComplete?(): void
 }
 
@@ -69,7 +69,7 @@ export const FileUploadButton: React.FC<FileUploadButtonProps> = ({
   const handleUpload = useCallback(
     async ({ url, file }: { url: string; file: File }) => {
       try {
-        onUpload(url)
+        onUpload({ url, file })
       } catch (err) {
         sendError({ body: errorMessage(err) })
       }

@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { Modal, useAlerts } from '@auspices/eos'
-import { ACCEPT, FilesUploader } from './FilesUploader'
+import { FilesUploader } from './FilesUploader'
 import { errorMessage } from '../util/errors'
 import { Z } from '../util/zIndexes'
 
@@ -12,7 +12,7 @@ enum Mode {
 }
 
 type FileDropzoneProps = {
-  onUpload(url: string): Promise<any>
+  onUpload({ url, file }: { url: string; file: File }): Promise<any>
   onComplete?(): void
 }
 
@@ -44,13 +44,12 @@ export const FileDropzone: React.FC<FileDropzoneProps> = ({
     onDragLeave: handleLeave,
     noClick: true,
     noKeyboard: true,
-    accept: ACCEPT,
   })
 
   const handleUpload = useCallback(
     async ({ url, file }: { url: string; file: File }) => {
       try {
-        onUpload(url)
+        onUpload({ url, file })
       } catch (err) {
         sendError({ body: errorMessage(err) })
       }

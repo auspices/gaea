@@ -16,6 +16,10 @@ import {
   COLLECTION_CONTENT_ENTITY_COLLECTION_FRAGMENT,
   CollectionContentEntityCollection,
 } from './components/CollectionContentEntityCollection'
+import {
+  COLLECTION_CONTENT_ENTITY_ATTACHMENT_FRAGMENT,
+  CollectionContentEntityAttachment,
+} from './components/CollectionContentEntityAttachment'
 import { CollectionContentEntityFragment } from '../../generated/types/CollectionContentEntityFragment'
 
 export const COLLECTION_CONTENT_ENTITY_FRAGMENT = gql`
@@ -24,11 +28,13 @@ export const COLLECTION_CONTENT_ENTITY_FRAGMENT = gql`
     ...CollectionContentEntityImageFragment
     ...CollectionContentEntityLinkFragment
     ...CollectionContentEntityCollectionFragment
+    ...CollectionContentEntityAttachmentFragment
   }
   ${COLLECTION_CONTENT_ENTITY_TEXT_FRAGMENT}
   ${COLLECTION_CONTENT_ENTITY_IMAGE_FRAGMENT}
   ${COLLECTION_CONTENT_ENTITY_LINK_FRAGMENT}
   ${COLLECTION_CONTENT_ENTITY_COLLECTION_FRAGMENT}
+  ${COLLECTION_CONTENT_ENTITY_ATTACHMENT_FRAGMENT}
 `
 
 type CollectionContentEntityProps = {
@@ -46,5 +52,7 @@ export const CollectionContentEntity: React.FC<CollectionContentEntityProps> =
         return <CollectionContentEntityLink link={entity} />
       case 'Collection':
         return <CollectionContentEntityCollection collection={entity} />
+      case 'Attachment':
+        return <CollectionContentEntityAttachment attachment={entity} />
     }
   }

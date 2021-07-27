@@ -3,7 +3,7 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { SupportedUpload } from "./globalTypes";
+import { UploadInput } from "./globalTypes";
 
 // ====================================================
 // GraphQL query operation: FilesUploaderQuery
@@ -23,5 +23,5 @@ export interface FilesUploaderQuery {
 }
 
 export interface FilesUploaderQueryVariables {
-  fileTypes: SupportedUpload[];
+  uploads: UploadInput[];
 }

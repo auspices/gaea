@@ -61,7 +61,16 @@ export interface CollectionContentContentFragment_entity_Collection {
   counts: CollectionContentContentFragment_entity_Collection_counts;
 }
 
-export type CollectionContentContentFragment_entity = CollectionContentContentFragment_entity_Image | CollectionContentContentFragment_entity_Text | CollectionContentContentFragment_entity_Link | CollectionContentContentFragment_entity_Collection;
+export interface CollectionContentContentFragment_entity_Attachment {
+  __typename: "Attachment";
+  label: string;
+  id: number;
+  url: string;
+  fileSize: string;
+  contentType: string;
+}
+
+export type CollectionContentContentFragment_entity = CollectionContentContentFragment_entity_Image | CollectionContentContentFragment_entity_Text | CollectionContentContentFragment_entity_Link | CollectionContentContentFragment_entity_Collection | CollectionContentContentFragment_entity_Attachment;
 
 export interface CollectionContentContentFragment {
   __typename: "Content";

@@ -55,4 +55,12 @@ export interface CollectionContentEntityFragment_Collection {
   counts: CollectionContentEntityFragment_Collection_counts;
 }
 
-export type CollectionContentEntityFragment = CollectionContentEntityFragment_Text | CollectionContentEntityFragment_Image | CollectionContentEntityFragment_Link | CollectionContentEntityFragment_Collection;
+export interface CollectionContentEntityFragment_Attachment {
+  __typename: "Attachment";
+  id: number;
+  url: string;
+  fileSize: string;
+  contentType: string;
+}
+
+export type CollectionContentEntityFragment = CollectionContentEntityFragment_Text | CollectionContentEntityFragment_Image | CollectionContentEntityFragment_Link | CollectionContentEntityFragment_Collection | CollectionContentEntityFragment_Attachment;

@@ -7,6 +7,10 @@
 // GraphQL query operation: CollectionPreviewQuery
 // ====================================================
 
+export interface CollectionPreviewQuery_me_collection_contents_entity_Attachment {
+  __typename: "Attachment";
+}
+
 export interface CollectionPreviewQuery_me_collection_contents_entity_Image_placeholder_urls {
   __typename: "RetinaImage";
   src: string;
@@ -41,7 +45,7 @@ export interface CollectionPreviewQuery_me_collection_contents_entity_Collection
   id: number;
 }
 
-export type CollectionPreviewQuery_me_collection_contents_entity = CollectionPreviewQuery_me_collection_contents_entity_Image | CollectionPreviewQuery_me_collection_contents_entity_Text | CollectionPreviewQuery_me_collection_contents_entity_Link | CollectionPreviewQuery_me_collection_contents_entity_Collection;
+export type CollectionPreviewQuery_me_collection_contents_entity = CollectionPreviewQuery_me_collection_contents_entity_Attachment | CollectionPreviewQuery_me_collection_contents_entity_Image | CollectionPreviewQuery_me_collection_contents_entity_Text | CollectionPreviewQuery_me_collection_contents_entity_Link | CollectionPreviewQuery_me_collection_contents_entity_Collection;
 
 export interface CollectionPreviewQuery_me_collection_contents {
   __typename: "Content";
