@@ -91,7 +91,7 @@
     "@types/react-helmet": "6.1.2",
     "@types/react-router": "5.1.16",
     "@types/react-router-dom": "5.1.8",
-    "@types/styled-components": "5.1.11",
+    "@types/styled-components": "5.1.12",
     "@types/styled-system": "5.1.12",
     "@types/styled-system__theme-get": "5.0.1",
     "apollo": "2.33.4",
