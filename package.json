@@ -27,7 +27,7 @@
     "styled-components": "5.3.1",
     "styled-system": "5.1.5",
     "use-debounce": "7.0.0",
-    "use-keyboard-list-navigation": "2.3.1"
+    "use-keyboard-list-navigation": "2.4.1"
   },
   "resolutions": {
     "graphql": "15.5.1"
