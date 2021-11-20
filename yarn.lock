@@ -14001,10 +14001,10 @@ use-debounce@7.0.1:
   resolved "https://registry.yarnpkg.com/use-debounce/-/use-debounce-7.0.1.tgz#380e6191cc13ad29f8e2149a12b5c37cc2891190"
   integrity sha512-fOrzIw2wstbAJuv8PC9Vg4XgwyTLEOdq4y/Z3IhVl8DAE4svRcgyEUvrEXu+BMNgMoc3YND6qLT61kkgEKXh7Q==
 
-use-keyboard-list-navigation@2.4.1:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/use-keyboard-list-navigation/-/use-keyboard-list-navigation-2.4.1.tgz#e6d2ee6188da005deebf443356f1dfbb20d86030"
-  integrity sha512-ghycnT+Hp86CUS780pp+ZcPhffYMUQvcofMq3US7kzNZCZ5eAL+vs+vR6BaTBcbSPJklIcEKvwJUcajeny/YkQ==
+use-keyboard-list-navigation@2.4.2:
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/use-keyboard-list-navigation/-/use-keyboard-list-navigation-2.4.2.tgz#d237e6cc35886c0f541d9e65eb5b3d2a65e6498d"
+  integrity sha512-PCoIDKsEmYaoce6pOwgU5xsqBjrRuUwcNNdIP1ZTmxyz9716zOAFJJHAp44QE74Zmnxc1VvgYxAfIkaCbq105A==
   dependencies:
     map-cursor-to-max "^1.0.0"
 
