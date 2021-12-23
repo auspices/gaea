@@ -10,7 +10,7 @@
     "@stripe/stripe-js": "1.22.0",
     "@styled-system/theme-get": "5.1.2",
     "axios": "0.24.0",
-    "fuse.js": "6.5.0",
+    "fuse.js": "6.5.2",
     "graphql": "15.8.0",
     "graphql-tag": "2.12.6",
     "jwt-decode": "3.1.2",
