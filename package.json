@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@apollo/client": "3.5.7",
+    "@apollo/client": "3.5.8",
     "@auspices/eos": "2.23.0",
     "@seznam/compose-react-refs": "1.0.6",
     "@stripe/react-stripe-js": "1.7.0",
