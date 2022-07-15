@@ -84,7 +84,7 @@
   "devDependencies": {
     "@types/jest": "26.0.24",
     "@types/jwt-decode": "3.1.0",
-    "@types/node": "15.12.5",
+    "@types/node": "16.11.45",
     "@types/qs": "6.9.7",
     "@types/react": "17.0.47",
     "@types/react-dom": "17.0.17",
