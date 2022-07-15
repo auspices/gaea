@@ -27,7 +27,9 @@ export const errorCode = (error: GenericError) => {
   return null
 }
 
-export const errorMessage = (error: GenericError) => {
+export const errorMessage = (error: any) => {
+  error = error as GenericError
+
   if (error.graphQLErrors && error.graphQLErrors.length > 0) {
     const code = errorCode(error)
 
