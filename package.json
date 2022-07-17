@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@apollo/client": "3.6.9",
-    "@auspices/eos": "2.32.3",
+    "@auspices/eos": "2.32.4",
     "@seznam/compose-react-refs": "1.0.6",
     "@stripe/react-stripe-js": "1.9.0",
     "@stripe/stripe-js": "1.32.0",
@@ -15,14 +15,14 @@
     "graphql-tag": "2.12.6",
     "jwt-decode": "3.1.2",
     "qs": "6.11.0",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
     "react-dropzone": "11.7.1",
     "react-helmet": "6.1.0",
     "react-intersection-observer": "8.34.0",
-    "react-router": "5.3.3",
-    "react-router-dom": "5.3.3",
-    "react-scripts": "4.0.3",
+    "react-router": "6.3.0",
+    "react-router-dom": "6.3.0",
+    "react-scripts": "5.0.1",
     "scroll-into-view-if-needed": "2.2.29",
     "styled-components": "5.3.5",
     "styled-system": "5.1.5",
@@ -30,6 +30,7 @@
     "use-keyboard-list-navigation": "2.4.2"
   },
   "resolutions": {
+    "@types/react": "18.0.15",
     "graphql": "15.8.0"
   },
   "scripts": {
@@ -40,7 +41,7 @@
     "gql:types:regenerate": "yarn gql:types:clean && yarn gql:types",
     "start:local": "REACT_APP_GRAPHQL_ENDPOINT=http://localhost:5000/graphql react-scripts start",
     "start:prod": "REACT_APP_GRAPHQL_ENDPOINT=https://atlas.auspic.es/graphql react-scripts start",
-    "start": "yarn start:prod",
+    "start": "GENERATE_SOURCEMAP=false yarn start:prod",
     "test": "react-scripts test",
     "unlink-all": "yalc remove --all && yarn --check-files"
   },
@@ -82,12 +83,12 @@
     ]
   },
   "devDependencies": {
-    "@types/jest": "26.0.24",
+    "@types/jest": "28.1.6",
     "@types/jwt-decode": "3.1.0",
-    "@types/node": "15.12.5",
+    "@types/node": "18.0.5",
     "@types/qs": "6.9.7",
-    "@types/react": "17.0.47",
-    "@types/react-dom": "17.0.17",
+    "@types/react": "18.0.15",
+    "@types/react-dom": "18.0.6",
     "@types/react-helmet": "6.1.5",
     "@types/react-router": "5.1.18",
     "@types/react-router-dom": "5.3.3",

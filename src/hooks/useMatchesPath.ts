@@ -7,18 +7,9 @@ export const useMatchesPath = () => {
 
   const matches = useMemo(
     () => ({
-      collections: matchPath(pathname, {
-        path: PATTERNS.collections,
-        exact: true,
-      }),
-      collection: matchPath<{ id: string }>(pathname, {
-        path: PATTERNS.collection,
-        exact: true,
-      }),
-      content: matchPath<{ id: string }>(pathname, {
-        path: PATTERNS.content,
-        exact: true,
-      }),
+      collections: matchPath({ path: PATTERNS.collections }, pathname),
+      collection: matchPath({ path: PATTERNS.collection }, pathname),
+      content: matchPath({ path: PATTERNS.content }, pathname),
     }),
     [pathname]
   )

@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react'
 import { gql } from 'graphql-tag'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { useMutation, useQuery } from '@apollo/client'
 import {
   Button,
@@ -55,13 +55,8 @@ enum Mode {
   Saving,
 }
 
-type CollectionSettingsPageProps = {
-  id: string
-}
-
-export const CollectionSettingsPage: React.FC<CollectionSettingsPageProps> = ({
-  id,
-}) => {
+export const CollectionSettingsPage: React.FC = () => {
+  const { id = '' } = useParams()
   const { data, loading, error, refetch } = useQuery<
     CollectionSettingsPageQuery,
     CollectionSettingsPageQueryVariables

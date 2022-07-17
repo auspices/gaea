@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react'
 import { gql } from 'graphql-tag'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Divider, Dropdown, Loading, PaneOption, Stack } from '@auspices/eos'
 import { useApolloClient, useQuery } from '@apollo/client'
 import { useDebounce } from 'use-debounce'
@@ -42,7 +42,7 @@ export type CollectionsPageProps = {}
 export const CollectionsPage: React.FC<CollectionsPageProps> = () => {
   const { page, per } = usePagination()
 
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const hrefs = useHrefs()
 
@@ -62,8 +62,8 @@ export const CollectionsPage: React.FC<CollectionsPageProps> = () => {
   const handleLogout = useCallback(() => {
     client.resetStore()
     localStorage.removeItem('jwt')
-    history.push(hrefs.root())
-  }, [client, history, hrefs])
+    navigate(hrefs.root())
+  }, [client, navigate, hrefs])
 
   if (error) {
     throw error

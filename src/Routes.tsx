@@ -1,7 +1,6 @@
 import React from 'react'
-import { Redirect, Route, Switch } from 'react-router-dom'
+import { Navigate, Routes as ReactRouterRoutes, Route } from 'react-router-dom'
 import { PATTERNS, useHrefs } from './hooks'
-import { parseRoute } from './util/parseRoute'
 import { RedirectHome } from './components/RedirectHome'
 import { LoginPage } from './pages/LoginPage'
 import { RegisterPage } from './pages/RegisterPage'
@@ -16,120 +15,108 @@ import { CreditCardProvider } from './components/CreditCard'
 import { CapturePage } from './pages/CapturePage'
 
 export const Routes = () => {
-  const hrefs = useHrefs()
-
   return (
-    <Switch>
+    <ReactRouterRoutes>
+      <Route path={PATTERNS.root} element={<Root />} />
       <Route
-        exact
-        path={PATTERNS.root}
-        component={() => {
-          const jwt = localStorage.getItem('jwt')
-          const isLoggedIn = !!jwt
-
-          if (!isLoggedIn) {
-            return <Redirect to={hrefs.login()} />
-          }
-
-          return (
-            <ErrorBoundary>
-              <RedirectHome />
-            </ErrorBoundary>
-          )
-        }}
-      />
-
-      <Route
-        exact
         path={PATTERNS.account}
-        component={() => (
+        element={
           <ErrorBoundary>
             <AccountPage />
           </ErrorBoundary>
-        )}
+        }
       />
 
       <Route
-        exact
         path={PATTERNS.login}
-        component={() => (
+        element={
           <ErrorBoundary>
             <LoginPage />
           </ErrorBoundary>
-        )}
+        }
       />
 
       <Route
-        exact
         path={PATTERNS.register}
-        component={() => (
+        element={
           <ErrorBoundary>
             <RegisterPage />
           </ErrorBoundary>
-        )}
+        }
       />
 
       <Route
-        exact
         path={PATTERNS.subscribe}
-        component={() => (
+        element={
           <ErrorBoundary>
             <CreditCardProvider>
               <SubscribePage />
             </CreditCardProvider>
           </ErrorBoundary>
-        )}
+        }
       />
 
       <Route
-        exact
         path={PATTERNS.collections}
-        component={parseRoute(() => (
+        element={
           <ErrorBoundary>
             <CollectionsPage />
           </ErrorBoundary>
-        ))}
+        }
       />
 
       <Route
-        exact
         path={PATTERNS.collection}
-        component={parseRoute(({ params: { id } }) => (
+        element={
           <ErrorBoundary>
-            <CollectionPage id={id} />
+            <CollectionPage />
           </ErrorBoundary>
-        ))}
+        }
       />
 
       <Route
-        exact
         path={PATTERNS.collectionSettings}
-        component={parseRoute(({ params: { id } }) => (
+        element={
           <ErrorBoundary>
-            <CollectionSettingsPage id={id} />
+            <CollectionSettingsPage />
           </ErrorBoundary>
-        ))}
+        }
       />
 
       <Route
-        exact
         path={PATTERNS.content}
-        component={parseRoute(({ params }) => (
+        element={
           <ErrorBoundary>
-            <ContentPage id={params.id} />
+            <ContentPage />
           </ErrorBoundary>
-        ))}
+        }
       />
 
       <Route
-        exact
         path={PATTERNS.capture}
-        component={parseRoute(({ params }) => (
+        element={
           <ErrorBoundary>
             <CapturePage />
           </ErrorBoundary>
-        ))}
+        }
       />
-    </Switch>
+    </ReactRouterRoutes>
+  )
+}
+
+const Root = () => {
+  const hrefs = useHrefs()
+
+  const jwt = localStorage.getItem('jwt')
+  const isLoggedIn = !!jwt
+
+  if (!isLoggedIn) {
+    return <Navigate to={hrefs.login()} />
+  }
+
+  return (
+    <ErrorBoundary>
+      <RedirectHome />
+    </ErrorBoundary>
   )
 }

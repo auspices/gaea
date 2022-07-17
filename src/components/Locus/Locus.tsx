@@ -1,6 +1,6 @@
 import React, { Suspense, useCallback, useEffect, useState } from 'react'
 import { Modal } from '@auspices/eos'
-import { useHistory } from 'react-router'
+import { useNavigate } from 'react-router'
 import { gql } from 'graphql-tag'
 import { useLazyQuery } from '@apollo/client'
 import {
@@ -48,7 +48,7 @@ enum Mode {
 }
 
 export const Locus: React.FC = () => {
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const { page, per, nextPage, prevPage, encode } = usePagination()
 
@@ -75,7 +75,7 @@ export const Locus: React.FC = () => {
           label: `go to next page`,
           kind: Kind.ACTION,
           onClick: (done) => {
-            history.push({ search: encode({ page: nextPage, per }) })
+            navigate({ search: encode({ page: nextPage, per }) })
             done()
           },
         },
@@ -89,7 +89,7 @@ export const Locus: React.FC = () => {
           label: `go to previous page`,
           kind: Kind.ACTION,
           onClick: (done) => {
-            history.push({ search: encode({ page: prevPage, per }) })
+            navigate({ search: encode({ page: prevPage, per }) })
             done()
           },
         },
@@ -100,7 +100,7 @@ export const Locus: React.FC = () => {
       label: 'go back',
       kind: Kind.ACTION,
       onClick: (done) => {
-        history.goBack()
+        navigate(-1)
         done()
       },
     }),
@@ -109,7 +109,7 @@ export const Locus: React.FC = () => {
       label: 'go home',
       kind: Kind.ACTION,
       onClick: (done) => {
-        history.push(hrefs.root())
+        navigate(hrefs.root())
         done()
       },
     }),
@@ -180,6 +180,8 @@ export const Locus: React.FC = () => {
             onClick: (done) => {
               setMode(Mode.Busy)
               addEntityToCollection(
+                // FIXME: `useMatchesPath`
+                // @ts-ignore
                 matches.collection!.params.id,
                 slug,
                 EntityTypes.COLLECTION
@@ -203,6 +205,8 @@ export const Locus: React.FC = () => {
               setMode(Mode.Busy)
               addEntityFromContentToCollection(
                 slug,
+                // FIXME: `useMatchesPath`
+                // @ts-ignore
                 matches.content!.params.id
               ).then(() => {
                 setMode(Mode.Resting)
@@ -220,7 +224,7 @@ export const Locus: React.FC = () => {
             ),
             kind: Kind.SEARCH,
             onClick: (done) => {
-              history.push(hrefs.collection(slug))
+              navigate(hrefs.collection(slug))
               done()
             },
           },
@@ -232,7 +236,7 @@ export const Locus: React.FC = () => {
     addEntityToCollection,
     data,
     error,
-    history,
+    navigate,
     loading,
     matches.collection,
     matches.content,

@@ -9,7 +9,13 @@ const PaginationContext = React.createContext<{
   setTotal: Dispatch<SetStateAction<number>>
 }>({ total: 0, setTotal: () => {} })
 
-export const PaginationProvider: React.FC = ({ children }) => {
+type PaginationProviderProps = {
+  children: React.ReactNode
+}
+
+export const PaginationProvider: React.FC<PaginationProviderProps> = ({
+  children,
+}) => {
   const [total, setTotal] = useState(0)
 
   return (
@@ -51,9 +57,7 @@ export const usePagination = () => {
   const { pathname } = useLocation()
   const { total, setTotal } = useContext(PaginationContext)
 
-  const mode = matchPath(pathname, { path: '/xs', exact: true })
-    ? 'list'
-    : 'grid'
+  const mode = matchPath({ path: '/xs' }, pathname) ? 'list' : 'grid'
 
   let { page = '1', per = '' } = useQueryString<Pagination>()
 

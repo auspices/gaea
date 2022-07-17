@@ -19,7 +19,7 @@ const RefetchContext = createContext<{
   setRefetch: () => {},
 })
 
-type RefetchProviderProps = { refetch?: Refetch }
+type RefetchProviderProps = { refetch?: Refetch; children: React.ReactNode }
 
 export const RefetchProvider: React.FC<RefetchProviderProps> = ({
   children,

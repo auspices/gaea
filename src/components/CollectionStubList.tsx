@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
 import { gql } from 'graphql-tag'
-import { useHistory } from 'react-router'
+import { useNavigate } from 'react-router'
 import { useKeyboardListNavigation } from 'use-keyboard-list-navigation'
 import { Stack, StackProps } from '@auspices/eos'
 import { useContextualRef, useHrefs } from '../hooks'
@@ -22,7 +22,7 @@ export const CollectionStubList: React.FC<CollectionStubListProps> = ({
   collections,
   ...rest
 }) => {
-  const history = useHistory()
+  const navigate = useNavigate()
   const hrefs = useHrefs()
 
   const { getContextualRef } = useContextualRef()
@@ -36,9 +36,9 @@ export const CollectionStubList: React.FC<CollectionStubListProps> = ({
       element: CollectionStubListFragment
     }) => {
       event.preventDefault()
-      history.push(hrefs.collection(collection.slug))
+      navigate(hrefs.collection(collection.slug))
     },
-    [history, hrefs]
+    [navigate, hrefs]
   )
 
   const { index } = useKeyboardListNavigation({

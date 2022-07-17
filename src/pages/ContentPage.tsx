@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from 'react'
 import { gql } from 'graphql-tag'
 import { useQuery } from '@apollo/client'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Box, Button, Caret, Loading, Stack } from '@auspices/eos'
 import { Helmet } from 'react-helmet'
 import { useHrefs } from '../hooks/useHrefs'
@@ -23,6 +23,7 @@ import {
   ContentPageQuery,
   ContentPageQueryVariables,
 } from '../generated/types/ContentPageQuery'
+import { useParams } from 'react-router'
 
 export const CONTENT_PAGE_QUERY = gql`
   query ContentPageQuery($id: ID!) {
@@ -56,12 +57,9 @@ export const CONTENT_PAGE_QUERY = gql`
   ${CONTENT_SETTINGS_FRAGMENT}
 `
 
-type ContentPageProps = {
-  id: string
-}
-
-export const ContentPage: React.FC<ContentPageProps> = ({ id }) => {
-  const history = useHistory()
+export const ContentPage: React.FC = () => {
+  const { id = '' } = useParams()
+  const navigate = useNavigate()
 
   const hrefs = useHrefs()
 
@@ -89,17 +87,17 @@ export const ContentPage: React.FC<ContentPageProps> = ({ id }) => {
 
       switch (key) {
         case 'ArrowUp':
-          history.push(hrefs.collection(collection.slug))
+          navigate(hrefs.collection(collection.slug))
           break
         case 'ArrowRight':
-          content.next && history.push(hrefs.content(content.next.id))
+          content.next && navigate(hrefs.content(content.next.id))
           break
         case 'ArrowLeft':
-          content.previous && history.push(hrefs.content(content.previous.id))
+          content.previous && navigate(hrefs.content(content.previous.id))
           break
       }
     },
-    [data, history, hrefs, loading]
+    [data, navigate, hrefs, loading]
   )
 
   useEffect(() => {

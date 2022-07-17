@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react'
 import { gql } from 'graphql-tag'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useMutation } from '@apollo/client'
 import {
   Button,
@@ -43,7 +43,7 @@ export const DeleteCollection: React.FC<DeleteCollectionProps> = ({
     DELETE_COLLECTION_MUTATION
   )
 
-  const history = useHistory()
+  const navigate = useNavigate()
   const hrefs = useHrefs()
 
   const { sendError, sendNotification } = useAlerts()
@@ -60,7 +60,7 @@ export const DeleteCollection: React.FC<DeleteCollectionProps> = ({
       try {
         await deleteCollection({ variables: { id } })
         sendNotification({ body: 'deleted successfully' })
-        history.push(hrefs.collections())
+        navigate(hrefs.collections())
       } catch (err) {
         sendError({ body: errorMessage(err) })
       }
@@ -68,7 +68,7 @@ export const DeleteCollection: React.FC<DeleteCollectionProps> = ({
     [
       confirmation,
       deleteCollection,
-      history,
+      navigate,
       hrefs,
       id,
       input,

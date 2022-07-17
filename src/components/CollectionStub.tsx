@@ -93,7 +93,6 @@ export const CollectionStub: React.FC<CollectionStubProps> = ({
 
   return (
     <Container
-      // @ts-ignore
       ref={ref}
       as={Link}
       to={hrefs.collection(collection.slug)}

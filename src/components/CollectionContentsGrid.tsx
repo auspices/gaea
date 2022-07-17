@@ -30,6 +30,8 @@ export const CollectionContentsGrid: React.FC<CollectionContentsGridProps> = ({
   ...rest
 }) => {
   return (
+    // FIXME: @auspices/eos
+    // @ts-ignore
     <MultiSelect>
       <Grid {...rest}>
         {collection.contents.map((content) => (

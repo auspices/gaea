@@ -39,6 +39,7 @@ import {
   CollectionPageQueryVariables,
 } from '../generated/types/CollectionPageQuery'
 import { Z } from '../util/zIndexes'
+import { useParams } from 'react-router'
 
 export const COLLECTION_PAGE_QUERY = gql`
   query CollectionPageQuery($id: ID!, $page: Int, $per: Int) {
@@ -71,11 +72,8 @@ export const COLLECTION_PAGE_QUERY = gql`
   ${COLLECTION_SETTINGS_FRAGMENT}
 `
 
-type CollectionPageProps = {
-  id: string
-}
-
-export const CollectionPage: React.FC<CollectionPageProps> = ({ id }) => {
+export const CollectionPage: React.FC = () => {
+  const { id = '' } = useParams()
   const { view = 'grid' } = useQueryString<{ view: 'list' | 'grid' }>()
   const { page, per } = usePagination()
 

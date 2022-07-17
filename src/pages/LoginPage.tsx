@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react'
-import { useHistory } from 'react-router'
+import { useLocation, useNavigate } from 'react-router'
 import { gql } from 'graphql-tag'
 import { useMutation } from '@apollo/client'
 import { Helmet } from 'react-helmet'
@@ -31,7 +31,8 @@ enum Mode {
 }
 
 export const LoginPage: React.FC = () => {
-  const history = useHistory()
+  const navigate = useNavigate()
+  const location = useLocation()
   const hrefs = useHrefs()
 
   const [mode, setMode] = useState(Mode.Resting)
@@ -66,14 +67,22 @@ export const LoginPage: React.FC = () => {
 
         sendNotification({ body: 'successfully logged in' })
 
-        const { redirectTo } = parse(history.location.search.slice(1))
-        history.push(redirectTo ? String(redirectTo) : hrefs.collections())
+        const { redirectTo } = parse(location.search.slice(1))
+        navigate(redirectTo ? String(redirectTo) : hrefs.collections())
       } catch (err) {
         sendError({ body: errorMessage(err) })
       }
       setMode(Mode.Resting)
     },
-    [history, hrefs, login, sendError, sendNotification, state]
+    [
+      sendNotification,
+      login,
+      state,
+      location.search,
+      navigate,
+      hrefs,
+      sendError,
+    ]
   )
 
   return (

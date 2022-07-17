@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react'
-import { useHistory } from 'react-router'
+import { useNavigate } from 'react-router'
 import { gql } from 'graphql-tag'
 import { useMutation } from '@apollo/client'
 import { Helmet } from 'react-helmet'
@@ -44,7 +44,7 @@ enum Mode {
 }
 
 export const RegisterPage: React.FC = () => {
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const hrefs = useHrefs()
 
@@ -87,13 +87,13 @@ export const RegisterPage: React.FC = () => {
         const { jwt } = data!.register!
         localStorage.setItem('jwt', jwt)
         sendNotification({ body: 'successfully created account' })
-        history.push(hrefs.collections())
+        navigate(hrefs.collections())
       } catch (err) {
         sendError({ body: errorMessage(err) })
       }
       setMode(Mode.Resting)
     },
-    [history, hrefs, register, sendError, sendNotification, state]
+    [navigate, hrefs, register, sendError, sendNotification, state]
   )
 
   return (
@@ -102,12 +102,7 @@ export const RegisterPage: React.FC = () => {
         <title>register</title>
       </Helmet>
 
-      <Box
-        as="form"
-        width="100%"
-        // @ts-ignore
-        onSubmit={handleSubmit}
-      >
+      <Box as="form" onSubmit={handleSubmit} width="100%">
         <Stack>
           <Input
             flex="1"

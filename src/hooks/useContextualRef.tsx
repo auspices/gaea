@@ -10,7 +10,13 @@ const ContextualRefsContext = React.createContext<{
   store: { current: null },
 })
 
-export const ContextualRefsProvider: React.FC = ({ children }) => {
+type ContextualRefsProviderProps = {
+  children: React.ReactNode
+}
+
+export const ContextualRefsProvider: React.FC<ContextualRefsProviderProps> = ({
+  children,
+}) => {
   const store = React.useRef<Map<string, Instance>>(new Map())
 
   const register = React.useCallback((key: string, current: Instance) => {

@@ -8,7 +8,7 @@ import {
 import { useHrefs } from '../hooks'
 import { CollectionContentContentFragment } from '../generated/types/CollectionContentContentFragment'
 import { CollectionContentCollectionFragment } from '../generated/types/CollectionContentCollectionFragment'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import {
   COLLECTION_CONTENT_CONTEXT_MENU_COLLECTION_FRAGMENT,
   COLLECTION_CONTENT_CONTEXT_MENU_CONTENT_FRAGMENT,
@@ -72,7 +72,7 @@ export const CollectionContent: React.FC<CollectionContentProps> = ({
   const [mode, setMode] = useState(Mode.Resting)
 
   const hrefs = useHrefs()
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const timer = useRef<ReturnType<typeof setTimeout>>()
 
@@ -94,7 +94,7 @@ export const CollectionContent: React.FC<CollectionContentProps> = ({
   }
 
   const handleDoubleClick = () => {
-    history.push(hrefs.content(content.id))
+    navigate(hrefs.content(content.id))
   }
 
   useEffect(() => {

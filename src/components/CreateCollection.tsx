@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react'
 import { gql } from 'graphql-tag'
 import { useMutation } from '@apollo/client'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { Button, ClearableInput, useAlerts, useConfirm } from '@auspices/eos'
 import { useContextualRef, useHrefs } from '../hooks'
 import { errorMessage } from '../util/errors'
@@ -46,7 +46,7 @@ export const CreateCollection: React.FC<CreateCollectionProps> = ({
     CreateCollectionMutationVariables
   >(CREATE_COLLECTION_MUTATION)
 
-  const history = useHistory()
+  const navigate = useNavigate()
   const hrefs = useHrefs()
 
   const { setContextualRef } = useContextualRef()
@@ -71,12 +71,12 @@ export const CreateCollection: React.FC<CreateCollectionProps> = ({
       const { data } = await createCollection({ variables: { title: value } })
       const { collection } = data!.createCollection!
       sendNotification({ body: `successfully created ${collection.title}` })
-      history.push(hrefs.collection(collection.slug))
+      navigate(hrefs.collection(collection.slug))
     } catch (err) {
       setMode(Mode.Error)
       sendError({ body: errorMessage(err) })
     }
-  }, [createCollection, history, hrefs, sendError, sendNotification, value])
+  }, [createCollection, navigate, hrefs, sendError, sendNotification, value])
 
   const { requestConfirmation, Confirmation } = useConfirm({
     onConfirm: handleConfirm,

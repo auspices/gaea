@@ -3,6 +3,7 @@ import { Box } from '@auspices/eos'
 
 type LocusLabelProps = {
   isMutation: boolean
+  children: React.ReactNode
 }
 
 export const LocusLabel: React.FC<LocusLabelProps> = ({

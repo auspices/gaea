@@ -7,7 +7,7 @@ import { errorMessage } from '../util/errors'
 import { Form, FormProps } from './Form'
 import { FileDropzone } from './FileDropzone'
 import { FileUploadButton } from './FileUploadButton'
-import { useHistory } from 'react-router'
+import { useNavigate } from 'react-router'
 import {
   AddToCollectionMutation,
   AddToCollectionMutationVariables,
@@ -49,7 +49,8 @@ export const AddToCollection: React.FC<AddToCollectionProps> = ({
   ...rest
 }) => {
   const hrefs = useHrefs()
-  const history = useHistory()
+  const navigate = useNavigate()
+
   const { refetch } = useRefetch()
   const { page, per, encode } = usePagination()
   const { sendNotification, sendError } = useAlerts()
@@ -95,14 +96,14 @@ export const AddToCollection: React.FC<AddToCollectionProps> = ({
       setInputKey(new Date().getTime())
 
       if (goToContent) {
-        history.push(hrefs.content(data?.addToCollection?.content.id!))
+        navigate(hrefs.content(data?.addToCollection?.content.id!))
         return
       }
 
       refetch()
 
       if (page !== 1) {
-        history.push({ search: encode({ page: 1, per }) })
+        navigate({ search: encode({ page: 1, per }) })
       }
     } catch (err) {
       sendError({ body: errorMessage(err) })
@@ -112,7 +113,7 @@ export const AddToCollection: React.FC<AddToCollectionProps> = ({
     addToCollection,
     encode,
     goToContent,
-    history,
+    navigate,
     hrefs,
     id,
     page,
