@@ -18,6 +18,7 @@ export const Routes = () => {
   return (
     <ReactRouterRoutes>
       <Route path={PATTERNS.root} element={<Root />} />
+
       <Route
         path={PATTERNS.account}
         element={

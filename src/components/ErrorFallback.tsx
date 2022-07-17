@@ -2,7 +2,7 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 import { Box, Cell, Stack } from '@auspices/eos'
 import { errorMessage, GraphQLError } from '../util/errors'
-import { Navigate, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useHrefs } from '../hooks'
 
 const isDevelopment = process.env.NODE_ENV === 'development'
@@ -42,12 +42,6 @@ export const ErrorFallback: React.FC<ErrorFallbackProps> = ({
         <title>error</title>
       </Helmet>
 
-      {requireLogin && (
-        <Navigate
-          to={hrefs.login([location.pathname, location.search].join(''))}
-        />
-      )}
-
       <Stack>
         {error && (
           <Cell as="h1" color="danger" borderColor="danger">
@@ -60,9 +54,21 @@ export const ErrorFallback: React.FC<ErrorFallbackProps> = ({
             could a version perhaps be false somewhat in the way a jigsaw puzzle
             can be wrongly put together, or a motor fail to run, a poster to
             attract attention, or a camouflage to conceal?{' '}
-            <Box as="a" color="danger" href="/">
-              go home
-            </Box>
+            {requireLogin ? (
+              <Box
+                as="a"
+                color="danger"
+                href={hrefs.login(
+                  [location.pathname, location.search].join('')
+                )}
+              >
+                login
+              </Box>
+            ) : (
+              <Box as="a" color="danger" href="/">
+                go home
+              </Box>
+            )}
           </span>
         </Cell>
 
