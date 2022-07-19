@@ -2,15 +2,7 @@ import React, { useCallback, useState } from 'react'
 import { gql } from 'graphql-tag'
 import { Link, useParams } from 'react-router-dom'
 import { useMutation, useQuery } from '@apollo/client'
-import {
-  Button,
-  Caret,
-  Cell,
-  Loading,
-  Split,
-  Stack,
-  useAlerts,
-} from '@auspices/eos'
+import { Button, Caret, Cell, Loading, Stack, useAlerts } from '@auspices/eos'
 import { Helmet } from 'react-helmet'
 import { useHrefs } from '../hooks'
 import { DeleteCollection } from '../components/DeleteCollection'
