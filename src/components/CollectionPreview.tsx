@@ -124,7 +124,10 @@ export const CollectionPreview: React.FC<CollectionPreviewProps> = React.memo(
                           p={2}
                           overflow="hidden"
                         >
-                          <FadeOut lineHeight="0px">
+                          <FadeOut
+                            lineHeight="0px"
+                            style={{ whiteSpace: 'pre-wrap' }}
+                          >
                             <Box
                               as="span"
                               color="secondary"
