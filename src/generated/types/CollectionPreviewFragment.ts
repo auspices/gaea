@@ -7,13 +7,10 @@
 // GraphQL fragment: CollectionPreviewFragment
 // ====================================================
 
-export interface CollectionPreviewFragment_contents_entity_Attachment {
-  __typename: "Attachment";
-}
-
 export interface CollectionPreviewFragment_contents_entity_Image_placeholder_urls {
   __typename: "RetinaImage";
-  src: string;
+  _1x: string;
+  _2x: string;
 }
 
 export interface CollectionPreviewFragment_contents_entity_Image_placeholder {
@@ -32,20 +29,29 @@ export interface CollectionPreviewFragment_contents_entity_Image {
 export interface CollectionPreviewFragment_contents_entity_Text {
   __typename: "Text";
   id: number;
-  length: number;
+  body: string;
 }
 
 export interface CollectionPreviewFragment_contents_entity_Link {
   __typename: "Link";
   id: number;
+  name: string;
 }
 
 export interface CollectionPreviewFragment_contents_entity_Collection {
   __typename: "Collection";
   id: number;
+  title: string;
 }
 
-export type CollectionPreviewFragment_contents_entity = CollectionPreviewFragment_contents_entity_Attachment | CollectionPreviewFragment_contents_entity_Image | CollectionPreviewFragment_contents_entity_Text | CollectionPreviewFragment_contents_entity_Link | CollectionPreviewFragment_contents_entity_Collection;
+export interface CollectionPreviewFragment_contents_entity_Attachment {
+  __typename: "Attachment";
+  id: number;
+  contentType: string;
+  fileSize: string | null;
+}
+
+export type CollectionPreviewFragment_contents_entity = CollectionPreviewFragment_contents_entity_Image | CollectionPreviewFragment_contents_entity_Text | CollectionPreviewFragment_contents_entity_Link | CollectionPreviewFragment_contents_entity_Collection | CollectionPreviewFragment_contents_entity_Attachment;
 
 export interface CollectionPreviewFragment_contents {
   __typename: "Content";

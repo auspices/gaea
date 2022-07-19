@@ -83,7 +83,7 @@ export interface ContentPageQuery_me_content_entity_Attachment {
   id: number;
   url: string;
   name: string;
-  fileSize: string;
+  fileSize: string | null;
   contentType: string;
 }
 

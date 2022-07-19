@@ -161,18 +161,15 @@ export const CollectionSettingsPage: React.FC = () => {
             onChange={handleChange}
           />
 
-          <Split>
-            <></>
-            <Button width="100%" type="submit" disabled={mode !== Mode.Dirty}>
+          <Button width="100%" type="submit" disabled={mode !== Mode.Dirty}>
+            {
               {
-                {
-                  [Mode.Resting]: 'save',
-                  [Mode.Dirty]: 'save',
-                  [Mode.Saving]: 'saving',
-                }[mode]
-              }
-            </Button>
-          </Split>
+                [Mode.Resting]: 'save',
+                [Mode.Dirty]: 'save',
+                [Mode.Saving]: 'saving',
+              }[mode]
+            }
+          </Button>
         </Stack>
       </Stack>
 

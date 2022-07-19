@@ -75,7 +75,7 @@ export interface CollectionContentsListFragment_contents_entity_Attachment {
   id: number;
   url: string;
   name: string;
-  fileSize: string;
+  fileSize: string | null;
   contentType: string;
 }
 

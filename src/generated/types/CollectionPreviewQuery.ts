@@ -7,13 +7,10 @@
 // GraphQL query operation: CollectionPreviewQuery
 // ====================================================
 
-export interface CollectionPreviewQuery_me_collection_contents_entity_Attachment {
-  __typename: "Attachment";
-}
-
 export interface CollectionPreviewQuery_me_collection_contents_entity_Image_placeholder_urls {
   __typename: "RetinaImage";
-  src: string;
+  _1x: string;
+  _2x: string;
 }
 
 export interface CollectionPreviewQuery_me_collection_contents_entity_Image_placeholder {
@@ -32,20 +29,29 @@ export interface CollectionPreviewQuery_me_collection_contents_entity_Image {
 export interface CollectionPreviewQuery_me_collection_contents_entity_Text {
   __typename: "Text";
   id: number;
-  length: number;
+  body: string;
 }
 
 export interface CollectionPreviewQuery_me_collection_contents_entity_Link {
   __typename: "Link";
   id: number;
+  name: string;
 }
 
 export interface CollectionPreviewQuery_me_collection_contents_entity_Collection {
   __typename: "Collection";
   id: number;
+  title: string;
 }
 
-export type CollectionPreviewQuery_me_collection_contents_entity = CollectionPreviewQuery_me_collection_contents_entity_Attachment | CollectionPreviewQuery_me_collection_contents_entity_Image | CollectionPreviewQuery_me_collection_contents_entity_Text | CollectionPreviewQuery_me_collection_contents_entity_Link | CollectionPreviewQuery_me_collection_contents_entity_Collection;
+export interface CollectionPreviewQuery_me_collection_contents_entity_Attachment {
+  __typename: "Attachment";
+  id: number;
+  contentType: string;
+  fileSize: string | null;
+}
+
+export type CollectionPreviewQuery_me_collection_contents_entity = CollectionPreviewQuery_me_collection_contents_entity_Image | CollectionPreviewQuery_me_collection_contents_entity_Text | CollectionPreviewQuery_me_collection_contents_entity_Link | CollectionPreviewQuery_me_collection_contents_entity_Collection | CollectionPreviewQuery_me_collection_contents_entity_Attachment;
 
 export interface CollectionPreviewQuery_me_collection_contents {
   __typename: "Content";

@@ -59,7 +59,7 @@ export interface CollectionContentEntityFragment_Attachment {
   __typename: "Attachment";
   id: number;
   url: string;
-  fileSize: string;
+  fileSize: string | null;
   contentType: string;
 }
 

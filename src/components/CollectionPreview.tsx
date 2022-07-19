@@ -1,60 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { gql } from 'graphql-tag'
-import { useQuery } from '@apollo/client'
-import {
-  AspectRatioBox,
-  Box,
-  BoxProps,
-  EmptyFrame,
-  Grid,
-  GridProps,
-  Image,
-} from '@auspices/eos'
+import { resetApolloContext, useQuery } from '@apollo/client'
+import { AspectRatioBox, Box, BoxProps, Image, space } from '@auspices/eos'
 import {
   CollectionPreviewQuery,
   CollectionPreviewQueryVariables,
 } from '../generated/types/CollectionPreviewQuery'
 import { FadeOut } from './FadeOut'
-
-const MiniGrid = styled(Grid)`
-  position: relative;
-  overflow: hidden;
-  transition: opacity 1s;
-`
-
-const Thumb = styled(AspectRatioBox)`
-  overflow: hidden;
-`
-
-const Line: React.FC<{ color?: string }> = React.memo(({ color = 'hint' }) => (
-  <Box
-    bg={color}
-    width={`${Math.floor(Math.random() * Math.floor(90))}%`}
-    height="2px"
-    mb="2px"
-  />
-))
-
-const Text: React.FC<BoxProps & { length: number }> = React.memo(
-  ({ length, ...rest }) => {
-    return (
-      <Box {...rest}>
-        <Line />
-        <Line />
-        <Line />
-        {length > 100 && (
-          <>
-            <Line />
-            <Line />
-            <Line />
-            <Line />
-          </>
-        )}
-      </Box>
-    )
-  }
-)
 
 export const COLLECTION_PREVIEW_FRAGMENT = gql`
   fragment CollectionPreviewFragment on Collection {
@@ -67,21 +20,29 @@ export const COLLECTION_PREVIEW_FRAGMENT = gql`
           id
           width
           height
-          placeholder: resized(width: 50, height: 50, blur: 10) {
+          placeholder: resized(width: 125, height: 125) {
             urls {
-              src: _1x
+              _1x
+              _2x
             }
           }
         }
         ... on Text {
           id
-          length
+          body: toString(length: 200)
         }
         ... on Link {
           id
+          name: toString(length: 30, from: CENTER)
         }
         ... on Collection {
           id
+          title
+        }
+        ... on Attachment {
+          id
+          contentType
+          fileSize
         }
       }
     }
@@ -100,19 +61,18 @@ export const COLLECTION_PREVIEW_QUERY = gql`
   ${COLLECTION_PREVIEW_FRAGMENT}
 `
 
-export type CollectionPreviewProps = Omit<GridProps, 'cellSize'> & {
+export type CollectionPreviewProps = BoxProps & {
   id: number
   per?: number
-  cellSizePx: string
 }
 
 export const CollectionPreview: React.FC<CollectionPreviewProps> = React.memo(
-  ({ id, per = 24, cellSizePx, cellGap = 2, ...rest }) => {
+  ({ id, per = 4, ...rest }) => {
     const { data, loading, error } = useQuery<
       CollectionPreviewQuery,
       CollectionPreviewQueryVariables
     >(COLLECTION_PREVIEW_QUERY, {
-      variables: { id: `${id}`, per: 16 },
+      variables: { id: `${id}`, per },
     })
 
     const [ready, setReady] = useState(false)
@@ -129,74 +89,151 @@ export const CollectionPreview: React.FC<CollectionPreviewProps> = React.memo(
     } = data
 
     return (
-      <FadeOut>
-        <MiniGrid
-          cellSize={cellSizePx}
-          cellGap={cellGap}
-          opacity={ready ? 1 : 0}
-          {...rest}
-        >
+      <FadeOut {...resetApolloContext}>
+        <Grid height="100%" style={{ opacity: ready ? 1 : 0 }}>
           {collection.contents.map(({ entity }) => {
-            switch (entity.__typename) {
-              case 'Image':
-                return (
-                  <Thumb
-                    key={entity.id}
-                    aspectWidth={entity.width}
-                    aspectHeight={entity.height}
-                    maxWidth={parseInt(cellSizePx, 10)}
-                    maxHeight={parseInt(cellSizePx, 10)}
-                    backgroundColor="hint"
-                  >
-                    <Image
-                      srcs={[entity.placeholder.urls.src]}
-                      width="100%"
-                      height="100%"
-                    />
-                  </Thumb>
-                )
-              case 'Text':
-                return (
-                  <Text
-                    key={entity.id}
-                    width="100%"
-                    height="100%"
-                    length={entity.length}
-                  >
-                    {entity.length}
-                  </Text>
-                )
-              case 'Link':
-                return (
-                  <EmptyFrame
-                    key={entity.id}
-                    width="100%"
-                    height="100%"
-                    color="external"
-                    strokeWidth={0.75}
-                    outline
-                  />
-                )
-              case 'Collection':
-                return (
-                  <Box
-                    key={entity.id}
-                    border="1px solid"
-                    borderColor="border"
-                    borderRadius={2}
-                    width="100%"
-                    height="100%"
-                    p={2}
-                  >
-                    <Line color="border" />
-                  </Box>
-                )
-              default:
-                return null
-            }
+            return (
+              <AspectRatioBox
+                key={entity.id}
+                aspectWidth={1}
+                aspectHeight={1}
+                maxWidth="100%"
+              >
+                {(() => {
+                  switch (entity.__typename) {
+                    case 'Image':
+                      return (
+                        <Image
+                          srcs={[
+                            entity.placeholder.urls._1x,
+                            entity.placeholder.urls._2x,
+                          ]}
+                          width="100%"
+                          height="100%"
+                          style={{ objectFit: 'cover' }}
+                          bg="tertiary"
+                        />
+                      )
+                    case 'Text':
+                      return (
+                        <Box
+                          width="100%"
+                          height="100%"
+                          border="1px solid"
+                          borderColor="hint"
+                          p={2}
+                          overflow="hidden"
+                        >
+                          <FadeOut lineHeight="0px">
+                            <Box
+                              as="span"
+                              color="secondary"
+                              bg="secondary"
+                              fontSize="4px"
+                              lineHeight={1}
+                            >
+                              {entity.body}
+                            </Box>
+                          </FadeOut>
+                        </Box>
+                      )
+                    case 'Link':
+                      return (
+                        <Box
+                          border="1px solid"
+                          borderColor="external"
+                          width="100%"
+                          height="100%"
+                          display="flex"
+                        >
+                          <Box
+                            borderTop="1px solid"
+                            borderColor="external"
+                            alignSelf="flex-end"
+                            width="100%"
+                            lineHeight="0px"
+                            p={2}
+                          >
+                            <Box
+                              as="span"
+                              color="external"
+                              bg="external"
+                              fontSize="4px"
+                              lineHeight={1}
+                              verticalAlign="middle"
+                            >
+                              {entity.name}
+                            </Box>
+                          </Box>
+                        </Box>
+                      )
+                    case 'Attachment':
+                      return (
+                        <Box
+                          border="1px solid"
+                          borderColor="secondary"
+                          width="100%"
+                          height="100%"
+                        >
+                          <Box
+                            borderBottom="1px solid"
+                            borderColor="secondary"
+                            width="100%"
+                            lineHeight="0px"
+                            p={2}
+                          >
+                            <Box
+                              as="span"
+                              color="secondary"
+                              bg="secondary"
+                              fontSize="4px"
+                              lineHeight={1}
+                              verticalAlign="middle"
+                            >
+                              {entity.contentType} ({entity.fileSize})
+                            </Box>
+                          </Box>
+                        </Box>
+                      )
+                    case 'Collection':
+                      return (
+                        <Box
+                          border="1px solid"
+                          borderColor="border"
+                          borderRadius={2}
+                          width="100%"
+                          height="100%"
+                          p={2}
+                          lineHeight="0px"
+                        >
+                          <Box
+                            as="span"
+                            color="primary"
+                            bg="primary"
+                            fontSize="4px"
+                            lineHeight={1}
+                          >
+                            {entity.title}
+                          </Box>
+                        </Box>
+                      )
+                    default:
+                      return null
+                  }
+                })()}
+              </AspectRatioBox>
+            )
           })}
-        </MiniGrid>
+        </Grid>
       </FadeOut>
     )
   }
 )
+
+const Grid = styled(Box)`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: ${space(2)};
+  grid-row-gap: ${space(2)};
+`

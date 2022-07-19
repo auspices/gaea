@@ -12,6 +12,6 @@ export interface ContentEntityAttachmentFragment {
   id: number;
   url: string;
   name: string;
-  fileSize: string;
+  fileSize: string | null;
   contentType: string;
 }

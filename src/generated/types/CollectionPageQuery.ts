@@ -105,7 +105,7 @@ export interface CollectionPageQuery_me_collection_contents_entity_Attachment {
   label: string;
   id: number;
   url: string;
-  fileSize: string;
+  fileSize: string | null;
   contentType: string;
   name: string;
 }
