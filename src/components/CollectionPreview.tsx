@@ -89,7 +89,7 @@ export const CollectionPreview: React.FC<CollectionPreviewProps> = React.memo(
     } = data
 
     return (
-      <FadeOut {...resetApolloContext}>
+      <FadeOut {...resetApolloContext} {...rest}>
         <Grid height="100%" style={{ opacity: ready ? 1 : 0 }}>
           {collection.contents.map(({ entity }) => {
             return (

@@ -73,7 +73,7 @@ export const CollectionContentEntityCollection: React.FC<
 
       <Box color="tertiary">{collection.counts.contents || '∅'}</Box>
 
-      {inView && <CollectionPreview id={collection.id} my={5} />}
+      {inView && <CollectionPreview id={collection.id} mt={3} />}
 
       <Delta>{collection.updatedAt}</Delta>
     </Container>
