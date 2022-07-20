@@ -1649,7 +1649,7 @@
     "@graphql-tools/utils" "^8.8.0"
     tslib "~2.4.0"
 
-"@graphql-codegen/typescript-operations@^2.5.2":
+"@graphql-codegen/typescript-operations@2.5.2":
   version "2.5.2"
   resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript-operations/-/typescript-operations-2.5.2.tgz#17dd6837eadb5bcd42b0c822b78f75c44a9a3c0b"
   integrity sha512-iFZsdsF4380WrN2UQHfgLjrjyo9VFIsZuCaHe1OoC4fQQ+P3t/GfJ0aj0hc5hNwTNJZ3BzBLHSRgE6wqO4591A==
