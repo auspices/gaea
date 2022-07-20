@@ -51,7 +51,7 @@ export const ContentEntityCollection: React.FC<
 
       <Box color="tertiary">{collection.counts.contents || '∅'}</Box>
 
-      <EmbeddedCollection id={collection.id} />
+      <EmbeddedCollection id={collection.id} mt={4} />
 
       <Box
         color="tertiary"
