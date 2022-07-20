@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { gql } from 'graphql-tag'
 import { File } from '@auspices/eos'
 import {
@@ -43,6 +43,7 @@ export const COLLECTION_CONTENT_CONTENT_FRAGMENT = gql`
         label: toString(length: 35, from: CENTER)
       }
       ... on Collection {
+        slug
         label: toString(length: 35, from: CENTER)
       }
       ... on Attachment {
@@ -96,7 +97,11 @@ export const CollectionContent: React.FC<CollectionContentProps> = ({
   }
 
   const handleDoubleClick = () => {
-    navigate(hrefs.content(content.id))
+    const href =
+      content.entity.__typename === 'Collection'
+        ? hrefs.collection(content.entity.slug)
+        : hrefs.content(content.id)
+    navigate(href)
   }
 
   useEffect(() => {
@@ -105,14 +110,14 @@ export const CollectionContent: React.FC<CollectionContentProps> = ({
     }
   }, [])
 
-  const meta = (() => {
+  const meta = useMemo(() => {
     switch (content.entity.__typename) {
       case 'Image':
         return `${content.entity.width}×${content.entity.height}`
       default:
         return undefined
     }
-  })()
+  }, [content.entity])
 
   return (
     <File

@@ -1,6 +1,6 @@
 import { gql } from 'graphql-tag'
 import React from 'react'
-import { Divider } from '@auspices/eos'
+import { Divider, PaneOption } from '@auspices/eos'
 import { ContextMenu, ContextMenuProps } from './ContextMenu'
 import {
   ReorderAction,
@@ -11,6 +11,8 @@ import {
   CollectionContentContextMenuCollectionFragment,
   CollectionContentContextMenuContentFragment,
 } from '../generated/graphql'
+import { Link } from 'react-router-dom'
+import { useHrefs } from '../hooks'
 
 export const COLLECTION_CONTENT_CONTEXT_MENU_COLLECTION_FRAGMENT = gql`
   fragment CollectionContentContextMenuCollectionFragment on Collection {
@@ -39,8 +41,16 @@ type CollectionContentContextMenuProps = ContextMenuProps & {
 export const CollectionContentContextMenu: React.FC<
   CollectionContentContextMenuProps
 > = ({ collection, content, ...rest }) => {
+  const hrefs = useHrefs()
+
   return (
     <ContextMenu {...rest}>
+      <PaneOption as={Link} to={hrefs.content(content.id)}>
+        view {content.entity.__typename.toLowerCase()}
+      </PaneOption>
+
+      <Divider />
+
       {content.position !== 0 && (
         <RepositionCollectionContent
           contentId={content.id}
