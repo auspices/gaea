@@ -85,7 +85,7 @@
     "@graphql-codegen/fragment-matcher": "3.3.0",
     "@graphql-codegen/introspection": "2.2.0",
     "@graphql-codegen/typescript": "2.7.2",
-    "@graphql-codegen/typescript-operations": "^2.5.2",
+    "@graphql-codegen/typescript-operations": "2.5.2",
     "@types/jest": "28.1.6",
     "@types/jwt-decode": "3.1.0",
     "@types/node": "18.0.6",
