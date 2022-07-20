@@ -77,6 +77,11 @@ export const CollectionContent: React.FC<CollectionContentProps> = ({
   const hrefs = useHrefs()
   const navigate = useNavigate()
 
+  const href =
+    content.entity.__typename === 'Collection'
+      ? hrefs.collection(content.entity.slug)
+      : hrefs.content(content.id)
+
   const timer = useRef<ReturnType<typeof setTimeout>>()
 
   const handleMouseEnter = useCallback(() => {
@@ -97,10 +102,6 @@ export const CollectionContent: React.FC<CollectionContentProps> = ({
   }
 
   const handleDoubleClick = () => {
-    const href =
-      content.entity.__typename === 'Collection'
-        ? hrefs.collection(content.entity.slug)
-        : hrefs.content(content.id)
     navigate(href)
   }
 
@@ -131,7 +132,7 @@ export const CollectionContent: React.FC<CollectionContentProps> = ({
       onDoubleClick={handleDoubleClick}
       // @ts-ignore
       as="a"
-      href={hrefs.content(content.id)}
+      href={href}
       {...rest}
     >
       {mode !== Mode.Resting && (
