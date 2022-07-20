@@ -6,8 +6,10 @@ import {
   CollectionContentEntity,
 } from './CollectionContentEntity'
 import { useHrefs } from '../hooks'
-import { CollectionContentContentFragment } from '../generated/types/CollectionContentContentFragment'
-import { CollectionContentCollectionFragment } from '../generated/types/CollectionContentCollectionFragment'
+import {
+  CollectionContentCollectionFragment,
+  CollectionContentContentFragment,
+} from '../generated/graphql'
 import { useNavigate } from 'react-router-dom'
 import {
   COLLECTION_CONTENT_CONTEXT_MENU_COLLECTION_FRAGMENT,

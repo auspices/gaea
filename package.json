@@ -11,7 +11,7 @@
     "@styled-system/theme-get": "5.1.2",
     "axios": "0.27.2",
     "fuse.js": "6.6.2",
-    "graphql": "15.8.0",
+    "graphql": "16.5.0",
     "graphql-tag": "2.12.6",
     "jwt-decode": "3.1.2",
     "qs": "6.11.0",
@@ -31,19 +31,17 @@
   },
   "resolutions": {
     "@types/react": "18.0.15",
-    "graphql": "15.8.0"
+    "graphql": "16.5.0"
   },
   "scripts": {
     "build": "react-scripts build",
     "eject": "react-scripts eject",
-    "gql:types": "apollo codegen:generate --target typescript --outputFlat src/generated/types",
-    "gql:types:clean": "rm -rf src/generated/types",
-    "gql:types:regenerate": "yarn gql:types:clean && yarn gql:types",
     "start:local": "REACT_APP_GRAPHQL_ENDPOINT=http://localhost:5000/graphql react-scripts start",
     "start:prod": "REACT_APP_GRAPHQL_ENDPOINT=https://atlas.auspic.es/graphql react-scripts start",
     "start": "GENERATE_SOURCEMAP=false yarn start:prod",
     "test": "react-scripts test",
-    "unlink-all": "yalc remove --all && yarn --check-files"
+    "unlink-all": "yalc remove --all && yarn --check-files",
+    "gql:codegen": "graphql-codegen --config codegen.yml"
   },
   "eslintConfig": {
     "extends": [
@@ -83,9 +81,14 @@
     ]
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "2.9.0",
+    "@graphql-codegen/fragment-matcher": "3.3.0",
+    "@graphql-codegen/introspection": "2.2.0",
+    "@graphql-codegen/typescript": "2.7.2",
+    "@graphql-codegen/typescript-operations": "^2.5.2",
     "@types/jest": "28.1.6",
     "@types/jwt-decode": "3.1.0",
-    "@types/node": "18.0.5",
+    "@types/node": "18.0.6",
     "@types/qs": "6.9.7",
     "@types/react": "18.0.15",
     "@types/react-dom": "18.0.6",

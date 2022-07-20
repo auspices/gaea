@@ -4,9 +4,11 @@ import { useMutation } from '@apollo/client'
 import { useAlerts } from '@auspices/eos'
 import { useRefetch } from './useRefetch'
 import { errorMessage } from '../util/errors'
-import { AddEntityToCollectionMutation } from '../generated/types/AddEntityToCollectionMutation'
-import { AddEntityFromContentToCollectionMutation } from '../generated/types/AddEntityFromContentToCollectionMutation'
-import { EntityTypes } from '../generated/types/globalTypes'
+import {
+  AddEntityFromContentToCollectionMutation,
+  AddEntityToCollectionMutation,
+  EntityTypes,
+} from '../generated/graphql'
 
 export const ADD_ENTITY_TO_COLLECTION_MUTATION = gql`
   mutation AddEntityToCollectionMutation(

@@ -17,7 +17,7 @@ import { FilteredCollectionStubList } from '../components/FilteredCollectionStub
 import {
   CollectionsPageQuery,
   CollectionsPageQueryVariables,
-} from '../generated/types/CollectionsPageQuery'
+} from '../generated/graphql'
 import { Z } from '../util/zIndexes'
 
 export const COLLECTIONS_PAGE_QUERY = gql`

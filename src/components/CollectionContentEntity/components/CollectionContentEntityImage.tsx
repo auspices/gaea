@@ -2,7 +2,7 @@ import React from 'react'
 import { gql } from 'graphql-tag'
 import { useInView } from 'react-intersection-observer'
 import { ResponsiveImage } from '@auspices/eos'
-import { CollectionContentEntityImageFragment } from '../../../generated/types/CollectionContentEntityImageFragment'
+import { CollectionContentEntityImageFragment } from '../../../generated/graphql'
 
 export const COLLECTION_CONTENT_ENTITY_IMAGE_FRAGMENT = gql`
   fragment CollectionContentEntityImageFragment on Image {

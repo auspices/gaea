@@ -37,7 +37,7 @@ import { SampleCollectionContent } from '../components/SampleCollectionContent'
 import {
   CollectionPageQuery,
   CollectionPageQueryVariables,
-} from '../generated/types/CollectionPageQuery'
+} from '../generated/graphql'
 import { Z } from '../util/zIndexes'
 import { useParams } from 'react-router'
 

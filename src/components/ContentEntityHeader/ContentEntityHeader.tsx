@@ -20,7 +20,7 @@ import {
   CONTENT_ENTITY_HEADER_ATTACHMENT_FRAGMENT,
   ContentEntityHeaderAttachment,
 } from './components/ContentEntityHeaderAttachment'
-import { ContentEntityHeaderFragment } from '../../generated/types/ContentEntityHeaderFragment'
+import { ContentEntityHeaderFragment } from '../../generated/graphql'
 
 export const CONTENT_ENTITY_HEADER_FRAGMENT = gql`
   fragment ContentEntityHeaderFragment on Entity {
@@ -56,5 +56,7 @@ export const ContentEntityHeader: React.FC<ContentEntityHeaderProps> = ({
       return <ContentEntityHeaderCollection collection={entity} {...rest} />
     case 'Attachment':
       return <ContentEntityHeaderAttachment attachment={entity} {...rest} />
+    default:
+      return null
   }
 }

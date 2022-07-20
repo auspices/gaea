@@ -14,14 +14,12 @@ import {
 import { gql } from 'graphql-tag'
 import { useMutation, useQuery } from '@apollo/client'
 import {
-  CapturePageCollectionsQuery,
-  CapturePageCollectionsQueryVariables,
-} from '../generated/types/CapturePageCollectionsQuery'
-import { errorMessage } from '../util/errors'
-import {
   AddToCollectionsMutation,
   AddToCollectionsMutationVariables,
-} from '../generated/types/AddToCollectionsMutation'
+  CapturePageCollectionsQuery,
+  CapturePageCollectionsQueryVariables,
+} from '../generated/graphql'
+import { errorMessage } from '../util/errors'
 import { Link } from 'react-router-dom'
 import { HREFS } from '../hooks'
 import { BottomNav } from '../components/BottomNav'

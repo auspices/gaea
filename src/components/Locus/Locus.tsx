@@ -13,12 +13,12 @@ import * as hrefs from '../../hooks/useHrefs'
 import { Z } from '../../util/zIndexes'
 import { Kind, LocusOption } from './LocusOptions'
 import {
+  EntityTypes,
   LocusCollectionsQuery,
   LocusCollectionsQueryVariables,
-} from '../../generated/types/LocusCollectionsQuery'
+} from '../../generated/graphql'
 import { Mode as Toggle, useLocusToggle } from './useLocusToggle'
 import { LocusBusy } from './LocusBusy'
-import { EntityTypes } from '../../generated/types/globalTypes'
 
 const LocusMenu = React.lazy(() => import('./LocusMenu'))
 
@@ -184,7 +184,7 @@ export const Locus: React.FC = () => {
                 // @ts-ignore
                 matches.collection!.params.id,
                 slug,
-                EntityTypes.COLLECTION
+                EntityTypes.Collection
               ).then(() => {
                 setMode(Mode.Resting)
                 done()

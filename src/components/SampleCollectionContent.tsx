@@ -6,7 +6,7 @@ import { Button, ButtonProps, useAlerts } from '@auspices/eos'
 import {
   SampleCollectionContentQuery,
   SampleCollectionContentQueryVariables,
-} from '../generated/types/SampleCollectionContentQuery'
+} from '../generated/graphql'
 import { errorMessage } from '../util/errors'
 import { useHrefs } from '../hooks'
 

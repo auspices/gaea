@@ -7,7 +7,7 @@ import { errorMessage } from '../util/errors'
 import {
   UnpublishCollectionMutation,
   UnpublishCollectionMutationVariables,
-} from '../generated/types/UnpublishCollectionMutation'
+} from '../generated/graphql'
 
 export const UNPUBLISH_COLLECTION_MUTATION = gql`
   mutation UnpublishCollectionMutation($id: ID!) {

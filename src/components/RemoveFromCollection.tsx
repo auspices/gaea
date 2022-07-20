@@ -7,7 +7,7 @@ import { useRefetch } from '../hooks'
 import {
   RemoveFromCollectionMutation,
   RemoveFromCollectionMutationVariables,
-} from '../generated/types/RemoveFromCollectionMutation'
+} from '../generated/graphql'
 
 export const REMOVE_FROM_COLLECTION_MUTATION = gql`
   mutation RemoveFromCollectionMutation($contentId: ID!) {

@@ -7,7 +7,7 @@ import { errorMessage } from '../util/errors'
 import {
   PublishCollectionMutation,
   PublishCollectionMutationVariables,
-} from '../generated/types/PublishCollectionMutation'
+} from '../generated/graphql'
 
 export const PUBLISH_COLLECTION_MUTATION = gql`
   mutation PublishCollectionMutation($id: ID!, $regenerate: Boolean) {

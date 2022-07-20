@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router'
 import {
   AddToCollectionMutation,
   AddToCollectionMutationVariables,
-} from '../generated/types/AddToCollectionMutation'
+} from '../generated/graphql'
 import { AUTOFOCUS } from '../util/autoFocus'
 
 const ADD_TO_COLLECTION_MUTATION = gql`

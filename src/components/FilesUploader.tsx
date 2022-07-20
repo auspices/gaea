@@ -7,7 +7,7 @@ import { FileUpload } from './FileUpload'
 import {
   FilesUploaderQuery,
   FilesUploaderQueryVariables,
-} from '../generated/types/FilesUploaderQuery'
+} from '../generated/graphql'
 
 export const FILES_UPLOADER_QUERY = gql`
   query FilesUploaderQuery($uploads: [UploadInput!]!) {

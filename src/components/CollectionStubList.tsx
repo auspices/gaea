@@ -5,7 +5,7 @@ import { useKeyboardListNavigation } from 'use-keyboard-list-navigation'
 import { Stack, StackProps } from '@auspices/eos'
 import { useContextualRef, useHrefs } from '../hooks'
 import { COLLECTION_STUB_FRAGMENT, CollectionStub } from './CollectionStub'
-import { CollectionStubListFragment } from '../generated/types/CollectionStubListFragment'
+import { CollectionStubListFragment } from '../generated/graphql'
 
 export const COLLECTION_STUB_LIST_FRAGMENT = gql`
   fragment CollectionStubListFragment on Collection {

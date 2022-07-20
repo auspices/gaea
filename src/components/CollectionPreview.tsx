@@ -6,7 +6,7 @@ import { AspectRatioBox, Box, BoxProps, Image, space } from '@auspices/eos'
 import {
   CollectionPreviewQuery,
   CollectionPreviewQueryVariables,
-} from '../generated/types/CollectionPreviewQuery'
+} from '../generated/graphql'
 import { FadeOut } from './FadeOut'
 
 export const COLLECTION_PREVIEW_FRAGMENT = gql`

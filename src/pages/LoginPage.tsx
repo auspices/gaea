@@ -9,7 +9,7 @@ import { errorMessage } from '../util/errors'
 import {
   LoginPageMutation,
   LoginPageMutationVariables,
-} from '../generated/types/LoginPageMutation'
+} from '../generated/graphql'
 import { parse } from 'qs'
 import { AUTOFOCUS } from '../util/autoFocus'
 

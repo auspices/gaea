@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { gql } from 'graphql-tag'
 import scrollIntoView from 'scroll-into-view-if-needed'
 import { useHrefs } from '../hooks'
-import { CollectionStubFragment } from '../generated/types/CollectionStubFragment'
+import { CollectionStubFragment } from '../generated/graphql'
 
 export const COLLECTION_STUB_FRAGMENT = gql`
   fragment CollectionStubFragment on Collection {

@@ -10,7 +10,7 @@ import { COLLECTION_STUB_FRAGMENT } from './CollectionStub'
 import {
   CreateCollectionMutation,
   CreateCollectionMutationVariables,
-} from '../generated/types/CreateCollectionMutation'
+} from '../generated/graphql'
 import { Z } from '../util/zIndexes'
 import { AUTOFOCUS } from '../util/autoFocus'
 

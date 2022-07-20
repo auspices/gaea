@@ -4,11 +4,11 @@ import { useMutation } from '@apollo/client'
 import { PaneOption, PaneOptionProps, useAlerts } from '@auspices/eos'
 import { useRefetch } from '../hooks'
 import { errorMessage } from '../util/errors'
-import { ReorderAction } from '../generated/types/globalTypes'
 import {
+  ReorderAction,
   RepositionCollectionContentMutation,
   RepositionCollectionContentMutationVariables,
-} from '../generated/types/RepositionCollectionContentMutation'
+} from '../generated/graphql'
 
 export { ReorderAction }
 
@@ -81,11 +81,11 @@ export const RepositionCollectionContent = React.forwardRef(
       >
         {
           {
-            [ReorderAction.MOVE_TO_TOP]: 'move to start',
-            [ReorderAction.MOVE_TO_BOTTOM]: 'move to end',
-            [ReorderAction.MOVE_UP]: 'move left',
-            [ReorderAction.MOVE_DOWN]: 'move right',
-            [ReorderAction.INSERT_AT]: 'move to',
+            [ReorderAction.MoveToTop]: 'move to start',
+            [ReorderAction.MoveToBottom]: 'move to end',
+            [ReorderAction.MoveUp]: 'move left',
+            [ReorderAction.MoveDown]: 'move right',
+            [ReorderAction.InsertAt]: 'move to',
           }[action]
         }
       </PaneOption>

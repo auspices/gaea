@@ -1,6 +1,6 @@
 import React from 'react'
 import { gql } from 'graphql-tag'
-import { ContentEntityFragment } from '../../generated/types/ContentEntityFragment'
+import { ContentEntityFragment } from '../../generated/graphql'
 import {
   CONTENT_ENTITY_IMAGE_FRAGMENT,
   ContentEntityImage,
@@ -56,5 +56,7 @@ export const ContentEntity: React.FC<ContentEntityProps> = ({
       return <ContentEntityCollection collection={entity} {...rest} />
     case 'Attachment':
       return <ContentEntityAttachment attachment={entity} {...rest} />
+    default:
+      return null
   }
 }

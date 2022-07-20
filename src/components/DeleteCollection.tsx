@@ -12,7 +12,7 @@ import {
 } from '@auspices/eos'
 import { useHrefs } from '../hooks'
 import { errorMessage } from '../util/errors'
-import { DeleteCollectionMutation } from '../generated/types/DeleteCollectionMutation'
+import { DeleteCollectionMutation } from '../generated/graphql'
 import { AUTOFOCUS } from '../util/autoFocus'
 
 export const DELETE_COLLECTION_MUTATION = gql`

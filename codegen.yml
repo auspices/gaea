@@ -1,0 +1,14 @@
+overwrite: true
+schema: 'https://atlas.auspic.es/graphql'
+documents: 'src/**/*'
+generates:
+  src/generated/graphql.tsx:
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+      - 'fragment-matcher'
+    config:
+      omitOperationSuffix: true
+  ./graphql.schema.json:
+    plugins:
+      - 'introspection'

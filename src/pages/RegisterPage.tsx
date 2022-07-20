@@ -9,7 +9,7 @@ import { errorMessage } from '../util/errors'
 import {
   RegisterPageMutation,
   RegisterPageMutationVariables,
-} from '../generated/types/RegisterPageMutation'
+} from '../generated/graphql'
 import { AUTOFOCUS } from '../util/autoFocus'
 
 const REGISTER_PAGE_MUTATION = gql`

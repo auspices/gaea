@@ -1,7 +1,7 @@
 import React from 'react'
 import { gql } from 'graphql-tag'
 import { Box, Stack, StackProps } from '@auspices/eos'
-import { CollectionContentsListFragment } from '../generated/types/CollectionContentsListFragment'
+import { CollectionContentsListFragment } from '../generated/graphql'
 import {
   COLLECTION_CONTENT_CONTEXT_MENU_COLLECTION_FRAGMENT,
   COLLECTION_CONTENT_CONTEXT_MENU_CONTENT_FRAGMENT,

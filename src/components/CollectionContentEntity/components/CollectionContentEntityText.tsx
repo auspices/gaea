@@ -2,7 +2,7 @@ import React from 'react'
 import { gql } from 'graphql-tag'
 import styled from 'styled-components'
 import { Box, BoxProps } from '@auspices/eos'
-import { CollectionContentEntityTextFragment } from '../../../generated/types/CollectionContentEntityTextFragment'
+import { CollectionContentEntityTextFragment } from '../../../generated/graphql'
 import { FadeOut } from '../../FadeOut'
 
 export const COLLECTION_CONTENT_ENTITY_TEXT_FRAGMENT = gql`
@@ -33,15 +33,16 @@ type CollectionContentEntityTextProps = BoxProps & {
   text: CollectionContentEntityTextFragment
 }
 
-export const CollectionContentEntityText: React.FC<CollectionContentEntityTextProps> =
-  ({ text }) => {
-    return (
-      <Container>
-        {text.blurb.length > 500 ? (
-          <FadeOut>{text.blurb}</FadeOut>
-        ) : (
-          <>{text.blurb}</>
-        )}
-      </Container>
-    )
-  }
+export const CollectionContentEntityText: React.FC<
+  CollectionContentEntityTextProps
+> = ({ text }) => {
+  return (
+    <Container>
+      {text.blurb.length > 500 ? (
+        <FadeOut>{text.blurb}</FadeOut>
+      ) : (
+        <>{text.blurb}</>
+      )}
+    </Container>
+  )
+}

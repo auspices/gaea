@@ -8,11 +8,11 @@ import { useHrefs } from '../hooks'
 import { DeleteCollection } from '../components/DeleteCollection'
 import { Fieldset, FieldsetData } from '../components/Fieldset'
 import { errorMessage } from '../util/errors'
-import { UpadateCollectionSettingsMutation } from '../generated/types/UpadateCollectionSettingsMutation'
 import {
   CollectionSettingsPageQuery,
   CollectionSettingsPageQueryVariables,
-} from '../generated/types/CollectionSettingsPageQuery'
+  UpadateCollectionSettingsMutation,
+} from '../generated/graphql'
 import { BottomNav } from '../components/BottomNav'
 
 export const UPDATE_COLLECTION_SETTINGS_MUTATION = gql`

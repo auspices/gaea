@@ -5,7 +5,7 @@ import { StackProps } from '@auspices/eos'
 import {
   AddToCollectionExtendedSearchQuery,
   AddToCollectionExtendedSearchQueryVariables,
-} from '../../generated/types/AddToCollectionExtendedSearchQuery'
+} from '../../generated/graphql'
 import { AddToCollectionExtendedOptions } from './AddToCollectionExtendedOptions'
 
 export const ADD_TO_COLLECTION_EXTENDED_SEARCH_QUERY = gql`
@@ -26,37 +26,37 @@ type AddToCollectionExtendedProps = StackProps & {
   onDone(): void
 }
 
-export const AddToCollectionExtended: React.FC<AddToCollectionExtendedProps> =
-  ({ value, ...rest }) => {
-    // Skip if value is unreasonably long or looks like a URL
-    const skip =
-      value.length > 65 ||
-      (value.startsWith('http') && value.indexOf(' ') === -1)
+export const AddToCollectionExtended: React.FC<
+  AddToCollectionExtendedProps
+> = ({ value, ...rest }) => {
+  // Skip if value is unreasonably long or looks like a URL
+  const skip =
+    value.length > 65 || (value.startsWith('http') && value.indexOf(' ') === -1)
 
-    const { data, error } = useQuery<
-      AddToCollectionExtendedSearchQuery,
-      AddToCollectionExtendedSearchQueryVariables
-    >(ADD_TO_COLLECTION_EXTENDED_SEARCH_QUERY, {
-      variables: { query: value },
-      skip,
-    })
+  const { data, error } = useQuery<
+    AddToCollectionExtendedSearchQuery,
+    AddToCollectionExtendedSearchQueryVariables
+  >(ADD_TO_COLLECTION_EXTENDED_SEARCH_QUERY, {
+    variables: { query: value },
+    skip,
+  })
 
-    if (error) {
-      console.error(error)
-      return null
-    }
-
-    if (!data) return null
-
-    const {
-      filtered: { collections },
-    } = data
-
-    return (
-      <AddToCollectionExtendedOptions
-        collections={collections}
-        value={value}
-        {...rest}
-      />
-    )
+  if (error) {
+    console.error(error)
+    return null
   }
+
+  if (!data) return null
+
+  const {
+    filtered: { collections },
+  } = data
+
+  return (
+    <AddToCollectionExtendedOptions
+      collections={collections}
+      value={value}
+      {...rest}
+    />
+  )
+}

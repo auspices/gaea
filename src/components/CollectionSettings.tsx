@@ -5,10 +5,10 @@ import { gql } from 'graphql-tag'
 import { KeyValueEditor, StackProps, toSchema, useAlerts } from '@auspices/eos'
 import { errorMessage } from '../util/errors'
 import {
+  CollectionSettingsFragment,
   CollectionSettingsMutation,
   CollectionSettingsMutationVariables,
-} from '../generated/types/CollectionSettingsMutation'
-import { CollectionSettingsFragment } from '../generated/types/CollectionSettingsFragment'
+} from '../generated/graphql'
 
 export const COLLECTION_SETTINGS_FRAGMENT = gql`
   fragment CollectionSettingsFragment on Collection {

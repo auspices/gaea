@@ -4,8 +4,10 @@ import { useMutation } from '@apollo/client'
 import { useAlerts } from '@auspices/eos'
 import { useRefetch } from './useRefetch'
 import { errorMessage } from '../util/errors'
-import { AddCollectionToCollectionMutation } from '../generated/types/AddCollectionToCollectionMutation'
-import { CreateCollectionToAddMutation } from '../generated/types/CreateCollectionToAddMutation'
+import {
+  AddCollectionToCollectionMutation,
+  CreateCollectionToAddMutation,
+} from '../generated/graphql'
 import { useMatchesPath } from './useMatchesPath'
 
 export const CREATE_COLLECTION_TO_ADD_MUTATION = gql`

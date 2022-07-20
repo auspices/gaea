@@ -20,7 +20,7 @@ import {
   COLLECTION_CONTENT_ENTITY_ATTACHMENT_FRAGMENT,
   CollectionContentEntityAttachment,
 } from './components/CollectionContentEntityAttachment'
-import { CollectionContentEntityFragment } from '../../generated/types/CollectionContentEntityFragment'
+import { CollectionContentEntityFragment } from '../../generated/graphql'
 
 export const COLLECTION_CONTENT_ENTITY_FRAGMENT = gql`
   fragment CollectionContentEntityFragment on Entity {
@@ -41,18 +41,21 @@ type CollectionContentEntityProps = {
   entity: CollectionContentEntityFragment
 }
 
-export const CollectionContentEntity: React.FC<CollectionContentEntityProps> =
-  ({ entity }) => {
-    switch (entity.__typename) {
-      case 'Image':
-        return <CollectionContentEntityImage image={entity} />
-      case 'Text':
-        return <CollectionContentEntityText text={entity} />
-      case 'Link':
-        return <CollectionContentEntityLink link={entity} />
-      case 'Collection':
-        return <CollectionContentEntityCollection collection={entity} />
-      case 'Attachment':
-        return <CollectionContentEntityAttachment attachment={entity} />
-    }
+export const CollectionContentEntity: React.FC<
+  CollectionContentEntityProps
+> = ({ entity }) => {
+  switch (entity.__typename) {
+    case 'Image':
+      return <CollectionContentEntityImage image={entity} />
+    case 'Text':
+      return <CollectionContentEntityText text={entity} />
+    case 'Link':
+      return <CollectionContentEntityLink link={entity} />
+    case 'Collection':
+      return <CollectionContentEntityCollection collection={entity} />
+    case 'Attachment':
+      return <CollectionContentEntityAttachment attachment={entity} />
+    default:
+      return null
   }
+}

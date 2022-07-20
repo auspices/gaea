@@ -5,7 +5,7 @@ import { useMutation } from '@apollo/client'
 import { useDebounce } from 'use-debounce'
 import { Box, Input, useAlerts } from '@auspices/eos'
 import { errorMessage } from '../../../util/errors'
-import { ContentEntityTextFragment } from '../../../generated/types/ContentEntityTextFragment'
+import { ContentEntityTextFragment } from '../../../generated/graphql'
 import { themeGet } from '@styled-system/theme-get'
 
 export const UPDATE_CONTENT_ENTITY_TEXT_MUTATION = gql`

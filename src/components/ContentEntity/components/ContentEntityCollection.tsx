@@ -4,7 +4,8 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { Box, BoxProps } from '@auspices/eos'
 import { useHrefs } from '../../../hooks'
-import { ContentEntityCollectionFragment } from '../../../generated/types/ContentEntityCollectionFragment'
+import { ContentEntityCollectionFragment } from '../../../generated/graphql'
+import { EmbeddedCollection } from '../../EmbeddedCollection'
 
 const Container = styled(Box)``
 
@@ -49,6 +50,8 @@ export const ContentEntityCollection: React.FC<
       <Box>{collection.title}</Box>
 
       <Box color="tertiary">{collection.counts.contents || '∅'}</Box>
+
+      <EmbeddedCollection id={collection.id} />
 
       <Box
         color="tertiary"

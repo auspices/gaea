@@ -5,10 +5,10 @@ import { gql } from 'graphql-tag'
 import { KeyValueEditor, toSchema, useAlerts } from '@auspices/eos'
 import { errorMessage } from '../util/errors'
 import {
+  ContentSettingsFragment,
   ContentSettingsMutation,
   ContentSettingsMutationVariables,
-} from '../generated/types/ContentSettingsMutation'
-import { ContentSettingsFragment } from '../generated/types/ContentSettingsFragment'
+} from '../generated/graphql'
 
 export const CONTENT_SETTINGS_FRAGMENT = gql`
   fragment ContentSettingsFragment on Content {

@@ -22,7 +22,7 @@ import { SampleCollectionContent } from '../components/SampleCollectionContent'
 import {
   ContentPageQuery,
   ContentPageQueryVariables,
-} from '../generated/types/ContentPageQuery'
+} from '../generated/graphql'
 import { useParams } from 'react-router'
 
 export const CONTENT_PAGE_QUERY = gql`

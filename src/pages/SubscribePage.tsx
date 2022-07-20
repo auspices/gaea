@@ -9,13 +9,13 @@ import {
   useStripe,
 } from '@stripe/react-stripe-js'
 import {
-  SubscribePageQuery_me_customer_plans as Plan,
+  SubscribePagePlanFragment as Plan,
+  PlanInterval,
+  ReactivateMutation,
+  SubscribeMutation,
   SubscribePageQuery,
-} from '../generated/types/SubscribePageQuery'
-import { SubscribeMutation } from '../generated/types/SubscribeMutation'
-import { UnsubscribeMutation } from '../generated/types/UnsubscribeMutation'
-import { ReactivateMutation } from '../generated/types/ReactivateMutation'
-import { PlanInterval } from '../generated/types/globalTypes'
+  UnsubscribeMutation,
+} from '../generated/graphql'
 import { errorMessage } from '../util/errors'
 import { CreditCard } from '../components/CreditCard'
 
@@ -29,11 +29,15 @@ const SUBSCRIBE_PAGE_FRAGMENT = gql`
         cancelAtPeriodEnd
       }
       plans {
-        id
-        interval
-        amount
+        ...SubscribePagePlanFragment
       }
     }
+  }
+
+  fragment SubscribePagePlanFragment on Plan {
+    id
+    interval
+    amount
   }
 `
 
@@ -287,10 +291,10 @@ export const SubscribePage: React.FC = () => {
                     {plan.amount} /{' '}
                     {
                       {
-                        [PlanInterval.YEAR]: 'yearly',
-                        [PlanInterval.MONTH]: 'monthly',
-                        [PlanInterval.WEEK]: 'weekly',
-                        [PlanInterval.DAY]: 'daily',
+                        [PlanInterval.Year]: 'yearly',
+                        [PlanInterval.Month]: 'monthly',
+                        [PlanInterval.Week]: 'weekly',
+                        [PlanInterval.Day]: 'daily',
                       }[plan.interval]
                     }
                   </Button>
