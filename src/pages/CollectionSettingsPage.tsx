@@ -3,7 +3,6 @@ import { gql } from 'graphql-tag'
 import { Link, useParams } from 'react-router-dom'
 import { useMutation, useQuery } from '@apollo/client'
 import {
-  Box,
   Button,
   Caret,
   Cell,
