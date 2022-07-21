@@ -1199,7 +1199,7 @@ export type CollectionSettingsPageQueryVariables = Exact<{
 }>;
 
 
-export type CollectionSettingsPageQuery = { __typename?: 'Query', me: { __typename?: 'User', id: number, slug: string, username: string, collection: { __typename?: 'Collection', id: number, slug: string, title: string } } };
+export type CollectionSettingsPageQuery = { __typename?: 'Query', me: { __typename?: 'User', id: number, slug: string, username: string, collection: { __typename?: 'Collection', id: number, key?: string | null, slug: string, title: string } } };
 
 export type CollectionsPageQueryVariables = Exact<{
   page?: InputMaybe<Scalars['Int']>;

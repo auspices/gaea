@@ -19,8 +19,8 @@ import { useHrefs, usePagination, useQueryString, useRefetch } from '../hooks'
 import { AddToCollection } from '../components/AddToCollection'
 import { Pagination } from '../components/Pagination'
 import { BottomNav } from '../components/BottomNav'
-import { PublishCollection } from '../components/PublishCollection'
-import { UnpublishCollection } from '../components/UnpublishCollection'
+import { PublishCollectionPaneOption } from '../components/PublishCollection'
+import { UnpublishCollectionPaneOption } from '../components/UnpublishCollection'
 import {
   COLLECTION_CONTENTS_GRID_FRAGMENT,
   CollectionContentsGrid,
@@ -138,12 +138,12 @@ export const CollectionPage: React.FC = () => {
                     data
                   </PaneOption>
 
-                  <UnpublishCollection id={collection.id} />
+                  <UnpublishCollectionPaneOption id={collection.id} />
 
-                  <PublishCollection id={collection.id} regenerate />
+                  <PublishCollectionPaneOption id={collection.id} regenerate />
                 </>
               ) : (
-                <PublishCollection id={collection.id} />
+                <PublishCollectionPaneOption id={collection.id} />
               )}
 
               <Divider />
