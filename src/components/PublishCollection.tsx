@@ -126,7 +126,7 @@ export const usePublishCollection = ({
   )
 
   const label = {
-    [Mode.Resting]: `${regenerate ? 're-' : ''}publish`,
+    [Mode.Resting]: `${regenerate ? 'regenerate key' : 'publish'}`,
     [Mode.Confirm]: 'confirm',
     [Mode.Saving]: 'updating',
     [Mode.Error]: 'error',

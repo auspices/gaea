@@ -14,6 +14,7 @@ import {
   PaneHeader,
   PaneOption,
   Stack,
+  Tooltip,
 } from '@auspices/eos'
 import { useHrefs, usePagination, useQueryString, useRefetch } from '../hooks'
 import { AddToCollection } from '../components/AddToCollection'
@@ -135,12 +136,15 @@ export const CollectionPage: React.FC = () => {
                     href={hrefs.data(collection.key)}
                     target="_blank"
                   >
-                    data
+                    view data
                   </PaneOption>
 
-                  <UnpublishCollectionPaneOption id={collection.id} />
-
-                  <PublishCollectionPaneOption id={collection.id} regenerate />
+                  <PaneOption
+                    as={Link}
+                    to={hrefs.collectionSettings(collection.slug)}
+                  >
+                    unpublish
+                  </PaneOption>
                 </>
               ) : (
                 <PublishCollectionPaneOption id={collection.id} />
@@ -179,6 +183,10 @@ export const CollectionPage: React.FC = () => {
           </Stack>
 
           <AddToCollection id={collection.id} />
+
+          <Tooltip label="open command palette (cmd+k)" placement="left">
+            <Button>⌘</Button>
+          </Tooltip>
         </Stack>
 
         <CollectionSettings collection={collection} />

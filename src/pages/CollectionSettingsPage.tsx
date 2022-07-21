@@ -6,6 +6,7 @@ import {
   Button,
   Caret,
   Cell,
+  Field,
   Loading,
   Stack,
   Tooltip,
@@ -176,44 +177,45 @@ export const CollectionSettingsPage: React.FC = () => {
         </Stack>
 
         <Stack mt={8}>
-          {collection.key ? (
-            <Stack>
-              <Button
-                key="data"
-                as="a"
-                href={hrefs.data(collection.key)}
-                target="_blank"
+          <Field label="data">
+            {collection.key ? (
+              <Stack>
+                <Button
+                  key="data"
+                  as="a"
+                  href={hrefs.data(collection.key)}
+                  target="_blank"
+                >
+                  open in glyph
+                </Button>
+
+                <Stack>
+                  <Tooltip
+                    label="unpublishing will disable the graphql endpoint; re-enabling it will change the key"
+                    placement="bottom"
+                  >
+                    <UnpublishCollectionButton id={collection.id} />
+                  </Tooltip>
+                </Stack>
+
+                <Stack>
+                  <Tooltip
+                    label="re-publshing will regenerate and change the key; breaking any existing integrations"
+                    placement="bottom"
+                  >
+                    <PublishCollectionButton id={collection.id} regenerate />
+                  </Tooltip>
+                </Stack>
+              </Stack>
+            ) : (
+              <Tooltip
+                label="publishing will expose a publicly available graphql endpoint"
+                placement="bottom"
               >
-                data
-                <Caret direction="right" ml={3} />
-              </Button>
-
-              <Stack>
-                <Tooltip
-                  label="unpublishing will disable the graphql endpoint; re-enabling it will change the key"
-                  placement="bottom"
-                >
-                  <UnpublishCollectionButton id={collection.id} />
-                </Tooltip>
-              </Stack>
-
-              <Stack>
-                <Tooltip
-                  label="re-publshing will regenerate and change the key; breaking any existing integrations"
-                  placement="bottom"
-                >
-                  <PublishCollectionButton id={collection.id} regenerate />
-                </Tooltip>
-              </Stack>
-            </Stack>
-          ) : (
-            <Tooltip
-              label="publishing will expose a publicly available graphql endpoint"
-              placement="bottom"
-            >
-              <PublishCollectionButton id={collection.id} />
-            </Tooltip>
-          )}
+                <PublishCollectionButton id={collection.id} />
+              </Tooltip>
+            )}
+          </Field>
         </Stack>
       </Stack>
 
