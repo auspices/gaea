@@ -208,12 +208,14 @@ export const CollectionSettingsPage: React.FC = () => {
                 </Stack>
               </Stack>
             ) : (
-              <Tooltip
-                label="publishing will expose a publicly available graphql endpoint"
-                placement="bottom"
-              >
-                <PublishCollectionButton id={collection.id} />
-              </Tooltip>
+              <Stack>
+                <Tooltip
+                  label="publishing will expose a publicly available graphql endpoint"
+                  placement="bottom"
+                >
+                  <PublishCollectionButton id={collection.id} />
+                </Tooltip>
+              </Stack>
             )}
           </Field>
         </Stack>
