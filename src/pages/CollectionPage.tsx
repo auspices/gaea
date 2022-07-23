@@ -183,17 +183,19 @@ export const CollectionPage: React.FC = () => {
             </Dropdown>
           </Stack>
 
-          <AddToCollection id={collection.id} />
+          <Stack direction="horizontal" flex="1">
+            <AddToCollection id={collection.id} />
 
-          <Tooltip label="open command palette (cmd+k)" placement="left">
-            <Button
-              onClick={() => {
-                dispatch({ type: 'TOGGLE' })
-              }}
-            >
-              ⌘
-            </Button>
-          </Tooltip>
+            <Tooltip label="open command palette (cmd+k)" placement="left">
+              <Button
+                onClick={() => {
+                  dispatch({ type: 'TOGGLE' })
+                }}
+              >
+                ⌘
+              </Button>
+            </Tooltip>
+          </Stack>
         </Stack>
 
         <CollectionSettings collection={collection} />
