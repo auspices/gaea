@@ -1,6 +1,6 @@
 import React, { Suspense, useCallback, useEffect, useState } from 'react'
 import { Modal } from '@auspices/eos'
-import { useNavigate } from 'react-router'
+import { useMatch, useNavigate } from 'react-router'
 import { gql } from 'graphql-tag'
 import { useLazyQuery } from '@apollo/client'
 import {
@@ -176,10 +176,30 @@ export const Locus: React.FC = () => {
             onClick: (done) => {
               dispatch({ type: 'STATUS', payload: Status.Busy })
               addEntityToCollection(
-                // FIXME: `useMatchesPath`
-                // @ts-ignore
-                matches.collection!.params.id,
+                matches.collection!.params.id!,
                 slug,
+                EntityTypes.Collection
+              ).then(() => {
+                dispatch({ type: 'STATUS', payload: Status.Resting })
+                done()
+              })
+            },
+          }),
+
+          // Add current collection to the specified collection
+          ...addCommand((i === 0 || i === 1) && !!matches.collection, {
+            key: title,
+            label: (
+              <>
+                add this to <u>{title}</u>
+              </>
+            ),
+            kind: Kind.MUTATION,
+            onClick: (done) => {
+              dispatch({ type: 'STATUS', payload: Status.Busy })
+              addEntityToCollection(
+                slug,
+                matches.collection!.params.id!,
                 EntityTypes.Collection
               ).then(() => {
                 dispatch({ type: 'STATUS', payload: Status.Resting })
@@ -201,9 +221,7 @@ export const Locus: React.FC = () => {
               dispatch({ type: 'STATUS', payload: Status.Busy })
               addEntityFromContentToCollection(
                 slug,
-                // FIXME: `useMatchesPath`
-                // @ts-ignore
-                matches.content!.params.id
+                matches.content!.params.id!
               ).then(() => {
                 dispatch({ type: 'STATUS', payload: Status.Resting })
                 done()

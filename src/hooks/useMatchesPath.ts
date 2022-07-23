@@ -8,8 +8,11 @@ export const useMatchesPath = () => {
   const matches = useMemo(
     () => ({
       collections: matchPath({ path: PATTERNS.collections }, pathname),
-      collection: matchPath({ path: PATTERNS.collection }, pathname),
-      content: matchPath({ path: PATTERNS.content }, pathname),
+      collection: matchPath<'id', string>(
+        { path: PATTERNS.collection },
+        pathname
+      ),
+      content: matchPath<'id', string>({ path: PATTERNS.content }, pathname),
     }),
     [pathname]
   )
