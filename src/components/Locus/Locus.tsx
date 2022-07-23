@@ -17,8 +17,9 @@ import {
   LocusCollectionsQuery,
   LocusCollectionsQueryVariables,
 } from '../../generated/graphql'
-import { Mode as Toggle, useLocusToggle } from './useLocusToggle'
+import { useLocusToggle } from './useLocusToggle'
 import { LocusBusy } from './LocusBusy'
+import { Status, useLocus, Visibility } from './LocusContext'
 
 const LocusMenu = React.lazy(() => import('./LocusMenu'))
 
@@ -42,18 +43,13 @@ const addCommand = (
   return condition ? [options].flat() : []
 }
 
-enum Mode {
-  Resting,
-  Busy,
-}
-
 export const Locus: React.FC = () => {
-  const navigate = useNavigate()
+  const { status, visibility, dispatch } = useLocus()
 
+  const navigate = useNavigate()
   const { page, per, nextPage, prevPage, encode } = usePagination()
 
-  const [mode, setMode] = useState(Mode.Resting)
-  const { mode: toggle, handleClose } = useLocusToggle()
+  const { handleClose } = useLocusToggle()
 
   const [getCollections, { loading, data, error }] = useLazyQuery<
     LocusCollectionsQuery,
@@ -136,16 +132,16 @@ export const Locus: React.FC = () => {
           ),
           kind: Kind.MUTATION,
           onClick: (done) => {
-            setMode(Mode.Busy)
+            dispatch({ type: 'STATUS', payload: Status.Busy })
             createAndAddCollectionToCollection(query).then(() => {
-              setMode(Mode.Resting)
+              dispatch({ type: 'STATUS', payload: Status.Resting })
               done()
             })
           },
         }),
       ])
     },
-    [createAndAddCollectionToCollection, matches.collection]
+    [createAndAddCollectionToCollection, dispatch, matches.collection]
   )
 
   const handleDebouncedChange = useCallback(
@@ -178,7 +174,7 @@ export const Locus: React.FC = () => {
             ),
             kind: Kind.MUTATION,
             onClick: (done) => {
-              setMode(Mode.Busy)
+              dispatch({ type: 'STATUS', payload: Status.Busy })
               addEntityToCollection(
                 // FIXME: `useMatchesPath`
                 // @ts-ignore
@@ -186,7 +182,7 @@ export const Locus: React.FC = () => {
                 slug,
                 EntityTypes.Collection
               ).then(() => {
-                setMode(Mode.Resting)
+                dispatch({ type: 'STATUS', payload: Status.Resting })
                 done()
               })
             },
@@ -202,14 +198,14 @@ export const Locus: React.FC = () => {
             ),
             kind: Kind.MUTATION,
             onClick: (done) => {
-              setMode(Mode.Busy)
+              dispatch({ type: 'STATUS', payload: Status.Busy })
               addEntityFromContentToCollection(
                 slug,
                 // FIXME: `useMatchesPath`
                 // @ts-ignore
                 matches.content!.params.id
               ).then(() => {
-                setMode(Mode.Resting)
+                dispatch({ type: 'STATUS', payload: Status.Resting })
                 done()
               })
             },
@@ -235,14 +231,15 @@ export const Locus: React.FC = () => {
     addEntityFromContentToCollection,
     addEntityToCollection,
     data,
+    dispatch,
     error,
-    navigate,
     loading,
     matches.collection,
     matches.content,
+    navigate,
   ])
 
-  if (toggle === Toggle.Resting) return null
+  if (visibility === Visibility.Resting) return null
 
   return (
     <Modal
@@ -252,7 +249,7 @@ export const Locus: React.FC = () => {
       onClose={handleClose}
     >
       <Suspense fallback={<LocusBusy />}>
-        {mode === Mode.Resting ? (
+        {status === Status.Resting ? (
           <LocusMenu
             mt="25vh"
             options={[...defaultOptions, ...dynamicOptions, ...searchResults]}

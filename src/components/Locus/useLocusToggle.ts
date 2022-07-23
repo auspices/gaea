@@ -1,19 +1,12 @@
-import { useCallback, useEffect, useState } from 'react'
-
-export enum Mode {
-  Resting,
-  Open,
-}
+import { useCallback, useEffect } from 'react'
+import { useLocus } from './LocusContext'
 
 export const useLocusToggle = () => {
-  const [mode, setMode] = useState(Mode.Resting)
+  const { dispatch } = useLocus()
 
   const toggleMode = useCallback(() => {
-    setMode(
-      (prevMode) =>
-        ({ [Mode.Resting]: Mode.Open, [Mode.Open]: Mode.Resting }[prevMode])
-    )
-  }, [])
+    dispatch({ type: 'TOGGLE' })
+  }, [dispatch])
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
@@ -25,13 +18,13 @@ export const useLocusToggle = () => {
 
       // <esc>
       if (event.key === 'Escape') {
-        setMode(Mode.Resting)
+        dispatch({ type: 'CLOSE' })
       }
     },
-    [toggleMode]
+    [dispatch, toggleMode]
   )
 
-  const handleClose = () => setMode(Mode.Resting)
+  const handleClose = () => dispatch({ type: 'CLOSE' })
 
   useEffect(() => {
     document.addEventListener('keydown', handleKeyDown)
@@ -40,8 +33,5 @@ export const useLocusToggle = () => {
     }
   }, [handleKeyDown])
 
-  return {
-    mode,
-    handleClose,
-  }
+  return { handleClose }
 }

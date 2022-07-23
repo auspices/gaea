@@ -19,7 +19,7 @@ import {
 import { initClient } from './apollo/initClient'
 import { Routes } from './Routes'
 import { Z } from './util/zIndexes'
-import { Locus } from './components/Locus'
+import { Locus, LocusProvider } from './components/Locus'
 
 const client = initClient()
 
@@ -62,14 +62,16 @@ const init = () => {
       <ApolloProvider client={client}>
         <ContextualRefsProvider>
           <PaginationProvider>
-            <ThemerProvider>
-              <Helmet
-                defaultTitle="loading / auspices"
-                titleTemplate="%s / auspices"
-              />
+            <LocusProvider>
+              <ThemerProvider>
+                <Helmet
+                  defaultTitle="loading / auspices"
+                  titleTemplate="%s / auspices"
+                />
 
-              <App />
-            </ThemerProvider>
+                <App />
+              </ThemerProvider>
+            </LocusProvider>
           </PaginationProvider>
         </ContextualRefsProvider>
       </ApolloProvider>
