@@ -7,6 +7,7 @@ export const PATTERNS = {
   subscribe: '/subscribe',
   account: '/account',
   collections: '/xs',
+  newCollections: '/home',
   collection: '/xs/:id',
   collectionSettings: '/xs/:id/settings',
   content: '/x/:id',

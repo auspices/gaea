@@ -46,7 +46,7 @@ export const FilteredCollectionStubList: React.FC<
   }
 
   if (loading || !data) {
-    return <Loading>looking for “{query}”</Loading>
+    return <Loading {...rest}>looking for “{query}”</Loading>
   }
 
   const {
@@ -55,7 +55,7 @@ export const FilteredCollectionStubList: React.FC<
 
   if (collections.length === 0) {
     return (
-      <Cell color="secondary" borderColor="secondary">
+      <Cell color="secondary" borderColor="secondary" {...rest}>
         nothing for “{query}”
       </Cell>
     )

@@ -845,6 +845,7 @@ export type User = {
   collection: Collection;
   collections: Array<Collection>;
   content: Content;
+  contents: Array<Content>;
   counts: UserCounts;
   createdAt: Scalars['String'];
   customer: Customer;
@@ -873,6 +874,14 @@ export type UserCollectionsArgs = {
 
 export type UserContentArgs = {
   id: Scalars['ID'];
+};
+
+
+export type UserContentsArgs = {
+  metadata?: InputMaybe<Scalars['JSON']>;
+  page?: InputMaybe<Scalars['Int']>;
+  per?: InputMaybe<Scalars['Int']>;
+  sortBy?: InputMaybe<ContentsSort>;
 };
 
 
@@ -975,9 +984,9 @@ export type CollectionSettingsMutationVariables = Exact<{
 
 export type CollectionSettingsMutation = { __typename?: 'Mutation', updateCollection?: { __typename?: 'UpdateCollectionPayload', collection: { __typename?: 'Collection', id: number, title: string, metadata: any } } | null };
 
-export type CollectionStubFragment = { __typename?: 'Collection', id: number, slug: string, key?: string | null, title: string, updatedAt: string, counts: { __typename?: 'CollectionCounts', contents: number } };
+export type CollectionStubFragment = { __typename?: 'Collection', id: number, slug: string, title: string, updatedAt: string, counts: { __typename?: 'CollectionCounts', contents: number } };
 
-export type CollectionStubListFragment = { __typename?: 'Collection', id: number, slug: string, key?: string | null, title: string, updatedAt: string, counts: { __typename?: 'CollectionCounts', contents: number } };
+export type CollectionStubListFragment = { __typename?: 'Collection', id: number, slug: string, title: string, updatedAt: string, counts: { __typename?: 'CollectionCounts', contents: number } };
 
 type ContentEntityFragment_Attachment_ = { __typename?: 'Attachment', id: number, url: string, fileSize?: string | null, contentType: string, name: string };
 
@@ -1047,7 +1056,7 @@ export type CreateCollectionMutationVariables = Exact<{
 }>;
 
 
-export type CreateCollectionMutation = { __typename?: 'Mutation', createCollection?: { __typename?: 'CreateCollectionPayload', collection: { __typename?: 'Collection', title: string, slug: string, id: number, key?: string | null, updatedAt: string, counts: { __typename?: 'CollectionCounts', contents: number } } } | null };
+export type CreateCollectionMutation = { __typename?: 'Mutation', createCollection?: { __typename?: 'CreateCollectionPayload', collection: { __typename?: 'Collection', title: string, slug: string, id: number, updatedAt: string, counts: { __typename?: 'CollectionCounts', contents: number } } } | null };
 
 export type DeleteCollectionMutationVariables = Exact<{
   id: Scalars['ID'];
@@ -1078,7 +1087,7 @@ export type FilteredCollectionStubListQueryVariables = Exact<{
 }>;
 
 
-export type FilteredCollectionStubListQuery = { __typename?: 'Query', filtered: { __typename?: 'User', id: number, collections: Array<{ __typename?: 'Collection', id: number, slug: string, key?: string | null, title: string, updatedAt: string, counts: { __typename?: 'CollectionCounts', contents: number } }> } };
+export type FilteredCollectionStubListQuery = { __typename?: 'Query', filtered: { __typename?: 'User', id: number, collections: Array<{ __typename?: 'Collection', id: number, slug: string, title: string, updatedAt: string, counts: { __typename?: 'CollectionCounts', contents: number } }> } };
 
 export type LocusCollectionsQueryVariables = Exact<{
   query: Scalars['String'];
@@ -1207,7 +1216,7 @@ export type CollectionsPageQueryVariables = Exact<{
 }>;
 
 
-export type CollectionsPageQuery = { __typename?: 'Query', me: { __typename?: 'User', id: number, slug: string, username: string, counts: { __typename?: 'UserCounts', collections: number }, collections: Array<{ __typename?: 'Collection', id: number, slug: string, key?: string | null, title: string, updatedAt: string, counts: { __typename?: 'CollectionCounts', contents: number } }> } };
+export type CollectionsPageQuery = { __typename?: 'Query', me: { __typename?: 'User', id: number, slug: string, username: string, counts: { __typename?: 'UserCounts', collections: number }, collections: Array<{ __typename?: 'Collection', id: number, slug: string, title: string, updatedAt: string, counts: { __typename?: 'CollectionCounts', contents: number } }> } };
 
 export type ContentPageQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -1215,6 +1224,14 @@ export type ContentPageQueryVariables = Exact<{
 
 
 export type ContentPageQuery = { __typename?: 'Query', me: { __typename?: 'User', id: number, slug: string, username: string, content: { __typename?: 'Content', id: number, metadata: any, collection: { __typename?: 'Collection', id: number, slug: string, title: string }, entity: { __typename?: 'Attachment', id: number, url: string, fileSize?: string | null, contentType: string, name: string } | { __typename?: 'Collection', id: number, name: string, slug: string, title: string, updatedAt: string, counts: { __typename?: 'CollectionCounts', contents: number } } | { __typename?: 'Image', id: number, url: string, width: number, height: number, title: string, name: string, placeholder: { __typename?: 'ResizedImage', urls: { __typename?: 'RetinaImage', src: string } }, resized: { __typename?: 'ResizedImage', width: number, height: number, urls: { __typename?: 'RetinaImage', _1x: string, _2x: string } } } | { __typename?: 'Link', id: number, url: string, name: string } | { __typename?: 'Text', id: number, body: string, name: string }, next?: { __typename?: 'Content', id: number } | null, previous?: { __typename?: 'Content', id: number } | null } } };
+
+export type HomePageQueryVariables = Exact<{
+  page?: InputMaybe<Scalars['Int']>;
+  per?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type HomePageQuery = { __typename?: 'Query', me: { __typename?: 'User', id: number, slug: string, username: string, counts: { __typename?: 'UserCounts', collections: number }, collections: Array<{ __typename?: 'Collection', id: number, slug: string, name: string, title: string, updatedAt: string, counts: { __typename?: 'CollectionCounts', contents: number } }>, contents: Array<{ __typename?: 'Content', id: number, entity: { __typename?: 'Attachment', id: number, url: string, fileSize?: string | null, contentType: string } | { __typename?: 'Collection', id: number, slug: string, title: string, updatedAt: string, name: string, counts: { __typename?: 'CollectionCounts', contents: number } } | { __typename?: 'Image', id: number, title: string, thumbnail: { __typename?: 'ResizedImage', width: number, height: number, urls: { __typename?: 'RetinaImage', _1x: string, _2x: string } } } | { __typename?: 'Link', id: number, url: string, name: string } | { __typename?: 'Text', id: number, blurb: string } }> } };
 
 export type LoginPageMutationVariables = Exact<{
   username: Scalars['String'];

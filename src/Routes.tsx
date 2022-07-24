@@ -13,6 +13,7 @@ import { SubscribePage } from './pages/SubscribePage'
 import { ErrorBoundary } from './components/ErrorBoundary'
 import { CreditCardProvider } from './components/CreditCard'
 import { CapturePage } from './pages/CapturePage'
+import { HomePage } from './pages/HomePage'
 
 export const Routes = () => {
   return (
@@ -62,6 +63,15 @@ export const Routes = () => {
         element={
           <ErrorBoundary>
             <CollectionsPage />
+          </ErrorBoundary>
+        }
+      />
+
+      <Route
+        path={PATTERNS.newCollections}
+        element={
+          <ErrorBoundary>
+            <HomePage />
           </ErrorBoundary>
         }
       />

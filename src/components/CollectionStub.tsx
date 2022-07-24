@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import styled, { css } from 'styled-components'
-import { Box, Button, ButtonProps, color, themeGet } from '@auspices/eos'
+import { Box, Button, ButtonProps, color } from '@auspices/eos'
 import { Link } from 'react-router-dom'
 import { gql } from 'graphql-tag'
 import scrollIntoView from 'scroll-into-view-if-needed'
@@ -11,7 +11,6 @@ export const COLLECTION_STUB_FRAGMENT = gql`
   fragment CollectionStubFragment on Collection {
     id
     slug
-    key
     title
     updatedAt(relative: true)
     counts {
@@ -58,19 +57,12 @@ const highlightedMixin = css`
 const Container = styled(Button)<ButtonProps>`
   position: relative;
   justify-content: flex-start;
+  width: 100%;
 
   ${({ highlighted }) => highlighted && highlightedMixin}
   &:hover {
     ${highlightedMixin}
   }
-`
-
-export const Indicator = styled(Box).attrs({ mr: 4 })`
-  position: relative;
-  z-index: 1;
-  width: ${themeGet('space.4')};
-  height: ${themeGet('space.4')};
-  border-radius: 50%;
 `
 
 export type CollectionStubProps = {
@@ -104,8 +96,6 @@ export const CollectionStub: React.FC<CollectionStubProps> = ({
       <Count mx={4} color="tertiary">
         {collection.counts.contents || '∅'}
       </Count>
-
-      {collection.key && <Indicator bg="hint" />}
 
       <Delta color="tertiary" fontSize={0}>
         {collection.updatedAt}
