@@ -63,7 +63,7 @@ enum Mode {
 }
 
 type CollectionContentProps = {
-  collection: CollectionContentCollectionFragment
+  collection?: CollectionContentCollectionFragment
   content: CollectionContentContentFragment
 }
 
@@ -135,7 +135,7 @@ export const CollectionContent: React.FC<CollectionContentProps> = ({
       href={href}
       {...rest}
     >
-      {mode !== Mode.Resting && (
+      {collection && mode !== Mode.Resting && (
         <CollectionContentContextMenu
           position="absolute"
           top={3}

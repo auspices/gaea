@@ -3,10 +3,10 @@ import { Button, File, Grid, Loading, Stack } from '@auspices/eos'
 import { gql } from 'graphql-tag'
 import { usePagination } from '../hooks'
 import { HomePageQuery, HomePageQueryVariables } from '../generated/graphql'
-import {
-  COLLECTION_CONTENT_ENTITY_FRAGMENT,
-  CollectionContentEntity,
-} from '../components/CollectionContentEntity'
+// import {
+//   COLLECTION_CONTENT_ENTITY_FRAGMENT,
+//   CollectionContentEntity,
+// } from '../components/CollectionContentEntity'
 import {
   COLLECTION_STUB_FRAGMENT,
   CollectionStub,
@@ -15,6 +15,10 @@ import { CreateCollection } from '../components/CreateCollection'
 import { FilteredCollectionStubList } from '../components/FilteredCollectionStubList'
 import { useState } from 'react'
 import { useDebounce } from 'use-debounce'
+import {
+  COLLECTION_CONTENT_CONTENT_FRAGMENT,
+  CollectionContent,
+} from '../components/CollectionContent'
 
 export const HomePage = () => {
   const { page, per } = usePagination()
@@ -62,9 +66,7 @@ export const HomePage = () => {
 
         <Grid>
           {contents.map((content) => (
-            <File key={content.id}>
-              <CollectionContentEntity entity={content.entity} />
-            </File>
+            <CollectionContent key={content.id} content={content} />
           ))}
         </Grid>
       </Stack>
@@ -82,19 +84,15 @@ export const HOME_PAGE_QUERY = gql`
         collections
       }
       collections(page: $page, per: $per) {
-        id
-        slug
-        name
         ...CollectionStubFragment
+        id
       }
       contents(sortBy: CREATED_AT_DESC) {
+        ...CollectionContentContentFragment
         id
-        entity {
-          ...CollectionContentEntityFragment
-        }
       }
     }
   }
-  ${COLLECTION_CONTENT_ENTITY_FRAGMENT}
+  ${COLLECTION_CONTENT_CONTENT_FRAGMENT}
   ${COLLECTION_STUB_FRAGMENT}
 `
