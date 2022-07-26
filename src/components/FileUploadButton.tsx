@@ -106,7 +106,7 @@ export const FileUploadButton: React.FC<FileUploadButtonProps> = ({
           />
 
           <Upload py={0} {...rest}>
-            <Plus size={6} strokeWidth="1px" />
+            <Plus size={5} strokeWidth="1px" />
           </Upload>
         </Box>
       </Tooltip>

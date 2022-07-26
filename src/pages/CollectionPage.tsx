@@ -14,7 +14,6 @@ import {
   PaneHeader,
   PaneOption,
   Stack,
-  Tooltip,
 } from '@auspices/eos'
 import { useHrefs, usePagination, useQueryString, useRefetch } from '../hooks'
 import { AddToCollection } from '../components/AddToCollection'
@@ -40,7 +39,6 @@ import {
 } from '../generated/graphql'
 import { Z } from '../util/zIndexes'
 import { useParams } from 'react-router'
-import { useLocus } from '../components/Locus'
 
 export const COLLECTION_PAGE_QUERY = gql`
   query CollectionPageQuery($id: ID!, $page: Int, $per: Int) {
@@ -74,7 +72,6 @@ export const COLLECTION_PAGE_QUERY = gql`
 `
 
 export const CollectionPage: React.FC = () => {
-  const { dispatch } = useLocus()
   const { id = '' } = useParams()
   const { view = 'grid' } = useQueryString<{ view: 'list' | 'grid' }>()
   const { page, per } = usePagination()
@@ -183,19 +180,7 @@ export const CollectionPage: React.FC = () => {
             </Dropdown>
           </Stack>
 
-          <Stack direction="horizontal" flex="1">
-            <AddToCollection id={collection.id} />
-
-            <Tooltip label="open command palette (cmd+k)" placement="left">
-              <Button
-                onClick={() => {
-                  dispatch({ type: 'TOGGLE' })
-                }}
-              >
-                ⌘
-              </Button>
-            </Tooltip>
-          </Stack>
+          <AddToCollection id={collection.id} />
         </Stack>
 
         <CollectionSettings collection={collection} />
