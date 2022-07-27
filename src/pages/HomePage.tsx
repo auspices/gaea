@@ -1,12 +1,8 @@
 import { useQuery } from '@apollo/client'
-import { Button, File, Grid, Loading, Stack } from '@auspices/eos'
+import { Button, Grid, Loading, Stack } from '@auspices/eos'
 import { gql } from 'graphql-tag'
 import { usePagination } from '../hooks'
 import { HomePageQuery, HomePageQueryVariables } from '../generated/graphql'
-// import {
-//   COLLECTION_CONTENT_ENTITY_FRAGMENT,
-//   CollectionContentEntity,
-// } from '../components/CollectionContentEntity'
 import {
   COLLECTION_STUB_FRAGMENT,
   CollectionStub,

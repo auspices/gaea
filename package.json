@@ -36,6 +36,7 @@
   "scripts": {
     "build": "react-scripts build",
     "eject": "react-scripts eject",
+    "lint": "eslint src --cache --cache-location '.eslintcache/eslint/' --ext ts,tsx --ignore-pattern 'build'",
     "start:local": "REACT_APP_GRAPHQL_ENDPOINT=http://localhost:5001/graphql react-scripts start",
     "start:prod": "REACT_APP_GRAPHQL_ENDPOINT=https://atlas.auspic.es/graphql react-scripts start",
     "start": "GENERATE_SOURCEMAP=false yarn start:prod",
@@ -58,6 +59,9 @@
           "ignoreDeclarationSort": true,
           "ignoreMemberSort": false
         }
+      ],
+      "@typescript-eslint/no-unused-vars": [
+        "error"
       ]
     }
   },
@@ -77,7 +81,8 @@
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
       "prettier --single-quote --write",
-      "git add"
+      "git add",
+      "yarn lint"
     ]
   },
   "devDependencies": {
