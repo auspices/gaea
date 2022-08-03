@@ -3,10 +3,11 @@ import { gql } from 'graphql-tag'
 import { Link, useParams } from 'react-router-dom'
 import { useMutation, useQuery } from '@apollo/client'
 import {
+  Box,
   Button,
   Caret,
   Cell,
-  Field,
+  Input,
   Loading,
   Stack,
   Tooltip,
@@ -177,47 +178,60 @@ export const CollectionSettingsPage: React.FC = () => {
         </Stack>
 
         <Stack mt={8}>
-          <Field label="data">
-            {collection.key ? (
-              <Stack>
+          {collection.key ? (
+            <Stack>
+              <Input
+                value={`https://atlas.auspic.es/graph/${collection.key}`}
+                disabled
+              />
+
+              <Stack direction={['vertical', 'vertical', 'horizontal']}>
                 <Button
                   key="data"
                   as="a"
                   href={hrefs.data(collection.key)}
                   target="_blank"
+                  flex={1}
                 >
-                  open in glyph
+                  open graphql endpoint in glyph
                 </Button>
 
-                <Stack>
+                <Box flex={1}>
                   <Tooltip
                     label="unpublishing will disable the graphql endpoint; re-enabling it will change the key"
                     placement="bottom"
                   >
-                    <UnpublishCollectionButton id={collection.id} />
+                    <UnpublishCollectionButton
+                      width="100%"
+                      id={collection.id}
+                    />
                   </Tooltip>
-                </Stack>
+                </Box>
 
-                <Stack>
+                <Box flex={1}>
                   <Tooltip
                     label="re-publshing will regenerate and change the key; breaking any existing integrations"
                     placement="bottom"
                   >
-                    <PublishCollectionButton id={collection.id} regenerate />
+                    <PublishCollectionButton
+                      width="100%"
+                      id={collection.id}
+                      regenerate
+                    />
                   </Tooltip>
-                </Stack>
+                </Box>
               </Stack>
-            ) : (
-              <Stack>
-                <Tooltip
-                  label="publishing will expose a publicly available graphql endpoint"
-                  placement="bottom"
-                >
-                  <PublishCollectionButton id={collection.id} />
-                </Tooltip>
-              </Stack>
-            )}
-          </Field>
+            </Stack>
+          ) : (
+            <Stack>
+              <Tooltip
+                label="publishing will expose a publicly available graphql endpoint"
+                placement="bottom"
+              >
+                <PublishCollectionButton id={collection.id} />
+              </Tooltip>
+            </Stack>
+          )}
         </Stack>
       </Stack>
 
