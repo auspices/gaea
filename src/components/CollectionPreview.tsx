@@ -20,7 +20,7 @@ export const COLLECTION_PREVIEW_FRAGMENT = gql`
           id
           width
           height
-          placeholder: resized(width: 125, height: 125) {
+          placeholder: cropped(width: 125, height: 125) {
             urls {
               _1x
               _2x
@@ -110,7 +110,6 @@ export const CollectionPreview: React.FC<CollectionPreviewProps> = React.memo(
                           ]}
                           width="100%"
                           height="100%"
-                          style={{ objectFit: 'cover' }}
                           bg="tertiary"
                         />
                       )

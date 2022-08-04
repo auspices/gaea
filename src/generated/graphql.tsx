@@ -331,6 +331,7 @@ export enum EntityTypes {
 export type Image = {
   __typename?: 'Image';
   createdAt: Scalars['String'];
+  cropped: ResizedImage;
   height: Scalars['Int'];
   id: Scalars['Int'];
   name: Scalars['String'];
@@ -347,6 +348,16 @@ export type Image = {
 export type ImageCreatedAtArgs = {
   format?: InputMaybe<Scalars['String']>;
   relative?: InputMaybe<Scalars['Boolean']>;
+};
+
+
+export type ImageCroppedArgs = {
+  blur?: InputMaybe<Scalars['Int']>;
+  height: Scalars['Int'];
+  quality?: InputMaybe<Scalars['Int']>;
+  scale?: InputMaybe<Scalars['Float']>;
+  sharpen?: InputMaybe<Scalars['Int']>;
+  width: Scalars['Int'];
 };
 
 
