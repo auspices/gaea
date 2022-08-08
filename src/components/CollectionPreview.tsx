@@ -20,7 +20,7 @@ export const COLLECTION_PREVIEW_FRAGMENT = gql`
           id
           width
           height
-          placeholder: cropped(width: 125, height: 125) {
+          placeholder: resized(width: 125, height: 125, fit: COVER) {
             urls {
               _1x
               _2x

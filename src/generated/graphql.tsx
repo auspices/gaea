@@ -363,6 +363,7 @@ export type ImageCroppedArgs = {
 
 export type ImageResizedArgs = {
   blur?: InputMaybe<Scalars['Int']>;
+  fit?: InputMaybe<ResizedImageFit>;
   height?: InputMaybe<Scalars['Int']>;
   quality?: InputMaybe<Scalars['Int']>;
   scale?: InputMaybe<Scalars['Float']>;
@@ -679,6 +680,11 @@ export type ResizedImage = {
   urls: RetinaImage;
   width: Scalars['Int'];
 };
+
+export enum ResizedImageFit {
+  Cover = 'COVER',
+  Inside = 'INSIDE'
+}
 
 export type RetinaImage = {
   __typename?: 'RetinaImage';
