@@ -121,10 +121,10 @@
   dependencies:
     node-fetch "^2.6.1"
 
-"@auspices/eos@2.32.4":
-  version "2.32.4"
-  resolved "https://registry.yarnpkg.com/@auspices/eos/-/eos-2.32.4.tgz#5a6770c172adc84a15c445e824fd47b1a7177751"
-  integrity sha512-DUXL8zdNjsef2EaRBhjctzQtCmqnlwSTKfWHi1HJNoLU1KdxgXH8YPt0F8HtLFC4D8LhfwTFA9LOSxcT/QM8QA==
+"@auspices/eos@2.32.5":
+  version "2.32.5"
+  resolved "https://registry.yarnpkg.com/@auspices/eos/-/eos-2.32.5.tgz#17923e897f86e7c86900ef15e6f7bb2b0d6868d1"
+  integrity sha512-+iFUirBnFLPcpqO9ZWD8YlL2iqeOmEuCCTNA+fdvHwbak9CEzSUPDO+m4a4LLwxiNY5blaJh2QYpon5gwII1zw==
   dependencies:
     "@popperjs/core" "^2.11.5"
     "@seznam/compose-react-refs" "^1.0.5"
