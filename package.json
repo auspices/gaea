@@ -91,7 +91,7 @@
     "@graphql-codegen/introspection": "2.2.1",
     "@graphql-codegen/typescript": "2.7.3",
     "@graphql-codegen/typescript-operations": "2.5.3",
-    "@types/jest": "28.1.7",
+    "@types/jest": "28.1.8",
     "@types/jwt-decode": "3.1.0",
     "@types/node": "18.0.6",
     "@types/qs": "6.9.7",
