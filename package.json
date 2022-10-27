@@ -30,7 +30,7 @@
     "use-keyboard-list-navigation": "2.4.2"
   },
   "resolutions": {
-    "@types/react": "18.0.23",
+    "@types/react": "18.0.24",
     "graphql": "16.6.0"
   },
   "scripts": {
@@ -95,7 +95,7 @@
     "@types/jwt-decode": "3.1.0",
     "@types/node": "18.11.7",
     "@types/qs": "6.9.7",
-    "@types/react": "18.0.23",
+    "@types/react": "18.0.24",
     "@types/react-dom": "18.0.7",
     "@types/react-helmet": "6.1.5",
     "@types/react-router": "5.1.19",
