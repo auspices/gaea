@@ -7,7 +7,7 @@
     "@auspices/eos": "2.34.1",
     "@seznam/compose-react-refs": "1.0.6",
     "@stripe/react-stripe-js": "1.14.2",
-    "@stripe/stripe-js": "1.42.1",
+    "@stripe/stripe-js": "1.43.0",
     "@styled-system/theme-get": "5.1.2",
     "axios": "0.27.2",
     "fuse.js": "6.6.2",
