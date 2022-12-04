@@ -12,6 +12,7 @@ import {
   CollectionContentsGridQuery,
   CollectionContentsGridQueryVariables,
 } from '../generated/graphql'
+import { useRefetch } from '../hooks'
 
 export const COLLECTION_CONTENTS_GRID_FRAGMENT = gql`
   fragment CollectionContentsGridFragment on Collection {
@@ -73,13 +74,16 @@ type CollectionContentsGridPaginationContainerProps = GridProps & {
 export const CollectionContentsGridPaginationContainer: React.FC<
   CollectionContentsGridPaginationContainerProps
 > = ({ id, page, per, ...rest }) => {
-  const { data, loading, error } = useQuery<
+  const { data, loading, error, refetch } = useQuery<
     CollectionContentsGridQuery,
     CollectionContentsGridQueryVariables
   >(COLLECTION_CONTENTS_GRID_QUERY, {
     fetchPolicy: 'network-only',
     variables: { id, page, per },
   })
+
+  // Sets refetch for adding/removing content from collection
+  useRefetch({ refetch })
 
   if (error) {
     throw error
