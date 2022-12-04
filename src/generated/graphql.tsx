@@ -331,7 +331,6 @@ export enum EntityTypes {
 export type Image = {
   __typename?: 'Image';
   createdAt: Scalars['String'];
-  cropped: ResizedImage;
   height: Scalars['Int'];
   id: Scalars['Int'];
   name: Scalars['String'];
@@ -348,16 +347,6 @@ export type Image = {
 export type ImageCreatedAtArgs = {
   format?: InputMaybe<Scalars['String']>;
   relative?: InputMaybe<Scalars['Boolean']>;
-};
-
-
-export type ImageCroppedArgs = {
-  blur?: InputMaybe<Scalars['Int']>;
-  height: Scalars['Int'];
-  quality?: InputMaybe<Scalars['Int']>;
-  scale?: InputMaybe<Scalars['Float']>;
-  sharpen?: InputMaybe<Scalars['Int']>;
-  width: Scalars['Int'];
 };
 
 
@@ -978,6 +967,15 @@ export type CollectionContentEntityTextFragment = { __typename?: 'Text', id: num
 
 export type CollectionContentsGridFragment = { __typename?: 'Collection', id: number, contents: Array<{ __typename?: 'Content', id: number, position: number, entity: { __typename: 'Attachment', id: number, url: string, fileSize?: string | null, contentType: string, label: string } | { __typename: 'Collection', slug: string, id: number, title: string, updatedAt: string, name: string, label: string, counts: { __typename?: 'CollectionCounts', contents: number } } | { __typename: 'Image', width: number, height: number, id: number, title: string, label: string, thumbnail: { __typename?: 'ResizedImage', width: number, height: number, urls: { __typename?: 'RetinaImage', _1x: string, _2x: string } } } | { __typename: 'Link', id: number, url: string, label: string, name: string } | { __typename: 'Text', id: number, label: string, blurb: string } }>, counts: { __typename?: 'CollectionCounts', contents: number } };
 
+export type CollectionContentsGridQueryVariables = Exact<{
+  id: Scalars['ID'];
+  page?: InputMaybe<Scalars['Int']>;
+  per?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type CollectionContentsGridQuery = { __typename?: 'Query', me: { __typename?: 'User', id: number, collection: { __typename?: 'Collection', id: number, contents: Array<{ __typename?: 'Content', id: number, position: number, entity: { __typename: 'Attachment', id: number, url: string, fileSize?: string | null, contentType: string, label: string } | { __typename: 'Collection', slug: string, id: number, title: string, updatedAt: string, name: string, label: string, counts: { __typename?: 'CollectionCounts', contents: number } } | { __typename: 'Image', width: number, height: number, id: number, title: string, label: string, thumbnail: { __typename?: 'ResizedImage', width: number, height: number, urls: { __typename?: 'RetinaImage', _1x: string, _2x: string } } } | { __typename: 'Link', id: number, url: string, label: string, name: string } | { __typename: 'Text', id: number, label: string, blurb: string } }>, counts: { __typename?: 'CollectionCounts', contents: number } } } };
+
 export type CollectionContentsListFragment = { __typename?: 'Collection', id: number, contents: Array<{ __typename?: 'Content', id: number, position: number, entity: { __typename: 'Attachment', id: number, url: string, fileSize?: string | null, contentType: string, name: string } | { __typename: 'Collection', id: number, title: string, slug: string, updatedAt: string, counts: { __typename?: 'CollectionCounts', contents: number } } | { __typename: 'Image', id: number, title: string, url: string, placeholder: { __typename?: 'ResizedImage', urls: { __typename?: 'RetinaImage', src: string } }, resized: { __typename?: 'ResizedImage', width: number, height: number, urls: { __typename?: 'RetinaImage', _1x: string, _2x: string } } } | { __typename: 'Link', id: number, url: string } | { __typename: 'Text', id: number, body: string } }>, counts: { __typename?: 'CollectionCounts', contents: number } };
 
 export type CollectionPreviewFragment = { __typename?: 'Collection', id: number, contents: Array<{ __typename?: 'Content', id: number, entity: { __typename: 'Attachment', id: number, contentType: string, fileSize?: string | null } | { __typename: 'Collection', id: number, title: string } | { __typename: 'Image', id: number, width: number, height: number, placeholder: { __typename?: 'ResizedImage', urls: { __typename?: 'RetinaImage', _1x: string, _2x: string } } } | { __typename: 'Link', id: number, name: string } | { __typename: 'Text', id: number, body: string } }> };
@@ -1205,12 +1203,10 @@ export type CapturePageCollectionsQuery = { __typename?: 'Query', me: { __typena
 
 export type CollectionPageQueryVariables = Exact<{
   id: Scalars['ID'];
-  page?: InputMaybe<Scalars['Int']>;
-  per?: InputMaybe<Scalars['Int']>;
 }>;
 
 
-export type CollectionPageQuery = { __typename?: 'Query', me: { __typename?: 'User', id: number, slug: string, username: string, collection: { __typename?: 'Collection', id: number, slug: string, key?: string | null, title: string, updatedAt: string, metadata: any, counts: { __typename?: 'CollectionCounts', contents: number }, within: Array<{ __typename?: 'Collection', id: number, slug: string, title: string }>, contents: Array<{ __typename?: 'Content', id: number, position: number, entity: { __typename: 'Attachment', id: number, url: string, fileSize?: string | null, contentType: string, label: string, name: string } | { __typename: 'Collection', slug: string, id: number, title: string, updatedAt: string, name: string, label: string, counts: { __typename?: 'CollectionCounts', contents: number } } | { __typename: 'Image', width: number, height: number, id: number, title: string, url: string, label: string, placeholder: { __typename?: 'ResizedImage', urls: { __typename?: 'RetinaImage', src: string } }, resized: { __typename?: 'ResizedImage', width: number, height: number, urls: { __typename?: 'RetinaImage', _1x: string, _2x: string } }, thumbnail: { __typename?: 'ResizedImage', width: number, height: number, urls: { __typename?: 'RetinaImage', _1x: string, _2x: string } } } | { __typename: 'Link', id: number, url: string, label: string, name: string } | { __typename: 'Text', id: number, body: string, label: string, blurb: string } }> } } };
+export type CollectionPageQuery = { __typename?: 'Query', me: { __typename?: 'User', id: number, slug: string, username: string, collection: { __typename?: 'Collection', id: number, slug: string, key?: string | null, title: string, updatedAt: string, metadata: any, counts: { __typename?: 'CollectionCounts', contents: number }, within: Array<{ __typename?: 'Collection', id: number, slug: string, title: string }> } } };
 
 export type UpadateCollectionSettingsMutationVariables = Exact<{
   id: Scalars['ID'];

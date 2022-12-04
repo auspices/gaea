@@ -1,12 +1,17 @@
 import React from 'react'
+import { useQuery } from '@apollo/client'
 import { gql } from 'graphql-tag'
-import { Grid, GridProps, MultiSelect } from '@auspices/eos'
+import { Grid, GridProps, Loading, MultiSelect } from '@auspices/eos'
 import {
   COLLECTION_CONTENT_COLLECTION_FRAGMENT,
   COLLECTION_CONTENT_CONTENT_FRAGMENT,
   CollectionContent,
 } from './CollectionContent'
-import { CollectionContentsGridFragment } from '../generated/graphql'
+import {
+  CollectionContentsGridFragment,
+  CollectionContentsGridQuery,
+  CollectionContentsGridQueryVariables,
+} from '../generated/graphql'
 
 export const COLLECTION_CONTENTS_GRID_FRAGMENT = gql`
   fragment CollectionContentsGridFragment on Collection {
@@ -44,4 +49,49 @@ export const CollectionContentsGrid: React.FC<CollectionContentsGridProps> = ({
       </Grid>
     </MultiSelect>
   )
+}
+
+export const COLLECTION_CONTENTS_GRID_QUERY = gql`
+  query CollectionContentsGridQuery($id: ID!, $page: Int, $per: Int) {
+    me {
+      id
+      collection(id: $id) {
+        id
+        ...CollectionContentsGridFragment
+      }
+    }
+  }
+  ${COLLECTION_CONTENTS_GRID_FRAGMENT}
+`
+
+type CollectionContentsGridPaginationContainerProps = GridProps & {
+  id: string
+  page: number
+  per: number
+}
+
+export const CollectionContentsGridPaginationContainer: React.FC<
+  CollectionContentsGridPaginationContainerProps
+> = ({ id, page, per, ...rest }) => {
+  const { data, loading, error } = useQuery<
+    CollectionContentsGridQuery,
+    CollectionContentsGridQueryVariables
+  >(COLLECTION_CONTENTS_GRID_QUERY, {
+    fetchPolicy: 'network-only',
+    variables: { id, page, per },
+  })
+
+  if (error) {
+    throw error
+  }
+
+  if (loading || !data) {
+    return <Loading />
+  }
+
+  const {
+    me: { collection },
+  } = data
+
+  return <CollectionContentsGrid collection={collection} {...rest} />
 }

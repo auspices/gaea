@@ -15,19 +15,12 @@ import {
   PaneOption,
   Stack,
 } from '@auspices/eos'
-import { useHrefs, usePagination, useQueryString, useRefetch } from '../hooks'
+import { useHrefs, usePagination } from '../hooks'
 import { AddToCollection } from '../components/AddToCollection'
 import { Pagination } from '../components/Pagination'
 import { BottomNav } from '../components/BottomNav'
 import { PublishCollectionPaneOption } from '../components/PublishCollection'
-import {
-  COLLECTION_CONTENTS_GRID_FRAGMENT,
-  CollectionContentsGrid,
-} from '../components/CollectionContentsGrid'
-import {
-  COLLECTION_CONTENTS_LIST_FRAGMENT,
-  CollectionContentsList,
-} from '../components/CollectionContentsList'
+import { CollectionContentsGridPaginationContainer } from '../components/CollectionContentsGrid'
 import {
   COLLECTION_SETTINGS_FRAGMENT,
   CollectionSettings,
@@ -41,7 +34,7 @@ import { Z } from '../util/zIndexes'
 import { useParams } from 'react-router'
 
 export const COLLECTION_PAGE_QUERY = gql`
-  query CollectionPageQuery($id: ID!, $page: Int, $per: Int) {
+  query CollectionPageQuery($id: ID!) {
     me {
       id
       slug
@@ -60,33 +53,26 @@ export const COLLECTION_PAGE_QUERY = gql`
           slug
           title
         }
-        ...CollectionContentsGridFragment
-        ...CollectionContentsListFragment
         ...CollectionSettingsFragment
       }
     }
   }
-  ${COLLECTION_CONTENTS_GRID_FRAGMENT}
-  ${COLLECTION_CONTENTS_LIST_FRAGMENT}
   ${COLLECTION_SETTINGS_FRAGMENT}
 `
 
 export const CollectionPage: React.FC = () => {
   const { id = '' } = useParams()
-  const { view = 'grid' } = useQueryString<{ view: 'list' | 'grid' }>()
   const { page, per } = usePagination()
 
   const hrefs = useHrefs()
 
-  const { data, loading, error, refetch } = useQuery<
+  const { data, loading, error } = useQuery<
     CollectionPageQuery,
     CollectionPageQueryVariables
   >(COLLECTION_PAGE_QUERY, {
     fetchPolicy: 'network-only',
-    variables: { id, page, per },
+    variables: { id },
   })
-
-  useRefetch({ refetch })
 
   if (error) {
     throw error
@@ -186,12 +172,12 @@ export const CollectionPage: React.FC = () => {
         <CollectionSettings collection={collection} />
 
         <Box flex="1">
-          {
-            {
-              grid: <CollectionContentsGrid my={4} collection={collection} />,
-              list: <CollectionContentsList my={4} collection={collection} />,
-            }[view]
-          }
+          <CollectionContentsGridPaginationContainer
+            my={4}
+            id={id}
+            page={page}
+            per={per}
+          />
         </Box>
 
         {collection.counts.contents > 0 && (
