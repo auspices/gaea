@@ -167,11 +167,11 @@ export const ContentPage: React.FC = () => {
                     as={Link}
                     to={hrefs.content(content.previous.id)}
                   >
-                    past
+                    ← past
                   </Button>
                 ) : (
                   <Button flex="1" disabled>
-                    past
+                    ← past
                   </Button>
                 )}
 
@@ -181,11 +181,11 @@ export const ContentPage: React.FC = () => {
                     as={Link}
                     to={hrefs.content(content.next.id)}
                   >
-                    next
+                    next →
                   </Button>
                 ) : (
                   <Button flex="1" disabled>
-                    next
+                    next →
                   </Button>
                 )}
               </Stack>
