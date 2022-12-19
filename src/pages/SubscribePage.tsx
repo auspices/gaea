@@ -272,7 +272,7 @@ export const SubscribePage: React.FC = () => {
         </Stack>
       )}
 
-      {!activeSubscription && (
+      {true && (
         <form onSubmit={handleSubmit}>
           <Stack>
             <Cell>choose a plan</Cell>

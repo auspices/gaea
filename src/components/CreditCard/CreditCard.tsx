@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import {
-  boxMixin,
+  cellMixin,
   ColorScheme,
   Field,
-  PILL,
   pillFocusMixin,
   SCHEMES,
   Stack,
@@ -20,7 +19,7 @@ import {
 import styled, { createGlobalStyle, css } from 'styled-components'
 
 const CARD_ATTRS = {
-  ...PILL,
+  variant: 'default',
   flex: 1,
   display: 'flex',
   alignItems: 'center',
@@ -42,7 +41,7 @@ const cardOptions = ({ colors }: { colors: ColorScheme }) => ({
 })
 
 const cardMixin = css`
-  ${boxMixin}
+  ${cellMixin}
 
   > * {
     flex: 1;

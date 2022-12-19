@@ -1,12 +1,12 @@
 import styled from 'styled-components'
-import { boxMixin, BoxProps, PILL } from '@auspices/eos'
+import { BoxProps, cellMixin } from '@auspices/eos'
 
 export type FormProps = BoxProps
 
 export const Form = styled.form<FormProps>`
   display: flex;
   flex: 1;
-  ${boxMixin}
+  ${cellMixin}
 `
 
-Form.defaultProps = { ...PILL, backgroundColor: 'transparent', px: 0, py: 0 }
+Form.defaultProps = { backgroundColor: 'transparent', px: 0, py: 0 }

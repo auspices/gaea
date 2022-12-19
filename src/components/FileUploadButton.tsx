@@ -4,12 +4,11 @@ import { FilesUploader } from './FilesUploader'
 import {
   Box,
   boxMixin,
-  BUTTON,
   buttonFocusMixin,
   buttonMixin,
+  color,
   Modal,
   Plus,
-  themeGet,
   Tooltip,
   useAlerts,
 } from '@auspices/eos'
@@ -30,14 +29,13 @@ const FileInput = styled.input.attrs({ id: 'file' })`
 `
 
 const Upload = styled.label.attrs({
-  ...BUTTON,
-  py: 0,
+  variant: 'default',
   for: 'file',
 })`
   ${boxMixin}
   ${buttonMixin}
   border: 0;
-  border-left: 1px solid ${themeGet('primary')};
+  border-left: 1px solid ${color('primary')};
   cursor: pointer;
 `
 
