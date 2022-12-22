@@ -138,16 +138,16 @@ export const AddToCollection: React.FC<AddToCollectionProps> = ({
     async ({ url, file }: { url: string; file: File }) => {
       sendNotification({ body: 'processing upload...' })
 
+      const payload = {
+        url,
+        fileName: file.name,
+        fileContentType: file.type,
+        fileContentLength: file.size,
+      }
+
       const upload = file.type.startsWith('image/')
-        ? { image: { url } }
-        : {
-            attachment: {
-              url,
-              fileName: file.name,
-              fileContentType: file.type,
-              fileContentLength: file.size,
-            },
-          }
+        ? { image: payload }
+        : { attachment: payload }
 
       try {
         await addToCollection({

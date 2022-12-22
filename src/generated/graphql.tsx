@@ -374,6 +374,12 @@ export type ImageUpdatedAtArgs = {
 
 /** Input needed to create an Image */
 export type ImageInput = {
+  /** Filesize in bytes */
+  fileContentLength: Scalars['Int'];
+  /** Content-type (MIME) of file */
+  fileContentType: Scalars['String'];
+  /** Name of file */
+  fileName: Scalars['String'];
   /** URL to image file */
   url: Scalars['String'];
 };
