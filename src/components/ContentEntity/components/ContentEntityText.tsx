@@ -42,7 +42,6 @@ const Status = styled(Box).attrs({ m: 6 })`
 const Editor = styled(Input).attrs({
   flex: 1,
   p: 6,
-  borderWidth: 0,
 })`
   resize: none;
 
