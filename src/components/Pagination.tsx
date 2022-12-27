@@ -1,23 +1,26 @@
 import React, { FC, useEffect } from 'react'
-import { Link, LinkProps } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import {
-  Page as BasePage,
   PageProps as BasePageProps,
+  Button,
   PaginationPage,
   PaginationProps,
   Stack,
 } from '@auspices/eos'
 import { usePagination } from '../hooks'
 
-export const Pagination: React.FC<PaginationProps & { href: string }> = ({
-  total,
-  page,
-  interval,
-  per,
-  href,
-  ...rest
-}) => {
-  const { head, center, tail, totalPages, setTotal } = usePagination()
+export const Pagination: React.FC<
+  PaginationProps & { href: string; per: number }
+> = ({ total, page, interval, per, href, ...rest }) => {
+  const {
+    current,
+    head,
+    leftSurrounding,
+    rightSurrounding,
+    setTotal,
+    tail,
+    totalPages,
+  } = usePagination()
 
   useEffect(() => setTotal(total), [setTotal, total])
 
@@ -27,17 +30,39 @@ export const Pagination: React.FC<PaginationProps & { href: string }> = ({
     <Stack direction="horizontal" {...rest}>
       <Stack direction="horizontal">
         {head.map((page) => {
-          return <Page key={page.page} to={href} {...page} />
+          return <Page key={page.page} href={href} per={per} {...page} />
         })}
       </Stack>
 
-      {center.map((page) => {
-        return <Page key={page.page} to={href} {...page} />
+      {leftSurrounding.map((page) => {
+        return (
+          <Page
+            key={page.page}
+            href={href}
+            per={per}
+            display={['none', 'none', 'block']}
+            {...page}
+          />
+        )
+      })}
+
+      <Page href={href} per={per} {...current} />
+
+      {rightSurrounding.map((page) => {
+        return (
+          <Page
+            key={page.page}
+            href={href}
+            per={per}
+            display={['none', 'none', 'block']}
+            {...page}
+          />
+        )
       })}
 
       <Stack direction="horizontal">
         {tail.map((page) => {
-          return <Page key={page.page} to={href} {...page} />
+          return <Page key={page.page} href={href} per={per} {...page} />
         })}
       </Stack>
     </Stack>
@@ -47,15 +72,18 @@ export const Pagination: React.FC<PaginationProps & { href: string }> = ({
 type PageProps = PaginationPage &
   Omit<BasePageProps, 'onClick' | 'children'> & {
     onClick?(page: number): void
-    to: LinkProps['to']
+    href: string
+    per: number
   }
 
 const Page: FC<PageProps> = ({
-  page,
-  label,
   disabled,
-  tabIndex,
+  href,
+  label,
   onClick,
+  page,
+  per,
+  tabIndex,
   ...rest
 }) => {
   const handleClick = () => {
@@ -65,15 +93,21 @@ const Page: FC<PageProps> = ({
   }
 
   return (
-    <BasePage
+    <Button
       as={Link}
       key={page}
+      flex="1"
+      textAlign="center"
       onClick={handleClick}
       disabled={disabled}
       tabIndex={tabIndex}
+      to={{
+        pathname: href,
+        search: `?page=${page}&per=${per}`,
+      }}
       {...rest}
     >
       {label}
-    </BasePage>
+    </Button>
   )
 }
