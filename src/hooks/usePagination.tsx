@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction, useContext, useState } from 'react'
 import { stringify } from 'qs'
 import { matchPath, useLocation } from 'react-router'
-import { paginate, THEME } from '@auspices/eos'
+import { THEME, usePagination as useBasePagination } from '@auspices/eos'
 import { useQueryString } from './useQueryString'
 
 const PaginationContext = React.createContext<{
@@ -77,20 +77,21 @@ export const usePagination = () => {
   page = parseInt(String(page), 10)
   per = parseInt(String(per), 10)
 
-  const { totalPages, nextPage, prevPage } = paginate({
-    page,
+  const { totalPages, nextPage, prevPage, ...rest } = useBasePagination({
+    currentPage: page,
     per,
     total,
   })
 
   return {
+    encode,
+    nextPage,
     page,
     per,
+    prevPage,
+    setTotal,
     total,
     totalPages,
-    nextPage,
-    prevPage,
-    encode,
-    setTotal,
+    ...rest,
   }
 }
