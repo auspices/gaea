@@ -122,15 +122,15 @@
   dependencies:
     node-fetch "^2.6.1"
 
-"@auspices/eos@5.0.0":
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/@auspices/eos/-/eos-5.0.0.tgz#0d9982a26273f2bbe20152581bdfa8b6396d02fd"
-  integrity sha512-qHYWqOGfnZVYKoOHKo6yMY8CVsDbsA67jQ1HAmM1V6/1VCaJIc5lnZ4mLDftyrPDozrn3B9t6t8VazaKXe60Hg==
+"@auspices/eos@5.0.1":
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/@auspices/eos/-/eos-5.0.1.tgz#055097263923fe57b0bdd136cd07a54335cc46c8"
+  integrity sha512-FR6Gaf3hiH5DGgLsOXH2YVXhnnWzLIgf7z0+mkGINGwfRQqnoF0wqEFlO3zodIaRBtuKjI8lC1hLw9HuGWc8tg==
   dependencies:
     "@popperjs/core" "^2.11.5"
     "@seznam/compose-react-refs" "^1.0.5"
     "@styled-system/theme-get" "^5.1.2"
-    "@types/styled-system" "5.1.15"
+    "@types/styled-system" "5.1.16"
     "@types/styled-system__theme-get" "5.0.2"
     proportional-scale "^4.0.0"
     react-focus-on "^3.6.0"
@@ -3579,13 +3579,6 @@
   dependencies:
     "@types/hoist-non-react-statics" "*"
     "@types/react" "*"
-    csstype "^3.0.2"
-
-"@types/styled-system@5.1.15":
-  version "5.1.15"
-  resolved "https://registry.yarnpkg.com/@types/styled-system/-/styled-system-5.1.15.tgz#075f969cc028a895dba916c07708e2fe828d7077"
-  integrity sha512-1uls4wipZn8FtYFZ7upRVFDoEeOXTQTs2zuyOZPn02T6rjIxtvj2P2lG5qsxXHhKuKsu3thveCZrtaeLE/ibLg==
-  dependencies:
     csstype "^3.0.2"
 
 "@types/styled-system@5.1.16":
