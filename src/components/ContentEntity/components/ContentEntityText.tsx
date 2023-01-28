@@ -13,6 +13,7 @@ export const CONTENT_ENTITY_TEXT_FRAGMENT = gql`
     id
     body
     updatedAt(relative: true)
+    createdAt(format: "%Y-%m-%d")
   }
 `
 
@@ -155,6 +156,16 @@ export const ContentEntityText: React.FC<ContentEntityTextProps> = ({
           onChange={handleChange}
         />
       </Box>
+
+      <Split>
+        <Cell variant="small" color="tertiary" borderColor="tertiary">
+          added on
+        </Cell>
+
+        <Cell variant="small" color="tertiary" borderColor="tertiary">
+          {text.createdAt}
+        </Cell>
+      </Split>
 
       <Split>
         <Cell variant="small" color="tertiary" borderColor="tertiary">

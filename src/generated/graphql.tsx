@@ -984,7 +984,7 @@ export type CollectionContentsGridQueryVariables = Exact<{
 
 export type CollectionContentsGridQuery = { __typename?: 'Query', me: { __typename?: 'User', id: number, collection: { __typename?: 'Collection', id: number, contents: Array<{ __typename?: 'Content', id: number, position: number, entity: { __typename: 'Attachment', id: number, url: string, fileSize?: string | null, contentType: string, label: string } | { __typename: 'Collection', slug: string, id: number, title: string, updatedAt: string, name: string, label: string, counts: { __typename?: 'CollectionCounts', contents: number } } | { __typename: 'Image', width: number, height: number, id: number, title: string, label: string, thumbnail: { __typename?: 'ResizedImage', width: number, height: number, urls: { __typename?: 'RetinaImage', _1x: string, _2x: string } } } | { __typename: 'Link', id: number, url: string, label: string, name: string } | { __typename: 'Text', id: number, label: string, blurb: string } }>, counts: { __typename?: 'CollectionCounts', contents: number } } } };
 
-export type CollectionContentsListFragment = { __typename?: 'Collection', id: number, contents: Array<{ __typename?: 'Content', id: number, position: number, entity: { __typename: 'Attachment', id: number, url: string, fileSize?: string | null, contentType: string, name: string } | { __typename: 'Collection', id: number, title: string, slug: string, updatedAt: string, counts: { __typename?: 'CollectionCounts', contents: number } } | { __typename: 'Image', id: number, title: string, url: string, placeholder: { __typename?: 'ResizedImage', urls: { __typename?: 'RetinaImage', src: string } }, resized: { __typename?: 'ResizedImage', width: number, height: number, urls: { __typename?: 'RetinaImage', _1x: string, _2x: string } } } | { __typename: 'Link', id: number, url: string } | { __typename: 'Text', id: number, body: string, updatedAt: string } }>, counts: { __typename?: 'CollectionCounts', contents: number } };
+export type CollectionContentsListFragment = { __typename?: 'Collection', id: number, contents: Array<{ __typename?: 'Content', id: number, position: number, entity: { __typename: 'Attachment', id: number, url: string, fileSize?: string | null, contentType: string, name: string } | { __typename: 'Collection', id: number, title: string, slug: string, updatedAt: string, counts: { __typename?: 'CollectionCounts', contents: number } } | { __typename: 'Image', id: number, title: string, url: string, placeholder: { __typename?: 'ResizedImage', urls: { __typename?: 'RetinaImage', src: string } }, resized: { __typename?: 'ResizedImage', width: number, height: number, urls: { __typename?: 'RetinaImage', _1x: string, _2x: string } } } | { __typename: 'Link', id: number, url: string } | { __typename: 'Text', id: number, body: string, updatedAt: string, createdAt: string } }>, counts: { __typename?: 'CollectionCounts', contents: number } };
 
 export type CollectionPreviewFragment = { __typename?: 'Collection', id: number, contents: Array<{ __typename?: 'Content', id: number, entity: { __typename: 'Attachment', id: number, contentType: string, fileSize?: string | null } | { __typename: 'Collection', id: number, title: string } | { __typename: 'Image', id: number, width: number, height: number, placeholder: { __typename?: 'ResizedImage', urls: { __typename?: 'RetinaImage', _1x: string, _2x: string } } } | { __typename: 'Link', id: number, name: string } | { __typename: 'Text', id: number, body: string } }> };
 
@@ -1019,7 +1019,7 @@ type ContentEntityFragment_Image_ = { __typename?: 'Image', id: number, title: s
 
 type ContentEntityFragment_Link_ = { __typename?: 'Link', id: number, url: string };
 
-type ContentEntityFragment_Text_ = { __typename?: 'Text', id: number, body: string, updatedAt: string };
+type ContentEntityFragment_Text_ = { __typename?: 'Text', id: number, body: string, updatedAt: string, createdAt: string };
 
 export type ContentEntityFragment = ContentEntityFragment_Attachment_ | ContentEntityFragment_Collection_ | ContentEntityFragment_Image_ | ContentEntityFragment_Link_ | ContentEntityFragment_Text_;
 
@@ -1031,7 +1031,7 @@ export type ContentEntityImageFragment = { __typename?: 'Image', id: number, tit
 
 export type ContentEntityLinkFragment = { __typename?: 'Link', id: number, url: string };
 
-export type ContentEntityTextFragment = { __typename?: 'Text', id: number, body: string, updatedAt: string };
+export type ContentEntityTextFragment = { __typename?: 'Text', id: number, body: string, updatedAt: string, createdAt: string };
 
 export type UpdateContentEntityTextMutationVariables = Exact<{
   id: Scalars['ID'];
@@ -1040,7 +1040,7 @@ export type UpdateContentEntityTextMutationVariables = Exact<{
 }>;
 
 
-export type UpdateContentEntityTextMutation = { __typename?: 'Mutation', updateEntity?: { __typename?: 'UpdateEntityPayload', entity: { __typename: 'Attachment' } | { __typename: 'Collection' } | { __typename: 'Image' } | { __typename: 'Link' } | { __typename: 'Text', id: number, body: string, updatedAt: string } } | null };
+export type UpdateContentEntityTextMutation = { __typename?: 'Mutation', updateEntity?: { __typename?: 'UpdateEntityPayload', entity: { __typename: 'Attachment' } | { __typename: 'Collection' } | { __typename: 'Image' } | { __typename: 'Link' } | { __typename: 'Text', id: number, body: string, updatedAt: string, createdAt: string } } | null };
 
 type ContentEntityHeaderFragment_Attachment_ = { __typename?: 'Attachment', id: number, url: string, name: string };
 
@@ -1244,7 +1244,7 @@ export type ContentPageQueryVariables = Exact<{
 }>;
 
 
-export type ContentPageQuery = { __typename?: 'Query', me: { __typename?: 'User', id: number, slug: string, username: string, content: { __typename?: 'Content', id: number, metadata: any, collection: { __typename?: 'Collection', id: number, slug: string, title: string }, entity: { __typename?: 'Attachment', id: number, url: string, fileSize?: string | null, contentType: string, name: string } | { __typename?: 'Collection', id: number, name: string, slug: string, title: string, updatedAt: string, counts: { __typename?: 'CollectionCounts', contents: number } } | { __typename?: 'Image', id: number, url: string, width: number, height: number, title: string, name: string, placeholder: { __typename?: 'ResizedImage', urls: { __typename?: 'RetinaImage', src: string } }, resized: { __typename?: 'ResizedImage', width: number, height: number, urls: { __typename?: 'RetinaImage', _1x: string, _2x: string } } } | { __typename?: 'Link', id: number, url: string, name: string } | { __typename?: 'Text', id: number, body: string, updatedAt: string, name: string }, next?: { __typename?: 'Content', id: number } | null, previous?: { __typename?: 'Content', id: number } | null } } };
+export type ContentPageQuery = { __typename?: 'Query', me: { __typename?: 'User', id: number, slug: string, username: string, content: { __typename?: 'Content', id: number, metadata: any, collection: { __typename?: 'Collection', id: number, slug: string, title: string }, entity: { __typename?: 'Attachment', id: number, url: string, fileSize?: string | null, contentType: string, name: string } | { __typename?: 'Collection', id: number, name: string, slug: string, title: string, updatedAt: string, counts: { __typename?: 'CollectionCounts', contents: number } } | { __typename?: 'Image', id: number, url: string, width: number, height: number, title: string, name: string, placeholder: { __typename?: 'ResizedImage', urls: { __typename?: 'RetinaImage', src: string } }, resized: { __typename?: 'ResizedImage', width: number, height: number, urls: { __typename?: 'RetinaImage', _1x: string, _2x: string } } } | { __typename?: 'Link', id: number, url: string, name: string } | { __typename?: 'Text', id: number, body: string, updatedAt: string, createdAt: string, name: string }, next?: { __typename?: 'Content', id: number } | null, previous?: { __typename?: 'Content', id: number } | null } } };
 
 export type HomePageQueryVariables = Exact<{
   page?: InputMaybe<Scalars['Int']>;
