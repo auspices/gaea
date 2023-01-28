@@ -3,10 +3,18 @@ import { gql } from 'graphql-tag'
 import styled from 'styled-components'
 import { useMutation } from '@apollo/client'
 import { useDebounce } from 'use-debounce'
-import { Box, Input, useAlerts } from '@auspices/eos'
+import { Box, Cell, Input, Split, Stack, useAlerts } from '@auspices/eos'
 import { errorMessage } from '../../../util/errors'
 import { ContentEntityTextFragment } from '../../../generated/graphql'
 import { themeGet } from '@styled-system/theme-get'
+
+export const CONTENT_ENTITY_TEXT_FRAGMENT = gql`
+  fragment ContentEntityTextFragment on Text {
+    id
+    body
+    updatedAt(relative: true)
+  }
+`
 
 export const UPDATE_CONTENT_ENTITY_TEXT_MUTATION = gql`
   mutation UpdateContentEntityTextMutation(
@@ -16,17 +24,12 @@ export const UPDATE_CONTENT_ENTITY_TEXT_MUTATION = gql`
   ) {
     updateEntity(input: { id: $id, value: $value, type: $type }) {
       entity {
+        ...ContentEntityTextFragment
         __typename
       }
     }
   }
-`
-
-export const CONTENT_ENTITY_TEXT_FRAGMENT = gql`
-  fragment ContentEntityTextFragment on Text {
-    id
-    body
-  }
+  ${CONTENT_ENTITY_TEXT_FRAGMENT}
 `
 
 const Status = styled(Box).attrs({ m: 6 })`
@@ -135,22 +138,33 @@ export const ContentEntityText: React.FC<ContentEntityTextProps> = ({
   }, [handleBeforeUnload, state.edited])
 
   return (
-    <Box
-      position="relative"
-      display="flex"
-      flex={1}
-      width="100%"
-      flexDirection="column"
-      {...rest}
-    >
-      {state.edited && <Status />}
+    <Stack flex={1} width="100%">
+      <Box
+        position="relative"
+        display="flex"
+        flex={1}
+        flexDirection="column"
+        {...rest}
+      >
+        {state.edited && <Status />}
 
-      <Editor
-        as="textarea"
-        ref={textareaRef}
-        defaultValue={text.body}
-        onChange={handleChange}
-      />
-    </Box>
+        <Editor
+          as="textarea"
+          ref={textareaRef}
+          defaultValue={text.body}
+          onChange={handleChange}
+        />
+      </Box>
+
+      <Split>
+        <Cell variant="small" color="tertiary" borderColor="tertiary">
+          last updated
+        </Cell>
+
+        <Cell variant="small" color="tertiary" borderColor="tertiary">
+          {text.updatedAt}
+        </Cell>
+      </Split>
+    </Stack>
   )
 }

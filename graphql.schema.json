@@ -964,6 +964,18 @@
             "description": null,
             "args": [
               {
+                "name": "entityType",
+                "description": null,
+                "type": {
+                  "kind": "ENUM",
+                  "name": "EntityTypes",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
                 "name": "metadata",
                 "description": null,
                 "type": {
@@ -2052,6 +2064,12 @@
         "inputFields": null,
         "interfaces": null,
         "enumValues": [
+          {
+            "name": "ATTACHMENT",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "COLLECTION",
             "description": null,
