@@ -3297,17 +3297,17 @@
     "@types/react" "*"
     csstype "^3.0.2"
 
-"@types/styled-system@5.1.16":
-  version "5.1.16"
-  resolved "https://registry.yarnpkg.com/@types/styled-system/-/styled-system-5.1.16.tgz#c6fa6f751f051de3c7c5fe1d5dc7562d95a80a9e"
-  integrity sha512-+dyGs2n2o6QStsexh87NeaRmXYnKOnEe7iOEkcYOwKwI5a1gFL0+Mt/hZKi+4KD1qDMkLkGb0lpDrffb/vSkDQ==
-  dependencies:
-    csstype "^3.0.2"
-
 "@types/styled-system@5.1.18":
   version "5.1.18"
   resolved "https://registry.yarnpkg.com/@types/styled-system/-/styled-system-5.1.18.tgz#66577f414b4e9b215efe102072cc72e5fe60c744"
   integrity sha512-ec6qSpzRZxTdylYl8VnCV9ko5he7E6g27aU2eagaHHpkO7oDpY28TdWiwzryUspcwXpOnIFQ4zrCzwwW0ClEMQ==
+  dependencies:
+    csstype "^3.0.2"
+
+"@types/styled-system@5.1.21":
+  version "5.1.21"
+  resolved "https://registry.yarnpkg.com/@types/styled-system/-/styled-system-5.1.21.tgz#937b0da9f6367e0eef9caf5eb536c0e26cf32818"
+  integrity sha512-8uqIyIAUYH+ufoyNMNDxqmrXXmTiyJKgtsxprpRMxw078TTuUtJyWUELbaEnkjtic0thouFkei3NVlGlM86KiA==
   dependencies:
     csstype "^3.0.2"
 
