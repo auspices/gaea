@@ -68,15 +68,15 @@
   dependencies:
     node-fetch "^2.6.1"
 
-"@auspices/eos@5.0.6":
-  version "5.0.6"
-  resolved "https://registry.yarnpkg.com/@auspices/eos/-/eos-5.0.6.tgz#5a054f5680274721ced01a927ebfbdc3430a5f29"
-  integrity sha512-2SmCj1HcJr/Pkcd45LfWHWAUTGtL0fGQSAdOP36CKe1nuA2kH+v39Ehxd9U2qk0GDnQynX7huRebx27KFmS+JA==
+"@auspices/eos@5.0.8":
+  version "5.0.8"
+  resolved "https://registry.yarnpkg.com/@auspices/eos/-/eos-5.0.8.tgz#bda558a648f4eb1591ce8b2b78a8907100bf43b5"
+  integrity sha512-Q1SE8/GDu27TufjUFcbuF8fhq4lWC7JchtZYce48Qc6g36u15U2R186JvLAlXHD6thkaAckQdQyrHX//sQA1/g==
   dependencies:
     "@popperjs/core" "^2.11.5"
     "@seznam/compose-react-refs" "^1.0.5"
     "@styled-system/theme-get" "^5.1.2"
-    "@types/styled-system" "5.1.16"
+    "@types/styled-system" "5.1.18"
     "@types/styled-system__theme-get" "5.0.2"
     proportional-scale "^4.0.0"
     react-focus-on "^3.6.0"
@@ -3296,6 +3296,13 @@
   version "5.1.16"
   resolved "https://registry.yarnpkg.com/@types/styled-system/-/styled-system-5.1.16.tgz#c6fa6f751f051de3c7c5fe1d5dc7562d95a80a9e"
   integrity sha512-+dyGs2n2o6QStsexh87NeaRmXYnKOnEe7iOEkcYOwKwI5a1gFL0+Mt/hZKi+4KD1qDMkLkGb0lpDrffb/vSkDQ==
+  dependencies:
+    csstype "^3.0.2"
+
+"@types/styled-system@5.1.18":
+  version "5.1.18"
+  resolved "https://registry.yarnpkg.com/@types/styled-system/-/styled-system-5.1.18.tgz#66577f414b4e9b215efe102072cc72e5fe60c744"
+  integrity sha512-ec6qSpzRZxTdylYl8VnCV9ko5he7E6g27aU2eagaHHpkO7oDpY28TdWiwzryUspcwXpOnIFQ4zrCzwwW0ClEMQ==
   dependencies:
     csstype "^3.0.2"
 
