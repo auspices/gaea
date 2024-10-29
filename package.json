@@ -30,7 +30,7 @@
     "use-keyboard-list-navigation": "2.4.2"
   },
   "resolutions": {
-    "@types/react": "18.3.3",
+    "@types/react": "18.3.12",
     "graphql": "16.8.2"
   },
   "scripts": {
@@ -95,8 +95,8 @@
     "@types/jwt-decode": "3.1.0",
     "@types/node": "18.19.60",
     "@types/qs": "6.9.15",
-    "@types/react": "18.3.3",
-    "@types/react-dom": "18.3.0",
+    "@types/react": "18.3.12",
+    "@types/react-dom": "18.3.1",
     "@types/react-helmet": "6.1.11",
     "@types/react-router": "5.1.20",
     "@types/react-router-dom": "5.3.3",
