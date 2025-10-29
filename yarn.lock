@@ -3298,10 +3298,10 @@
   dependencies:
     csstype "^3.0.2"
 
-"@types/styled-system@5.1.23":
-  version "5.1.23"
-  resolved "https://registry.yarnpkg.com/@types/styled-system/-/styled-system-5.1.23.tgz#6b1db0fc9518f7aadfa4462dbd43813d02e24208"
-  integrity sha512-mIwCCdhDa2ifdQCEm8ZeD8m4UEbFsokqEoT9YNOUv4alUJ8jbMKxvpr+oOwfuZgwqLh5HjWuEzwnX7DzWvjFBg==
+"@types/styled-system@5.1.24":
+  version "5.1.24"
+  resolved "https://registry.yarnpkg.com/@types/styled-system/-/styled-system-5.1.24.tgz#eae25e5e20e75bcd0decea9b3b77e2f704edf8b3"
+  integrity sha512-bItgWb7lQsynxuSoyfPj2LZCNB9aeRCv70NYvMKZN1xbcQ/j6IS2PWsIlQqkIzDQgHbdcrRbWEIg9vKlbbgnGw==
   dependencies:
     csstype "^3.0.2"
 
