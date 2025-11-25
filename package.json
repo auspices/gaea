@@ -6,7 +6,7 @@
     "@apollo/client": "3.14.0",
     "@auspices/eos": "5.0.8",
     "@seznam/compose-react-refs": "1.0.6",
-    "@stripe/react-stripe-js": "1.16.5",
+    "@stripe/react-stripe-js": "5.4.1",
     "@stripe/stripe-js": "1.54.2",
     "@styled-system/theme-get": "5.1.2",
     "axios": "0.30.2",
