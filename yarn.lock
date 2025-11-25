@@ -2690,10 +2690,10 @@
   dependencies:
     prop-types "^15.7.2"
 
-"@stripe/stripe-js@1.54.2":
-  version "1.54.2"
-  resolved "https://registry.yarnpkg.com/@stripe/stripe-js/-/stripe-js-1.54.2.tgz#0665848e22cbda936cfd05256facdfbba121438d"
-  integrity sha512-R1PwtDvUfs99cAjfuQ/WpwJ3c92+DAMy9xGApjqlWQMj0FKQabUAys2swfTRNzuYAYJh7NqK2dzcYVNkKLEKUg==
+"@stripe/stripe-js@8.5.3":
+  version "8.5.3"
+  resolved "https://registry.yarnpkg.com/@stripe/stripe-js/-/stripe-js-8.5.3.tgz#17b967d207dcbd25ea50cfebdab8a38b4abecf22"
+  integrity sha512-UM0GHAxlTN7v0lCK2P6t0VOlvBIdApIQxhnM3yZ2kupQ4PpSrLsK/n/NyYKtw2NJGMaNRRD1IicWS7fSL2sFtA==
 
 "@styled-system/background@^5.1.2":
   version "5.1.2"
